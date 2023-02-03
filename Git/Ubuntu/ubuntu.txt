@@ -1,0 +1,29 @@
+﻿						Ubuntu
+1. Version check in terminal:-
+    • lsb_release -d 
+    • output:- Ubuntu 20.04.5  LTS    (focal fossa)
+    • LTS stands for Long Term Service.
+
+2. Latest version:-
+    • 22.10 (“kinetic kudu”)
+    • LTS release is 22.04 (“Jammy Jellyfish”)
+
+3. Currently Working on and Features :-
+    • Focal fossa – Ubuntu 20.04.5 LTS
+
+	Features:-
+    1. More default theme variants.
+    2. GNOME 3.36 -> all the visual and performance improvement are come with it.
+    3. Disable all desktop notification with “Do Not Disturb” button.
+    4. Fractional Scaling :- If you found that icons at 100% looked to small and bit too big at 200%. you can take advantage of the 	   fractional scaling.
+       Eg:- 100% , 125% , 150% , 175% , 200%.
+    5. Faster Installation and faster Boot
+       -> By the help of new Compression algorithm, it now takes less time to install ubuntu 20.04 and faster boot compare to 18.04.
+    6. No amazon app , no python 2
+       -> Past 8 year , Amazon app installed by default , which is not useful.
+       -> This version won’t support python 2 anymore , you’ll have to connect your self with python 3.
+    7. No 32-bit system for Ubuntu 20.04.
+    8. Under the hood improvement.
+       -> GNOME 3.36 is less resource hungry and feels sleek as light to use.
+       -> most of the software has been upgraded to newer version.
+       -> you’ll get NVIDIA drivers on the ISO itself.

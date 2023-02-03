@@ -1,0 +1,342 @@
+﻿						GIT
+1. What is Git?
+    • Git is popular version control system.	
+    • Installing Git 
+          syntax :- sudo apt install git.
+    • Git version :- 2.25.1
+          syntax:- git --version 
+    • Used for:-
+            1. Tracking code changes.
+            2. Tracking who made changes.
+            3. Coding collaboration.
+            
+2. What does Git do?
+    • Manage projects with Repositories.
+    • Clone a project to work on a local copy.
+    • Control and track changes with staging and committing.
+    • Branch and merge to allow for work on different parts and versions of a project.
+    • Pull the latest version of the project to a local copy.
+    • Push local updates to main project.
+    
+3. Working with Git
+    • Initialize Git on a folder, making it a Repository
+    • Git now creates a hidden folder to keep track of changes in that folder
+    • When a file is changed, added or deleted, it is considered modified
+    • You select the modified files you want to Stage
+    • The Staged files are Committed, which prompts Git to store a permanent snapshot of the files
+    • Git allows you to see the full history of every commit.
+    • You can revert back to any previous commit.
+    • Git does not store a separate copy of every file in every commit, but keeps track of changes made in each commit!
+    
+4. What is GitHub?
+    • Git is not the same as GitHub.
+    • GitHub makes tools that use Git.
+    • GitHub is the largest host of source code in the world, and has been owned by Microsoft since 2018.
+
+
+
+5. Installing Git :-
+    • sudo apt install git-all
+    • Set up username and email.
+          $ git config --global user.name "yourusername"
+          
+$ git config --global user.email "yourusername@example.com"
+    • To check if the configuration have been set properly 
+          git config --list
+          
+6. git init command
+    • You can tell Git to monitor this directory.
+    • It is used for create and initialized the git directory (repo) in our system.
+    • For initiazlization :- git init
+    • For creating new repo with initialization :- git init new
+    
+7. git add command
+    • To make file tracked , we use add command.
+          Syntax:- git add file_name   or   git add .    (to add everything in the dir).
+          
+8. git commit command
+    • So even though Git is tracking index.html, there isn’t anything in the Git repository about the file yet.
+    • Used for commit the changes in current repo.
+          git commit -m “comment which you want”
+          
+9.  git status
+    • shows the current condition of working directory
+       syntax :- git status
+       
+10. git log
+    • Log command shows the history.
+    • Provide messages commit in past , author , date and time.
+    • For only 5 comments :- git log -n 5
+    • By date :- git log --since = yyyy-mm-dd
+    • Till the date :- git log --until = yyyy-mm-dd
+    • By author name :- git log author = “Sachin-beryl”
+    • Using messages specific words :- 
+              git log --grep = “Init”
+              git log --grep = “Bugfix”
+              git log –grep = “github issue”
+              
+11. git rm command
+    • git rm “fle-name”
+    • git rm -r “file_name”  (repo having sub-repo).
+          Steps for remove repo
+          1. git rm “file_name”
+          2. git commit -m “comment”
+          3. git push <remote-name> <branch-name>
+    • rm –cached (for delete from only online , not on system)
+    • rm –dry-run  (remove not actually , we can see an output of the file)
+    
+12. git pull
+    • Used to fetch and download content from a remote repository and immediately update the local repo to match that content.
+    • Syntax :- git pull <remote> <branch>
+          note  :- git pull contains git fetch <remote> and git merge origin/<current-branch>
+          
+13. git push
+    • used to push all commits from local repo to online repository.
+      Syntax :- git push -u origin main
+              Create any folder 
+              cd folder
+              git init
+              gir remote add <remote><ssh-link>
+              git pull <remote><branch>
+              
+14. git remote add origin url:-
+    • first by SSH key
+            ▪ check for ssh key :- ls -l ~/.ssh/id_*.pub
+            ▪ if not present then generate new ssh key
+                  ssh-keygen -t rsa -b 4096 -c “email_address”
+                                      or
+	           ssh -keygen
+            ▪ Then go to location of id_rsa.pub
+                  eg :- Home/beryl/.ssh/id_rsa.pub
+                • copy the key from the file (entire file)
+                • then go to github profile setting -> Access (ssh and gpg key) -> click new ssh key -> paste the key -> press add ssh 			   key.
+                • Now go to file loaction which you want to upload on github, open terminal there. And executing below commands .
+                      git init
+                      git add file or folder_name
+                      git commit -m “Comment”
+                      git branch -M main
+                      git remote add origin url            :- url->( git@github.com:Sachin-beryl/demo-for-ssh.git)
+                      git push -u origin main
+    • By HTTPs :-
+            ▪ git init
+              git add file or folder_name
+              git commit -m “comment”
+              git branch -M main
+              git remote add origin url      :- url ->(https://github.com/sachin-beryl/Training.git)
+              git push -u origin main 	
+            ▪ After executing above command enter username and password of github.
+            ▪ If password not working then follow below steps:-
+                        ▪ Github profile setting -> scroll down and click on developer setting -> personal access tokens -> 				   tokens(classic) -> generate new token -> generate new token (classic) -> check all the boxes -> click generate 				   token.
+                        ▪ Copy the token and save for laters uses.
+            ▪ Now use the token as password .
+            
+15 . To re-set remote url 
+    • Copy the url from the github (http or ssh)
+    • syntax :- git remote set-url origin url                  :- url -> git@github.com:Sachin-beryl/Training.git
+    
+16. git help
+    • helps to understand the git commands
+          syntax :- git help
+                      :- git help log (for knowing about the log command)
+    • similar to man command
+          syntax :- man git log
+
+17. git rm
+    • steps :-
+                • git rm “file_name”
+                • git commit -m “message”
+                • git push <remote> <branch>
+    • Remove repo with sub-repo    syntax :- git rm -r  “file name” 
+    
+18. git checkout
+    • use to make branch and navigate between the branches.
+    • Create new branch :- git checkout -b name_of_name
+    • switch to new branch :- git checkout name_of_branch
+    • copy all data from one to another branch :- git checkout -b destination_branch_name  source_branch_name
+    
+19. git branch
+    • To check name of branches for that git location.
+    • Syntax :- git branch 
+    
+20. merge branches
+    • below commands should be written in the master branch or main branch of project.
+                    ◦ Syntax :- git merge branch_name(branch which you want to merge with main branch).
+                    ◦ If conflict , then remove conflict.
+                    ◦ git add .
+                    ◦ Then commit the merge (git commit -m “merging branches”)
+                       
+21. To make change in comment
+    • git commit --amend -> it will open vim editor -> add message in vim -> wq to save message and exit the vim editor.  
+    
+22. git diff
+    • View changes in working dir 
+          syntax :- git diff
+    • View changes in staged level
+          synatx :- git diff --staged or --cached
+          
+23. git clone
+    • Use to clone the remote repo 
+              syntax :- git clone ssh_or_http_address_of_git_repo.
+
+			Note:- Pull request and merge branches process
+    I. Create new branch :-   git checkout -b sachin.
+    II. Now you are in sachin branch , make pull request for main or master branch or for any branch you want.
+           Syntax :- git pull origin name_of_branch_from_you_want_to_pull
+           eg :- git pull origin main.
+    III. Now you have updated content from main branch, make changes you want to do.
+    IV. git add .
+    V. git commit -m “change by sachin branch”
+    VI. git push -u origin sachin (name must be of created branch).
+    VII. Switch to main or master branch for approvel and merge.
+               Switch branch syntax :- git checkout main or master
+    VIII. merge syntax :- git merge sachin
+    IX. git add .
+    X. git commit -m “merge branch sachin with main”
+    XI. git push -u origin main.
+    XII. YOUR FILE IS NOW MERGED WITH MAIN BRANCH
+
+					Resolving Conflict Process
+    i. if conflict occur will merging branches because two branches made change for same thing.
+    ii. Then owner will decide which change can be used.
+    iii. Open conflicted file in vim.
+           Syntax :- vim file_name.
+           Note :-  To see the beginning of the merge conflict in your file, search the file for the conflict marker <<<<<<<. When you 			     open the file in your text editor, you'll see the changes from the HEAD or base branch after the line <<<<<<< HEAD. 			     Next, you'll see =======, which divides your changes from the changes in the other branch, followed by >>>>>>> 		     BRANCH-NAME.
+    iv. Makes changes in vim and save it.
+    v. git add .
+    vi. git commit -m “message”
+    vii. git push -u origin main.
+
+
+
+
+				Subject Line Standard Terminology
+				
+Add		->Create a capability e.g. feature, test, dependency.
+Cut		->Remove a capability e.g. feature, test, dependency.
+Fix		->Fix an issue e.g. bug, typo, accident, misstatement.
+Bump		->Increase the version of something e.g. dependency.
+Make		->Change the build process, or tooling, or infra.
+Start		->Begin doing something; e.g. create a feature flag.
+Stop		->End doing something; e.g. remove a feature flag.
+Refactor	->A code change that MUST be just a refactoring.
+Reformat	->Refactor of formatting, e.g. omit whitespace.
+Optimize	->Refactor of performance, e.g. speed up code.
+Document	->Refactor of documentation, e.g. help files.
+
+24. Revert a commit :- git revert commit_id -> editor opens -> make changes in comment -> save it
+
+25.  Remove Untracked Files :-
+    • git clean -n [would remove file_name]
+    • git clean -i [interactive]
+    • git clean -f [force to delete the file]
+    
+26. Use .gitignore file :-
+    • project/.gitignore
+    • list of rules to determine which files to ignore.
+                  .zip
+                  log/*.log
+                  !assests/video/tour
+                  assests/video
+    • Changes made to ignored files will be ignored by git.
+    
+27. unstage files :-
+    • syntax :- git reset HEAD file_name
+    • HEAD points to newly added files in stage .
+
+28. Ideas on what to ignore :-
+    • complied source code
+    • packages and compressed files
+    • logs and database.
+    • Operating system generated files.
+    • User – uploaded assests (images, pdfs,videos)
+    
+29. Ignore Tracked files :-
+    • syntax :- git rm --cached file_name
+    
+30. Track Empty Directory:-
+    • git is designed to be a file tracking system.
+    • Tracks files
+    • git ignore dir which is empty
+    • to overcome syntax :- touch folder_name/.gitkeep
+    
+    
+    
+					Advance git command
+
+31. git stash :-
+    • makes a temporary , local save of your code.
+    • Enable you to save your code without making a commit.
+    • A stash is just for your own personal use.
+    • Syntaxs:- to stash the file -> git stash
+                  :- to list the stash files -> git stash list
+                  :-to apply the stash -> git stash apply
+                  :- apply by name -> git stash apply stash@{1}
+                  :- delete latest stash and add to main -> git stash pop
+                  :- particular stash delete -> git stash drop stash@{2}
+                  :- delete all the stash -> git stash clear
+                  :- create new branch using stash -> git stash branch “name_of_branch” stash@{1}
+                  :- to push added feature -> git stash push -m “added feature”.
+
+32. git rebase :-
+    • rebase is to maintain a linear project history.
+    • git rebase in standard mode will automatially take the commits in your current working branch and apply them to the head of your 		passed branch.
+
+    • Steps :-
+                    ◦ create new branch 
+                              -> git checkout -b feature_branch
+                    ◦ #make edit in file which you want.
+                    ◦ git commit -am “add new feature”
+                    ◦ Now merge the branches using rebase
+                              -> git rebase <base>
+                    ◦ switch to master branch and merge the feature branch :- git merge feature_branch
+                    ◦ git add .
+                    ◦ git push origin main.
+                    
+Note :-  to alter individual commits in the process
+		-> git rebase -i <base>	
+		
+		
+33. squashing your commits:-
+    • squash -> combine your commits without lossing data.
+          Eg :-  add 1 commit
+                    add 2 commit
+                    add 3 commit 
+                  combine above in single commit.
+    • Steps:- 
+                • select commits :- git rebase -i HEAD~3       (3 for last 3 commits)
+                • after above command editor opens -> replace “pick” word with “s” (squash) , but not replace the main commit which you 			   want to show.
+                • Save and exit  =  ctrl+o -> enter -> ctrl exit.
+                • Another editor opens to edit message,  edit the message.
+                • Save and exit = ctrl+o -> enter -> ctrl exit.
+                • git push origin main -f.
+
+
+34. git reset :-
+    • It is used to reset the commits.
+    • To reset last commit 
+              syntax :- git reset --soft HEAD~1
+    • To reset more than one commit, replace by number of commit you want to reset
+              syntax :- git reset --soft HEAD~4
+    • NOTE :-  git reset --hard HEAD~1  [this reset essentially erases your last commit]
+    • we can use “git restore –staged <file_name> “ to unstage some specific files. 
+                   
+35. git bisect :-
+    • Find bad commit in your app or code.
+    • Steps:-
+                1. Go to file location and open terminal.
+                2. git log
+                3. copy bad and good commit_id , save other place for further use.
+                4. To start bisect 
+                       -> git bisect start
+                5. provide bad commit
+                       -> git bisect bad Bad_commit_id
+                6. provide good commit
+                       -> git bisect good Good_commit_id
+                7. now automatically bisecting process occur.
+                8. If provided output is bad write command 
+                       -> git bisect bad
+                9. if provided output is good write command 
+                       -> git bisect good
+                10. after good command, bisect will show all the things make changes according to your requirement.
+    • To clean up the bisection state and return to the original HEAD
+              -> git bisect reset.

@@ -1,0 +1,18 @@
+﻿				Version Control Best Practice
+
+    1. Commit Changes Atomically :- Commit after every small block completion of task.
+       
+    2. Commit files with a single purpose :- Every commit must be for single purpose which makes easy to understand in future.
+       
+    3. Write Good Commit Messages :-  Short and informative in present tense.
+       
+    4. Don’t Break Builds :- use best test cases , might your build work properly in your system and pass all tests, but it could break in 	another team member’s work system. 
+       
+    5. Do Reviews before committing to a shared repository 
+       
+    6. Make sure Everycommit is traceable :-  the project should be able to build and pass its test cases before and after the commit.
+       
+    7. Follow branching best Practices :- Using branches is important for managing releases , new features and bugs.
+       
+    8. Protect your assets :- Incorporate the right security measures to protect your assets.
+
