@@ -1,0 +1,26 @@
+
+->It is an open-source object-relational database managment system.
+->allow to store, process and retrieve data safely.
+
+1. To install Postgresql 
+	-> Sudo apt install postgresql postgresql-contrib
+
+2. To go into postgres
+	->sudo -u postgres psql
+	
+3. To check version :- select version();
+	-> 12.13
+	
+4. To check services:-
+	-> service postgresql
+	
+5. For status :-
+	-> service postgresql status.
+	
+6. Postgres Commands :-
+	\l               - List of databases.
+	\du              - List of users.
+	\c database_name - To go and switch database.
+	\t or \dt        - List the tables or relations.
+	\d table_name    - Describe the table.
+	\t               - used to on/off the column names.
