@@ -24,3 +24,43 @@
 	\t or \dt        - List the tables or relations.
 	\d table_name    - Describe the table.
 	\t               - used to on/off the column names.
+	
+	
+					ALL ABOUT USER
+	
+7. Go to root user :-
+	-> sudo su postgres
+	
+8. Change password of user :-
+	-> ALTER USER postgres WITH PASSWORD "changeit";
+	
+9. Create new user :-
+	-> CREATE USER sachin WITH PASSWORD "changeit";
+	
+10. Make user as superuser :-
+	-> ALTER USER sachin WITH SUPERUSER:
+	
+11. Remove user :-
+	-> DROP USER sachin;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
