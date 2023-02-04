@@ -28,8 +28,9 @@
 	
 					ALL ABOUT USER
 	
-7. Go to root user :-
+7. Go to root user and owner ship of database:-
 	-> sudo su postgres
+	-> ALTER DATABASE name_of_db OWNER TO name_of_new_owner
 	
 8. Change password of user :-
 	-> ALTER USER postgres WITH PASSWORD "changeit";
@@ -105,6 +106,198 @@
 	time [ (p)] with time zone		12 bytes	times of day only, with time zone	00:00:00+1459		24:00:00-1459
 
 	interval [fields ] [(p) ]		12 bytes	time interval			       -178000000 years       178000000 years
+	
+	
+                                      		DATABASE
+
+13. TO create database    :-  CREATE DATABASE beryl-system;
+14. To connect database   :-  \c beryl-system;
+15. To drop database	   :-  DROP DATABASE beryl-system;
+
+
+16.To create table   :- create table employee(ID BIGSERIAL
+			 CREATE TABLE employee(id BIGSERIAL NOT NULL PRIMARY KEY,
+			 first_name VARCHAR(50) NOT NULL,
+			 last_name VARCHAR(50) NOT NULL,
+			 gender VARCHAR(10) NOT NULL,
+			 date_of_birth DATE NOT NULL,
+			 email VARCHAR(150));
+			 
+17. To insert into table :-    INSERT INTO employee(first_name,last_name,gender,date_of_birth,email)
+				VALUES('Sachin','Kanojia','Male', '2001-01-05','sachin.kanojia@berylsystems.com'),
+				('Ram','kumar','Male','1999-10-07','ram@gmail.com'),
+				('Rahul','Dev','male','1990-04-22','rahul@gmail.com'),
+				('Reeta','Singh','female','1998-10-19','reeta@gmail.com'),
+				('Neeraj','Kumar','Male', '2001-05-10','neeraj.kumar@berylsystems.com');
+				
+18. ADD column in table :-  ALTER TABLE employee ADD COLUMN age varchar(100);
+
+
+ id | first_name | last_name | gender | date_of_birth |              email              | age 
+----+------------+-----------+--------+---------------+---------------------------------+-----
+  1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com                   | 
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com                 | 
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com                 | 
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com   | 
+  6 | sita       | rao       | female | 2003-01-05    | sita@gmail.com                  | 
+(6 rows)
+
+
+19. DROP column in table :- ALTER TABLE employee DROP COLUMN age;
+
+20. Update the table  :- UPDATE employee SET age = AGE(now(),date_of_birth) where id between 2 and 6 ;
+
+ id | first_name | last_name | gender | date_of_birth |              email              |                  age                   
+----+------------+-----------+--------+---------------+---------------------------------+----------------------------------------
+  1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 20
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com                   | 23 years 3 mons 28 days 15:16:32.12658
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com                 | 32 years 9 mons 12 days 15:16:32.12658
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com                 | 24 years 3 mons 16 days 15:16:32.12658
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com   | 21 years 8 mons 25 days 15:16:32.12658
+  6 | sita       | rao       | female | 2003-01-05    | sita@gmail.com                  | 20 years 30 days 15:16:32.12658
+(6 rows)
+
+
+21. For change the type of column :- ALTER TABLE employee ALTER COLUMN age TYPE bigint;
+				
+22. TO content of table  :- select * from employee;
+
+23. OPERATORS:- 
+	Arithmetic operators :- +,-,*,/,%,^, |/ (square root), ||/ (cube root) , ! 
+	Comparison operators :- =,!=,<>,>,<,>=,<=
+	Logical operators    :- AND , NOT, OR
+	Bitwise operators    :- &,|,~,<<,>> ,#
+
+24. WHERE CLAUSE:-
+-> It is used to filter the search.
+-> used with select, update ,delete etc.
+
+	eg:- print first and last name with age , whose gender is female.
+	  :- select first_name,last_name,age from employee where gender = 'female';
+	
+ first_name | last_name |                  age                   
+------------+-----------+----------------------------------------
+ Reeta      | Singh     | 24 years 3 mons 16 days 15:26:59.39971
+ sita       | rao       | 20 years 30 days 15:26:59.39971
+(2 rows)
+
+
+25. AND , OR CLAUSE :-
+AND -: all the conditions must be true;
+OR  -: One condition must be true;
+
+ eg1 :- print details of employee whose gender is male and last name is kumar.
+     :- select * from employee where gender = 'Male' and last_name = 'kumar';
+    
+ id | first_name | last_name | gender | date_of_birth |     email     |                  age                   
+----+------------+-----------+--------+---------------+---------------+----------------------------------------
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com | 23 years 3 mons 28 days 15:26:59.39971
+(1 row)
+
+
+ eg2 :- print details of employee whose gender is male or last name is kumar.
+     :- select * from employee where gender = 'Male' or last_name = 'kumar';
+     
+     
+ id | first_name | last_name | gender | date_of_birth |              email              |                  age                   
+----+------------+-----------+--------+---------------+---------------------------------+----------------------------------------
+  1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 22 years 30 days 15:26:59.39971
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com                   | 23 years 3 mons 28 days 15:26:59.39971
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com   | 21 years 8 mons 25 days 15:26:59.39971
+(3 rows)
+
+
+25. DELETE CLAUSE :-
+-> DELETE query to delete the selected rows.
+
+ eg :- delete the employee whose id is 6.
+    :- delete from employee where id = 6;
+    
+id | first_name | last_name | gender | date_of_birth |              email              |                  age                   | salary  
+----+------------+-----------+--------+---------------+---------------------------------+----------------------------------------+---------
+  1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 22 years 30 days 15:26:59.39971        | 2500000
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com                   | 23 years 3 mons 28 days 15:26:59.39971 | 200000
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com                 | 32 years 9 mons 12 days 15:26:59.39971 | 300000
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com                 | 24 years 3 mons 16 days 15:26:59.39971 | 400000
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com   | 21 years 8 mons 25 days 15:26:59.39971 | 500000
+(5 rows)
+
+
+26. LIKE CLAUSE :-
+
+	S.No.		Statement & Description
+	
+	1		WHERE SALARY::text LIKE '200%'
+			Finds any values that start with 200
+
+	2		WHERE SALARY::text LIKE '%200%'
+			Finds any values that have 200 in any position
+
+	3		WHERE SALARY::text LIKE '_00%'
+			Finds any values that have 00 in the second and third positions
+
+	4		WHERE SALARY::text LIKE '2_%_%'
+			Finds any values that start with 2 and are at least 3 characters in length
+
+	5		WHERE SALARY::text LIKE '%2'
+			Finds any values that end with 2
+
+	6		WHERE SALARY::text LIKE '_2%3'
+			Finds any values that have 2 in the second position and end with a 3
+
+	7		WHERE SALARY::text LIKE '2___3'
+			Finds any values in a five-digit number that start with 2 and end with 3
+			
+eg :-  print details of employee whose email ends with gmail.com
+   :-  select * from employee where email like '%gmail.com';
+       
+ id | first_name | last_name | gender | date_of_birth |      email      |                  age                   | salary 
+----+------------+-----------+--------+---------------+-----------------+----------------------------------------+--------
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com   | 23 years 3 mons 28 days 15:26:59.39971 | 200000
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com | 32 years 9 mons 12 days 15:26:59.39971 | 300000
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com | 24 years 3 mons 16 days 15:26:59.39971 | 400000
+(3 rows)
+
+
+27. LIMIT CLAUSE :-
+-> LIMIT clause is used to limit the data amount returned by the SELECT statement.
+
+eg1 :-  display details of top 2 employees in table
+    :-  select *from employee limit 2;
+	
+ id | first_name | last_name | gender | date_of_birth |      email      |                  age                   | salary 
+----+------------+-----------+--------+---------------+-----------------+----------------------------------------+--------
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com   | 23 years 3 mons 28 days 15:26:59.39971 | 200000
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com | 32 years 9 mons 12 days 15:26:59.39971 | 300000
+(2 rows)
+
+
+eg2 :- display details of employees after 2 from the top;
+    :- select *from employee limit 2 offset 2;
+
+ id | first_name | last_name | gender | date_of_birth |             email             |                  age                   | salary 
+----+------------+-----------+--------+---------------+-------------------------------+----------------------------------------+--------
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com               | 24 years 3 mons 16 days 15:26:59.39971 | 400000
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com | 21 years 8 mons 25 days 15:26:59.39971 | 500000
+(2 rows)
+
+
+28. ORDER BY :-
+-> provide order according to the attribute in ascending and descending.
+-> by default it is ascending.
+
+eg1 :- SELECT * FROM employee ORDER BY id DESC; 
+
+id | first_name | last_name | gender | date_of_birth |              email              |                  age                   | salary  
+----+------------+-----------+--------+---------------+---------------------------------+----------------------------------------+---------
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com   | 21 years 8 mons 25 days 15:26:59.39971 | 500000
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com                 | 24 years 3 mons 16 days 15:26:59.39971 | 400000
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com                 | 32 years 9 mons 12 days 15:26:59.39971 | 300000
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com                   | 23 years 3 mons 28 days 15:26:59.39971 | 200000
+  1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 22 years 30 days 15:26:59.39971        | 2500000
+(5 rows)
+
 
 
 
