@@ -162,6 +162,8 @@
 21. For change the type of column :- ALTER TABLE employee ALTER COLUMN age TYPE bigint;
 
     varchar to integer :- ALTER TABLE employee ALTER COLUMN salary TYPE integer USING salary::integer;
+    
+    ALTER TABLE department DROP COLUMN id , ADD COLUMN id BIGSERIAL PRIMARY KEY NOT NULL;
 				
 22. TO content of table  :- select * from employee;
 
@@ -398,11 +400,157 @@ id | first_name | last_name | gender | date_of_birth |              email       
 		 Reeta
 		 Ram
 		(5 rows)
+-------------------------------------------------------ADVANCE POSTGRESQL-----------------------------------------------------------------
+						
+33. CONSTRAINTS :-
+->Constraints are the rules enforced on data columns on table. These are used to prevent invalid data from being entered into the database. This ensures the accuracy and reliability of the data in the database.
 
+-> Constraints could be column level or table level.
+
+	The following are commonly used constraints available in PostgreSQL.
+	NOT NULL Constraint  − Ensures that a column cannot have NULL value.
+	UNIQUE Constraint    − Ensures that all values in a column are different.
+	PRIMARY Key          − Uniquely identifies each row/record in a database table.
+	FOREIGN Key          − Constrains data based on columns in other tables.
 	
+				eg:- EMP_ID  INT  references COMPANY6(ID)
+				
+	CHECK Constraint     − The CHECK constraint ensures that all values in a column satisfy certain conditions.
+	EXCLUSION Constraint − The EXCLUDE constraint ensures that if any two rows are compared on the specified column(s) or 					expression(s) using the specified operator(s), not all of these comparisons will return TRUE.
+	DEFAULT              − use as by default.
+	
+				eg:- SALARY  REAL DEFAULT 50000.00
+		
+	CHECK                − SALARY REAL CHECK(SALARY > 0)  to check some condition .
+
+-> Dropping Constraints
+	syntax :- ALTER TABLE table_name DROP CONSTRAINT some_name;
+	
+34. JOINS :-
+-> Joins clause is used to combine records from two or more tables in a database.
+-> Types in PostgreSQL are 
+
+	The CROSS JOIN
+	The INNER JOIN
+	The LEFT OUTER JOIN
+	The RIGHT OUTER JOIN
+	The FULL OUTER JOIN
 
 
+Now we have two tables:-----
+----------------------------------------------------------EMPLOYEE TABLE------------------------------------------------------------------
 
+id | first_name | last_name | gender | date_of_birth |              email              |                  age                   | salary  
+----+------------+-----------+--------+---------------+---------------------------------+----------------------------------------+---------
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com                   | 23 years 3 mons 28 days 15:26:59.39971 |  200000
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com                 | 32 years 9 mons 12 days 15:26:59.39971 |  300000
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com                 | 24 years 3 mons 16 days 15:26:59.39971 |  400000
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com   | 21 years 8 mons 25 days 15:26:59.39971 |  500000
+  1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 22 years 30 days 15:26:59.39971        | 2500000
+  7 | Ram        | singh     | male   | 2003-12-27    |                                 |                                        |   23400
+  8 | Reeta      | kumari    | female | 1998-05-31    |                                 |                                        |  876000
+(7 rows)
+
+----------------------------------------------------------DEPARTMENT TABLE----------------------------------------------------------------
+
+ dept_name | emp_id | id 
+-----------+--------+----
+ IT        |      1 |  1
+ IT        |      2 |  2
+ HR        |      3 |  3
+ support   |      4 |  4
+ HR        |      5 |  5
+ Tech      |      6 |  6
+ IT        |      7 |  7
+ Tech      |      8 |  8
+(8 rows)
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+	a). CROSS JOIN:- A CROSS JOIN matches every row of the first table with every row of the second table.
+		      :- If the input tables have x and y columns, respectively, the resulting table will have x+y columns.
+		      
+		      syntax :- SELECT ... FROM table1 CROSS JOIN table2 ...
+		      
+		      eg:- select first_name,last_name,emp_id,dept_name from employee cross join department where dept_name = 'HR';
+		      
+				 first_name | last_name | emp_id | dept_name 
+				------------+-----------+--------+-----------
+				 Ram        | kumar     |      3 | HR
+				 Rahul      | Dev       |      3 | HR
+				 Reeta      | Singh     |      3 | HR
+				 Neeraj     | Kumar     |      3 | HR
+				 Sachin     | Kanojia   |      3 | HR
+				 Ram        | singh     |      3 | HR
+				 Reeta      | kumari    |      3 | HR
+				 Ram        | kumar     |      5 | HR
+				 Rahul      | Dev       |      5 | HR
+				 Reeta      | Singh     |      5 | HR
+				 Neeraj     | Kumar     |      5 | HR
+				 Sachin     | Kanojia   |      5 | HR
+				 Ram        | singh     |      5 | HR
+				 Reeta      | kumari    |      5 | HR
+				 
+	b). INNER JOIN:- The query compares each row of table1 with each row of table2 to find all pairs of rows, which satisfy the join-predicate
+		      :- An INNER JOIN is the most common type of join and is the default type of join.
+		      
+		      syntax :- SELECT table1.column1, table2.column2... FROM table1 INNER JOIN table2 ON table1.common_filed =
+		      		 table2.common_field;
+		      		 
+		      eg:- select emp_id,first_name,last_name,salary from employee inner join department on employee.id = 				   department.emp_id where salary >400000;
+		      
+				 emp_id | first_name | last_name | salary  
+				--------+------------+-----------+---------
+				      1 | Sachin     | Kanojia   | 2500000
+				      5 | Neeraj     | Kumar     |  500000
+				      8 | Reeta      | kumari    |  876000
+				(3 rows)
+
+	c). LEFT OUTER JOIN :- In case of LEFT OUTER JOIN, an inner join is performed first. Then, for each row in table T1 that does not 			       satisfy the join condition with any row in table T2, a joined row is added with null values in columns of T2
+			     
+		      syntax :- SELECT ... FROM table1 LEFT OUTER JOIN table2 ON conditional_expression ...
+			  
+		      eg:- select emp_id,first_name,last_name,dept_name from employee left outer join department on employee.id = 					department.emp_id;
+		      
+				 emp_id | first_name | last_name | dept_name 
+				--------+------------+-----------+-----------
+				      1 | Sachin     | Kanojia   | IT
+				      2 | Ram        | kumar     | IT
+				      3 | Rahul      | Dev       | HR
+				      4 | Reeta      | Singh     | support
+					| Neeraj     | Kumar     | 
+					| Reeta      | kumari    | 
+					| Ram        | singh     | 
+
+	d). RIGHT OUTER JOIN :- similar to left join but for right table.
+			
+		     syntax :- SELECT ... FROM table1 RIGHT OUTER JOIN table2 ON conditional_expression ...
+		    
+		     eg:- select emp_id,first_name,last_name,dept_name from employee right outer join department on employee.id = 				  department.emp_id;
+		     
+				 emp_id | first_name | last_name | dept_name 
+				--------+------------+-----------+-----------
+				      1 | Sachin     | Kanojia   | IT
+				      2 | Ram        | kumar     | IT
+				      3 | Rahul      | Dev       | HR
+				      4 | Reeta      | Singh     | support
+	
+	e). FULL OUTER JOIN :- or each row in table T1 that does not satisfy the join condition with any row in table T2, a joined row is 				added with null values in columns of T2. In addition, for each row of T2 that does not satisfy the join 					condition with any row in T1, a joined row with null values in the columns of T1 is added.	
+		
+		     syntax :- SELECT ... FROM table1 FULL OUTER JOIN table2 ON conditional_expression ...
+		     
+		     eg:- select emp_id,first_name,last_name,dept_name from employee full outer join department on employee.id = 				  department.emp_id;
+		     
+				 emp_id | first_name | last_name | dept_name 
+				--------+------------+-----------+-----------
+				      1 | Sachin     | Kanojia   | IT
+				      2 | Ram        | kumar     | IT
+				      3 | Rahul      | Dev       | HR
+				      4 | Reeta      | Singh     | support
+					| Neeraj     | Kumar     | 
+					| Reeta      | kumari    | 
+					| Ram        | singh     | 
+ 	
 
 
 
