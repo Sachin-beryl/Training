@@ -25,8 +25,7 @@
 	\d table_name    - Describe the table.
 	\t               - used to on/off the column names.
 	
-	
-					ALL ABOUT USER
+-------------------------------------------------------------ALL ABOUT USER---------------------------------------------------------------
 	
 7. Go to root user and owner ship of database:-
 	-> sudo su postgres
@@ -44,7 +43,7 @@
 11. Remove user :-
 	-> DROP USER sachin;
 	
-					DATA TYPE
+--------------------------------------------------------------DATA TYPE-------------------------------------------------------------------
 					
 12. Benefits of Data type:-
 	Consistency − Operations against columns of same data type give consistent results and are usually the fastest.
@@ -108,7 +107,7 @@
 	interval [fields ] [(p) ]		12 bytes	time interval			       -178000000 years       178000000 years
 	
 	
-                                      		DATABASE
+----------------------------------------------------------------DATABASE------------------------------------------------------------------
 
 13. TO create database    :-  CREATE DATABASE beryl-system;
 14. To connect database   :-  \c beryl-system;
@@ -550,13 +549,184 @@ id | first_name | last_name | gender | date_of_birth |              email       
 					| Neeraj     | Kumar     | 
 					| Reeta      | kumari    | 
 					| Ram        | singh     | 
- 	
+------------------------------------------------------------------------------------------------------------------------------------------ 	
+35. UNION CLAUSE :- 
+->UNION clause/operator is used to combine the results of two or more SELECT statements without returning any duplicate rows.
+	
+	syntax :- SELECT column1 [, column2 ] FROM table1 [, table2 ] [WHERE condition]
+			UNION
+		  SELECT column1 [, column2 ] FROM table1 [, table2 ] [WHERE condition]
+      		  
+      	eg :- select emp_id,first_name,salary,dept_name from employee inner join department on employee.id = department.emp_id UNION 
+	      select emp_id,first_name,salary,dept_name from employee left outer join department on employee.id = department.emp_id;
+	      
+				 emp_id | first_name | salary  | dept_name 
+				--------+------------+---------+-----------
+				      7 | Ram        |   23400 | IT
+				      1 | Sachin     | 2500000 | IT
+				      4 | Reeta      |  400000 | support
+				      2 | Ram        |  200000 | IT
+				      3 | Rahul      |  300000 | HR
+				      5 | Neeraj     |  500000 | HR
+				      8 | Reeta      |  876000 | Tech
+
+(@)->  UNION ALL -> combine the results of two or more select statements with duplicate rows.
+
+	eg :- select emp_id,first_name,salary,dept_name from employee inner join department on employee.id = department.emp_id UNION  
+	      ALL select emp_id,first_name,salary,dept_name from employee left outer join department on employee.id = department.emp_id;
+	      
+				 emp_id | first_name | salary  | dept_name 
+				--------+------------+---------+-----------
+				      1 | Sachin     | 2500000 | IT
+				      2 | Ram        |  200000 | IT
+				      3 | Rahul      |  300000 | HR
+				      4 | Reeta      |  400000 | support
+				      5 | Neeraj     |  500000 | HR
+				      7 | Ram        |   23400 | IT
+				      8 | Reeta      |  876000 | Tech
+				      1 | Sachin     | 2500000 | IT
+				      2 | Ram        |  200000 | IT
+				      3 | Rahul      |  300000 | HR
+				      4 | Reeta      |  400000 | support
+				      5 | Neeraj     |  500000 | HR
+				      7 | Ram        |   23400 | IT
+				      8 | Reeta      |  876000 | Tech
+				      
+------------------------------------------------------------------------------------------------------------------------------------------
+
+ 36. NULL :- 
+ -> NULL is the term used to represent a missing value. A NULL value in a table is a value in a field that appears to be blank.
+ 
+ 	a). IS NOT NULL operator to list down all the records where attribute is not NULL.
+ 		 
+ 	    eg:- select * from employee where age is not null;
+ 	    
+ id | first_name | last_name | gender | date_of_birth |              email              |                  age                   |salary  
+----+------------+-----------+--------+---------------+---------------------------------+----------------------------------------+---------
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com                   | 23 years 3 mons 28 days 15:26:59.39971 |  200000
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com                 | 32 years 9 mons 12 days 15:26:59.39971 |  300000
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com                 | 24 years 3 mons 16 days 15:26:59.39971 |  400000
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com   | 21 years 8 mons 25 days 15:26:59.39971 |  500000
+  1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 22 years 30 days 15:26:59.39971        | 2500000
 
 
+	b). IS NULL operator which will list down all the records where attribute is NULL.
+	
+	eg:- select * from employee where age is null;
+	
+		 id | first_name | last_name | gender | date_of_birth | email | age | salary 
+		----+------------+-----------+--------+---------------+-------+-----+--------
+		  7 | Ram        | singh     | male   | 2003-12-27    |       |     |  23400
+		  8 | Reeta      | kumari    | female | 1998-05-31    |       |     | 876000
+		
+------------------------------------------------------------------------------------------------------------------------------------------
+
+37. ALIAS :-
+-> rename a table or a column temporarily by giving another name, which is known as ALIAS.
+	
+	a). syntax of table alias :- SELECT column1, column2.... FROM table_name AS alias_name WHERE [condition];
+	
+	    eg:- select e.id,e.first_name,d.dept_name,e.salary from employee as e , department as d where e.id = d.emp_id; 
+	    
+		 id | first_name | dept_name | salary  
+		----+------------+-----------+---------
+		  1 | Sachin     | IT        | 2500000
+		  2 | Ram        | IT        |  200000
+		  3 | Rahul      | HR        |  300000
+		  4 | Reeta      | support   |  400000
+		  5 | Neeraj     | HR        |  500000
+		  7 | Ram        | IT        |   23400
+		  8 | Reeta      | Tech      |  876000
+
+	    
+	b). syntax of column alias :- SELECT column_name AS alias_name FROM table_name WHERE [condition];
+	
+	    eg:- select e.id as Employee_id ,e.first_name as Employee_first_name,d.dept_name as Department_name,e.salary from employee as 		 e , department as d where e.id = d.emp_id; 
+	    
+		 employee_id | employee_first_name | department_name | salary  
+		-------------+---------------------+-----------------+---------
+			   1 | Sachin              | IT              | 2500000
+			   2 | Ram                 | IT              |  200000
+			   3 | Rahul               | HR              |  300000
+			   4 | Reeta               | support         |  400000
+			   5 | Neeraj              | HR              |  500000
+			   7 | Ram                 | IT              |   23400
+			   8 | Reeta               | Tech            |  876000
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+38. TRIGGER :-
+
+-> Triggers are database callback functions, which are automatically performed/invoked when a specified database event occurs.
+-> In contrast, a trigger that is marked FOR EACH STATEMENT only executes once for any given operation, regardless of how many rows it   modifies.
+-> The BEFORE, AFTER or INSTEAD OF keyword determines when the trigger actions will be executed relative to the insertion, modification or removal of the associated row.
+
+	syntax :- syntax of creating a trigger .
+		CREATE  TRIGGER trigger_name [BEFORE|AFTER|INSTEAD OF] event_name
+		ON table_name
+		[
+		 -- Trigger logic goes here....
+		];
+
+	syntax :- syntax of creating a trigger on an UPDATE operation.
+		CREATE  TRIGGER trigger_name [BEFORE|AFTER] UPDATE OF column_name
+		ON table_name
+		[
+		 -- Trigger logic goes here....
+		];
 
 
+EXAMPLE :- 
+	1). first create table company in which we are going to insert our data and using trigger during insertion.
+		CREATE TABLE COMPANY(
+		   ID INT PRIMARY KEY     NOT NULL,
+		   NAME           TEXT    NOT NULL,
+		   AGE            INT     NOT NULL,
+		   ADDRESS        CHAR(50),
+		   SALARY         REAL
+		);
+
+	2). now, create another table audit to store id and time of insertion.
+		CREATE TABLE AUDIT(
+		   EMP_ID INT NOT NULL,
+		   ENTRY_DATE TEXT NOT NULL
+		);
+
+	3). now, create function which you want to apply ,when trigger is activated.
+	
+		CREATE OR REPLACE FUNCTION auditlogfunc() RETURNS TRIGGER AS $example_table$
+		   BEGIN
+		      INSERT INTO AUDIT(EMP_ID, ENTRY_DATE) VALUES (new.ID, current_timestamp);
+		      RETURN NEW;
+		   END;
+		$example_table$ LANGUAGE plpgsql;
 
 
+	4). now, create trigger .
+	
+		CREATE TRIGGER example_trigger AFTER INSERT ON COMPANY
+		FOR EACH ROW EXECUTE PROCEDURE auditlogfunc();
+		
+	5). do insertion .
+		INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (1, 'Paul', 32, 'California', 20000.00 );
+		
+	output:- 
+		select * from company ;
+		 id | name | age |                      address                       | salary 
+		----+------+-----+----------------------------------------------------+--------
+		  1 | Paul |  32 | California                                         |  20000
+	
+	
+		select * from audit ;
+		 emp_id |            entry_date            
+		--------+----------------------------------
+		      1 | 2023-02-06 17:17:07.603434+05:30
+		     
+-> List all triggers :- SELECT * FROM pg_trigger;
+-> DROP trigger :- DROP TRIGGER trigger_name;
+
+------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
