@@ -160,6 +160,8 @@
 
 
 21. For change the type of column :- ALTER TABLE employee ALTER COLUMN age TYPE bigint;
+
+    varchar to integer :- ALTER TABLE employee ALTER COLUMN salary TYPE integer USING salary::integer;
 				
 22. TO content of table  :- select * from employee;
 
@@ -299,10 +301,105 @@ id | first_name | last_name | gender | date_of_birth |              email       
 (5 rows)
 
 
+29. GROUP BY :-
+-> GROUP BY clause is used in collaboration with the SELECT statement to group together those rows in a table that have identical data.
+-> The GROUP BY clause must follow the conditions in the WHERE clause and must precede the ORDER BY clause if one is used.
+
+ id | first_name | last_name | gender | date_of_birth |              email              |                  age                   |salary  
+----+------------+-----------+--------+---------------+---------------------------------+----------------------------------------+---------
+  2 | Ram        | kumar     | Male   | 1999-10-07    | ram@gmail.com                   | 23 years 3 mons 28 days 15:26:59.39971 | 200000
+  3 | Rahul      | Dev       | male   | 1990-04-22    | rahul@gmail.com                 | 32 years 9 mons 12 days 15:26:59.39971 | 300000
+  4 | Reeta      | Singh     | female | 1998-10-19    | reeta@gmail.com                 | 24 years 3 mons 16 days 15:26:59.39971 | 400000
+  5 | Neeraj     | Kumar     | Male   | 2001-05-10    | neeraj.kumar@berylsystems.com   | 21 years 8 mons 25 days 15:26:59.39971 | 500000
+  1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 22 years 30 days 15:26:59.39971        | 2500000
+  7 | Ram        | singh     | male   | 2003-12-27    |                                 |                                        | 23400
+  8 | Reeta      | kumari    | female | 1998-05-31    |                                 |                                        | 876000
+(7 rows)
 
 
+	syntax:- SELECT column-list
+		 FROM table_name
+		 WHERE [ conditions ]
+		 GROUP BY column1, column2....columnN
+		 ORDER BY column1, column2....columnN
+		 
+	eg :- select first_name , sum(salary) from employee group by first_name;
+	
+		 first_name |   sum   
+		------------+---------
+		 Sachin     | 2500000
+		 Rahul      |  300000
+		 Neeraj     |  500000
+		 Reeta      | 1276000
+		 Ram        |  223400
+		(5 rows)
 
+30. WITH CLAUSE:- 
+-> with clause is used for defining a temporary relation such that the output of this temporary relation is available and is used by the 	 query that is associated with the WITH clause.
+-> helps to make complex query simpler , 
+-> eg :- without group by clause using avg of any attribute.
 
+	syntax :- WITH temp_table_name as (select column_name which is want in temp_table from main_table)
+	       :- select * from temp_table_name;
+
+	eg1:- WITH salary_table as(select first_name,last_name,salary from employee)
+	      select * from salary_table;
+	      
+		 first_name | last_name | salary  
+		------------+-----------+---------
+		 Ram        | kumar     |  200000
+		 Rahul      | Dev       |  300000
+		 Reeta      | Singh     |  400000
+		 Neeraj     | Kumar     |  500000
+		 Sachin     | Kanojia   | 2500000
+		 Ram        | singh     |   23400
+		 Reeta      | kumari    |  876000
+		(7 rows)
+
+31. HAVING CLAUSE :-
+-> The HAVING clause allows us to pick out particular rows where the function's result meets some condition.
+-> The WHERE clause places conditions on the selected columns, whereas the HAVING clause places conditions on groups created by the GROUP BY clause.
+
+	Format :- SELECT FROM WHERE GROUP BY HAVING ORDER BY
+	Syntax :- SELECT column1, column2
+		  FROM table1, table2
+		  WHERE [ conditions ]
+		  GROUP BY column1, column2
+		  HAVING [ conditions ]
+		  ORDER BY column1, column2
+		  
+	eg :- select first_name from employee group by first_name having count(first_name)>1;
+		 first_name 
+		------------
+		 Reeta
+		 Ram
+		(2 rows)
+
+	eg2 :- select first_name,avg(salary) from employee group by first_name having count(first_name)>1;
+		 first_name |         avg         
+		------------+---------------------
+		 Reeta      | 638000.000000000000
+		 Ram        | 111700.000000000000
+		(2 rows)
+
+32. DISTINCT CLAUSE :-
+-> The PostgreSQL DISTINCT keyword is used in conjunction with SELECT statement to eliminate all the duplicate records and fetching only 	 unique records.
+
+	syntax :- SELECT DISTINCT column1, column2,.....columnN
+		  FROM table_name
+		  WHERE [condition]
+		  
+	eg:- select distinct first_name from employee;
+		 first_name 
+		------------
+		 Sachin
+		 Rahul
+		 Neeraj
+		 Reeta
+		 Ram
+		(5 rows)
+
+	
 
 
 
