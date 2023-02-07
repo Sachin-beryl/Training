@@ -802,7 +802,65 @@ EXAMPLE :-
 			
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+41. VIEWS :-
+-> Structure data in a way that users or classes of users find natural or intuitive.
+-> Restrict access to the data such that a user can only see limited data instead of complete table.
+-> Summarize data from various tables, which can be used to generate reports.
+
+	syntax :- basic CREATE VIEW syntax
+	       :- CREATE [TEMP | TEMPORARY] VIEW view_name AS SELECT column1, column2..... FROM table_name WHERE [condition];
+	       
+	     eg :- CREATE VIEW emp_view AS select first_name,last_name,age from employee;
+	     
+	     output :- select * from emp_view ;
+			 first_name | last_name |                  age                   
+			------------+-----------+----------------------------------------
+			 Ram        | kumar     | 23 years 3 mons 28 days 15:26:59.39971
+			 Rahul      | Dev       | 32 years 9 mons 12 days 15:26:59.39971
+			 Reeta      | Singh     | 24 years 3 mons 16 days 15:26:59.39971
+			 Neeraj     | Kumar     | 21 years 8 mons 25 days 15:26:59.39971
+			 Sachin     | Kanojia   | 22 years 30 days 15:26:59.39971
+			 Ram        | singh     | 
+			 Reeta      | kumari    | 
+
+-> DROP the view :- DROP VIEW emp_view;
+
+------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
 
