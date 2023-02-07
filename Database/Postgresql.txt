@@ -1075,7 +1075,84 @@ NOTE :- MVCC -> database optimization technique that creates duplicate copies of
 				      6
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-	       
+49. Useful Functions:-
+-> Function types :- count(),max(),min(),avg(),sum()
+
+ 	a). select sum(salary) from employee;
+		   sum   
+		---------
+		 4776000
+
+
+	b). select avg(salary) from employee;
+		 avg         
+	---------------------
+	 796000.000000000000
+	
+
+	c). select count(salary) from employee;
+		 count 
+		-------
+		     6
+
+	d). select max(salary) from employee;
+		   max   
+		---------
+		 2500000
+		(1 row)
+
+	e). select min(salary) from employee;
+		  min   
+		--------
+		 200000
+		(1 row)
+
+
+PostgreSQL ARRAY Functions   − The PostgreSQL ARRAY aggregate function puts input values, including nulls, concatenated into an array.
+
+		                 Table "public.company"
+			   Column   |     Type      | Collation | Nullable | Default 
+			------------+---------------+-----------+----------+---------
+			 id         | integer       |           | not null | 
+			 name       | text          |           | not null | 
+			 age        | integer       |           | not null | 
+			 address    | character(50) |           |          | 
+			 salary     | real          |           |          | 
+			 test_score | integer[]     |           |          | 
+			 email      | text[]        |           |          | 
+
+Syntax to add table with array :-
+	IMP ->	CREATE TABLE employee(student_id bigserial,email text[][],test_score[] );
+	
+	    ->  INSERT INTO company (name,age,address,salary,test_score,email)
+		values('shiv',25,'badarpur',120000,'{94,23,88,45}','{{"work","work@gmail.com"},{"other","other1@gmail.com"}}');
+	
+	a). select email[1][1] as type,test_score[1] from company;
+		 type | test_score 
+		------+------------
+		 work |         94
+
+	b). select email[1][1] as address,test_score[1] from company;
+		 address | test_score 
+		---------+------------
+		 work    |         94
+		 
+	c). select email[1][1] as type,email[1][2] as address,test_score[1] from company where email[1][1] = 'work';
+	
+		 type |    address     | test_score 
+		------+----------------+------------
+		 work | work@gmail.com |         94
+		
+
+
+
+
+PostgreSQL Numeric Functions − Complete list of PostgreSQL functions required to manipulate numbers in SQL.
+
+PostgreSQL String Functions  − Complete list of PostgreSQL functions required to manipulate strings in PostgreSQL.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+		   
 	       
 	     
 	       
