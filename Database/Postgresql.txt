@@ -893,12 +893,53 @@ NOTE :- MVCC -> database optimization technique that creates duplicate copies of
 	eg :- begin; lock table company IN ACCESS EXCLUSIVE MODE; DELETE from company where salary = '20000';
 		-> now table is lock no one can make changes untill commit or rollback command is not executed. and only work with    			   transaction.
 	       
+------------------------------------------------------------------------------------------------------------------------------------------
+
+44. SUBQUERY :-
+-> A subquery or Inner query or Nested query is a query within another PostgreSQL query and embedded within the WHERE clause.
+-> A subquery is used to return data that will be used in the main query as a condition to further restrict the data to be retrieved.
+
+-> rules that subqueries must follow −
+
+	a). Subqueries must be enclosed within parentheses.
+
+	b). A subquery can have only one column in the SELECT clause, unless multiple columns are in the main query for the subquery to 		    compare its selected columns.
+
+	c). An ORDER BY cannot be used in a subquery, although the main query can use an ORDER BY. The GROUP BY can be used to perform 		    the same function as the ORDER BY in a subquery.
+
+	d). Subqueries that return more than one row can only be used with multiple value operators, such as the IN, EXISTS, NOT IN, 		    ANY/SOME, ALL operator.
+
+	e). The BETWEEN operator cannot be used with a subquery; however, the BETWEEN can be used within the subquery.
+	
+	syntax :- SELECT column_name [, column_name ] FROM   table1 [, table2 ] WHERE  column_name OPERATOR (SELECT column_name 
+		[, column_name ] FROM table1 [, table2 ] [WHERE])
+	     
+	     eg:- select id,first_name,salary from employee where salary < (select max(salary) from employee);
+	     
+			 id | first_name | salary 
+			----+------------+--------
+			  2 | Ram        | 200000
+			  3 | Rahul      | 300000
+			  4 | Reeta      | 400000
+			  5 | Neeraj     | 500000
+			  8 | Reeta      | 876000
+  
+------------------------------------------------------------------------------------------------------------------------------------------
+
+45. AUTO INCREMENT :-
+-> PostgreSQL has the data types smallserial, serial and bigserial; these are not true types.
+
+	syntax :- 
+		The basic usage of SERIAL dataype is as follows −
+
+		CREATE TABLE tablename (
+		   colname SERIAL
+		);
+
+	eg :- CREATE TABLE employee(
+		id BIGSERIAL );
 	       
-	       
-	       
-	       
-	       
-	       
+
 	       
 	       
 	       
