@@ -973,14 +973,111 @@ NOTE :- MVCC -> database optimization technique that creates duplicate copies of
 	   
 	   syntax for revoke :- REVOKE ALL ON employee TO sach;
 	   
+------------------------------------------------------------------------------------------------------------------------------------------
+
+47. DATE/TIME Functions and Operators
+
+	Operator			Example				     	Result
+	+		date '2001-09-28' + integer '7'				ate '2001-10-05'
+	+		date '2001-09-28' + interval '1 hour'				timestamp '2001-09-28 01:00:00'
+	+		date '2001-09-28' + time '03:00'				timestamp '2001-09-28 03:00:00'
+	+		interval '1 day' + interval '1 hour'				interval '1 day 01:00:00'
+	+		timestamp '2001-09-28 01:00' + interval '23 hours'		timestamp '2001-09-29 00:00:00'
+	+		time '01:00' + interval '3 hours'				time '04:00:00'
+	-		- interval '23 hours'						interval '-23:00:00'
+	-		date '2001-10-01' - date '2001-09-28'				integer '3' (days)
+	-		date '2001-10-01' - integer '7'				date '2001-09-24'
+	-		date '2001-09-28' - interval '1 hour'				timestamp '2001-09-27 23:00:00'
+	-		time '05:00' - time '03:00'					interval '02:00:00'
+	-		time '05:00' - interval '2 hours'				time '03:00:00'
+	-		timestamp '2001-09-28 23:00' - interval '23 hours'		timestamp '2001-09-28 00:00:00'
+	-		interval '1 day' - interval '1 hour'				interval '1 day -01:00:00'
+	-	timestamp '2001-09-29 03:00' - timestamp '2001-09-27 12:00'		interval '1 day 15:00:00'
+	*		900 * interval '1 second'					interval '00:15:00'
+	*		21 * interval '1 day'						interval '21 days'
+	*		double precision '3.5' * interval '1 hour'			interval '03:30:00'
+	/		interval '1 hour' / double precision '1.5'			interval '00:40:00'
+	
+	
+-> date and time function.
+	S. No.	        Function & Description
+	1		AGE()
+			Subtract arguments
+
+	2		CURRENT DATE/TIME()
+			Current date and time
+
+	3		DATE_PART()
+			Get subfield (equivalent to extract)
+
+	4		EXTRACT()
+			Get subfield
+
+	5		ISFINITE()
+			Test for finite date, time and interval (not +/-infinity)
+
+	6		JUSTIFY
+			Adjust interval
+			
+	eg1:- SELECT CURRENT_TIME;
+		     current_time      
+		-----------------------
+		 15:01:25.548336+05:30
+
+	eg2:- SELECT CURRENT_TIME;
+		     current_time      
+		-----------------------
+		 15:01:25.548336+05:30
+
+	eg3:- SELECT CURRENT_TIME;
+		     current_time      
+		-----------------------
+		 15:01:25.548336+05:30
+
+	eg4:- SELECT LOCALTIMESTAMP ;
+	
+		       localtimestamp       
+		----------------------------
+		 2023-02-07 15:03:06.605063
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+48. Function :-
+
+
+	syntax:- CREATE [OR REPLACE] FUNCTION function_name (arguments) 
+		RETURNS return_datatype AS $variable_name$
+		   DECLARE
+		      declaration;
+		      [...]
+		   BEGIN
+		      < function_body >
+		      [...]
+		      RETURN { variable_name | value }
+		   END; LANGUAGE plpgsql;
+	       
+	 eg:- CREATE OR REPLACE FUNCTION totalRecords ()
+		RETURNS integer AS $total$
+		declare
+ 			total integer;
+		BEGIN
+   			SELECT count(*) into total FROM employee;
+   			RETURN total;
+		END;
+		$total$ LANGUAGE plpgsql;
+		 
+		output:- CREATE FUNCTION
+		
+		
+		NOTE :- to call the function -> select totalRecord();
+			output :- totalrecords
+				--------------
+				      6
+------------------------------------------------------------------------------------------------------------------------------------------
+
 	       
 	       
-	       
-	       
-	       
-	       
-	       
-	       
+	     
 	       
 	       
 	       
