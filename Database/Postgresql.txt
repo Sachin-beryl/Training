@@ -728,6 +728,53 @@ EXAMPLE :-
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+39. INDEX COMMAND:-
+
+-> Indexes are special lookup tables that the database search engine can use to speed up data retrieval.
+-> An index is a pointer to data in a table.
+-> An index helps to speed up SELECT queries and WHERE clauses.
+-> slows down data input, with UPDATE and INSERT statements.
+-> BY DEFAULT create b-tree indexes.
+-> index type :-
+		B-tree,Hash,Gist,SP-Gist and GIN.
+
+	syntax of CREATE INDEX :- CREATE INDEX index_name on table_name;
+	
+	a). Single-Column Indexes :-
+		-> A single-column index is one that is created based on only one table column.
+		
+		syntax :- CREATE INDEX index_name on table_name (column_name);
+		
+		eg:- CREATE INDEX salary_index on table employee(salary);
+		output:- "salary_index" btree (salary)
+		
+	b). Multicolumn Indexes :- 
+		-> A multicolumn index is defined on more than one column of a table.
+		
+		syntax :- CREATE INDEX index_name on table_name (column1_name, column2_name , .....);
+		
+		eg:- CREATE INDEX genage_index on table employee(gender,age); 
+		
+		output :- "genage_index" btree (gender, age)
+		
+	c). Unique Indexes :- 
+		-> Does not allow any duplicate values to be inserted into the table.
+		
+		syntax :- CREATE UNIQUE INDEX index_name on table_name (column_name);
+		
+	d). Partial indexes :- 
+		-> The index contains entries only for those table rows that satisfy the predicate.
+		
+		syntax :- CREATE INDEX index_name on table_name (conditional_expression);
+		
+	e). Implicit indexes :-
+		-> Implicit indexes are indexes that are automatically created by the database server when an object is created.
+		
+-> LIST down of indexes :- \d table_name.
+-> DROP index command :- DROP INDEX index_name;
+		
+------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
