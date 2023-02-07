@@ -147,6 +147,12 @@
 
 20. Update the table  :- UPDATE employee SET age = AGE(now(),date_of_birth) where id between 2 and 6 ;
 
+NOTE :- Modify the table  :- ALTER TABLE table_name MODIFY column_name datatype NOT NULL;
+
+	ADD UNIQUE CONSTRAINT to a table :- ALTER TABLE table_name ADD CONSTRAINT MyUniqueConstraint UNIQUE(column1, column2...);
+	
+	
+
  id | first_name | last_name | gender | date_of_birth |              email              |                  age                   
 ----+------------+-----------+--------+---------------+---------------------------------+----------------------------------------
   1 | Sachin     | Kanojia   | Male   | 2001-01-05    | sachin.kanojia@berylsystems.com | 20
@@ -775,8 +781,26 @@ EXAMPLE :-
 		
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+40. TRUNCATE command :- 
+-> TRUNCATE TABLE command is used to delete complete data from an existing table.
+-> DROP TABLE command to delete complete table but it would remove complete table structure from the database.
 
+	syntax :- TRUNCATE TABLE  table_name;
+	     eg:- step1 -  select * from sample;
+				 id | subject | student_id 
+				----+---------+------------
+				  1 | english |          3
+				  2 | science |          2
+				  3 | sst     |          4
+ 
 
+		  step2 - truncate table sample;
+		  
+		  	  select * from sample;
+			 id | subject | student_id 
+			----+---------+------------     structure is still present.
+			
+------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
