@@ -871,8 +871,27 @@ IMP-------> Transaction Control
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-43.    
+43.  LOCKS :-
+-> Locks or Exclusive Locks or Write Locks prevent users from modifying a row or an entire table. 
+-> Rows modified by UPDATE and DELETE are then exclusively locked automatically for the duration of the transaction.   
+-> prevents other users from changing the row until the transaction is either committed or rolled back.
+
+	Syntax for LOCK command:- LOCK [ TABLE ] name IN lock_mode
+	
+	* name − The name (optionally schema-qualified) of an existing table to lock.
+	       − If ONLY is specified before the table name, only that table is locked. If ONLY is not specified, the table and all its 			 descendant tables (if any) are locked.	  
 	       
+	* lock_mode - Default -> ACCESS EXCLUSIVE
+	  -> ACCESS SHARE, ROW SHARE, ROW EXCLUSIVE, SHARE UPDATE EXCLUSIVE, SHARE, SHARE ROW EXCLUSIVE, EXCLUSIVE, ACCESS EXCLUSIVE.     
+	       
+DEAD LOCK      :- Deadlocks can occur when two transactions are waiting for each other to finish their operations.
+Advisory Locks :- Advisory locks can be useful for locking strategies that are an awkward fit for the MVCC model.
+
+NOTE :- MVCC -> database optimization technique that creates duplicate copies of records so that data can be safely read and updated at 			the same time. With MVCC, DBMS reads and writes don't block each other.
+
+
+	eg :- begin; lock table company IN ACCESS EXCLUSIVE MODE; DELETE from company where salary = '20000';
+		-> now table is lock no one can make changes untill commit or rollback command is not executed. and only work with    			   transaction.
 	       
 	       
 	       
