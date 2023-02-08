@@ -1154,16 +1154,66 @@ PostgreSQL String Functions  − Complete list of PostgreSQL functions required 
 -----------------------------------------------------------------------------------------------------------------------------------------
 		   
 	       
-	     
+	     						DATABASE DESIGN (website - dbdiagram.io)
+	       
+a). Create table in design :-
+
+	Table posts {
+	    id integer [primary key]
+	    title varchar
+	    body text [note: 'Content of the post']
+	    user_id integer
+	    created_at timestamp
+	    }
+
+b). Column setting :- 
+	Table buildings {
+	    ...
+	    address varchar(255) [unique, not null, note: 'to include unit number']
+	    id integer [ pk, unique, default: 123, note: 'Number' ]
+	    }
+	    
+	    
+	The list of column settings you can use:
+
+	note: 'string to add notes': add a metadata note to this column
+	primary key or pk          : mark a column as primary key. For composite primary key, refer to the 'Indexes' section
+	null or not null           : mark a column null or not null
+	unique                     : mark the column unique
+	default: some_value        : set a default value of the column, please refer to the 'Default Value' section below
+	increment                  : mark the column as auto-increment
+
+c). Relationships & Foreign Key Definitions :-
+	
+	1. Table posts {
+		    id integer [primary key]
+		    user_id integer [ref: > users.id] // many-to-one
+		}       
+		
+	2. ref : student.stu_id < issues.isu_id
+	
+	
+-> There are 4 types of relationships: one-to-one, one-to-many, many-to-one and many-to-many
+
+	<: one-to-many. E.g: users.id < posts.user_id
+	>: many-to-one. E.g: posts.user_id > users.id
+	-: one-to-one. E.g: users.id - user_infos.user_id
+	<>: many-to-many. E.g: authors.id <> books.id
 	       
 	       
+d). Syntax Consistency
+	DBML is the standard language for database and the syntax is consistent to provide clear and extensive functions.
+
+	curly brackets  			{}: grouping for indexes, constraints and table definitions
+	square brackets 			[]: settings
+	forward slashes 			//: comments
+	column_name is stated in just plain text
+	single quote as 'string' 	  	  : string value
+	double quote as "column name"   	  : quoting variable
+	triple quote as '''multi-line string'''  : multi-line string value
+	backtick `				  : function expression
 	       
-	       
-	       
-	       
-	       
-	       
-	       
+-----------------------------------------------------------------------------------------------------------------------------------------
 	       
 	       
 	       
