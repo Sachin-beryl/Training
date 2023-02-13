@@ -340,3 +340,62 @@ Note :-  to alter individual commits in the process
                 10. after good command, bisect will show all the things make changes according to your requirement.
     • To clean up the bisection state and return to the original HEAD
               -> git bisect reset.
+              
+              
+36. Cherry pick :- 
+	• Cherry picking is the act of picking a commit from a branch and applying it to another.
+	• say a commit is accidently made to the wrong branch. You can switch to the correct branch and cherry-pick the commit to where 		  it should belong.
+	
+	steps :- 
+		1. switch to other branch.
+		 -> git checkout sachin
+		 
+		2. Make changes in this branch.
+		 -> git pull origin main         /////pull request in important before making changes for latest updates.
+		 
+  		    touch cherry1.txt
+  		    git add.
+  		    git commit -m "cherry pick test 1"
+  		    git push
+  		    
+  		    touch cherry2.txt
+  		    git add .
+  		    git commit -m "cherry pick test 2"
+  		    git push
+  		    
+  		3. But we only want cherry2.txt in main branch.
+  		 -> git log
+  		 -> copy the commit id of cherry2.txt
+  		    
+		4. Switch to main branch and use cherry-pick command to merge in main branch only picked commit id.
+		 ->  git checkout main
+  		 ->  git cherry-pick 0028747575e0b1791e03974186527afae18ae5dd                          //////(commit_id)
+  		 ->  git push
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
