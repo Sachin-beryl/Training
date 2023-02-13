@@ -1,0 +1,103 @@
+----------------------------------------------------------DATABASE ASSIGNMENT---------------------------------------------------------------
+
+Questions
+	1. The following relations keep track of airline flight information:
+	   Flights(flno: integer, from: string, to: string, distance: integer, departs:time,arrives: time, price: integer)
+	   Aircraft(aid: integer, aname: string, cruisingrange: integer)
+	   Certified(eid: integer, aid: integer)
+	   Employees(eid: integer, ename: string, salary: integer)
+	   
+	a). FLight Table :-
+		CREATE TABLE Flights (                                                       
+		  "flno" integer PRIMARY KEY,
+		  "from" text,
+		  "to" text,
+		  "distance" integer,
+		  "departs" time,
+		  "arrives" time,
+		  "price" integer
+		);
+		
+		
+		 flno |     from     |    to     | distance | departs  | arrives  | price  
+		------+--------------+-----------+----------+----------+----------+--------
+		 1001 | London       | Malaga    |     1680 | 10:30:00 | 14:20:00 |   4580
+		 1002 | Toulouse     | Bristol   |      915 | 11:00:00 | 11:55:00 |  23550
+		 1003 | Indianapolis | Venice    |     7569 | 06:00:00 | 08:00:00 |  45315
+		 1004 | Los-angles   | Honolulu  |     4108 | 17:05:00 | 21:05:00 |  16342
+		 1005 | Mumbai       | Jaisalmer |      895 | 14:15:00 | 16:05:00 |   5200
+		 1006 | Los-angeles  | chicago   |     2818 | 15:55:00 | 21:56:00 |  15390
+		 1007 | madison      | new-york  |     1301 | 14:46:00 | 21:59:00 |  47242
+		 1008 | Delhi        | Srinagar  |      640 | 08:10:00 | 09:15:00 |   8300
+		 1009 | Hydrabad     | Lucknow   |     1088 | 07:00:00 | 09:05:00 |   8196
+		 1010 | New-Delhi    | Montreal  |    11842 | 23:55:00 | 06:10:00 | 160000
+
+		
+		
+	b). Aircraft Table :-
+		CREATE TABLE Aircraft (                                                       
+		  "aid" integer PRIMARY KEY,
+		  "aname" text,
+		  "cruising_range" integer
+		);
+		
+		
+		 aid |  aname  | cruising_range 
+		-----+---------+----------------
+		  51 | Boeing  |           6690
+		  52 | Airbus  |           6940
+		  53 | Cessna  |           3889
+		  54 | Boeing  |           6690
+		  55 | SG440   |           4200
+		  56 | Airbus  |           4300
+		  57 | Airbus  |           3200
+		  58 | Boeing  |            800
+		  59 | Bmbraer |           3000
+		  60 | Airbus  |          16670
+
+			
+	c). Certified Table :-
+		CREATE TABLE Certified (                               
+		  "eid" integer,
+		  "aid" integer
+		);
+		
+		
+		 eid | aid 
+		-----+-----
+		   1 |  51
+		   2 |  52
+		   3 |  53
+		   4 |  54
+		   5 |  55
+		   6 |  56
+		   7 |  57
+		   8 |  58
+		   9 |  59
+		  10 |  60
+
+		
+	d). Employees Table :-
+		CREATE TABLE Employees (                               
+		  "eid" integer PRIMARY KEY,
+		  "ename" text,
+		  "salary" integer
+		);
+
+		
+		 eid |      ename       | salary 
+		-----+------------------+--------
+		   1 | Georgy Street    | 100000
+		   2 | Florina Pheasant | 450000
+		   3 | Loren Irnys      | 250000
+		   4 | Silvia Ainscow   | 550000
+		   5 | Aleen Battill    |  80000
+		   6 | Thaine Dainter   | 750000
+		   7 | Elysia Kersey    |  35000
+		   8 | Aurthur Zorzetti |  52000
+		   9 | Shay Franzetti   | 110000
+		  10 | Ruby Rodenborch  | 130000
+
+
+
+
