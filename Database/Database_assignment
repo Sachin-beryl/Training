@@ -273,9 +273,11 @@ h). Print the enames of pilots who can operate planes with cruisingrange greater
 NOTE :- we use inner query for NOT IN condition which can filter the aname which having 'Boeing' in there name.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+
 i). A customer wants to travel from Madison to New York with no more than two changes of flight. List the choice of departure times from Madison if the customer wants to arrive in New York by 6 p.m.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+
 j). Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
 
  step 1 :- select avg(salary) emp_avg from employees;       --:: 
@@ -301,6 +303,7 @@ j). Compute the difference between the average salary of a pilot and the average
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+
 k). Print the name and salary of every nonpilot whose salary is more than the average salary for pilots.
 
  step 1 :- select ename , salary from employees where eid NOT IN (select emp.eid from employees as emp inner join certified as cert on   emp.eid=cert.eid);        --::( for non pilot)
@@ -323,6 +326,7 @@ k). Print the name and salary of every nonpilot whose salary is more than the av
  NOTE :- 'and' is used here to satisfy both the conditions.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+
 l). Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
 
  :-> select DISTINCT(ename) from employees as emp inner join certified as cert on emp.eid=cert.eid inner join aircraft as air on    	air.aid=cert.aid where air.cruising_range > 1000;
@@ -344,6 +348,7 @@ l). Print the names of employees who are certified only on aircrafts with cruisi
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+
 m). Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts.
 
  :-> select count(*),ename from employees as emp inner join certified as cert on emp.eid=cert.eid inner join aircraft as air on 		air.aid=cert.aid group by ename having count(air.aname)>=2 and every(air.cruising_range > 1000) order by ename;
@@ -362,14 +367,25 @@ m). Print the names of employees who are certified only on aircrafts with cruisi
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+
 n). Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft.
 
+ :-> select DISTINCT(ename) from employees as emp inner join certified as cert on emp.eid=cert.eid inner join aircraft as air on air.aid=cert.aid where air.cruising_range > 1000 and air.aid IN (select aid from aircraft where aname LIKE 'Boeing%'); 
  
+ output:-
+	      ename      
+	-----------------
+	 Elysia Kersey
+	 Georgy Street
+	 Phil Fellibrand
+	 Silvia Ainscow
+
  
  
  
 
 
+---------------------------------------------------------ASSIGNMENT COMPLETED-------------------------------------------------------------
 
 
 
