@@ -191,8 +191,31 @@ c). Find the names of pilots whose salary is less than the price of the cheapest
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+d). For all aircraft with cruisingrange over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft.
 
+ step 1 :- select aname from aircraft where cruising_range > 1000;      --::( find aname having crrising range > 1000)
+ 
+ step 2 :- select aname from aircraft as air inner join certified as cert on air.aid=cert.aid  where cruising_range > 1000;
+ 			--:: (check for certified pilots)
+ 			
+ step 3 :- select air.aname,avg(emp.salary) from aircraft as air inner join certified as cert on air.aid=cert.aid inner join employees as 	   emp on emp.eid=cert.eid group by air.aname  having every(cruising_range > 1000);
+ 
+     output :-
+			    aname             |         avg         
+		------------------------------+---------------------
+		 Airbus A320                  | 483333.333333333333
+		 Airbus A319                  | 320000.000000000000
+		 Boeing 737-85H               | 292500.000000000000
+		 GoAir 261                    | 105000.000000000000
+		 Airbus A340-500              | 215000.000000000000
+		 Boeing 737                   | 250333.333333333333
+		 Airbus 720                   | 248333.333333333333
+		 Cessna 560 XL Citation Excel | 284000.000000000000
+		 SPice-jet SG440              | 345250.000000000000
 
+ NOTE :- join the employees table for salary, group by is used for group the aname to find the average salary and every aggregate 	function for satisfying group clause .
+
+------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
