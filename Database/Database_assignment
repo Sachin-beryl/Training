@@ -122,6 +122,57 @@ Questions
 		  14 | Saloma Stirley   |  67000
 		  15 | Hazel Kobus      | 260000
 
+--------------------------------------------------------------SOLUTIONS-------------------------------------------------------------------
+
+a).  Find the names of aircraft such that all pilots certified to operate them earn more than $80,000.
+
+   step 1 :- select aircraft.aname from aircraft inner join certified on aircraft.aid = certified.aid; (provide aname which are certified)
+	
+   step 2 :- select aircraft.aname from aircraft inner join certified on aircraft.aid = certified.aid group by aircraft.aname; (remove 		     duplicates )
+   
+   step 3 :- select aircraft.aname from aircraft inner join certified on aircraft.aid = certified.aid inner join employees on 		     employees.eid = certified.eid group by aircraft.aname having every(salary>80000)  order by aircraft.aname;
+   
+   
+		   output :-     aname    
+				-------------
+				 Airbus A319
+				 Airbus A320
+				 Boeing 737
+				 GoAir 261
+
+   
+   note :- for salary we need employees table , and order the output using order by clause , and every aggregate function is used to   		   satisfy group by clause. Without applying aggregate function we can't use the salary for comparation.
+   
+   	-> Aggregate function "every" -- true if all input values are true, otherwise false.
+   	
+   	
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
