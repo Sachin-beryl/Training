@@ -325,7 +325,7 @@ k). Print the name and salary of every nonpilot whose salary is more than the av
 ------------------------------------------------------------------------------------------------------------------------------------------
 l). Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
 
- -> select DISTINCT(ename) from employees as emp inner join certified as cert on emp.eid=cert.eid inner join aircraft as air on    	air.aid=cert.aid where air.cruising_range > 1000;
+ :-> select DISTINCT(ename) from employees as emp inner join certified as cert on emp.eid=cert.eid inner join aircraft as air on    	air.aid=cert.aid where air.cruising_range > 1000;
  
  	output :-
 		      ename       
@@ -345,6 +345,21 @@ l). Print the names of employees who are certified only on aircrafts with cruisi
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 m). Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts.
+
+ :-> select count(*),ename from employees as emp inner join certified as cert on emp.eid=cert.eid inner join aircraft as air on 		air.aid=cert.aid group by ename having count(air.aname)>=2 and every(air.cruising_range > 1000) order by ename;
+ 
+ output :-
+	 count |      ename       
+	-------+------------------
+	     2 | Aleen Battill
+	     3 | Elysia Kersey
+	     3 | Florina Pheasant
+	     4 | Georgy Street
+	     2 | Loren Irnys
+	     3 | Phil Fellibrand
+	     2 | Shay Franzetti
+	     4 | Thaine Dainter
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 n). Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft.
