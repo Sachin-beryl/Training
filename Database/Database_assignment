@@ -65,34 +65,37 @@ Questions
 		
 		  	 eid | aid 
 			-----+-----
-			   1 |  60
-			   1 |  59
 			   1 |  51
+			   1 |  59
+			   1 |  60
+			   1 |  56
 			   2 |  55
 			   2 |  52
 			   2 |  57
 			   3 |  53
 			   3 |  52
 			   4 |  54
+			   4 |  60
 			   4 |  51
 			   4 |  58
 			   5 |  60
 			   5 |  55
-			   6 |  56
-			   6 |  53
-			   6 |  52
 			   6 |  55
+			   6 |  52
+			   6 |  53
+			   6 |  56
+			   7 |  57
 			   7 |  54
 			   7 |  53
-			   7 |  57
 			   8 |  58
 			   9 |  59
 			   9 |  56
 			  10 |  60
 			  13 |  55
-			  13 |  51
 			  13 |  53
+			  13 |  51
 			  15 |  57
+
 
 
 		
@@ -146,7 +149,106 @@ a).  Find the names of aircraft such that all pilots certified to operate them e
    	-> Aggregate function "every" -- true if all input values are true, otherwise false.
    	
    	
+------------------------------------------------------------------------------------------------------------------------------------------
+
+b). For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange of the aircraft for which 	she or he is certified.
+
+  step 1 :- select emp.eid from employees as emp inner join certified as cert on emp.eid = cert.eid;    --::(find certified employees)
   
+  step 2 :- select emp.eid from employees as emp inner join certified as cert on emp.eid = cert.eid inner join aircraft as air on air.aid 	    = cert.aid group by emp.eid  having count(air.aid)>3;       --::(find eid having aircraft greater than 3)
+  
+  step 3 :- select emp.eid, max(air.cruising_range) from employees as emp inner join certified as cert on emp.eid = cert.eid inner join 		    aircraft as air on air.aid = cert.aid group by emp.eid  having count(air.aid)>3;     --:: (max cruising_range)
+  
+  	output :-
+  		 eid |  max  
+		-----+-------
+		   4 | 16670
+		   6 |  6940
+		   1 | 16670
+
+  
+  NOTE :- IN these question we use alias ( emp for employees , cert for certified , air for aircraft ).
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
