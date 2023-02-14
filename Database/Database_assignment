@@ -219,7 +219,7 @@ d). For all aircraft with cruisingrange over 1000 miles, find the name of the ai
 
 e). Find the names of pilots certified for some Boeing aircraft.
 
- -> select emp.ename from employees as emp inner join certified as cert on emp.eid = cert.eid inner join aircraft as air on air.aid = 	cert.aid where air.aname LIKE 'Boeing%';
+ :-> select emp.ename from employees as emp inner join certified as cert on emp.eid = cert.eid inner join aircraft as air on air.aid = 	cert.aid where air.aname LIKE 'Boeing%';
  
   output :-						Justification :- 
   								
@@ -238,6 +238,22 @@ NOTE :- LIKE is used for having all aname which start with 'Boeing' justificatio
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 f). Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago.
+
+ :-> select aid from aircraft where cruising_range >= (select distance from flights where "from"='Los-angeles' and "to"='chicago');
+ 
+ output :-
+	 aid 
+	-----
+	  51
+	  52
+	  53
+	  54
+	  55
+	  56
+	  57
+	  59
+	  60
+
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------
