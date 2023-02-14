@@ -303,6 +303,25 @@ j). Compute the difference between the average salary of a pilot and the average
 ------------------------------------------------------------------------------------------------------------------------------------------
 k). Print the name and salary of every nonpilot whose salary is more than the average salary for pilots.
 
+ step 1 :- select ename , salary from employees where eid NOT IN (select emp.eid from employees as emp inner join certified as cert on   emp.eid=cert.eid);        --::( for non pilot)
+ 
+ 	     ename      | salary 
+	----------------+--------
+	 Raine Boakes   | 298000
+	 Vale Itzak     |  95100
+	 Saloma Stirley |  67000
+
+ step 2 :- select ename , salary from employees where eid NOT IN (select emp.eid from employees as emp inner join certified as cert on emp.eid=cert.eid) and salary > (select avg(DISTINCT(salary)) from employees as emp inner join certified as cert on emp.eid = cert.eid);
+ 
+ output:- 
+ 
+	    ename     | salary 
+	--------------+--------
+	 Raine Boakes | 298000
+
+
+ NOTE :- 'and' is used here to satisfy both the conditions.
+
 ------------------------------------------------------------------------------------------------------------------------------------------
 l). Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
 
