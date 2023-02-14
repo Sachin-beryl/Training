@@ -237,8 +237,57 @@ NOTE :- LIKE is used for having all aname which start with 'Boeing' justificatio
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+f). Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago.
 
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+g. Identify the routes that can be piloted by every pilot who makes more than $100,000.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+h. Print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any Boeing aircraft.
+
+ step 1 :- select ename from employees as emp inner join certified as cert on emp.eid=cert.eid ;    --::(For certified pilot)
  
+ step 2 :- select ename from employees as emp inner join certified as cert on emp.eid=cert.eid inner join aircraft as air
+	   on air.aid=cert.aid where air.cruising_range > 3000;             --::(for cruising range condition we join aircraft table)
+	   
+ step 3 :- select DISTINCT(ename) from employees as emp inner join certified as cert on emp.eid=cert.eid inner join aircraft as air
+	   on air.aid=cert.aid where air.cruising_range > 3000 and air.aname NOT IN (select aname from aircraft where aname LIKE          'Boeing%') order by ename;
+	   
+ output :-		      ename       
+			------------------
+			 Aleen Battill
+			 Elysia Kersey
+			 Florina Pheasant
+			 Georgy Street
+			 Hazel Kobus
+			 Loren Irnys
+			 Phil Fellibrand
+			 Ruby Rodenborch
+			 Shay Franzetti
+			 Silvia Ainscow
+			 Thaine Dainter
+
+NOTE :- we use inner query for NOT IN condition which can filter the aname which having 'Boeing' in there name.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+i. A customer wants to travel from Madison to New York with no more than two changes of flight. List the choice of departure times from Madison if the customer wants to arrive in New York by 6 p.m.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+j. Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
+
+------------------------------------------------------------------------------------------------------------------------------------------
+k. Print the name and salary of every nonpilot whose salary is more than the average salary for pilots.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+l. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+m. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+n. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft.
 
  
  
