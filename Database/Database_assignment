@@ -260,6 +260,15 @@ f). Find the aids of all aircraft that can be used on routes from Los Angeles to
 
 g). Identify the routes that can be piloted by every pilot who makes more than $100,000.
 
+
+ :-> select DISTINCT("from","to"),distance from flights where distance <= (select min(cruising_range) from aircraft as air inner join 	certified as cert on air.aid = cert.aid inner join employees as emp on emp.eid=cert.eid where salary > 100000);
+ 
+ output:-
+	       row        | distance 
+	------------------+----------
+	 (Delhi,Srinagar) |      640
+
+
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 h). Print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any Boeing aircraft.
@@ -296,7 +305,7 @@ i). A customer wants to travel from Madison to New York with no more than two ch
 
 j). Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
 
- step 1 :- select avg(salary) emp_avg from employees;       --:: 
+ step 1 :- select avg(salary) emp_avg from employees;     
  	 
  	   emp_avg       
 	---------------------
