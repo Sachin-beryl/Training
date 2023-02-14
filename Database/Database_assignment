@@ -217,8 +217,33 @@ d). For all aircraft with cruisingrange over 1000 miles, find the name of the ai
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+e). Find the names of pilots certified for some Boeing aircraft.
+
+ -> select emp.ename from employees as emp inner join certified as cert on emp.eid = cert.eid inner join aircraft as air on air.aid = 	cert.aid where air.aname LIKE 'Boeing%';
+ 
+  output :-						Justification :- 
+  								
+  	      ename       				      ename       |     aname      	
+	------------------				------------------+----------------
+	 Aurthur Zorzetti				 Aurthur Zorzetti | Boeing 121
+	 Elysia Kersey					 Elysia Kersey    | Boeing 737-85H
+	 Georgy Street					 Georgy Street    | Boeing 737
+	 Phil Fellibrand				 Phil Fellibrand  | Boeing 737
+	 Silvia Ainscow				 Silvia Ainscow   | Boeing 737
+	 Silvia Ainscow				 Silvia Ainscow   | Boeing 737-85H
+	 Silvia Ainscow				 Silvia Ainscow   | Boeing 121
+
+NOTE :- LIKE is used for having all aname which start with 'Boeing' justification is used to show that the same pilot can fly any number 		of different flights.
+
+------------------------------------------------------------------------------------------------------------------------------------------
 
 
+ 
+
+ 
+ 
+ 
+ 
 
 
 
