@@ -1,4 +1,4 @@
-------------------------------------------------------------INTRODUCTION--------------------------------------------------------------------
+------------------------------------------------------------INTRODUCTION-------------------------------------------------------------------
 
  1). Ruby is a scripting language designed by Yukihiro Matsumoto, also known as Matz.
  2). It runs on a variety of platforms, such as Windows, Mac OS, and the various versions of UNIX.
@@ -10,7 +10,7 @@
  
  7). Ruby can be embedded into Hypertext Markup Language (HTML).
 
-------------------------------------------------------------Ruby Installation---------------------------------------------------------------
+------------------------------------------------------------Ruby Installation--------------------------------------------------------------
 
  1). Update the system repositories with:
 	sudo apt update
@@ -34,4 +34,54 @@
                 d). check for ruby version.
                 	ruby -v
                 	
+
+------------------------------------------------------------PLATFORMS TO RUN RUBY----------------------------------------------------------
+
+ 1). VIM (Vi IMproved) is a very simple text editor.
+ 
+ 2). Interactive Ruby (IRb) :- 
+ 	a). Interactive Ruby (IRb) provides a shell for experimentation. Within the IRb shell, you can immediately view expression results, line by line.
+ 	b). Just type irb at your command prompt and an Interactive Ruby Session will start.
+ 		
+ 		eg:- beryl@beryl-HP-Pavilion-Notebook:~$ irb
+			3.2.1 :001 > puts "sachin"
+			sachin
+			 => nil                                      
+			3.2.1 :003 >   out = "Hello"
+			3.2.1 :004 >   puts out
+			3.2.1 :005 > end
+			 => :hello 
+	
+	c). Exit the ruby terminal type "quit".
+	
+ 3). VScode :- install vscode , install extensions in vscode related to ruby.
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
