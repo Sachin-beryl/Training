@@ -135,7 +135,24 @@
 	output :- priority code
 		  main code
 
- 8). 
+ 8). Ruby END Statement
+	Syntax :- 
+		END {
+		   code
+		}
+		
+	eg :- 
+	 code :- puts "main code"
+		END{
+		    puts "Always run at the end of code"
+		}
+		BEGIN{
+		    puts "priority code"
+		}
+		
+	output :- priority code
+		  main code
+		  Always run at the end of code
 
 
 
