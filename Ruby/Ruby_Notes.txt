@@ -167,12 +167,57 @@
 		      I said that already.
 		      =end
 		
+--------------------------------------------------------Classes and Objects--------------------------------------------------------------
 
+ -> features of the object-oriented programming language include −
 
+	Data Encapsulation
+	Data Abstraction
+	Polymorphism
+	Inheritance
+	
+ -> An object-oriented program involves classes and objects. 
+ -> A class is the blueprint from which individual objects are created.
+ 
+ 1). Defining a Class in Ruby :-
+ 	-> A class in Ruby always starts with the keyword class followed by the name of the class. 
+ 	-> The name should always be in initial capitals.
 
+	syntax :- class Customer
+		  end
+	        	    
+ 2). Creating Objects in Ruby using new Method :-
+ 	
+ 	-> Objects are instances of the class.
+ 	-> The new method belongs to the class methods.
+ 	
+ 	eg :- cust1 = Customer. new
+	      cust2 = Customer. new
 
-
-
+ 3). Member Functions in Ruby Class :-
+ 
+ 	-> functions are called methods. 
+ 	-> Each method in a class starts with the keyword def followed by the method name.
+	-> The method name always preferred in lowercase letters. 
+	-> End a method in Ruby by using the keyword end.
+	
+	eg:- class Sample
+		  def hello
+		     puts "Hello Ruby!"
+		  end
+	     end
+ 
+ 	     # Now using above class to create objects
+	     object = Sample. new
+	     object.hello
+	     
+ 4). Ruby Constants :-
+	-> Constants begin with an uppercase letter. 
+	-> Constants defined within a class or module can be accessed from within that class or module. 
+	-> And those defined outside a class or module can be accessed globally.
+	
+		eg :- VAR1 = 100
+ NOTE:-	   :- puts "Value of first Constant is #{VAR1}"
 
 
 
