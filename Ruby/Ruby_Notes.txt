@@ -219,11 +219,107 @@
 		eg :- VAR1 = 100
  NOTE:-	   :- puts "Value of first Constant is #{VAR1}"
 
+-------------------------------------------------------------VARIABLES-------------------------------------------------------------------
 
+ 1). Local Variables    -> Local variables begin with a lowercase letter or _.
 
+ 2). Instance Variables −> Instance variables are available across methods for any particular instance or object. 
+			-> Instance variables are preceded by the at sign (@) followed by the variable name.
+			    
+			    	eg:- @cust_id = id
+	NOTE:-		    	  :- puts "Customer id #@cust_id"    
 
+ 3). Class Variables    −> Class variables are available across different objects.
+			-> They are preceded by the sign @@ and are followed by the variable name.
+			    
+			    	eg:- class Customer
+   				        @@no_of_customers = 0
+				     end
 
+ 4). Global Variables   −> Class variables are not available across classes. 
+        	       -> If you want to have a single variable, which is available across classes, 
+        	       -> you need to define a global variable. 
+        	       -> The global variables are always preceded by the dollar sign ($).
+        	    
+	        	    	eg :- $global_variable = 10
 
+ 5). Ruby Pseudo-Variables :-
+  
+  -> They are special variables that have the appearance of local variables but behave like constants.
+  -> You cannot assign any value to these variables.
+
+	a). self     − The receiver object of the current method.
+	b). true     − Value representing true.
+	c). false    − Value representing false.
+	d). nil      − Value representing undefined.
+	e). __FILE__ − The name of the current source file.
+	f). __LINE__ − The current line number in the source file.
+	
+ 6). Ruby Basic Literals :-
+ 
+ 	a). Integer Numbers  :- range from -2^30 to (2^30)-1 or -2^62 to (2^62)-1.
+ 	b). Floating Numbers :- Ruby supports floating numbers. They are also numbers but with decimals.
+ 	c). String Literals  :- Ruby strings are simply sequences of 8-bit bytes and they are objects of class String. 
+ 			      :- Double-quoted strings allow substitution and backslash notation 
+ 			      :- but single-quoted strings don't allow substitution and allow backslash notation only for \\ and \'
+ 			      
+ 		eg :-   puts 'escape using "\\"';
+			puts 'That\'s right';
+			
+			output :-
+				escape using "\"
+				That's right
+			 	
+ NOTE IMP :- You can substitute the value of any Ruby expression into a string using the sequence #{ expr }.
+ 
+ 7). Ruby Arrays :-
+ 
+ -> Literals of Ruby Array are created by placing a comma-separated series of object references between the square brackets. 
+ -> A trailing comma is ignored.
+
+   eg :-
+	ary = [  "fred", 10, 3.14, "This is a string", "last element", ]
+	ary.each do |i|
+	   puts i
+	end
+
+   output :-
+	fred
+	10
+	3.14
+	This is a string
+	last element
+	
+ 8). Ruby Hashes
+  -> A literal Ruby Hash is created by placing a list of key/value pairs between braces, with either a comma or the sequence => between the key and the value. 
+  -> A trailing comma is ignored.
+
+	eg :- 
+		hsh = colors = { "red" => 0xf00, "green" => 0x0f0, "blue" => 0x00f }
+		hsh.each do |key, value|
+		   print key, " is ", value, "\n"
+		end
+
+	output :-
+		red is 3840
+		green is 240
+		blue is 15
+
+ 9). Ruby Ranges
+  -> A range (1..5) means it includes 1, 2, 3, 4, 5 values 
+  -> A range (1...5) means it includes 1, 2, 3, 4 values.
+  
+	eg:-
+		(10..15).each do |n| 
+		   print n, ' ' 
+		end
+		
+	output :-
+		10 11 12 13 14 15
+		
+		
+	
+  
 
 
 
