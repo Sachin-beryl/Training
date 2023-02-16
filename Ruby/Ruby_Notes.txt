@@ -10,5 +10,28 @@
  
  7). Ruby can be embedded into Hypertext Markup Language (HTML).
 
+------------------------------------------------------------Ruby Installation---------------------------------------------------------------
 
+ 1). Update the system repositories with:
+	sudo apt update
+
+ 2). Use the following command to install Ruby:
+	sudo apt install ruby-full
+	
+ 3). Type 'y' in terminal to give permission to download and install ruby.
+ 
+                                    ----------IF ALREADY PRESENT UPDATE THE VERSION OF RUBY----------
+                      
+                a). check version on rvm(ruby version manager) in terminal.
+                	rvm -v
+                	
+                b). list the version of ruby using rvm.
+                	rvm list known
+                	
+                c). Now install the latest version of ruby.
+                	rvm install 3.2.1(version number)
+                	
+                d). check for ruby version.
+                	ruby -v
+                	
 
