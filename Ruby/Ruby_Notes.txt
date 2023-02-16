@@ -1,0 +1,14 @@
+------------------------------------------------------------INTRODUCTION--------------------------------------------------------------------
+
+ 1). Ruby is a scripting language designed by Yukihiro Matsumoto, also known as Matz.
+ 2). It runs on a variety of platforms, such as Windows, Mac OS, and the various versions of UNIX.
+ 3). Ruby is a pure object-oriented programming language.
+ 4). Ruby is a general-purpose, interpreted programming language.
+ 5). Ruby is a server-side scripting language similar to Python and PERL.
+ 6). Ruby can be used to write Common Gateway Interface (CGI) scripts.
+ CGI -> a simple protocol for passing an HTTP request from a web server to a standalone program, and returning the output to the web browser
+ 
+ 7). Ruby can be embedded into Hypertext Markup Language (HTML).
+
+
+
