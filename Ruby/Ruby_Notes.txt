@@ -484,6 +484,178 @@
 	output :-
 		little child
 
+---------------------------------------------------------------Loops-------------------------------------------------------------------
+
+ 1). while Statement
+	Syntax :-
+		while conditional [do]
+		   code
+		end
+		
+	eg :- 
+		number = 1;
+		while number < 5 do
+		    puts ("something #{number}")
+		    number += 1
+		end
+		
+ 2). while modifier
+	Syntax :-
+		code while condition
+
+		OR
+
+		begin 
+		  code 
+		end while conditional
+		
+	eg :-
+		number = 1;
+		begin 
+		    puts "something #{number}"
+		    number += 1
+		end while number < 6
+
+ 3). until Statement
+ 	syntax :-
+		until conditional [do]
+		   code
+		end
+		
+	eg :-
+		number = 1
+		until number > 5 do
+		    puts "number is #{number}"
+		    number += 1
+		end
+				
+ 4). until modifier
+	Syntax :-
+		code until conditional
+
+		OR
+
+		begin
+		   code
+		end until conditional
+		
+	eg :-
+		number = 1
+		begin
+		    puts "number is #{number}"
+		    number += 2
+		end until number > 5
+
+ 5). for Statement
+	Syntax :-
+		for variable [, variable ...] in expression [do]
+		   code
+		end
+	
+	eg :-
+		number = 10
+		for i in 1..5
+		    print (number * i),"\n"
+		end
+
+	for each loop :- (0..5).each do |i|
+			     puts "Value of local variable is #{i}"
+		     	  end
+		     	  
+ 6). break Statement
+ 	eg:-
+ 		for i in 0..5
+		   if i > 2 then
+		      break
+		   end
+		   puts "Value of local variable is #{i}"
+		end
+				     
+ 	output:-
+ 		Value of local variable is 0
+		Value of local variable is 1
+		Value of local variable is 2
+		
+ 7). next Statement
+ 	eg:- 
+ 		for i in 0..5
+		   if i < 2 then
+		      next
+		   end
+		   puts "Value of local variable is #{i}"
+		end
+
+	output :-
+		Value of local variable is 2
+		Value of local variable is 3
+		Value of local variable is 4
+		Value of local variable is 5
+
+ 8). redo Statement 
+ -> Restarts this iteration of the most internal loop, without checking loop condition.
+ 	eg:-
+ 		for i in 0..5
+		   if i < 2 then
+		      puts "Value of local variable is #{i}"
+		      redo
+		   end
+		end
+		
+	output :-
+		This will produce the following result and will go in an infinite loop −
+
+		Value of local variable is 0
+		Value of local variable is 0
+		............................
+				
+ 9). retry Statement
+ -> If retry appears in rescue clause of begin expression, restart from the beginning of the begin body.
+
+	syntax:-
+		begin
+		   do_something # exception raised
+		rescue
+		   # handles error
+		   retry  # restart from beginning
+		end
+
+	   eg:-
+		for i in 1..5
+		   retry if some_condition # restart from i == 1
+		end	
+		
+	     :- for i in 0..5
+		   retry if i > 2
+		puts "Value of local variable is #{i}"
+		end
+			
+	output:-
+		This will produce the following result and will go in an infinite loop −
+
+		Value of local variable is 1
+		Value of local variable is 2
+		Value of local variable is 1
+		Value of local variable is 2
+		Value of local variable is 1
+		Value of local variable is 2
+		............................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
