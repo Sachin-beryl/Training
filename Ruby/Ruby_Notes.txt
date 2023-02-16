@@ -394,10 +394,95 @@
 		puts Inside_one::CONST
 		puts Inside_one::CONST.call + Inside_two::CONST
 
+-----------------------------------------------------------------IF ELSE---------------------------------------------------------------
 
+ 1). if...else Statement
+	Syntax :-
+		if conditional [then]
+		   code...
+		[elsif conditional [then]
+		   code...]...
+		[else
+		   code...]
+		end
 
+	eg :-
+		number = 1
+		if number > 2
+		    puts "number is greater then two"
+		elsif number <= 2 and number != 0
+		    puts "The number is 1"
+		else
+		    puts "Invalid number"
+		end
 
+ 2). if modifier
+	Syntax :-
+		code if condition       (Executes code if the conditional is true.)
 
+	eg:-
+		$debug = 1
+		print "debug\n" if $debug
+	
+	output :-
+		debug
+		
+ 3). unless Statement
+ 	-> Executes code if conditional is false.
+ 
+	Syntax :-
+		unless conditional [then]
+		   code
+		[else
+		   code ]
+		end
+		
+	eg :-
+		number = 1;
+		unless number >= 2
+		    puts "number equals to 1"
+		else
+		    puts "number is greater than 2"
+		end
+			
+	output:-
+		number equals to 1
+		
+ 4). unless modifier
+ 	syntax :- 
+ 		code unless condition
+ 	eg :-
+ 		$var = false
+		print "3 -- Value is set\n" unless $var
+		
+ 5). case Statement
+ 	syntax :-
+	 	case expr0
+		when expr1, expr2
+		   stmt1
+		when expr3, expr4
+		   stmt2
+		else
+		   stmt3
+		end
+
+	eg:-
+		$age =  5
+		case $age
+		when 0 .. 2
+		   puts "baby"
+		when 3 .. 6
+		   puts "little child"
+		when 7 .. 12
+		   puts "child"
+		when 13 .. 18
+		   puts "youth"
+		else
+		   puts "adult"
+		end
+
+	output :-
+		little child
 
 
 
