@@ -135,7 +135,7 @@
 	output :- priority code
 		  main code
 
- 8). Ruby END Statement
+ 8). Ruby END Statement :-
 	Syntax :- 
 		END {
 		   code
@@ -153,6 +153,21 @@
 	output :- priority code
 		  main code
 		  Always run at the end of code
+		  
+ 9). Ruby Comments :-
+	-> A comment hides a line, part of a line, or several lines from the Ruby interpreter. 
+	-> You can use the hash character (#) at the beginning of a line 
+
+		eg :- # I am a comment. Just ignore me.
+		
+		   :- =begin
+		      This is a comment.
+		      This is a comment, too.
+		      This is a comment, too.
+		      I said that already.
+		      =end
+		
+
 
 
 
