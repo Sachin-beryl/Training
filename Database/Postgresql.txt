@@ -1215,11 +1215,50 @@ d). Syntax Consistency
 	       
 -----------------------------------------------------------------------------------------------------------------------------------------
 	       
+								NOTE
+								
+1). For random values between range :- 
+			syntax :- UPDATE orders SET menu_id = floor(random() * (h-l+1) + l)::int;					
+				   UPDATE orders SET menu_id = floor(random() * (20-1+1) + 1)::int;
 	       
 	       
+2). for case :-
+	example :-
+	 
+	a).  
+	 SELECT title,
+	       length,
+	       CASE
+		   WHEN length> 0
+		        AND length <= 50 THEN 'Short'
+		   WHEN length > 50
+		        AND length <= 120 THEN 'Medium'
+		   WHEN length> 120 THEN 'Long'
+	       END duration                              #here duration is a column name
+	FROM film
+	ORDER BY title;
 	       
 	       
-	       
-	       
+	b). With aggregate function :-
+		 -> SELECT
+			SUM (CASE
+			       WHEN rental_rate = 0.99 THEN 1
+			       ELSE 0
+			      END
+			) AS "Economy",          #After as is a column name.
+			SUM (
+				CASE
+				WHEN rental_rate = 2.99 THEN 1
+				ELSE 0
+				END
+			) AS "Mass",
+			SUM (
+				CASE
+				WHEN rental_rate = 4.99 THEN 1
+				ELSE 0
+				END
+			) AS "Premium"
+			FROM
+			film;
 	       
 
