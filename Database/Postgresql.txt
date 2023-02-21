@@ -1225,7 +1225,7 @@ d). Syntax Consistency
 2). for case :-
 	example :-
 	 
-	a).  
+	a).
 	 SELECT title,
 	       length,
 	       CASE
