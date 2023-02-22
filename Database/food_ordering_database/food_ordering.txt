@@ -63,7 +63,26 @@
 	  date Date
 	);
 	
+ 7). ratings table creation :-
+ 
+ 	CREATE TYPE score AS ENUM (          #user define data type for scale attribute
+	  '1',
+	  '2',
+	  '3',
+	  '4',
+	  '5'
+	);
 	
+	
+	CREATE TABLE ratings (               #rating table 
+	  id BIGSERIAL PRIMARY KEY,
+	  Scale score,
+	  comment varchar(200),
+	  rating_for_id integer,
+	  date Date,
+	  Customer_id integer
+	);
+
 	
 	
 	
