@@ -163,3 +163,16 @@
 	  Driving_license_number varchar,
 	  vehicle_id integer
 	);
+	
+ 16). vehicles table creation :-
+ 
+ 	CREATE TABLE vehicles (
+	  id integer PRIMARY KEY,
+	  name varchar,
+	  brand_name varchar,
+	  registration_number integer,
+	  purchase_date Date,
+	  RC varchar,
+	  insurance_certificate_number varchar,
+	  pollution_certificate_number varchar
+	);
