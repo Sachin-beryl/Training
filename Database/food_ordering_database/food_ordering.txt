@@ -365,9 +365,29 @@
 	 10 | Emily Kim   | Female | 1991-06-07 | 0123-4567-8901     | DL-0123456789          |          4
 
  
+ 26). insertion in order_details :-
  
+ 	COPY order_details(order_id,menu_item_id,quantity,item_price,total_price)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/order_details.csv' 
+	DELIMITER ',' CSV HEADER ;
+
+	food_ordering=# select * from order_details;
+	
+	 id | order_id | menu_item_id | quantity | item_price | total_price 
+	----+----------+--------------+----------+------------+-------------
+	  1 |        1 |           19 |        2 |         85 |         170
+	  2 |        2 |           11 |        5 |        550 |        2750
+	  3 |        5 |           12 |        3 |        685 |        2055
+	  4 |        4 |            7 |        1 |        249 |         249
+	  5 |        7 |            8 |        2 |         90 |         180
+	  6 |       12 |            4 |        4 |        140 |         560
+	  7 |        9 |            8 |       10 |         90 |         900
+	  8 |        3 |            2 |        3 |        120 |         360
+	  9 |       10 |            7 |        4 |        249 |         996
+	 10 |        8 |            3 |        1 |        450 |         450
+
  
- 
+
  
  
  
