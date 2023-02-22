@@ -266,6 +266,28 @@
 	  4 |       10 | 2022-08-08 |                   1 |              60
 	  5 |       12 | 2022-09-22 |                  11 |              40
 
+ 22). insertion in menu_categories :-
+ 
+ 	COPY menu_categories(id,name)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/menu_categories.csv' 
+	DELIMITER ',' CSV HEADER ;
+
+	select * from menu_categories ;
+	 id |   name    
+	----+-----------
+	  1 | chinese
+	  2 | french
+	  3 | japanese
+	  4 | indian
+	  5 | italian
+	  6 | spanish
+	  7 | thai
+	  8 | mexicon
+	  9 | american
+	 10 | turkish
+	 11 | breakfast
+	 12 | lunch
+	 13 | dinner
 
 
 
