@@ -103,8 +103,13 @@
 	  Delivery_charge integer
 	);
 	
-	
-	
+ 10). status table creation
+ 
+	 CREATE TABLE status (
+	  id BIGSERIAL PRIMARY KEY,
+	  name varchar
+	);
+		
 	
 	
 	
