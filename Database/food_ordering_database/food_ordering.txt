@@ -204,6 +204,27 @@
 	o). ALTER TABLE "order_details" ADD FOREIGN KEY ("menu_item_id") REFERENCES "menu_items" ("id");
 	p). ALTER TABLE "ratings" ADD FOREIGN KEY ("rating_for_id") REFERENCES "rating_for" ("id");
 	q). ALTER TABLE "restaurants" ADD FOREIGN KEY ("restaurant_categories_id") REFERENCES "restaurant_categories" ("id");
+	
+	
+ ----------------------------------------------------------------------------------------------------------------------------------
+ 							insertion using csv files
+
+ 19). insertion in cart_items :-
+ 
+	 COPY cart_items(customer_id,menu_item_id,created_at,updated_at)
+	 FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/cart_items.csv' 
+	 DELIMITER ',' CSV HEADER;
+	
+	food_ordering=# select * from cart_items;
+	 id | customer_id | menu_item_id | created_at | updated_at 
+	----+-------------+--------------+------------+------------
+	  6 |           3 |            7 | 2023-02-02 | 2023-02-02
+	  7 |           8 |           12 | 2023-01-07 | 2023-01-08
+	  8 |          14 |           10 | 2022-12-17 | 2022-12-17
+	  9 |           9 |           17 | 2023-02-18 | 2023-02-18
+	 10 |           8 |           19 | 2023-01-28 | 2023-01-28
+	 
+ 
 
 
 
