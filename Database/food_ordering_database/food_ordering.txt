@@ -289,6 +289,36 @@
 	 12 | lunch
 	 13 | dinner
 
+ 23). insertion in menu_items :-
+ 
+ 	COPY menu_items(restaurant_id,menu_category_id,name,price,description,veg)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/menu_items.csv' 
+	DELIMITER ',' CSV HEADER ;
+
+	food_ordering=# select * from menu_items;
+	
+ id | restaurant_id | menu_category_id |          name           | price |                                description                                | veg 
+----+---------------+------------------+-------------------------+-------+---------------------------------------------------------------------------+-----
+  1 |             3 |                5 | pizza                   |   230 | 1 medium , paneer and onion                                               | t
+  2 |             1 |               11 | Sandwish                |   120 | 2 pic , Corn and spinach whole wheat                                      | t
+  3 |             7 |                4 | Biryani                 |   450 | 1 kg, Mutton hyderabadi Dum biryani                                       | f
+  4 |             9 |                4 | Dal makhani             |   140 | 1 plate , Urad dal and rajma                                              | t
+  5 |             4 |                9 | Crispy veg burger       |    70 | Crispy veg patty burger                                                   | t
+  6 |            10 |                4 | 2-Aloo pyaaz paratha    |   242 | Served with curd                                                          | t
+  7 |             5 |                4 | Tandoori chicken        |   249 | 1/2 kg ,Tandori marinated & spiced                                        | f
+  8 |             1 |                4 | Paneer paratha          |    90 | 2 pic                                                                     | t
+  9 |             6 |                2 | Veg grilled sandwich    |   100 | 2 pic with cheese                                                         | t
+ 10 |            10 |                4 | Veg Thali               |   350 | shahi paneer,Dal makhani,Mix Veg,Rice,Raita,Butter roti,Gulab jamun,Onion | t
+ 11 |             2 |                6 | Grilled chicken Breast  |   550 | 146g protein,18g fat,2g fiber                                             | f
+ 12 |             8 |                4 | Royal biryani           |   685 | 1 kg , slow cooked with tandoori spiced prawn                             | f
+ 13 |             2 |                7 | Lemon grill chicken     |   224 | 200g chicken breast                                                       | f
+ 14 |             9 |                4 | Achari paneer tikka     |   315 | 10 pic of paneer with green sauce                                         | t
+ 15 |             7 |                4 | Murgh Malai seekh       |   660 | Creamy kebabs made with spiced chicken keema                              | f
+ 16 |             8 |                4 | Falooda                 |   137 | 15g , with Ice-cream                                                      | t
+ 17 |             3 |                5 | Chicken pepperoni pizza |   850 | 1 medium, classic italian                                                 | f
+ 18 |             4 |               12 | Veg whopper             |   169 | Signature veg patty whopper                                               | t
+ 19 |             6 |                8 | Grilled Burger          |    85 | Mouth watering taste                                                      | t
+ 20 |             5 |                9 | Butter Chicken Rara     |   425 | full plate ,Butter chicken with minced butter chicken gravy               | f
 
 
 
