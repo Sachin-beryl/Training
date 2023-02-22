@@ -343,4 +343,41 @@
  10 | Harley Davidson Street | Harley Davidson | KA07ST1234          | 2018-05-19    | JKL8901234 | VWX4567890                   | TUV7890123
 
 
+ 25). insertion in riders :-
+ 
+ 	COPY riders(id,name,gender,dob,aadhar_card_number,driving_license_number,vehicle_id)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/riders.csv' 
+	DELIMITER ',' CSV HEADER ;
+
+	food_ordering=# select * from riders;
+	
+	 id |    name     | gender |    dob     | aadhar_card_number | driving_license_number | vehicle_id 
+	----+-------------+--------+------------+--------------------+------------------------+------------
+	  1 | John Smith  | Male   | 1985-02-15 | 1234-5678-9012     | DL-1234567890          |          5
+	  2 | Jane Doe    | Female | 1992-07-30 | 2345-6789-0123     | DL-2345678901          |          8
+	  3 | David Lee   | Male   | 1989-05-22 | 3456-7890-1234     | DL-3456789012          |          1
+	  4 | Sarah Kim   | Female | 1998-11-12 | 4567-8901-2345     | DL-4567890123          |          9
+	  5 | Michael Tan | Male   | 1994-04-05 | 5678-9012-3456     | DL-5678901234          |          2
+	  6 | Rachel Wong | Female | 1996-08-23 | 6789-0123-4567     | DL-6789012345          |          6
+	  7 | Daniel Chen | Male   | 1990-12-01 | 7890-1234-5678     | DL-7890123456          |          3
+	  8 | Lisa Zhang  | Female | 1988-09-14 | 8901-2345-6789     | DL-8901234567          |          7
+	  9 | Jack Lee    | Male   | 1993-03-27 | 9012-3456-7890     | DL-9012345678          |         10
+	 10 | Emily Kim   | Female | 1991-06-07 | 0123-4567-8901     | DL-0123456789          |          4
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 	
