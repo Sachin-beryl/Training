@@ -152,4 +152,14 @@
 	  name varchar
 	);
 	
-	
+ 15). riders table creation :-
+ 
+ 	CREATE TABLE riders (
+	  id integer PRIMARY KEY,
+	  name varchar,
+	  gender varchar,
+	  dob varchar,
+	  Aadhar_card_number varchar,
+	  Driving_license_number varchar,
+	  vehicle_id integer
+	);
