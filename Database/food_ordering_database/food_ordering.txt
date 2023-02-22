@@ -176,3 +176,10 @@
 	  insurance_certificate_number varchar,
 	  pollution_certificate_number varchar
 	);
+	
+ 17). restaurant_categories table creation :-
+ 
+ 	CREATE TABLE restaurant_categories (
+	  id integer PRIMARY KEY,
+	  name varchar
+	);
