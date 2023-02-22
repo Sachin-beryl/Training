@@ -93,6 +93,16 @@
 	  Updated_at Date
 	);
 	
+ 9). checkout_details table creation :-
+ 
+ 	CREATE TABLE checkout_details (
+	  id BIGSERIAL PRIMARY KEY,
+	  Order_id integer,
+	  Check_at date,
+	  customer_address_id integer,
+	  Delivery_charge integer
+	);
+	
 	
 	
 	
