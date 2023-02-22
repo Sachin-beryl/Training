@@ -387,6 +387,21 @@
 	 10 |        8 |            3 |        1 |        450 |         450
 
  
+ 27). insertion in status :-
+ 
+ 	COPY status(name)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/order_status.csv' 
+	DELIMITER ',' CSV HEADER ;
+
+	food_ordering=# select * from status;
+	
+	 id |    name    
+	----+------------
+	  1 | Approved
+	  2 | pending
+	  3 | cancelled
+	  4 | delivered
+	  5 | on the way
 
  
  
