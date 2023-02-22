@@ -31,4 +31,15 @@
 	  gender varchar
 	);
 	
- 4). 
+ 4). orders table creation :-
+ 
+ 	CREATE TABLE orders (
+	  id BIGSERIAL PRIMARY KEY,
+	  Customer_id integer,
+	  restaurant_id integer,
+	  customer_address_id integer,
+	  amount integer,
+	  Created_at timestamp,
+	  status_id integer,
+	  rider_id integer
+	);
