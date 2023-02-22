@@ -125,6 +125,11 @@
 	  rating_for_id integer
 	);
 	
-	
+ 12). menu_categories table creation :-
+ 
+ 	CREATE TABLE menu_categories (
+	  id integer PRIMARY KEY,
+	  name varchar(100)
+	);
 	
 	
