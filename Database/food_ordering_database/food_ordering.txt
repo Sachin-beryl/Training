@@ -183,3 +183,29 @@
 	  id integer PRIMARY KEY,
 	  name varchar
 	);
+	
+	
+ 18). Making foreign keys :-
+ 
+ 	a). ALTER TABLE "menu_items" ADD FOREIGN KEY ("menu_category_id") REFERENCES "menu_categories" ("id");
+ 	b). ALTER TABLE "orders" ADD FOREIGN KEY ("status_id") REFERENCES "status" ("id");
+	c). ALTER TABLE "order_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("id");
+	d). ALTER TABLE "payments" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("id");
+	e). ALTER TABLE "ratings" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("id");
+	f). ALTER TABLE "cart_items" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("id");
+	g). ALTER TABLE "cart_items" ADD FOREIGN KEY ("menu_item_id") REFERENCES "menu_items" ("id");
+	h). ALTER TABLE "checkout_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("id");
+	i). ALTER TABLE "checkout_details" ADD FOREIGN KEY ("customer_address_id") REFERENCES "customer_address" ("id");
+	j). ALTER TABLE "restaurants" ADD FOREIGN KEY ("rating_for_id") REFERENCES "rating_for" ("id");
+	k). ALTER TABLE "riders" ADD FOREIGN KEY ("vehicle_id") REFERENCES "vehicles" ("id");
+	l). ALTER TABLE "orders" ADD FOREIGN KEY ("restaurant_id") REFERENCES "restaurants" ("id");
+	m). ALTER TABLE "orders" ADD FOREIGN KEY ("customer_address_id") REFERENCES "customer_address" ("id");
+	n). ALTER TABLE "orders" ADD FOREIGN KEY ("rider_id") REFERENCES "riders" ("id");
+	o). ALTER TABLE "order_details" ADD FOREIGN KEY ("menu_item_id") REFERENCES "menu_items" ("id");
+	p). ALTER TABLE "ratings" ADD FOREIGN KEY ("rating_for_id") REFERENCES "rating_for" ("id");
+	q). ALTER TABLE "restaurants" ADD FOREIGN KEY ("restaurant_categories_id") REFERENCES "restaurant_categories" ("id");
+
+
+
+
+	
