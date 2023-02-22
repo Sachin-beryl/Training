@@ -2,3 +2,15 @@
 
  1). Database creation :-
  	 CREATE DATABASE food_ordering
+ 	 
+ 2). menu_items table created :-
+ 
+ 	 CREATE TABLE menu_items (
+	  id BIGSERIAL PRIMARY KEY,
+	  restaurant_id integer,
+	  menu_category_id integer,
+	  name varchar(50),
+	  price integer,
+	  Description varchar(100),
+	  veg boolean
+	);
