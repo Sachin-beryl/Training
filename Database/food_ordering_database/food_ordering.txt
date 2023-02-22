@@ -103,13 +103,27 @@
 	  Delivery_charge integer
 	);
 	
- 10). status table creation
+ 10). status table creation :-
  
 	 CREATE TABLE status (
 	  id BIGSERIAL PRIMARY KEY,
 	  name varchar
 	);
 		
+ 11). restaurants table creation :-
+ 
+ 	CREATE TABLE restaurants (
+	  id BIGSERIAL PRIMARY KEY,
+	  name varchar(50),
+	  veg boolean,
+	  restaurant_categories_id integer,
+	  address varchar(100),
+	  contact_person varchar,
+	  contact_person_number varchar,
+	  open_time timestamp,
+	  close_time timestamp,
+	  rating_for_id integer
+	);
 	
 	
 	
