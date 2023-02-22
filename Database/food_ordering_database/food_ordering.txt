@@ -403,8 +403,28 @@
 	  4 | delivered
 	  5 | on the way
 
+ 28). insertion in restaurant_categories :-
  
- 
+ 	COPY restaurant_categories(id,name)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/rest_cat.csv' 
+	DELIMITER ',' CSV HEADER ;
+	
+	food_ordering=# select * from restaurant_categories ;
+	
+	 id |     name      
+	----+---------------
+	  1 | Italian
+	  2 | Chinese
+	  3 | Mexican
+	  4 | American
+	  5 | Indian
+	  6 | Mediterranean
+	  7 | Thai
+	  8 | French
+	  9 | Vegetarian
+	 10 | Seafood
+
+
  
  
  
