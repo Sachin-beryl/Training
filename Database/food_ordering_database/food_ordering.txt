@@ -145,4 +145,11 @@
 	  land_mark varchar
 	);
 	
+ 14). rating_for table creation :-
+ 
+ 	CREATE TABLE rating_for (
+	  id integer PRIMARY KEY,
+	  name varchar
+	);
+	
 	
