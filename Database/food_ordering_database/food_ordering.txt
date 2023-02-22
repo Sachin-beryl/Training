@@ -132,4 +132,17 @@
 	  name varchar(100)
 	);
 	
+ 13). customer_address table creation :-
+ 
+ 	CREATE TABLE customer_address (
+	  id integer PRIMARY KEY,
+	  name varchar,
+	  house_no integer,
+	  street_no integer,
+	  locality varchar,
+	  city varchar,
+	  zip_code varchar,
+	  land_mark varchar
+	);
+	
 	
