@@ -321,5 +321,26 @@
  20 |             5 |                9 | Butter Chicken Rara     |   425 | full plate ,Butter chicken with minced butter chicken gravy               | f
 
 
+ 24). insertion the vehicles :-
+ 
+ 	COPY vehicles(id,name,brand_name,registration_number,purchase_date,rc,insurance_certificate_number,pollution_certificate_number)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/vehicles.csv' 
+	DELIMITER ',' CSV HEADER ;
+	
+	food_ordering=# select * from vehicles ;
+	
+ id |          name          |   brand_name    | registration_number | purchase_date |     rc     | insurance_certificate_number | pollution_certificate_number 
+----+------------------------+-----------------+---------------------+---------------+------------+------------------------------+------------------------------
+  1 | Honda Shine            | Honda           | KA02AB1234          | 2020-01-01    | ABC1234567 | XYZ9876543                   | PQR4567890
+  2 | Yamaha FZ              | Yamaha          | KA05CD5678          | 2019-05-15    | DEF2345678 | ABC8765432                   | STU5678901
+  3 | Bajaj Pulsar           | Bajaj           | KA03EF9012          | 2021-09-30    | GHI3456789 | JKL7654321                   | VWX6789012
+  4 | KTM Duke               | KTM             | KA09GH3456          | 2018-11-21    | MNO4567891 | DEF7654321                   | TUV1234567
+  5 | TVS Apache             | TVS             | KA01IJ7890          | 2022-02-10    | PQR5678901 | GHI2345678                   | ABC7890123
+  6 | Suzuki Gixxer          | Suzuki          | KA08KL2345          | 2017-06-12    | STU6789012 | MNO3456789                   | DEF9012345
+  7 | Hero Splendor          | Hero            | KA04MN6789          | 2019-03-24    | ABC2345678 | XYZ4567890                   | GHI5678901
+  8 | Royal Enfield Classic  | Royal Enfield   | KA12OP9012          | 2020-08-17    | DEF3456789 | PQR9012345                   | JKL6789012
+  9 | Kawasaki Ninja         | Kawasaki        | KA11QR5678          | 2022-01-08    | XYZ7890123 | STU1234567                   | ABC2345678
+ 10 | Harley Davidson Street | Harley Davidson | KA07ST1234          | 2018-05-19    | JKL8901234 | VWX4567890                   | TUV7890123
+
 
 	
