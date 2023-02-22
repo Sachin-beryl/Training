@@ -14,3 +14,21 @@
 	  Description varchar(100),
 	  veg boolean
 	);
+	
+ 3). customers table creation :- 
+ 
+ 	CREATE TABLE customers (
+	  id BIGSERIAL PRIMARY KEY,
+	  First_name varchar(20),
+	  Last_name varchar(20),
+	  Email varchar(100),
+	  Phone varchar,
+	  Username varchar(50),
+	  Password varchar(50),
+	  Address_id integer,
+	  dob Date,
+	  Created_at timestamptz,
+	  gender varchar
+	);
+	
+ 4). 
