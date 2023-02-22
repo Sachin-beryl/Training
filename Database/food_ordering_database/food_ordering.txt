@@ -251,6 +251,21 @@
  30 | Gilberta   | Coxhead    | gcoxheadd@mapy.cz           | 3127590453 | gcoxheadd    | b4EQLkNTfLF  |         14 | 2000-07-25 | 2023-02-03 01:03:00+05:30 | Female
 
  
+ 21). insertion in checkout_details table :-
+ 
+ 	COPY checkout_details(order_id,check_at,customer_address_id,delivery_charge)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/checkout_details.csv' 
+	DELIMITER ',' CSV HEADER ;
+
+	select * from checkout_details;
+	 id | order_id |  check_at  | customer_address_id | delivery_charge 
+	----+----------+------------+---------------------+-----------------
+	  1 |        2 | 2023-02-10 |                   5 |              40
+	  2 |        9 | 2023-01-09 |                  10 |              20
+	  3 |        3 | 2023-01-22 |                  13 |              20
+	  4 |       10 | 2022-08-08 |                   1 |              60
+	  5 |       12 | 2022-09-22 |                  11 |              40
+
 
 
 
