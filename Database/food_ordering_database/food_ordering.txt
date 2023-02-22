@@ -54,3 +54,20 @@
 	  item_price integer,
 	  total_price integer
 	);
+	
+ 6). payments table creation :-
+ 
+ 	CREATE TABLE payments (
+	  id BIGSERIAL PRIMARY KEY,
+	  Order_id integer,
+	  date Date
+	);
+	
+	
+	
+	
+	
+	
+	
+	
+	
