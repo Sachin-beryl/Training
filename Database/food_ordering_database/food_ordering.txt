@@ -43,3 +43,14 @@
 	  status_id integer,
 	  rider_id integer
 	);
+	
+ 5). order_details table creation :-
+ 
+ 	CREATE TABLE order_details (
+	  id BIGSERIAL PRIMARY KEY,
+	  Order_id integer,
+	  menu_item_id integer,
+	  quantity integer,
+	  item_price integer,
+	  total_price integer
+	);
