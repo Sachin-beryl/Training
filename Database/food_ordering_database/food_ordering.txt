@@ -83,6 +83,15 @@
 	  Customer_id integer
 	);
 
+ 8). cart_items table creation :-
+ 
+ 	CREATE TABLE cart_items (
+	  id BIGSERIAL PRIMARY KEY,
+	  Customer_id integer,
+	  menu_item_id integer,
+	  Created_at Date,
+	  Updated_at Date
+	);
 	
 	
 	
