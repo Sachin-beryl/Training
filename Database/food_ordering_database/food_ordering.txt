@@ -440,6 +440,14 @@
 	  5 |       39 |        11 | Sushant Lok  | Gurugram   | 122002   | Near Mall      | other
 	  6 |       42 |         9 | Sector 15    | Faridabad  | 121007   | Near School    | home
 	  7 |       11 |         3 | Sector 16    | Faridabad  | 121002   | Near Market    | work
+	  8 |       10 |       123 | MG Road      | New Delhi  | 110001   | India Gate     | home
+	  9 |       20 |       456 | Koramangala  | Bangalore  | 560034   | Forum Mall     | work
+	 10 |       30 |       789 | Bandra       | Mumbai     | 400050   | Bandstand      | second_home
+	 11 |       40 |       987 | Begumpet     | Hyderabad  | 500016   | NTR Gardens    | other
+	 12 |       50 |       111 | Civil Lines  | Allahabad  | 211001   | Triveni Sangam | home
+	 13 |       60 |       222 | Gomti        | Lucknow    | 226010   | Ambedkar Park  | work
+	 14 |       70 |       333 | Adajan       | Surat      | 395009   | Dumas Beach    | second_home
+	 15 |       80 |       444 | T.Nagar      | Chennai    | 600017   | Marina Beach   | other
 
  
  30). insertion into ratings :-
