@@ -553,6 +553,52 @@
 	    "checkout_details_customer_address_id_fkey" FOREIGN KEY (customer_address_id) REFERENCES customer_address(id)
 	    "checkout_details_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id)
 
+ 35). index creation in order_details table :-
+ 
+ 	-------:::::: CREATE INDEX idx_order_details_order_id ON order_details(order_id);
+ 	-------:::::: CREATE INDEX idx_order_details_menu_item_id ON order_details(menu_item_id);
+
+	\d order_details
+	
+		                       Table "public.order_details"
+	    Column    |  Type   | Collation | Nullable |                  Default                  
+	--------------+---------+-----------+----------+-------------------------------------------
+	 id           | bigint  |           | not null | nextval('order_details_id_seq'::regclass)
+	 order_id     | integer |           |          | 
+	 menu_item_id | integer |           |          | 
+	 quantity     | integer |           |          | 
+	 item_price   | integer |           |          | 
+	 total_price  | integer |           |          | 
+	Indexes:
+	    "order_details_pkey" PRIMARY KEY, btree (id)
+	    "idx_order_details_menu_item_id" btree (menu_item_id)    #### index created on menu_item_id
+	    "idx_order_details_order_id" btree (order_id)		#### index created on order_id
+	Foreign-key constraints:
+	    "order_details_menu_item_id_fkey" FOREIGN KEY (menu_item_id) REFERENCES menu_items(id)
+	    "order_details_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id)
+
+
+ --------------------------------------------------------------- QUERIES ------------------------------------------------------------
+ 
+ 1). print the restaurant (name,veg,rating,comment) , items(id,price,description) where item range between 3 to 17 and restaurants location is bata chowk.
+ 
+	sol :- select rest.name,rest.veg,rat.scale,rat.comment,mi.id,mi.price,mi.description from restaurants as rest inner join
+		menu_items as mi on mi.restaurant_id = rest.id inner join ratings as rat on rest.rating_id = rat.id
+		where mi.id between 3 and 17 and rest.address = 'bata chowk';
+		
+		    name     | veg | scale |    comment     | id | price |        description        
+		-------------+-----+-------+----------------+----+-------+---------------------------
+		 Dominos     | f   | 4     | nice location  | 17 |   850 | 1 medium, classic italian
+		 Burger-king | f   | 4     | good behaviour |  5 |    70 | Crispy veg patty burger
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
 	
