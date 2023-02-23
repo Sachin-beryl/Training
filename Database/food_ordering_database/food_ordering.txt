@@ -206,6 +206,7 @@
 	q). ALTER TABLE "restaurants" ADD FOREIGN KEY ("restaurant_categories_id") REFERENCES "restaurant_categories" ("id");
 	r). ALTER TABLE "customers" ADD FOREIGN KEY ("address_id") REFERENCES "customer_address" ("id");
 	s). ALTER TABLE "menu_items" ADD FOREIGN KEY ("restaurant_id") REFERENCES "restaurants" ("id");
+	t). ALTER TABLE "orders" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("id");
 	
 	
  ----------------------------------------------------------------------------------------------------------------------------------
