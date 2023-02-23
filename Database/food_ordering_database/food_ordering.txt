@@ -463,7 +463,26 @@
 	  8 | 4     | good behaviour    |             1 | 2022-11-24 |           1
 
  
+ 31). insertion in restaurants :-
  
+ 	COPY restaurants(name,veg,restaurant_categories_id,address,contact_person,contact_person_number,open_time,close_time,rating_id)
+	FROM '/home/beryl/Desktop/demo/something/food_ordering_tables/restaurants.csv' 
+	DELIMITER ',' CSV HEADER ;
+	
+	select * from restaurants;
+ id |        name        | veg | restaurant_categories_id |   address    | contact_person | contact_person_number | open_time | close_time | rating_id 
+----+--------------------+-----+--------------------------+--------------+----------------+-----------------------+-----------+------------+-----------
+  1 | The Breakfast club | t   |                        9 | neelam chowk | Ravi Verma     | 9876543210            | 09:00:00  | 12:00:00   |         6
+  2 | Happy Grillmore    | t   |                        3 | faridabad    | Priya Singh    | 9988776655            | 17:00:00  | 23:00:00   |          
+  3 | Dominos            | f   |                        4 | bata chowk   | Arjun Gupta    | 9876543211            | 10:00:00  | 23:00:00   |         6
+  4 | Burger-king        | f   |                        4 | bata chowk   | Pooja Sharma   | 9567891234            | 10:00:00  | 23:00:00   |         8
+  5 | The Maharaja club  | f   |                        5 | badarpur     | Rohit Mehra    | 9876543212            | 11:00:00  | 22:00:00   |         8
+  6 | The Indian Grill   | t   |                        5 | badarpur     | Kavita Mishra  | 9555555555            | 11:00:00  | 22:00:00   |          
+  7 | Mughlai Darbar     | f   |                        5 | delhi        | Naveen Singh   | 9876543213            | 10:00:00  | 21:00:00   |         6
+  8 | Shahi Darbar       | f   |                        5 | delhi        | Anjali Yadav   | 9712345678            | 09:00:00  | 22:00:00   |         8
+  9 | Curry Kingdom      | t   |                        5 | faridabad    | Rahul Jain     | 9898765432            | 10:00:00  | 22:00:00   |          
+ 10 | Dilli ki Rasoi     | t   |                        5 | delhi        | Megha Khanna   | 9912345678            | 11:30:00  | 23:00:00   |          
+
  
  
  
