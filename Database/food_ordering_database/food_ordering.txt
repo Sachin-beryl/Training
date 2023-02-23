@@ -196,7 +196,7 @@
 	g). ALTER TABLE "cart_items" ADD FOREIGN KEY ("menu_item_id") REFERENCES "menu_items" ("id");
 	h). ALTER TABLE "checkout_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("id");
 	i). ALTER TABLE "checkout_details" ADD FOREIGN KEY ("customer_address_id") REFERENCES "customer_address" ("id");
-	j). ALTER TABLE "restaurants" ADD FOREIGN KEY ("rating_for_id") REFERENCES "rating_for" ("id");
+	j). ALTER TABLE "restaurants" ADD FOREIGN KEY ("rating_id") REFERENCES "ratings" ("id");
 	k). ALTER TABLE "riders" ADD FOREIGN KEY ("vehicle_id") REFERENCES "vehicles" ("id");
 	l). ALTER TABLE "orders" ADD FOREIGN KEY ("restaurant_id") REFERENCES "restaurants" ("id");
 	m). ALTER TABLE "orders" ADD FOREIGN KEY ("customer_address_id") REFERENCES "customer_address" ("id");
