@@ -20,6 +20,31 @@
 	
  3). Type 'y' in terminal to give permission to download and install ruby.
  
+ 
+ 4). install rvm in linux :-
+ 
+ 	a). install GPG keys used to verify installation package:
+
+key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+ 
+ 	b). Install RVM stable with ruby (development version):
+
+		-> \curl -sSL https://get.rvm.io | bash -s stable --ruby
+		
+ 5). install ruby using rvm:-
+ 	-> rvm install 3.2.1
+ 	
+ 6). RVM Configuration :-
+ 	-> Defaults = RVM has a set of defaults recorded in the file.
+ 	
+		$rvm_config_path/db
+ 	
+ 	-> Overriding Default Settings
+		RVM also has a directory for user overrides located in $rvm_path/user/. In order to override RVM's default settings, 			place the appropriate key=value into the db file of that folder
+
+		$rvm_path/user/db
+
+ 
                                     ----------IF ALREADY PRESENT UPDATE THE VERSION OF RUBY----------
                       
                 a). check version on rvm(ruby version manager) in terminal.
@@ -33,6 +58,15 @@
                 	
                 d). check for ruby version.
                 	ruby -v
+                	
+                e). check ruby version present on system.
+                	rvm list
+                	
+                f). switch between ruby versions.
+                	rvm use (version_number_present_on_system)
+                	
+                g). set default version of ruby.
+                	rvm 3.2.1 --default
                 	
 
 ------------------------------------------------------------PLATFORMS TO RUN RUBY--------------------------------------------------------
@@ -979,6 +1013,47 @@
 		k). arr.compact    #remove null or nil values.
 		l). arr.product    #convert each element in array.
 
+--------------------------------------------------------------------------------------------------------------------------------------
+							         STRINGS
 
+ -> A String object in Ruby holds and manipulates an arbitrary sequence of one or more bytes.
+ -> typically representing characters that represent human language.
+ 
+ 	eg :- 'This is a simple Ruby string literal'
+ 	
+ -> If you need to place an apostrophe within a single-quoted string literal, precede it with a backslash.
+ 
+        eg :- 'Won\'t you read O\'Reilly\'s book?'
 
+	1). Expression Substitution
+		-> it is a means of embedding the value of any Ruby expression into a string using #{ and } −
+		
+		eg:-
+			x, y, z = 12, 36, 72
+			puts "The value of x is #{ x }."
+			puts "The sum of x and y is #{ x + y }."
+			puts "The average was #{ (x + y + z)/3 }."
+			
+		output :- The value of x is 12.
+			  The sum of x and y is 48.
+			  The average was 40.
+			  
+	2). General Delimited Strings
+		-> you can create strings inside a pair of matching though arbitrary delimiter characters, e.g., !, (, {, <, etc., preceded by a percent character (%). 
+		-> Q, q, and x have special meanings. 
+		-> General delimited strings can be :-
+
+			%{Ruby is fun.}  equivalent to "Ruby is fun."
+			%Q{ Ruby is fun. } equivalent to " Ruby is fun. "
+			%q[Ruby is fun.]  equivalent to a single-quoted string
+			%x!ls! equivalent to back tick command output `ls`
+			
+	
+			
+			
+			
+			
+			
+			
+			
 
