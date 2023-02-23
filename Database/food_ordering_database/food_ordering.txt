@@ -194,7 +194,6 @@
 	e). ALTER TABLE "ratings" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("id");
 	f). ALTER TABLE "cart_items" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("id");
 	g). ALTER TABLE "cart_items" ADD FOREIGN KEY ("menu_item_id") REFERENCES "menu_items" ("id");
-	h). ALTER TABLE "checkout_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("id");
 	i). ALTER TABLE "checkout_details" ADD FOREIGN KEY ("customer_address_id") REFERENCES "customer_address" ("id");
 	j). ALTER TABLE "restaurants" ADD FOREIGN KEY ("rating_id") REFERENCES "ratings" ("id");
 	k). ALTER TABLE "riders" ADD FOREIGN KEY ("vehicle_id") REFERENCES "vehicles" ("id");
