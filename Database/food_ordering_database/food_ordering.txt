@@ -233,21 +233,21 @@
 	
  id | first_name | last_name  |            email            |   phone    |   username   |   password   | address_id |    dob     |        created_at         | gender 
 ----+------------+------------+-----------------------------+------------+--------------+--------------+------------+------------+---------------------------+--------
- 16 | Norah      | Bulluck    | nbulluck0@timesonline.co.uk | 4498136144 | nbulluck0    | m6R1ef       |          1 | 2002-02-05 | 2023-02-17 11:46:00+05:30 | Male
- 17 | Rad        | Ripsher    | rripsher1@cocolog-nifty.com | 7318203254 | rripsher1    | XaF6uX       |          3 | 2003-08-30 | 2023-01-05 14:05:00+05:30 | Male
- 18 | Lonnie     | Tarbard    | ltarbard2@weebly.com        | 2088202323 | ltarbard2    | fkGNrm       |          7 | 2012-10-30 | 2023-01-29 05:28:00+05:30 | Male
- 19 | Newton     | Beldom     | nbeldom3@tripod.com         | 9105924398 | nbeldom3     | MsAJdurqvqIz |          9 | 2018-10-10 | 2023-02-10 23:06:00+05:30 | Male
- 20 | Ethe       | Downing    | edowning4@fastcompany.com   | 5167204325 | edowning4    | XxLacF4      |          5 | 1993-03-03 | 2023-02-23 03:46:00+05:30 | Male
- 21 | Andrey     | Fryd       | afryd5@cmu.edu              | 7161592822 | afryd5       | 1lprxTZaq    |         15 | 2022-11-01 | 2023-01-15 19:14:00+05:30 | Female
- 22 | Ibrahim    | Dorrity    | idorrity6@tinyurl.com       | 9665654644 | idorrity6    | DanmL6g      |          2 | 2022-03-30 | 2022-10-28 14:43:00+05:30 | Male
- 23 | Berti      | Sherlock   | bsherlock7@weibo.com        | 8728756665 | bsherlock7   | obt2s6GPbxv  |          4 | 2013-01-09 | 2022-05-13 12:06:00+05:30 | Female
- 24 | Bendite    | Danis      | bdanis8@live.com            | 4922883725 | bdanis8      | UIWjfEN      |          6 | 2009-02-22 | 2022-07-09 02:32:00+05:30 | Male
- 25 | Alyse      | Mapplebeck | amapplebeck9@sakura.ne.jp   | 7402722084 | amapplebeck9 | OwKrBNveZ    |         10 | 2014-08-16 | 2022-05-25 05:49:00+05:30 | Female
- 26 | Muriel     | Kibbel     | mkibbela@indiegogo.com      | 9358185298 | mkibbela     | rRIkLR       |         11 | 2017-09-25 | 2022-11-21 05:57:00+05:30 | Female
- 27 | Lonna      | Premble    | lprembleb@salon.com         | 8484292339 | lprembleb    | fDKbZZ       |          8 | 2005-03-23 | 2023-01-18 22:00:00+05:30 | Female
- 28 | Marlo      | Scrymgeour | mscrymgeourc@csmonitor.com  | 1176070248 | mscrymgeourc | 6waWNAwz     |         13 | 2011-10-30 | 2022-07-16 19:58:00+05:30 | Male
- 29 | Ashly      | Hiley      | ahileye@biglobe.ne.jp       | 8836875761 | ahileye      | 1m03cP9Z     |         12 | 1990-03-14 | 2022-12-06 05:59:00+05:30 | Male
- 30 | Gilberta   | Coxhead    | gcoxheadd@mapy.cz           | 3127590453 | gcoxheadd    | b4EQLkNTfLF  |         14 | 2000-07-25 | 2023-02-03 01:03:00+05:30 | Female
+  1 | Norah      | Bulluck    | nbulluck0@timesonline.co.uk | 4498136144 | nbulluck0    | m6R1ef       |          1 | 2002-02-05 | 2023-02-17 11:46:00+05:30 | Male
+  2 | Rad        | Ripsher    | rripsher1@cocolog-nifty.com | 7318203254 | rripsher1    | XaF6uX       |          3 | 2003-08-30 | 2023-01-05 14:05:00+05:30 | Male
+  3 | Lonnie     | Tarbard    | ltarbard2@weebly.com        | 2088202323 | ltarbard2    | fkGNrm       |          7 | 2012-10-30 | 2023-01-29 05:28:00+05:30 | Male
+  4 | Newton     | Beldom     | nbeldom3@tripod.com         | 9105924398 | nbeldom3     | MsAJdurqvqIz |          9 | 2018-10-10 | 2023-02-10 23:06:00+05:30 | Male
+  5 | Ethe       | Downing    | edowning4@fastcompany.com   | 5167204325 | edowning4    | XxLacF4      |          5 | 1993-03-03 | 2023-02-23 03:46:00+05:30 | Male
+  6 | Andrey     | Fryd       | afryd5@cmu.edu              | 7161592822 | afryd5       | 1lprxTZaq    |         15 | 2022-11-01 | 2023-01-15 19:14:00+05:30 | Female
+  7 | Ibrahim    | Dorrity    | idorrity6@tinyurl.com       | 9665654644 | idorrity6    | DanmL6g      |          2 | 2022-03-30 | 2022-10-28 14:43:00+05:30 | Male
+  8 | Berti      | Sherlock   | bsherlock7@weibo.com        | 8728756665 | bsherlock7   | obt2s6GPbxv  |          4 | 2013-01-09 | 2022-05-13 12:06:00+05:30 | Female
+  9 | Bendite    | Danis      | bdanis8@live.com            | 4922883725 | bdanis8      | UIWjfEN      |          6 | 2009-02-22 | 2022-07-09 02:32:00+05:30 | Male
+ 10 | Alyse      | Mapplebeck | amapplebeck9@sakura.ne.jp   | 7402722084 | amapplebeck9 | OwKrBNveZ    |         10 | 2014-08-16 | 2022-05-25 05:49:00+05:30 | Female
+ 11 | Muriel     | Kibbel     | mkibbela@indiegogo.com      | 9358185298 | mkibbela     | rRIkLR       |         11 | 2017-09-25 | 2022-11-21 05:57:00+05:30 | Female
+ 12 | Lonna      | Premble    | lprembleb@salon.com         | 8484292339 | lprembleb    | fDKbZZ       |          8 | 2005-03-23 | 2023-01-18 22:00:00+05:30 | Female
+ 13 | Marlo      | Scrymgeour | mscrymgeourc@csmonitor.com  | 1176070248 | mscrymgeourc | 6waWNAwz     |         13 | 2011-10-30 | 2022-07-16 19:58:00+05:30 | Male
+ 14 | Ashly      | Hiley      | ahileye@biglobe.ne.jp       | 8836875761 | ahileye      | 1m03cP9Z     |         12 | 1990-03-14 | 2022-12-06 05:59:00+05:30 | Male
+ 15 | Gilberta   | Coxhead    | gcoxheadd@mapy.cz           | 3127590453 | gcoxheadd    | b4EQLkNTfLF  |         14 | 2000-07-25 | 2023-02-03 01:03:00+05:30 | Female
 
  
  21). insertion in checkout_details table :-
