@@ -532,6 +532,27 @@
 	  6 |        5 | 2023-01-17
 	  7 |        6 | 2022-11-19
 
+ 34). using index in checkout_details table for order_id :-
+ 
+ 	----:::::  CREATE INDEX idx_checkout_order_id ON checkout_details(order_id);
+
+	\d checkout_details
+	
+		                           Table "public.checkout_details"
+	       Column        |  Type   | Collation | Nullable |                   Default                    
+	---------------------+---------+-----------+----------+----------------------------------------------
+	 id                  | bigint  |           | not null | nextval('checkout_details_id_seq'::regclass)
+	 order_id            | integer |           |          | 
+	 check_at            | date    |           |          | 
+	 customer_address_id | integer |           |          | 
+	 delivery_charge     | integer |           |          | 
+	Indexes:
+	    "checkout_details_pkey" PRIMARY KEY, btree (id)
+	    "idx_checkout_order_id" btree (order_id)             #####index created here
+	Foreign-key constraints:
+	    "checkout_details_customer_address_id_fkey" FOREIGN KEY (customer_address_id) REFERENCES customer_address(id)
+	    "checkout_details_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id)
+
  
  
 	
