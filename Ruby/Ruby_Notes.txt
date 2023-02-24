@@ -1332,7 +1332,7 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				utf8_string = string.encode("UTF-8")
 				puts utf8_string # prints "héllo" (encoded in UTF-8)
 				
-		Checking if a string is valid in a specific encoding: You can use the valid_encoding? 
+		Checking if a string is valid in a specific encoding: You can use the valid_encoding?
 									method to check if a string is valid in a specific encoding.
 				eg :-
 				string = "héllo"
@@ -1358,6 +1358,27 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				3.2.1 :274 > string.ascii_only?
  				=> true 
 
+	  d). checksum or hash code :-
+	  
+	  	sum: This method returns a basic checksum for the string by computing the sum of the ASCII or binary values of each byte in the string. 
+
+				eg :-
+				string = "hello"
+				checksum = string.sum
+				
+				puts checksum # prints 532
+
+	NOTE :-sum method computes the sum of the ASCII values of each byte in the string ("h" is 104, "e" is 101, etc.) and returns the integer result.
+
+		hash: This method returns an integer hash code for the string.
+		      which is a value that can be used to quickly identify the string and compare it with other strings. 
+		      The hash code is computed using a hash function that takes into account the values of each byte in the string.
+
+				eg :- 
+				string = "hello"
+				hash_code = string.hash
+				
+				puts hash_code # prints 8664480119899782111
 
 
 
