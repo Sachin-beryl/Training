@@ -1219,6 +1219,101 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				
 			output :- concat string is not frozen .
 			
-						
+	8). Methods for Querying
+	
+	  a) count :-
+		length, size: Returns the count of characters (not bytes).
+		
+			eg :-
+				3.2.1 :216 > str1.length
+				 => 9 
+				3.2.1 :217 > str1.size
+				 => 9 
+		
+		empty? : Returns true if self.length is zero; false otherwise.
 			
+			eg :- 
+				3.2.1 :218 > str1.empty?
+ 				=> false 
+
+		bytesize : Returns the count of bytes.
+		
+			eg :- 
+				3.2.1 :219 > str1.bytesize
+ 				=> 9 
+
+		count : Returns the count of substrings matching given strings.
+		
+			eg :- 
+				3.2.1 :225 > str1.count('e')
+ 				=> 1 
+			
+	  b) Substrings :-
+
+		=~ : Returns index of the first substring that matches a given object, nil if no match is found.
+		
+			eg :- 
+				3.2.1 :237 > string
+ 				=> "The quick brown fox jumps over the lazy dog" 
+ 				
+ 				3.2.1 :227 > if string =~ /brown/
+				3.2.1 :228 >   puts "Match found at index #{$~.begin(0)}"
+				3.2.1 :229 > else
+				3.2.1 :230 >   puts "No match found"
+				3.2.1 :231 > end
+				Match found at index 10
+
+
+		index : Returns the index of the first occurrence of a given substring; returns nil if none found.
+		
+			eg :- 
+				3.2.1 :238 > string.index('he')
+				 => 1 
+
+		rindex : Returns the index of the last occurrence of a given substring; returns nil if none found.
+		
+			eg :-
+				3.2.1 :239 > string.rindex('he')
+				 => 32 
+
+		include? : Returns true if the string contains a given substring; false otherwise.
+		
+			eg :-
+				3.2.1 :241 > string.include?('brown')
+				 => true 
+
+		match : Returns a MatchData object if the string matches a given Regexp; nil otherwise.
+		
+			eg :-
+				3.2.1 :243 > match_str = string.match(/fox/)
+				=> #<MatchData "fox"> 
+				
+				3.2.1 :249 > if match_str
+				3.2.1 :250 >   print "match found for the string"
+				3.2.1 :251 > else
+				3.2.1 :252 >   print "match not found"
+				3.2.1 :253 > end
+				match found for the string => nil 
+
+		match? : Returns true if the string matches a given Regexp; false otherwise.
+		
+			eg :- 
+				3.2.1 :255 > string.match?('fox')
+				=> true 
+
+		start_with?: Returns true if the string begins with any of the given substrings.
+		
+			eg :- 
+				3.2.1 :263 > string.start_with?('The')
+				 => true 
+				3.2.1 :264 > string.start_with?('he')
+				 => false 
+
+		end_with? : Returns true if the string ends with any of the given substrings.
+		
+			eg :- 
+				3.2.1 :259 > string.end_with?('dog')
+				 => true 
+				3.2.1 :260 > string.end_with?('do')
+				 => false 
 
