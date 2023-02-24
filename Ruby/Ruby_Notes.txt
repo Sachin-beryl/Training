@@ -1103,8 +1103,62 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			 => "purple" 
 			3.2.1 :151 > 'apple'.sub('le',h)
 			 => "apply" 
- 	
-			
+			 
+	5). String Slices :-
+
+	-> A slice of a string is a substring that is selected by certain criteria.
+	-> Types of slicing
+		a). string[index].
+		
+			eg :-  3.2.1 :166 > str
+				 => "sachin" 
+				3.2.1 :167 > str[0]
+				 => "s" 
+				3.2.1 :168 > str[3]
+				 => "h" 
+				3.2.1 :169 > str[-2]
+ 				=> "i" 
+
+
+		b). string[start, length].    #between some range
+		
+			eg :- 	3.2.1 :170 > str[0,4]
+				 => "sach" 
+				3.2.1 :173 > str[2,5]
+				 => "chin" 
+
+		c). string[range].
+		
+			eg :-   3.2.1 :174 > str[1..4]
+				 => "achi" 
+				3.2.1 :175 > str[1...4]
+				 => "ach" 
+				3.2.1 :176 > str[2..200]
+				 => "chin" 
+
+		d). string[regexp, capture = 0].
+		
+		eg :-   s = 'saaaccchinn' 
+			3.2.1 :195 > s[/[aeiou]/]   # find first vowel letter
+			 => "a" 
+			3.2.1 :196 > s[/[aeiou](.)/]   # "." for add next element after first vowel
+			 => "aa" 
+			3.2.1 :197 > s[/[aeiou](.)\1/]  # "\1" for add all similer letter after the first vowel but must be consecutive
+			 => "aaa" 
+			3.2.1 :198 > s[/[aeiou](.)\1/,0]
+			 => "aaa" 
+			3.2.1 :199 > s[/[aeiou](.)\1/,1] # "1" consecutive similer letter limit to 1.
+			 => "a" 
+
+		e). string[substring].   #search for substring in the string.
+		
+			eg :-   3.2.1 :201 > s['aa']
+				 => "aa" 
+				3.2.1 :202 > s['zzz']
+				 => nil 
+
+		 	
+		
 			
 			
 			
