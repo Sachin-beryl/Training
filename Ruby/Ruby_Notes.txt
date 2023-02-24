@@ -1086,6 +1086,10 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			%q[Ruby is fun.]  equivalent to a single-quoted string
 			%x!ls! equivalent to back tick command output `ls`
 			
+	3). substitute(sub) and global substitute(gsub).
+	
+		-> s.sub(/[aeiou]/, '*')# => "h*llo"
+		-> s.gsub(/[aeiou]/, '*') # => "h*ll*"
 	
 			
 			
