@@ -1513,3 +1513,35 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 					 => "hhelloo wworld" 
 					3.2.1 :318 > st5.tr_s!("aeiou","*")
 					 => "hh*ll* ww*rld" 
+					 
+		c). Casing :-
+
+			*). capitalize!: Upcases the initial character and downcases all others.
+				-> returns self if any changes, nil otherwise.
+				
+				eg :-
+					3.2.1 :319 > st6 = 'beryl system'
+					 => "beryl system" 
+					3.2.1 :320 > st6.capitalize!
+					 => "Beryl system" 
+
+			*). downcase!: Downcases all characters; returns self if any changes, nil otherwise.
+			
+				eg :- 
+					 3.2.1 :322 > st6.downcase!
+					 => "beryl system" 
+
+			*). upcase!: Upcases all characters; returns self if any changes, nil otherwise.
+			
+				eg :-
+					3.2.1 :321 > st6.upcase!
+					 => "BERYL SYSTEM" 
+
+			*). swapcase!: Upcases each downcase character and downcases each upcase character.
+				-> returns self if any changes, nil otherwise.
+				
+				eg :-
+					3.2.1 :325 > st6.swapcase!
+					 => "bERYL SYSTEM" 
+
+
