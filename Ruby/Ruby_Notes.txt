@@ -1380,6 +1380,30 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				
 				puts hash_code # prints 8664480119899782111
 
+	9). Methods for Comparing :-
+	
+		a). ==, === : Returns true if a given other string has the same content as self.
+		b). eql?    : Returns true if the content is the same as the given other string. 
+		c). #<=>    : Returns -1, 0, or 1 as a given other string is smaller than, equal to, or larger than self.
 
+		d). casecmp : Ignoring case, returns -1, 0, or 1 as a given other string is smaller than, equal to, or larger than self.
+		
+			 0: The two strings are equal in a case-insensitive comparison.
+			-1: The first string is less than the second string in a case-insensitive comparison.
+			 1: The first string is greater than the second string in a case-insensitive comparison.
+
+			eg :-  
+				3.2.1 :276 > st1 = 'HELLO'
+				 => "HELLO" 
+				3.2.1 :277 > st2 = 'hElLO'
+				 => "hElLO" 
+				3.2.1 :278 > st1.casecmp(st2)
+				 => 0 
+
+		e). casecmp?: Returns true if the string is equal to a given string after Unicode case folding; false otherwise.
+
+			eg :- 
+				3.2.1 :280 > st1.casecmp?(st2)
+ 			        => true 
 
 
