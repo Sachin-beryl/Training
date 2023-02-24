@@ -1316,4 +1316,49 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				 => true 
 				3.2.1 :260 > string.end_with?('do')
 				 => false 
+				 
+	  c). Encodings
+	  
+	        Retrieving the encoding of a string: You can use the encoding method to retrieve the encoding of a string.
+
+				eg :-
+				string = "hello"
+				puts string.encoding # prints "UTF-8"
+
+		Converting a string to a different encoding: You can use the encode method to convert a string to a different encoding.
+
+				eg :-
+				string = "héllo"
+				utf8_string = string.encode("UTF-8")
+				puts utf8_string # prints "héllo" (encoded in UTF-8)
+				
+		Checking if a string is valid in a specific encoding: You can use the valid_encoding? 
+									method to check if a string is valid in a specific encoding.
+				eg :-
+				string = "héllo"
+				puts string.valid_encoding? # prints true
+				ascii_string = string.encode("ASCII")
+				puts ascii_string.valid_encoding? # prints false
+
+		Forcing a string to a specific encoding: You can use the force_encoding method to force a string to a specific encoding.
+
+				eg :-
+				string = "héllo".force_encoding("ASCII")
+				puts string.valid_encoding? # prints false
+				
+		unicode_normalized?: Returns true if the string is in Unicode normalized form; false otherwise.
+		
+				eg :-
+				3.2.1 :275 > string.unicode_normalized?
+ 				=> true 
+		
+		ascii_only?: Returns true if the string has only ASCII characters; false otherwise.
+				
+				eg :-
+				3.2.1 :274 > string.ascii_only?
+ 				=> true 
+
+
+
+
 
