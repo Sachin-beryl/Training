@@ -1406,4 +1406,22 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				3.2.1 :280 > st1.casecmp?(st2)
  			        => true 
 
+	10). Methods for Modifying a String :-
+	 
+		a). Insertion :-
+
+			insert: Returns self with a given string inserted at a given offset.
+			
+				eg :-
+				3.2.1 :283 > st3 = 'ram'
+ 				=> "ram" 
+				3.2.1 :284 > st3.insert(2,'aa')
+				=> "raaam" 
+
+			<< : Returns self concatenated with a given string or integer.
+			
+				eg :-
+				3.2.1 :282 > st1 << ' WORLD'
+				=> "HELLO WORLD" 
+
 
