@@ -1169,9 +1169,56 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 		 	eg :-   arr = ["h", "e", "l", "l", "o"]
 				str = String.try_convert(arr)          #try to convert the array into the string and store into str.
 		
+	7). Methods for a Frozen/Unfrozen String :-
+	
+		a). Frozen -> A frozen string cannot be modified.
+			    -> Any attempt to modify a frozen string will result in a RuntimeError. 
+			    
+			   -> To make string freeze.
+			      syntax :- str = "something".frozen
+			    	
+			   -> To check frozen or not.
+			      syntax :- str.frozen?       #provide true or false value as output.
 			
+			eg :-   
+				3.2.1 :212 > str1 = 'something'.freeze    
+				 => "something" 				#frozen string
+				3.2.1 :213 > str2 = 'not_something'
+				 => "not_something" 				#unfrozen string
+				3.2.1 :214 > str1.frozen?
+				 => true 
+				3.2.1 :215 > str2.frozen?
+				 => false 
+		b). #dup  -> This method creates a copy of the string that is not frozen. 
+			   -> allowing it to be modified.
+			   -> dup make duplicate which is a shallow copy.
+
+			eg :-
+				str1 = "hello".freeze
+				str2 = str1.dup                     #replace of dup is clone which is a deep copy method of string.
+
+				begin
+				  str2[0] = "H"
+				rescue RuntimeError => e
+				  puts e.message #=> can't modify frozen String
+				end
 			
+			output :- through error because of shallow copy.
 			
+		c). #concat  -> This method appends a string to the end of the current string.
+			     -> returning a new string that is not frozen.
+
+			eg :-
+				str1 = "hello".freeze
+				str2 = "world"
+
+				str3 = str1.concat(str2)
+
+				puts str3 #=> "helloworld"
+				puts str3.frozen? #=> false	
+				
+			output :- concat string is not frozen .
 			
+						
 			
 
