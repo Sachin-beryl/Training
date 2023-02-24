@@ -1543,5 +1543,16 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				eg :-
 					3.2.1 :325 > st6.swapcase!
 					 => "bERYL SYSTEM" 
+					 
+		d). Encoding :-
+			
+		*). scrub!: This method is used to replace any invalid byte sequences in a string with a given replacement character. 
+		  -> It returns the modified string with the invalid byte sequences replaced. 
+		  -> The original string is modified in place. Here's an example:
+
+			eg :-
+				str = "hello\xE9world"
+				str.scrub!("*")
+				puts str # outputs: "hello*world"
 
 
