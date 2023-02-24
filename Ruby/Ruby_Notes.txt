@@ -1633,6 +1633,62 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 					3.2.1 :356 > st9.chop!
 					 => "hello \n wor" 
 
+	11). Methods for Converting to New String:-
+	
+		a). Extension :-
+		
+			*). *: Returns a new string that is the concatenation of the original string repeated a given number of times. 
+			
+				eg:-
+				3.2.1 :361 > st9 = "sachin "
+				 => "sachin " 
+				3.2.1 :362 > st9*3
+				 => "sachin sachin sachin " 
 
+			*). +: Returns a new string that is the concatenation of the original string and another given string. 
+			
+				eg:- 
+				3.2.1 :364 > st9 + 'kanojia'
+				=> "sachin kanojia" 
+
+			*). center: This method returns a new string that is padded with a given substring to a certain length.
+			    -> with the original string centered in between the padding. 
+			   
+			   	eg:-
+			   	3.2.1 :368 > st9.center(10,"-")     #10 specify the number of character in string.
+				=> "--sachin--" 
+ 
+
+			*). concat: appends the given strings to the end of the original string and returns the modified string. 
+			
+				eg:-
+				3.2.1 :369 > st9
+				 => "sachin" 
+				3.2.1 :370 > st9.concat('kanojia')
+				 => "sachinkanojia" 
+
+			*). prepend: prepends the given string to the beginning of the original string and returns the modified string. 
+			
+				eg:-
+				 3.2.1 :371 > st9.prepend('Hello ')
+				 => "Hello sachinkanojia" 
+
+			*). ljust: This method returns a new string that is padded with a given substring to a certain length.
+			    -> with the original string left-justified. 
+			    
+			    	eg:-
+			    	3.2.1 :374 > st9.ljust(25,'-')
+				 => "Hello sachinkanojia------" 
+				
+			*). rjust: This method returns a new string that is padded with a given substring to a certain length.
+			    -> with the original string right-justified. 
+			    
+			    	eg:-
+			    	3.2.1 :375 > st9.rjust(25,'-')
+				 => "------Hello sachinkanojia" 
+
+
+			
+			
 
 
