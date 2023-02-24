@@ -1555,4 +1555,84 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				str.scrub!("*")
 				puts str # outputs: "hello*world"
 
+		e). Deletion :-
+		
+			*). clear: Removes all content, so that self is empty; returns self.
+			
+				eg :-
+					3.2.1 :327 > st6.clear
+					=> "" 
+
+			*). slice!, []=: Removes a substring determined by a given index, start/length, range, regexp, or substring.
+			
+				eg :-
+					3.2.1 :328 > st5
+					 => "hh*ll* ww*rld" 
+					3.2.1 :329 > st5.slice!(2,5)
+					 => "*ll* " 
+					3.2.1 :330 > st5
+					 => "hhww*rld" 
+
+			*). squeeze!: Removes contiguous duplicate characters; returns self.
+			
+				eg :-
+					3.2.1 :331 > st5.squeeze!
+ 					=> "hw*rld" 
+
+			*). delete!: Removes characters as determined by the intersection of substring arguments.
+			
+				eg :-
+					3.2.1 :332 > st3
+					 => "raaam" 
+					3.2.1 :333 > st3.delete!('aeiou')
+					 => "rm" 
+
+			*). lstrip!: Removes leading whitespace; returns self if any changes, nil otherwise.
+			
+				eg :-
+					3.2.1 :338 > st7 = '    there is an apple    '
+					 => "    there is an apple    " 
+					3.2.1 :339 > st7.lstrip!
+					 => "there is an apple    " 
+
+			*). rstrip!: Removes trailing whitespace; returns self if any changes, nil otherwise.
+			
+				eg :-
+					3.2.1 :340 > st7.rstrip!
+					=> "there is an apple" 
+
+			*). strip!: Removes leading and trailing whitespace; returns self if any changes, nil otherwise.
+			
+				eg :-
+					3.2.1 :344 > st8
+					 => "     there is a banana    " 
+					3.2.1 :345 > st8.strip!
+					 => "there is a banana" 
+
+			*). chomp!: Removes trailing record separator, if found; returns self if any changes, nil otherwise.
+				->  (i.e., "\n", "\r", or "\r\n") 
+				
+				eg :-
+					3.2.1 :347 > st9 = "hello \n world \n\r"
+					=> "hello \n world \n\r" 
+					
+					3.2.1 :349 > st9.chomp!
+					 => "hello \n world \n" 
+					3.2.1 :350 > st9.chomp!
+					 => "hello \n world " 
+
+
+			*). chop!: Removes trailing newline characters if found; otherwise removes the last character.
+				-> returns self if any changes, nil otherwise.
+				
+				eg :-
+					3.2.1 :354 > st9.chop!
+					 => "hello \n world" 
+					3.2.1 :355 > st9.chop!
+					 => "hello \n worl" 
+					3.2.1 :356 > st9.chop!
+					 => "hello \n wor" 
+
+
+
 
