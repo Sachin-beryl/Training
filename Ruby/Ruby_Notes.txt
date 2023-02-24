@@ -1091,7 +1091,19 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 		-> s.sub(/[aeiou]/, '*')# => "h*llo"
 		-> s.gsub(/[aeiou]/, '*') # => "h*ll*"
 	
+	4). Hash replacement :- 
+	-> If argument replacement is a hash, and pattern matches one of its keys, the replacing string is the value for that key
+	
+		eg :-  3.2.1 :148 > h = {'app'=>'purp' , 'le' => 'ly'}
+			 => {"app"=>"purp", "le"=>"ly"} 
+			3.2.1 :149 > apple.sub('app',h)
 			
+		output :-
+			3.2.1 :150 > 'apple'.sub('app',h)
+			 => "purple" 
+			3.2.1 :151 > 'apple'.sub('le',h)
+			 => "apply" 
+ 	
 			
 			
 			
