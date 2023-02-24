@@ -1156,8 +1156,18 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				 => "aa" 
 				3.2.1 :202 > s['zzz']
 				 => nil 
+				 
+	6). Methods for Creating a String :-
+	
+		a). ::new: Returns a new string.
+		
+			eg :- str = String.new("hello")
 
-		 	
+		b). ::try_convert: Returns a new string created from a given object.
+			-> try to convert into string.
+
+		 	eg :-   arr = ["h", "e", "l", "l", "o"]
+				str = String.try_convert(arr)          #try to convert the array into the string and store into str.
 		
 			
 			
