@@ -1424,4 +1424,92 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				3.2.1 :282 > st1 << ' WORLD'
 				=> "HELLO WORLD" 
 
+		b). Substitution :-
 
+			*). sub!: Replaces the first substring that matches a given pattern with a given replacement string.
+			    -> returns self if any changes, nil otherwise.     #destructive versions 
+			    
+			    eg :-
+			    	3.2.1 :288 > st1
+				 => "HELLO WORLD" 
+				3.2.1 :289 > st1.sub!('WORLD','RUBY')
+				 => "HELLO RUBY" 
+				3.2.1 :290 > st1
+				 => "HELLO RUBY" 
+
+
+			*). gsub!: Replaces each substring that matches a given pattern with a given replacement string. 
+			    -> returns self if any changes, nil otherwise.     #destructive versions 
+			    
+			    eg :-
+			    	3.2.1 :291 > string
+ 				=> "The quick brown fox jumps over the lazy dog" 
+ 				3.2.1 :293 > string.gsub!('The','the')
+ 				=> "the quick brown fox jumps over the lazy dog" 
+ 				
+			*). succ!, next!: Returns self modified to become its own successor.
+			    -> Both methods are destructive and modify the string in place.
+			    
+			    eg :-
+			    	3.2.1 :294 > st1.succ
+				 => "HELLO RUBZ" 
+				3.2.1 :295 > st1.succ
+				 => "HELLO RUBZ" 
+				3.2.1 :296 > st1.succ!
+				 => "HELLO RUBZ" 
+				3.2.1 :297 > st1.succ!
+				 => "HELLO RUCA" 
+				 
+				 
+				 3.2.1 :299 > st1.next!        #for next! similer to succ!
+				 => "HELLO RUCB" 
+				 3.2.1 :300 > st1.next!
+				 => "HELLO RUCC" 
+				 3.2.1 :301 > st1.next!
+
+			*). replace: Returns self with its entire content replaced by a given string.
+			
+				eg :-
+					3.2.1 :303 > st1
+					 => "HELLO RUCF" 
+					3.2.1 :304 > st2
+					 => "hElLO" 
+					3.2.1 :305 > st1.replace(st2)
+					 => "hElLO" 
+					3.2.1 :306 > st1
+					 => "hElLO" 
+
+
+			*). reverse!: Returns self with its characters in reverse order.
+			
+				eg :-
+					3.2.1 :307 > st1.reverse!
+					=> "OLlEh" 
+
+			*). setbyte: Sets the byte at a given integer offset to a given value; returns the argument.
+			
+				eg :-
+					3.2.1 :310 > st1.setbyte(0, 72)
+					 => 72 
+					3.2.1 :311 > st1
+					 => "HElLO" 
+
+			*). tr!: Replaces specified characters in self with specified replacement characters. 
+			    returns self if any changes, nil otherwise.
+			    
+			    	eg :-
+			    		3.2.1 :314 > st4 = 'hhellooo wworldd'
+					 => "hhellooo wworldd" 
+					3.2.1 :315 > st4.tr!("aeiou","&")
+					 => "hh&ll&&& ww&rldd" 
+					3.2.1 :316 > st4
+					 => "hh&ll&&& ww&rldd" 
+			    		
+			*). tr_s!: Replaces specified characters in self with specified replacement characters. 
+			    removing duplicates from the substrings that were modified; returns self if any changes, nil otherwise.
+			    
+			    	eg :-
+			    		3.2.1 :317 > st5 = 'hhelloo wworld'
+					 => "hhelloo wworld" 
+					3.2.1 :318 > st5.tr_s!("aeiou","*")
+					 => "hh*ll* ww*rld" 
