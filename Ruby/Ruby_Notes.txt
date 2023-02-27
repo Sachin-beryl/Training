@@ -1348,8 +1348,65 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			eg :-  
 				3.2.1 :041 > arr.values_at(2,4)
 				=> [3, 5] 		
+	
+		h). dig: Returns the object in nested objects that is specified by a given index and additional arguments.
+		
+			eg :-
+				3.2.1 :043 > earth = {a: {b: {c:54}}}
+				=> {:a=>{:b=>{:c=>54}}} 
+				
+				3.2.1 :047 > earth.dig(:a, :b, :c)
+				=> 54 
+				3.2.1 :048 > earth.dig(:a, :b, :d)
+				=> nil 
 
+		i). drop: Returns trailing elements as determined by a given index.
+		
+			eg :- 
+				3.2.1 :049 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :050 > arr.drop(2)
+				 => [3, 4, 5] 
 
+		j). take: Returns leading elements as determined by a given index.
+		
+			eg :-
+				3.2.1 :051 > arr.take(2)
+				 => [1, 2] 
+
+		k). drop_while: Returns trailing elements as determined by a given block.
+		
+			eg :-
+				 3.2.1 :052 > arr.drop_while{|a| a<4}
+				 => [4, 5] 
+
+		l). take_while: Returns leading elements as determined by a given block.
+		
+			eg :-
+				3.2.1 :054 > arr.take_while{|a| a<4}
+				=> [1, 2, 3] 
+
+		m). slice: Returns consecutive elements as determined by a given argument.
+		
+			eg :-
+				3.2.1 :056 > arr.slice(1,3)
+				 => [2, 3, 4] 
+				3.2.1 :057 > arr.slice(1..3)
+				 => [2, 3, 4] 
+				3.2.1 :058 > arr.slice(1...3)
+				 => [2, 3] 
+
+		n). select, filter: Returns an array containing elements selected by a given block.
+
+		o). rotate: Returns all elements with some rotated from one end to the other.
+
+		p). bsearch: Returns an element selected via a binary search as determined by a given block.
+
+		q). bsearch_index: Returns the index of an element selected via a binary search as determined by a given block.
+
+		r). sample: Returns one or more random elements.
+
+		s). shuffle: Returns elements in a random order.
 --------------------------------------------------------------------------------------------------------------------------------------
 							         STRINGS
 
