@@ -1758,5 +1758,38 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 					3.2.1 :044 > b.class
 					 => String 
 
+	12). Methods for Converting to Non-String
+
+		a). Characters, Bytes, and Clusters
+
+			*). bytes: Returns an array of the bytes in self.
+			
+				eg :-   3.2.1 :054 > str.bytes
+ 					=> [104, 101, 108, 108, 111] 
+
+
+			*). chars: Returns an array of the characters in self.
+			
+				eg :-   3.2.1 :047 > str.chars
+					 => ["h", "e", "l", "l", "o"] 
+
+			*). codepoints: Returns an array of the integer ordinals in self, have values greater than 255.
+			
+				eg :-   3.2.1 :048 > str.codepoints
+					 => [104, 101, 108, 108, 111] 
+					
+			*). getbyte: Returns an integer byte as determined by a given index.
+			
+				eg :-   3.2.1 :049 > str.getbyte(1)
+					 => 101 
+					
+			*). grapheme_clusters: Returns an array of the grapheme clusters in self, also works on emojis.
+			
+				eg :-   3.2.1 :050 > str.grapheme_clusters
+					 => ["h", "e", "l", "l", "o"] 
+					3.2.1 :051 > str = "😇"
+					 => "😇" 
+					3.2.1 :052 > str.grapheme_clusters
+					 => ["😇"] 
 
 
