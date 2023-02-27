@@ -1880,6 +1880,66 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			
 				eg :-   3.2.1 :086 > str.to_sym
 					 => :"hello\\nworld" 
+					 
+	13). Methods for Iterating
+	
+			*). each_byte: Calls the given block with each successive byte in self.
+			
+				eg :-   3.2.1 :096 > str.each_byte{ |a| puts a}
+					104
+					101                                                             
+					108                                                             
+					108                                                             
+					111                                                             
+					 => "hello"                                                     
+					
+			*). each_char: Calls the given block with each successive character in self.
+			
+				eg :-   3.2.1 :097 > str.each_char{ |a| puts a}
+					h
+					e                                                               
+					l                                                               
+					l                                                               
+					o                                                               
+					 => "hello"                                                     
+					
+			*). each_codepoint: Calls the given block with each successive integer codepoint in self.
+			
+				eg :-   3.2.1 :098 > str.each_codepoint{ |a| puts a}
+					104
+					101                                   
+					108                                   
+					108                                   
+					111                                   
+					 => "hello" 
+
+			*). each_grapheme_cluster: Calls the given block with each successive grapheme cluster in self.
+			
+				eg :-   3.2.1 :099 > str.each_grapheme_cluster{ |a| puts a}
+					h
+					e                                     
+					l                                     
+					l                                     
+					o                                     
+					 => "hello" 
+
+			*). each_line: Calls the given block with each successive line in self, as determined by a given record separator.
+			
+				eg :-   3.2.1 :107 > str = "hello \n world"
+					 => "hello \n world" 
+					3.2.1 :108 > str.each_line{|a| puts a}
+					hello 
+					 world                                                         
+					 => "hello \n world"                                           
+
+			*). upto: Calls the given block with each string value returned by successive calls to succ.
+			
+				eg :-   3.2.1 :105 > "a".upto("d") { |str| puts str }
+					a
+					b                                                                               
+					c                                                                               
+					d                                                                               
+					 => "a"  
 
 
 
