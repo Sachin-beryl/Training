@@ -1223,6 +1223,35 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			f). 3.2.1 :181 > arr.map{ |a| a**2}  #apply power 
 			    => [1, 4, 9, 16, 25] 
 
+	14). Selecting Items from an Array :-
+	
+		a). Non-destructive Selection
+			eg :-
+				3.2.1 :005 > arr.drop_while {|a| a<4}
+				 => [4, 5] 
+				 
+				3.2.1 :006 > arr.select{|a| a>3}
+				 => [4, 5] 
+				 
+				3.2.1 :007 > arr.reject{|a| a<3}
+				 => [3, 4, 5] 
+				
+		b). Destructive selection
+		-> Similar to select vs. reject, delete_if and keep_if have the exact opposite result when supplied with the same block:
+
+			eg :-
+				3.2.1 :008 > arr          #delete if
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :009 > arr.delete_if{|a| a>3}
+				 => [1, 2, 3] 
+				 
+				 
+				3.2.1 :010 > arr.keep_if{|a| a<3}     #keep if
+				 => [1, 2] 
+				3.2.1 :011 > arr
+				 => [1, 2] 
+
+				
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
