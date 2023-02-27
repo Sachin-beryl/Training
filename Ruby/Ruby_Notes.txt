@@ -1837,6 +1837,35 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			
 				eg :-   3.2.1 :069 > str.unpack1('c*')
 					 => 1 
+					 
+		d). Numerics
+
+			*). hex: Returns the integer value of the leading characters, interpreted as hexadecimal digits.
+			
+				eg :-   3.2.1 :080 > str
+					 => "2AB" 
+					3.2.1 :081 > str.hex
+					 => 683 
+
+			*). oct: Returns the integer value of the leading characters, interpreted as octal digits.
+			
+				eg :-   3.2.1 :082 > str.oct
+					 => 2 
+
+			*). ord: Returns the integer ordinal of the first character in self.
+			
+				eg :-   3.2.1 :083 > str.ord
+					 => 50 
+
+			*). to_i: Returns the integer value of leading characters, interpreted as an integer.
+			
+				eg :-   3.2.1 :078 > str.to_i
+					 => 2 
+
+			*). to_f: Returns the floating-point value of leading characters, interpreted as a floating-point number.
+			
+				eg :-   3.2.1 :079 > str.to_f
+					 => 2.0 
 
 
 
