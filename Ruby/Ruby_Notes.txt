@@ -2592,6 +2592,17 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 					d                                                                               
 					 => "a"  
 
+------------------------------------------------------------------------------------------------------------------------------------
+								HASHES
+								
+ Intro :-
+ -> A Hash maps each of its unique keys to a specific value.
+ -> A Hash has certain similarities to an Array, but:
+ -> An Array index is always an Integer.
+ -> A Hash key can be (almost) any object.
+ 
+ 
+
 
 
 
