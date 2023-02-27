@@ -2601,8 +2601,29 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
  -> An Array index is always an Integer.
  -> A Hash key can be (almost) any object.
  
- 
+ Hash Data Syntax :-
 
+ -> The older syntax for Hash data uses the “hash rocket,” =>:
+
+	h = {:foo => 0, :bar => 1, :baz => 2}
+	h # => {:foo=>0, :bar=>1, :baz=>2}
+
+ -> Alternatively, but only for a Hash key that’s a Symbol, you can use a newer JSON-style syntax, where each bareword becomes a Symbol:
+
+	h = {foo: 0, bar: 1, baz: 2}
+	h # => {:foo=>0, :bar=>1, :baz=>2}
+	
+ -> You can also use a String in place of a bareword:
+
+	h = {'foo': 0, 'bar': 1, 'baz': 2}
+	h # => {:foo=>0, :bar=>1, :baz=>2}
+	
+ -> Hash value can be omitted, meaning that value will be fetched from the context by the name of the key:
+
+	x = 0
+	y = 100
+	h = {x:, y:}
+	h # => {:x=>0, :y=>100}
 
 
 
