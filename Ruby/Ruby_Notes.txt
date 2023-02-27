@@ -1029,6 +1029,14 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 		eg :- nums = Array.[](1, 2, 3, 4,5)
 		      nums = Array[1, 2, 3, 4,5]
 		      
+		      -> try_convert: Returns a new array created from a given object.
+		      
+		      		eg :-
+		      			3.2.1 :012 > arr = [1, 2, 3]
+					3.2.1 :013 > p Array.try_convert(arr)
+					[1, 2, 3]
+					 => [1, 2, 3]                                    
+	      
 	6). Using range :-
 		
 		eg :- digits = Array(0..9)
