@@ -1050,6 +1050,50 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 		j). arr.flatten    #convert inner array into elements
 		k). arr.compact    #remove null or nil values.
 		l). arr.product    #convert each element in array.
+		
+	8). Convert into Array from other formats :-
+	
+		*). Enumerable#to_a: Converts an enumerable object (e.g. a range, a hash, or an enumerator) into an array. 
+		
+			eg :-   
+				h = { "a" => 1, "b" => 2, "c" => 3 }
+				p h.to_a # returns [["a", 1], ["b", 2], ["c", 3]]
+
+		*). Hash#to_a: Converts a hash into an array of key-value pairs. 
+
+			eg :- 
+				h = { "a" => 1, "b" => 2, "c" => 3 }
+				p h.to_a 
+				# returns [["a", 1], ["b", 2], ["c", 3]]
+
+		*). MatchData#to_a: Converts a MatchData object (which is returned by the String#match method) into an array containing the matched text and any capture groups.
+			eg :- 
+				s = "hello world"
+				m = /world/.match(s)
+				p m.to_a 
+				# returns ["world"]
+
+		*). NilClass#to_a: Returns an empty array. 
+		
+			eg :- 
+				nil.to_a 
+				# returns []
+				
+		*). Set#to_a : The Set#to_a method returns an array containing all elements in the set.
+		
+			eg :-
+				require 'set'
+				s = Set.new([1, 2, 3])
+				s.to_a  
+				# => [1, 2, 3]
+		
+		*). Struct#to_a : The Struct#to_a method returns an array containing the values of each member of the struct.
+			
+			eg :- 
+				Person = Struct.new(:name, :age)
+				p = Person.new("Alice", 30)
+				p.to_a  
+				# => ["Alice", 30]
 
 --------------------------------------------------------------------------------------------------------------------------------------
 							         STRINGS
