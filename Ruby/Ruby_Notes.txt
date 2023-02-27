@@ -1686,6 +1686,26 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			    	eg:-
 			    	3.2.1 :375 > st9.rjust(25,'-')
 				 => "------Hello sachinkanojia" 
+				 
+		b). Encoding
+
+			*). b: Returns a copy of self with ASCII-8BIT encoding.
+			
+				eg :-   3.2.1 :007 > st1.encoding
+					 => #<Encoding:UTF-8> 
+					3.2.1 :008 > st2 = st1.b
+					 => "sachin" 
+					3.2.1 :009 > st2.encoding
+					 => #<Encoding:ASCII-8BIT> 
+
+			*). scrub: Returns a copy of self with each invalid byte replaced with a given character.
+				
+				eg :-   3.2.1 :016 > str = "Hello, \xFFworld!"
+					 => "Hello, \xFFworld!" 
+					3.2.1 :017 > scrubbed_str = str.scrub('?')
+					3.2.1 :018 > puts scrubbed_str
+					Hello, ?world!
+
 
 
 			
