@@ -1397,16 +1397,45 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				 => [2, 3] 
 
 		n). select, filter: Returns an array containing elements selected by a given block.
-
+		
+			eg :- 
+				3.2.1 :059 > arr.select{|a| a%2 == 0}
+				 => [2, 4] 
+				
 		o). rotate: Returns all elements with some rotated from one end to the other.
+		
+			eg :-
+				3.2.1 :060 > arr.rotate(3)
+				 => [4, 5, 1, 2, 3] 
 
 		p). bsearch: Returns an element selected via a binary search as determined by a given block.
-
+		
+			eg :-
+				3.2.1 :065 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :066 > arr.bsearch{|x| x>=3}
+				 => 3 
+				
 		q). bsearch_index: Returns the index of an element selected via a binary search as determined by a given block.
+		
+			eg :-
+				3.2.1 :067 > arr.bsearch_index{|x| x>=3}
+				 => 2 
 
 		r). sample: Returns one or more random elements.
-
+		
+			eg :-
+				3.2.1 :069 > arr.sample(2)
+				 => [1, 5] 
+				
 		s). shuffle: Returns elements in a random order.
+		
+			eg :-
+				3.2.1 :070 > arr.shuffle
+				 => [2, 5, 1, 3, 4] 
+				3.2.1 :071 > arr.shuffle
+				 => [3, 5, 2, 1, 4] 
+
 --------------------------------------------------------------------------------------------------------------------------------------
 							         STRINGS
 
