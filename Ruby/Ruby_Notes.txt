@@ -1705,6 +1705,20 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 					3.2.1 :017 > scrubbed_str = str.scrub('?')
 					3.2.1 :018 > puts scrubbed_str
 					Hello, ?world!
+					
+		c). Substitution
+
+			*). dump: Returns a copy of self with all non-printing characters replaced by xHH notation and all special characters escaped.
+				eg :-   3.2.1 :019 > str = "Hello, \tworld!\n"
+					 => "Hello, \tworld!\n" 
+					 
+					3.2.1 :020 > str3 = str.dump
+					 => "\"Hello, \\tworld!\\n\"" 
+					
+			*). undump: Returns a copy of self with all \xNN notation replace by \uNNNN notation and all escaped characters unescaped.
+				eg :-   3.2.1 :021 > str4 = str3.undump
+					 => "Hello, \tworld!\n" 
+
 
 
 
