@@ -1436,6 +1436,44 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				3.2.1 :071 > arr.shuffle
 				 => [3, 5, 2, 1, 4] 
 
+	17). Methods for Assigning:-
+		
+		a). concat: Appends all elements from given arrays.
+		
+			eg :- 
+				3.2.1 :072 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :073 > arr1 = [6,7,8,9]
+				 => [6, 7, 8, 9] 
+				3.2.1 :074 > arr.concat(arr1)
+				 => [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+				3.2.1 :075 > arr
+				 => [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+				
+		b). fill: Replaces specified elements with specified objects.  #file a value between some range
+		
+			eg :- 
+				3.2.1 :076 > arr.fill(1,4,8)
+				 => [1, 2, 3, 4, 1, 1, 1, 1, 1, 1, 1, 1] 
+
+		c). replace: Replaces the content of self with the content of a given array.
+		
+			eg :-
+				3.2.1 :077 > arr2 = [10,11,12,13,14]
+				 => [10, 11, 12, 13, 14] 
+				3.2.1 :078 > arr.replace(arr2)
+				 => [10, 11, 12, 13, 14] 
+
+		d). sort_by!: Replaces self with its elements sorted, as determined by a given block.
+		
+			eg :-
+				3.2.1 :083 > arr = ["apple", "banana", "cherry"]
+				 => ["apple", "banana", "cherry"] 
+				3.2.1 :084 > arr.sort_by! {|fruit| fruit.length }
+				 => ["apple", "banana", "cherry"] 
+
+ NOTE :- reverse!,rotate!,shuffle! similar to reverse,rotate and shuffle respectfully but with permanent change. 
+
 --------------------------------------------------------------------------------------------------------------------------------------
 							         STRINGS
 
