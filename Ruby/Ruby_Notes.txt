@@ -1298,6 +1298,57 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			eg :-   3.2.1 :024 > arr.hash{|a| a == 3}
 				 => 2802280231947848363 
 
+	16). Methods for Fetching :-
+	
+		a). max: Returns one or more maximum-valued elements, as determined by <=> or a given block.
+		
+			eg :-
+				3.2.1 :025 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :026 > arr.max
+				 => 5 
+				
+		b). min: Returns one or more minimum-valued elements, as determined by <=> or a given block.
+		
+			eg :-
+				3.2.1 :027 > arr.min
+				 => 1 
+				
+		c). minmax: Returns the minimum-valued and maximum-valued elements, as determined by <=> or a given block.
+		
+			eg :-
+				3.2.1 :028 > arr.minmax
+				 => [1, 5] 
+
+		d). assoc: Returns the first element that is an array whose first element == a given object.
+			
+			eg :-
+				 3.2.1 :032 > arr1 = [[1,"ram"],[2,"ravi"],[3,"dev"]]
+				 => [[1, "ram"], [2, "ravi"], [3, "dev"]] 
+				 
+				 3.2.1 :034 > arr1.assoc(2)
+				 => [2, "ravi"] 
+
+		e). rassoc: Returns the first element that is an array whose second element == a given object.
+		
+			eg :-
+				 3.2.1 :038 > arr1.rassoc('dev')
+				 => [3, "dev"] 
+
+		f). at: Returns the element at a given offset.
+		
+			eg :-
+				3.2.1 :039 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :040 > arr.at(4)
+				 => 5 
+
+		g). values_at: Returns the elements at given offsets.
+		
+			eg :-  
+				3.2.1 :041 > arr.values_at(2,4)
+				=> [3, 5] 		
+
 
 --------------------------------------------------------------------------------------------------------------------------------------
 							         STRINGS
