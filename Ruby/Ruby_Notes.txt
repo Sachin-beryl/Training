@@ -1668,6 +1668,38 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				 => ["a", "b", "c"] 
 				3.2.1 :142 > print arr1.zip(arr2)
 				[[1, "a"], [2, "b"], [3, "c"]] => nil 
+				
+	21). Other Methods :-
+	
+		a). abbrev: Returns a hash of unambiguous abbreviations for elements.
+			
+			eg :-
+				3.2.1 :163 > require 'abbrev'
+				 => true 
+				3.2.1 :164 > 
+				3.2.1 :165 > words = ["car", "cone", "cart", "cape"]
+				 => ["car", "cone", "cart", "cape"] 
+				3.2.1 :166 > abbreviations = words.abbrev
+				 => {"cone"=>"cone", "con"=>"cone", "co"=>"cone", "cart"=>"cart", "cape"=>"cape", "cap"=>"cape", "car"=>"car"} 
+				3.2.1 :167 > 
+				3.2.1 :168 > puts abbreviations.inspect
+				{"cone"=>"cone", "con"=>"cone", "co"=>"cone", "cart"=>"cart", "cape"=>"cape", "cap"=>"cape", "car"=>"car"}
+				 => nil 
+
+
+		b). pack: Packs the elements into a binary sequence.
+			
+			eg :-
+				3.2.1 :155 > arr1
+				 => [1, 2, 3] 
+				3.2.1 :156 > arr1.pack('sss')
+				 => "\x01\x00\x02\x00\x03\x00" 
+
+		c). sum: Returns a sum of elements according to either + or a given block.
+		
+			eg :-
+				3.2.1 :159 > arr1.sum
+				=> 6 
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
