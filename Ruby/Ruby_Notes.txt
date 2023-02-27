@@ -1473,6 +1473,79 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				 => ["apple", "banana", "cherry"] 
 
  NOTE :- reverse!,rotate!,shuffle! similar to reverse,rotate and shuffle respectfully but with permanent change. 
+ 
+ 	18). Methods for Combining :-
+		 	
+		a). &: Returns an array containing elements found both in self and a given array.
+		
+			eg :- 
+				3.2.1 :086 > a
+				=> [1, 2, 3, 4]
+				3.2.1 :087 > b = [2,3,4,5,6]
+				 => [2, 3, 4, 5, 6] 
+				3.2.1 :088 > a & b
+				 => [2, 3, 4] 
+				
+		b). intersection: Returns an array containing elements found both in self and in each given array.
+		
+			eg :- 
+				3.2.1 :089 > c = [3,4,5,6,7,8,9]
+				 => [3, 4, 5, 6, 7, 8, 9] 
+				3.2.1 :090 > a.intersection(b,c)
+				 => [3, 4] 
+
+		c). +: Returns an array containing all elements of self followed by all elements of a given array.
+		
+			eg :-
+				3.2.1 :091 > a+b
+				 => [1, 2, 3, 4, 2, 3, 4, 5, 6] 
+
+		d). -: Returns an array containing all elements of self that are not found in a given array.
+		
+			eg :-
+				3.2.1 :092 > a-b
+				 => [1] 
+
+		e). |: Returns an array containing all elements of self and all elements of a given array, duplicates removed.
+		
+			eg :-
+				3.2.1 :093 > a | b
+				 => [1, 2, 3, 4, 5, 6] 
+				
+		f). union: Returns an array containing all elements of self and all elements of given arrays, duplicates removed.
+		
+			eg :-
+				3.2.1 :094 > a.union(b,c)
+				 => [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+
+		g). difference: Returns an array containing all elements of self that are not found in any of the given arrays..
+		
+			eg :-
+				3.2.1 :095 > a.difference(b,c)
+				 => [1] 
+
+		h). product: Returns or yields all combinations of elements from self and given arrays.
+		
+			eg :-
+				3.2.1 :109 > a.product(b,c)
+				 => 
+				[[1, 2, 3],                                    
+				 [1, 2, 4],                                    
+				 [1, 3, 3],                                    
+				 [1, 3, 4],                                    
+				 [2, 2, 3],                                    
+				 [2, 2, 4],                                    
+				 [2, 3, 3],                                    
+				 [2, 3, 4],                                    
+				 [3, 2, 3],                                    
+				 [3, 2, 4],                                    
+				 [3, 3, 3],                                    
+				 [3, 3, 4],                                    
+				 [4, 2, 3],                                    
+				 [4, 2, 4],                                    
+				 [4, 3, 3],
+				 [4, 3, 4]] 
+
 
 --------------------------------------------------------------------------------------------------------------------------------------
 							         STRINGS
