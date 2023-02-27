@@ -1866,6 +1866,21 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			
 				eg :-   3.2.1 :079 > str.to_f
 					 => 2.0 
+					 
+		e). Strings and Symbols
+
+			*). inspect: Returns copy of self, enclosed in double-quotes, with special characters escaped.
+			
+				eg :-   3.2.1 :084 > str = 'hello\nworld'
+					 => "hello\\nworld" 
+					3.2.1 :085 > str.inspect
+					 => "\"hello\\\\nworld\"" 
+					
+			*). to_sym, intern: Returns the symbol corresponding to self.
+			
+				eg :-   3.2.1 :086 > str.to_sym
+					 => :"hello\\nworld" 
+
 
 
 
