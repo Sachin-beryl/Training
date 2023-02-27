@@ -1746,7 +1746,17 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 					3.2.1 :041 > str.chr
 					 => "H" 
 
-			
-			
+		e). Duplication
+
+			*). to_s, $to_str: If self is a subclass of String, returns self copied into a String; otherwise, returns self.
+				
+				eg :-
+					3.2.1 :042 > a = 45
+					 => 45 
+					3.2.1 :043 > b = a.to_s
+					 => "45" 
+					3.2.1 :044 > b.class
+					 => String 
+
 
 
