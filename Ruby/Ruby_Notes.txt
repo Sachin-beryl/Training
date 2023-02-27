@@ -1163,6 +1163,36 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			e). 3.2.1 :149 > arr.insert(3,'apple','orange','banana')   #insert multiple values at specific position
 			    => [0, 1, 2, "apple", "orange", "banana", "apple", 3, 4, 5, 6, 7, 8, 9] 
 
+	12). Removing Items from an Array :-
+	
+		eg :- 
+			a). 3.2.1 :151 > arr.pop        #remove from last
+			    => 9 
+			 
+			b). 3.2.1 :152 > arr.shift      #remove from starting
+			    => 0 
+			 
+			c). 3.2.1 :153 > arr.delete_at(3)    #delete at specific position
+			    => "orange" 
+			 
+			d). 3.2.1 :154 > arr.delete(5)   #delete every 5 from array
+			    => 5 
+			 
+			inputs :-	3.2.1 :156 > arr.insert(3,nil)
+					 => [1, 2, "apple", nil, "nil", "banana", "apple", 3, 4, 6, 7, 8] 
+					3.2.1 :157 > arr.insert(5,nil)
+					 => [1, 2, "apple", nil, "nil", nil, "banana", "apple", 3, 4, 6, 7, 8] 
+					3.2.1 :158 > arr.push(7)
+					 => [1, 2, "apple", nil, "nil", nil, "banana", "apple", 3, 4, 6, 7, 8, 7] 
+					3.2.1 :159 > arr.push(1)
+					 => [1, 2, "apple", nil, "nil", nil, "banana", "apple", 3, 4, 6, 7, 8, 7, 1] 
+					 
+			 
+			e). 3.2.1 :160 > arr.compact		#remove nil values
+			    => [1, 2, "apple", "nil", "banana", "apple", 3, 4, 6, 7, 8, 7, 1] 
+			 
+			f). 3.2.1 :161 > arr.uniq 		#remove duplicate values
+			    => [1, 2, "apple", nil, "nil", "banana", 3, 4, 6, 7, 8] 
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
