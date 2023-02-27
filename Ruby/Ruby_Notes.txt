@@ -1719,8 +1719,32 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				eg :-   3.2.1 :021 > str4 = str3.undump
 					 => "Hello, \tworld!\n" 
 
+		d). Deletion
 
+			*). delete: Returns a copy of self with characters removed
+			
+				eg :-   3.2.1 :030 > str
+					 => "Hello, \tworld!\n" 
+					3.2.1 :031 > str.delete('llo')
+					 => "He, \twrd!\n" 
 
+			*). delete_prefix: Returns a copy of self with a given prefix removed.
+			
+				eg :-   3.2.1 :032 > str.delete_prefix('Hello, ')
+					 => "\tworld!\n" 
+
+			*). delete_suffix: Returns a copy of self with a given suffix removed.
+			
+				eg :-   3.2.1 :037 > str = "Hello, world!"
+					3.2.1 :038 > new_str = str.delete_suffix(", world!")
+					 => "Hello" 
+
+			*). chr: Returns the first character.
+
+				eg :-   3.2.1 :040 > str
+					 => "Hello, world!" 
+					3.2.1 :041 > str.chr
+					 => "H" 
 
 			
 			
