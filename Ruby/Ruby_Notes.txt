@@ -1094,6 +1094,39 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				p = Person.new("Alice", 30)
 				p.to_a  
 				# => ["Alice", 30]
+				
+	9). Accessing Elements :-
+	
+		eg :- 
+			arr = [1,2,3,4,5,6,7]
+			
+			a). 3.2.1 :127 > arr[1,4]     # element in the range
+			    => [2, 3, 4, 5] 
+			    
+			b). 3.2.1 :128 > arr[1..5]    # element in the range
+			    => [2, 3, 4, 5, 6] 
+			    
+			c). 3.2.1 :129 > arr[1..-4]    # element in the range
+			    => [2, 3, 4] 
+			    
+			d). 3.2.1 :132 > arr.at(4)   #element at specific position
+			    => 5 
+			 
+			e). 3.2.1 :133 > arr.fetch(4)  #element at specific position
+			    => 5 
+			 
+			f). 3.2.1 :134 > arr.first    #first element of array
+			    => 1 
+			 
+			g). 3.2.1 :135 > arr.last     #last element of array
+			    => 7 
+			 
+			h). 3.2.1 :136 > arr.take(3)   #first 3 element of array
+			    => [1, 2, 3] 
+			 
+			i). 3.2.1 :137 > arr.drop(3)   #drop first 3 element of array
+			    => [4, 5, 6, 7] 
+
 
 --------------------------------------------------------------------------------------------------------------------------------------
 							         STRINGS
