@@ -1126,6 +1126,25 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 			 
 			i). 3.2.1 :137 > arr.drop(3)   #drop first 3 element of array
 			    => [4, 5, 6, 7] 
+			    
+	10). Obtaining Information about an Array :-
+	
+		eg :-  
+			3.2.1 :139 > arr
+			 => [1, 2, 3, 4, 5, 6, 7] 
+			 
+			a). 3.2.1 :140 > arr.length
+			    => 7 
+			    
+			b). 3.2.1 :141 > arr.count
+			    => 7 
+			    
+			c). 3.2.1 :142 > arr.empty?
+			    => false 
+			 
+			d). 3.2.1 :143 > arr.include?(5)
+			    => true 
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
