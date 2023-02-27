@@ -1792,4 +1792,31 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 					3.2.1 :052 > str.grapheme_clusters
 					 => ["😇"] 
 
+		b). Splitting
+
+			*). lines: Returns an array of the lines in self, as determined by a given record separator.
+			
+				eg :-   3.2.1 :055 > str = "Line 1\nLine 2\nLine 3"
+					 => "Line 1\nLine 2\nLine 3" 
+					3.2.1 :056 > str.lines
+					 => ["Line 1\n", "Line 2\n", "Line 3"] 
+
+			*). partition: Returns a 3-element array determined by the first substring that matches a given substring or regexp,
+				eg :-   3.2.1 :058 > str = 'hello , world'
+					 => "hello , world" 
+					3.2.1 :059 > str.partition(',')
+					 => ["hello ", ",", " world"] 
+				
+			*). rpartition: Returns a 3-element array determined by the last substring that matches a given substring or regexp,
+				eg :-   3.2.1 :060 > str = 'hello world , again'
+					 => "hello world , again" 
+					3.2.1 :061 > str.rpartition(',')
+					 => ["hello world ", ",", " again"] 
+
+			*). split: Returns an array of substrings determined by a given delimiter – regexp or string – or, if a block given, passes those substrings to the block.
+			
+				eg :-   3.2.1 :062 > str = 'hello , world , again'
+					 => "hello , world , again" 
+					3.2.1 :063 > str.split(',')
+					 => ["hello ", " world ", " again"] 
 
