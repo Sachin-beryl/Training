@@ -1819,4 +1819,26 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 					 => "hello , world , again" 
 					3.2.1 :063 > str.split(',')
 					 => ["hello ", " world ", " again"] 
+					 
+		c). Matching
+
+			*). scan: Returns an array of substrings matching a given regexp or string, or, if a block given, passes each matching substring to the block.
+				eg :-   3.2.1 :065 > str.scan(/[aeiou]/)
+					 => ["e", "o", "o", "a", "a", "i"] 
+					3.2.1 :066 > str = "\x01\x02\x03"
+					 => "\u0001\u0002\u0003" 
+
+			*). unpack: Returns an array of substrings extracted from self according to a given format.
+			
+				eg :-   3.2.1 :068 > str.unpack('c*')
+					 => [1, 2, 3] 
+					
+			*). unpack1: Returns the first substring extracted from self according to a given format.
+			
+				eg :-   3.2.1 :069 > str.unpack1('c*')
+					 => 1 
+
+
+
+
 
