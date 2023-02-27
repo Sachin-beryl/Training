@@ -1259,7 +1259,44 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 				3.2.1 :011 > arr
 				 => [1, 2] 
 
+	15). Methods for Querying :-
+	
+		a). all?: Returns whether all elements meet a given criterion.
+		
+			eg :-   3.2.1 :017 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :018 > arr.all?{|a| a<6}
+				 => true 
+
+		b). any?: Returns whether any element meets a given criterion.
+		
+			eg :-   3.2.1 :019 > arr.any?{|a| a>3}
+				 => true 
 				
+		c). none?: Returns whether no element == a given object.
+		
+			eg :-   3.2.1 :020 > arr.none?{|a| a>7}
+				 => true 
+				
+		d). one?: Returns whether exactly one element == a given object.
+		
+			eg :-   3.2.1 :021 > arr.one?{|a| a>7}
+				 => false 
+			
+		e). find_index, index: Returns the index of the first element that meets a given criterion.
+		
+			eg :-   3.2.1 :022 > arr.index{|a| a == 3}
+				 => 2 
+				
+		f). rindex: Returns the index of the last element that meets a given criterion.
+		
+			eg :-   3.2.1 :023 > arr.rindex{|a| a == 3}
+				 => 2 
+				
+		g). hash: Returns the integer hash code.
+		
+			eg :-   3.2.1 :024 > arr.hash{|a| a == 3}
+				 => 2802280231947848363 
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
