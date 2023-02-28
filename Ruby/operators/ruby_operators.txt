@@ -2,7 +2,7 @@
 
  1). Arithmetic Operators :- +,-,/,%,*,**(power).
  
- 2). Arithmetic Operators :- ==,!=,>,<,<=,>=,
+ 2). Comparison Operators :- ==,!=,>,<,<=,>=,
 
 	a). Combined comparison operator(<=>)
 		-> Returns 0 if first operand equals second                 5<=>5    return 0
