@@ -1,0 +1,91 @@
+------------------------------------------------------------INTRODUCTION-----------------------------------------------------------------
+
+ 1). Ruby is a scripting language designed by Yukihiro Matsumoto, also known as Matz.
+ 2). It runs on a variety of platforms, such as Windows, Mac OS, and the various versions of UNIX.
+ 3). Ruby is a pure object-oriented programming language.
+ 4). Ruby is a general-purpose, interpreted programming language.
+ 5). Ruby is a server-side scripting language similar to Python and PERL.
+ 6). Ruby can be used to write Common Gateway Interface (CGI) scripts.
+ CGI -> a simple protocol for passing an HTTP request from a web server to a standalone program, and returning the output to the web browser
+ 
+ 7). Ruby can be embedded into Hypertext Markup Language (HTML).
+
+------------------------------------------------------------Ruby Installation------------------------------------------------------------
+
+ 1). Update the system repositories with:
+	sudo apt update
+
+ 2). Use the following command to install Ruby:
+	sudo apt install ruby-full
+	
+ 3). Type 'y' in terminal to give permission to download and install ruby.
+ 
+ 
+ 4). install rvm in linux :-
+ 
+ 	a). install GPG keys used to verify installation package:
+
+key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+ 
+ 	b). Install RVM stable with ruby (development version):
+
+		-> \curl -sSL https://get.rvm.io | bash -s stable --ruby
+		
+ 5). install ruby using rvm:-
+ 	-> rvm install 3.2.1
+ 	
+ 6). RVM Configuration :-
+ 	-> Defaults = RVM has a set of defaults recorded in the file.
+ 	
+		$rvm_config_path/db
+ 	
+ 	-> Overriding Default Settings
+		RVM also has a directory for user overrides located in $rvm_path/user/. In order to override RVM's default settings, 			place the appropriate key=value into the db file of that folder
+
+		$rvm_path/user/db
+
+ 
+                                    ----------IF ALREADY PRESENT UPDATE THE VERSION OF RUBY----------
+                      
+                a). check version on rvm(ruby version manager) in terminal.
+                	rvm -v
+                	
+                b). list the version of ruby using rvm.
+                	rvm list known
+                	
+                c). Now install the latest version of ruby.
+                	rvm install 3.2.1(version number)
+                	
+                d). check for ruby version.
+                	ruby -v
+                	
+                e). check ruby version present on system.
+                	rvm list
+                	
+                f). switch between ruby versions.
+                	rvm use (version_number_present_on_system)
+                	
+                g). set default version of ruby.
+                	rvm 3.2.1 --default
+                	
+
+------------------------------------------------------------PLATFORMS TO RUN RUBY--------------------------------------------------------
+
+ 1). VIM (Vi IMproved) is a very simple text editor.
+ 
+ 2). Interactive Ruby (IRb) :- 
+ 	a). Interactive Ruby (IRb) provides a shell for experimentation. Within the IRb shell, you can immediately view expression results, line by line.
+ 	b). Just type irb at your command prompt and an Interactive Ruby Session will start.
+ 		
+ 		eg:- beryl@beryl-HP-Pavilion-Notebook:~$ irb
+			3.2.1 :001 > puts "sachin"
+			sachin
+			 => nil                                      
+			3.2.1 :003 >   out = "Hello"
+			3.2.1 :004 >   puts out
+			3.2.1 :005 > end
+			 => :hello 
+	
+	c). Exit the ruby terminal type "quit".
+	
+ 3). VScode :- install vscode , install extensions in vscode related to ruby.
