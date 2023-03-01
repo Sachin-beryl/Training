@@ -1,0 +1,110 @@
+-------------------------------------------------------------METHODS--------------------------------------------------------------------
+
+ -> Ruby methods are very similar to functions in any other programming language. 
+ -> Ruby methods are used to bundle one or more repeatable statements into a single unit.
+ -> Method names should begin with a lowercase letter. 
+ 
+ 	syntax :-
+	     1. def method_name 
+		   expr..
+		end
+
+	     2. def method_name (var1, var2)
+		   expr..
+		end
+
+	     3. def method_name (var1 = value1, var2 = value2)
+		   expr..
+		end
+
+ 1). return Statement :-
+ 
+ -> The return statement in ruby is used to return one or more values from a Ruby Method.
+ 	syntax :-
+		return [expr[`,' expr...]]
+
+	eg :- 
+		def return_method
+		    a = 10
+		    b = 15
+		    c = 20
+
+		    return a,b,c     #multiple return
+		end
+
+		ret = return_method  #saving method return into variable.
+		puts ret	      # print the return using variable.
+		
+ 2). Variable Number of Parameters :-
+ -> Suppose you declare a method that takes two parameters. 
+ -> whenever you call this method.
+ -> you need to pass two parameters along with it.
+ -> However, Ruby allows you to declare methods that work with a variable number of parameters.
+ -> This means that this parameter can take in any number of variables.
+
+	eg :-
+		def sample(*a)
+		    puts "The length of variable is #{a.length}"
+		    for i in 0...a.length
+			puts "The values are #{a[i]}"
+		    end
+		end
+
+		sample(1,2,3)
+		sample('ram','shiv')
+		
+	output :-
+		The length of variable is 3
+		The values are 1
+		The values are 2
+		The values are 3
+		The length of variable is 2
+		The values are ram
+		The values are shiv
+
+ 3). Class Methods :- 
+ -> When a method is defined outside of the class definition, the method is marked as private by default. 
+ -> On the other hand, the methods defined in the class definition are marked as public by default. 
+ -> The default visibility and the private mark of the methods can be changed by public or private of the Module.
+
+ NOTE --->>>>Ruby gives you a way to access a method without instantiating a class.
+
+	eg :- 
+		class Sample
+		    def test1
+			puts "normal method"
+		    end
+		    def Sample.test2
+			puts "class method"
+		    end
+		end
+
+		Sample.test2     #call the method without making object of class.
+		 	
+	output :-
+		class method
+		
+ 4). alias Statement :-
+ -> This gives alias to methods or global variables.       NOTE :- alias only for method and global variable.
+ -> Aliases cannot be defined within the method body. 
+ -> The alias of the method keeps the current definition of the method.
+ -> Making aliases for the numbered global variables ($1, $2,...) is prohibited. 
+ 
+	Syntax :-
+		alias method-name method-name
+		alias global-variable-name global-variable-name
+	Example :-
+		alias foo bar
+		alias $MATCH $&
+		Here we have defined foo alias for bar, and $MATCH is an alias for $&
+		
+ 5). undef Statement :-
+ -> This cancels the method definition. 
+ -> An undef cannot appear in the method body.
+
+	Syntax :-
+		undef method-name
+
+	eg :-
+		undef bar   #To undefine a method called bar.
+		
