@@ -1,0 +1,123 @@
+------------------------------------------------------------------------------------------------------------------------------------
+								MODULES
+								
+ -> Modules are a way of grouping together methods, classes, and constants. Modules give you two major benefits.
+	1). Modules provide a namespace and prevent name clashes.
+	2). Modules implement the mixin facility.
+	
+	Syntax :-
+		module Identifier
+		   statement1
+		   statement2
+		   ...........
+		end
+		
+	3). Module constants are named just like class constants, with an initial uppercase letter. 
+	4). The method definitions look similar, too: Module methods are defined just like class methods.
+	
+ -> require Statement :-
+	1). The require statement is similar to the include statement of C and C++ and the import statement of Java. 
+	2). If a third program wants to use any defined module, it can simply load the module files using the Ruby require statement −
+
+	Syntax :-  require filename
+	
+ -> include Statement :-
+	You can embed a module in a class. To embed a module in a class, you use the include statement in the class −
+
+	Syntax :- include modulename
+		
+	
+	eg :-
+	step 1 :- make module file and module in it (module file extension is also .rb)
+	
+		module Module_tool
+		    def hlo(name)
+			puts "hlo #{name}"
+		    end
+		    def bye(name)
+			puts "bye #{name}"
+		    end
+		end
+		
+	step 2 :- calling module feature in other file.
+	
+		require_relative "Module_tool.rb"   #relative is used to find module in same folder
+		include Module_tool
+
+		Module_tool.hlo('ram')	     #calling the module method .
+	
+
+	eg 2 :- for including module in class
+	
+	step 1 :- make module file support.rb
+		
+		module Week
+		   FIRST_DAY = "Sunday"
+		   def Week.weeks_in_month
+		      puts "You have four weeks in a month"
+		   end
+		   def Week.weeks_in_year
+		      puts "You have 52 weeks in a year"
+		   end
+		end
+		
+	step 2 :- calling module in class 
+	
+		$LOAD_PATH << '.'         #Ruby aware that included files must be searched in the current directory
+		require "support"
+
+		class Decade
+		include Week
+		   no_of_yrs = 10
+		   def no_of_months
+		      puts Week::FIRST_DAY
+		      number = 10*12
+		      puts number
+		   end
+		end
+		d1 = Decade.new
+		puts Week::FIRST_DAY
+		Week.weeks_in_month
+		Week.weeks_in_year
+		d1.no_of_months
+		
+ -> MIXINS :-
+ 	1). eliminate the need for multiple inheritance.
+ 	2). Mixins give you a wonderfully controlled way of adding functionality to classes.
+ 	
+ 	eg :- 
+ 		module A
+		  def a1
+		    puts "module A method a1"
+		  end
+		  
+		  def a2
+		    puts "module A method a2"
+		  end
+		end
+		
+		module B
+		  def b1
+		    puts "module B method b1"
+		  end
+		    
+		  def b2
+		    puts "module B method b2"
+		  end
+		end
+		 
+		 class Sample
+		 include A
+		 include B
+		    def s1
+			puts "class method call."
+		    end
+		 end
+		 
+		 samp = Sample.new
+		 samp.a1
+		 samp.a2
+		 samp.b1
+		 samp.b2
+		 samp.s1
+
