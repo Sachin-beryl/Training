@@ -24,9 +24,9 @@ NOTE :-
 	
 	Syntax :-
 		module Identifier
-		   statement1
-		   statement2
-		   ...........
+		  statement1
+		  statement2
+		  ...........
 		end
 		
 	3). Module constants are named just like class constants, with an initial uppercase letter. 
@@ -48,12 +48,13 @@ NOTE :-
 	step 1 :- make module file and module in it (module file extension is also .rb)
 	
 		module Module_tool
-		    def hlo(name)
-			puts "hlo #{name}"
-		    end
-		    def bye(name)
-			puts "bye #{name}"
-		    end
+	          def hlo(name)
+	            puts "hlo #{name}"
+	          end
+	    
+	          def bye(name)
+		    puts "bye #{name}"
+	          end
 		end
 		
 	step 2 :- calling module feature in other file.
@@ -69,13 +70,14 @@ NOTE :-
 	step 1 :- make module file support.rb
 		
 		module Week
-		   FIRST_DAY = "Sunday"
-		   def Week.weeks_in_month
-		      puts "You have four weeks in a month"
-		   end
-		   def Week.weeks_in_year
-		      puts "You have 52 weeks in a year"
-		   end
+		  FIRST_DAY = "Sunday"
+		  def Week.weeks_in_month
+		    puts "You have four weeks in a month"
+		  end
+		  
+		  def Week.weeks_in_year
+		    puts "You have 52 weeks in a year"
+		  end
 		end
 		
 	step 2 :- calling module in class 
@@ -85,13 +87,14 @@ NOTE :-
 
 		class Decade
 		include Week
-		   no_of_yrs = 10
-		   def no_of_months
-		      puts Week::FIRST_DAY
-		      number = 10*12
-		      puts number
-		   end
+		  no_of_yrs = 10
+		  def no_of_months
+		    puts Week::FIRST_DAY
+		    number = 10*12
+		    puts number
+		  end
 		end
+		
 		d1 = Decade.new
 		puts Week::FIRST_DAY
 		Week.weeks_in_month
@@ -123,18 +126,18 @@ NOTE :-
 		  end
 		end
 		 
-		 class Sample
-		 include A
-		 include B
-		    def s1
-			puts "class method call."
-		    end
-		 end
+		class Sample
+		include A
+		include B
+		  def s1
+		    puts "class method call."
+		  end
+		end
 		 
-		 samp = Sample.new
-		 samp.a1
-		 samp.a2
-		 samp.b1
-		 samp.b2
-		 samp.s1
+		samp = Sample.new
+		samp.a1
+		samp.a2
+		samp.b1
+		samp.b2
+		samp.s1
 
