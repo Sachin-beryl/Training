@@ -1,0 +1,645 @@
+---------------------------------------------------------Array irb---------------------------------------------------------------------
+
+	1). Convert into Array from other formats :-
+	
+		*). Enumerable#to_a: Converts an enumerable object (e.g. a range, a hash, or an enumerator) into an array. 
+		
+			eg :-   
+				h = { "a" => 1, "b" => 2, "c" => 3 }
+				p h.to_a # returns [["a", 1], ["b", 2], ["c", 3]]
+
+		*). Hash#to_a: Converts a hash into an array of key-value pairs. 
+
+			eg :- 
+				h = { "a" => 1, "b" => 2, "c" => 3 }
+				p h.to_a 
+				# returns [["a", 1], ["b", 2], ["c", 3]]
+
+		*). MatchData#to_a: Converts a MatchData object (which is returned by the String#match method) into an array containing the matched text and any capture groups.
+			eg :- 
+				s = "hello world"
+				m = /world/.match(s)
+				p m.to_a 
+				# returns ["world"]
+
+		*). NilClass#to_a: Returns an empty array. 
+		
+			eg :- 
+				nil.to_a 
+				# returns []
+				
+		*). Set#to_a : The Set#to_a method returns an array containing all elements in the set.
+		
+			eg :-
+				require 'set'
+				s = Set.new([1, 2, 3])
+				s.to_a  
+				# => [1, 2, 3]
+		
+		*). Struct#to_a : The Struct#to_a method returns an array containing the values of each member of the struct.
+			
+			eg :- 
+				Person = Struct.new(:name, :age)
+				p = Person.new("Alice", 30)
+				p.to_a  
+				# => ["Alice", 30]
+				
+	2). Accessing Elements :-
+	
+		eg :- 
+			arr = [1,2,3,4,5,6,7]
+			
+			a). 3.2.1 :127 > arr[1,4]     # element in the range
+			    => [2, 3, 4, 5] 
+			    
+			b). 3.2.1 :128 > arr[1..5]    # element in the range
+			    => [2, 3, 4, 5, 6] 
+			    
+			c). 3.2.1 :129 > arr[1..-4]    # element in the range
+			    => [2, 3, 4] 
+			    
+			d). 3.2.1 :132 > arr.at(4)   #element at specific position
+			    => 5 
+			 
+			e). 3.2.1 :133 > arr.fetch(4)  #element at specific position
+			    => 5 
+			 
+			f). 3.2.1 :134 > arr.first    #first element of array
+			    => 1 
+			 
+			g). 3.2.1 :135 > arr.last     #last element of array
+			    => 7 
+			 
+			h). 3.2.1 :136 > arr.take(3)   #first 3 element of array
+			    => [1, 2, 3] 
+			 
+			i). 3.2.1 :137 > arr.drop(3)   #drop first 3 element of array
+			    => [4, 5, 6, 7] 
+			    
+	3). Obtaining Information about an Array :-
+	
+		eg :-  
+			3.2.1 :139 > arr
+			 => [1, 2, 3, 4, 5, 6, 7] 
+			 
+			a). 3.2.1 :140 > arr.length
+			    => 7 
+			    
+			b). 3.2.1 :141 > arr.count
+			    => 7 
+			    
+			c). 3.2.1 :142 > arr.empty?
+			    => false 
+			 
+			d). 3.2.1 :143 > arr.include?(5)
+			    => true 
+
+	4). Adding Items to Arrays :-
+	
+		eg :-
+			a). 3.2.1 :145 > arr.push(8)
+			    => [1, 2, 3, 4, 5, 6, 7, 8] 
+			 
+			b). 3.2.1 :146 > arr << 9
+			    => [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+			 
+			c). 3.2.1 :147 > arr.unshift(0)              #insert at beginning
+			    => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] 
+			 
+			d). 3.2.1 :148 > arr.insert(3,'apple')       #insert at specific position
+			    => [0, 1, 2, "apple", 3, 4, 5, 6, 7, 8, 9] 
+			 
+			e). 3.2.1 :149 > arr.insert(3,'apple','orange','banana')   #insert multiple values at specific position
+			    => [0, 1, 2, "apple", "orange", "banana", "apple", 3, 4, 5, 6, 7, 8, 9] 
+
+	5). Removing Items from an Array :-
+	
+		eg :- 
+			a). 3.2.1 :151 > arr.pop        #remove from last
+			    => 9 
+			 
+			b). 3.2.1 :152 > arr.shift      #remove from starting
+			    => 0 
+			 
+			c). 3.2.1 :153 > arr.delete_at(3)    #delete at specific position
+			    => "orange" 
+			 
+			d). 3.2.1 :154 > arr.delete(5)   #delete every 5 from array
+			    => 5 
+			 
+			inputs :-	3.2.1 :156 > arr.insert(3,nil)
+					 => [1, 2, "apple", nil, "nil", "banana", "apple", 3, 4, 6, 7, 8] 
+					3.2.1 :157 > arr.insert(5,nil)
+					 => [1, 2, "apple", nil, "nil", nil, "banana", "apple", 3, 4, 6, 7, 8] 
+					3.2.1 :158 > arr.push(7)
+					 => [1, 2, "apple", nil, "nil", nil, "banana", "apple", 3, 4, 6, 7, 8, 7] 
+					3.2.1 :159 > arr.push(1)
+					 => [1, 2, "apple", nil, "nil", nil, "banana", "apple", 3, 4, 6, 7, 8, 7, 1] 
+					 
+			 
+			e). 3.2.1 :160 > arr.compact		#remove nil values
+			    => [1, 2, "apple", "nil", "banana", "apple", 3, 4, 6, 7, 8, 7, 1] 
+			 
+			f). 3.2.1 :161 > arr.uniq 		#remove duplicate values
+			    => [1, 2, "apple", nil, "nil", "banana", 3, 4, 6, 7, 8] 
+
+	6). Iterating over Arrays :-
+	
+		eg :- 
+		
+			a). 3.2.1 :168 > arr = [1, 2, 3, 4, 5]
+			    3.2.1 :169 > arr.each {|a| print a -= 10, " "}
+			    -9 -8 -7 -6 -5  => [1, 2, 3, 4, 5] 
+			    
+			b). 3.2.1 :170 > words = %w[first second third fourth fifth sixth]    #%w is used to create array of string seperated by whitespace.
+			
+			    => ["first", "second", "third", "fourth", "fifth", "sixth"] 
+			    3.2.1 :171 > str = ""
+			    3.2.1 :172 > words.reverse_each {|word| str += "#{word} "}
+			    => ["first", "second", "third", "fourth", "fifth", "sixth"] 
+			    3.2.1 :174 > print str
+			    sixth fifth fourth third second first  => nil 
+			
+			c). 3.2.1 :175 > arr = [1,2,3,4,5]
+			    => [1, 2, 3, 4, 5] 
+			 
+			d). 3.2.1 :179 > arr.map{ |a| a*2}   #multiply each element by 2
+			    => [2, 4, 6, 8, 10] 
+			    
+			e). 3.2.1 :180 > arr.map{|a| 2**a}   
+			    => [2, 4, 8, 16, 32] 
+			    
+			f). 3.2.1 :181 > arr.map{ |a| a**2}  #apply power 
+			    => [1, 4, 9, 16, 25] 
+
+	7). Selecting Items from an Array :-
+	
+		a). Non-destructive Selection
+			eg :-
+				3.2.1 :005 > arr.drop_while {|a| a<4}
+				 => [4, 5] 
+				 
+				3.2.1 :006 > arr.select{|a| a>3}
+				 => [4, 5] 
+				 
+				3.2.1 :007 > arr.reject{|a| a<3}
+				 => [3, 4, 5] 
+				
+		b). Destructive selection
+		-> Similar to select vs. reject, delete_if and keep_if have the exact opposite result when supplied with the same block:
+
+			eg :-
+				3.2.1 :008 > arr          #delete if
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :009 > arr.delete_if{|a| a>3}
+				 => [1, 2, 3] 
+				 
+				 
+				3.2.1 :010 > arr.keep_if{|a| a<3}     #keep if
+				 => [1, 2] 
+				3.2.1 :011 > arr
+				 => [1, 2] 
+
+	8). Methods for Querying :-
+	
+		a). all?: Returns whether all elements meet a given criterion.
+		
+			eg :-   3.2.1 :017 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :018 > arr.all?{|a| a<6}
+				 => true 
+
+		b). any?: Returns whether any element meets a given criterion.
+		
+			eg :-   3.2.1 :019 > arr.any?{|a| a>3}
+				 => true 
+				
+		c). none?: Returns whether no element == a given object.
+		
+			eg :-   3.2.1 :020 > arr.none?{|a| a>7}
+				 => true 
+				
+		d). one?: Returns whether exactly one element == a given object.
+		
+			eg :-   3.2.1 :021 > arr.one?{|a| a>7}
+				 => false 
+			
+		e). find_index, index: Returns the index of the first element that meets a given criterion.
+		
+			eg :-   3.2.1 :022 > arr.index{|a| a == 3}
+				 => 2 
+				
+		f). rindex: Returns the index of the last element that meets a given criterion.
+		
+			eg :-   3.2.1 :023 > arr.rindex{|a| a == 3}
+				 => 2 
+				
+		g). hash: Returns the integer hash code.
+		
+			eg :-   3.2.1 :024 > arr.hash{|a| a == 3}
+				 => 2802280231947848363 
+
+	9). Methods for Fetching :-
+	
+		a). max: Returns one or more maximum-valued elements, as determined by <=> or a given block.
+		
+			eg :-
+				3.2.1 :025 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :026 > arr.max
+				 => 5 
+				
+		b). min: Returns one or more minimum-valued elements, as determined by <=> or a given block.
+		
+			eg :-
+				3.2.1 :027 > arr.min
+				 => 1 
+				
+		c). minmax: Returns the minimum-valued and maximum-valued elements, as determined by <=> or a given block.
+		
+			eg :-
+				3.2.1 :028 > arr.minmax
+				 => [1, 5] 
+
+		d). assoc: Returns the first element that is an array whose first element == a given object.
+			
+			eg :-
+				 3.2.1 :032 > arr1 = [[1,"ram"],[2,"ravi"],[3,"dev"]]
+				 => [[1, "ram"], [2, "ravi"], [3, "dev"]] 
+				 
+				 3.2.1 :034 > arr1.assoc(2)
+				 => [2, "ravi"] 
+
+		e). rassoc: Returns the first element that is an array whose second element == a given object.
+		
+			eg :-
+				 3.2.1 :038 > arr1.rassoc('dev')
+				 => [3, "dev"] 
+
+		f). at: Returns the element at a given offset.
+		
+			eg :-
+				3.2.1 :039 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :040 > arr.at(4)
+				 => 5 
+
+		g). values_at: Returns the elements at given offsets.
+		
+			eg :-  
+				3.2.1 :041 > arr.values_at(2,4)
+				=> [3, 5] 		
+	
+		h). dig: Returns the object in nested objects that is specified by a given index and additional arguments.
+		
+			eg :-
+				3.2.1 :043 > earth = {a: {b: {c:54}}}
+				=> {:a=>{:b=>{:c=>54}}} 
+				
+				3.2.1 :047 > earth.dig(:a, :b, :c)
+				=> 54 
+				3.2.1 :048 > earth.dig(:a, :b, :d)
+				=> nil 
+
+		i). drop: Returns trailing elements as determined by a given index.
+		
+			eg :- 
+				3.2.1 :049 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :050 > arr.drop(2)
+				 => [3, 4, 5] 
+
+		j). take: Returns leading elements as determined by a given index.
+		
+			eg :-
+				3.2.1 :051 > arr.take(2)
+				 => [1, 2] 
+
+		k). drop_while: Returns trailing elements as determined by a given block.
+		
+			eg :-
+				 3.2.1 :052 > arr.drop_while{|a| a<4}
+				 => [4, 5] 
+
+		l). take_while: Returns leading elements as determined by a given block.
+		
+			eg :-
+				3.2.1 :054 > arr.take_while{|a| a<4}
+				=> [1, 2, 3] 
+
+		m). slice: Returns consecutive elements as determined by a given argument.
+		
+			eg :-
+				3.2.1 :056 > arr.slice(1,3)
+				 => [2, 3, 4] 
+				3.2.1 :057 > arr.slice(1..3)
+				 => [2, 3, 4] 
+				3.2.1 :058 > arr.slice(1...3)
+				 => [2, 3] 
+
+		n). select, filter: Returns an array containing elements selected by a given block.
+		
+			eg :- 
+				3.2.1 :059 > arr.select{|a| a%2 == 0}
+				 => [2, 4] 
+				
+		o). rotate: Returns all elements with some rotated from one end to the other.
+		
+			eg :-
+				3.2.1 :060 > arr.rotate(3)
+				 => [4, 5, 1, 2, 3] 
+
+		p). bsearch: Returns an element selected via a binary search as determined by a given block.
+		
+			eg :-
+				3.2.1 :065 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :066 > arr.bsearch{|x| x>=3}
+				 => 3 
+				
+		q). bsearch_index: Returns the index of an element selected via a binary search as determined by a given block.
+		
+			eg :-
+				3.2.1 :067 > arr.bsearch_index{|x| x>=3}
+				 => 2 
+
+		r). sample: Returns one or more random elements.
+		
+			eg :-
+				3.2.1 :069 > arr.sample(2)
+				 => [1, 5] 
+				
+		s). shuffle: Returns elements in a random order.
+		
+			eg :-
+				3.2.1 :070 > arr.shuffle
+				 => [2, 5, 1, 3, 4] 
+				3.2.1 :071 > arr.shuffle
+				 => [3, 5, 2, 1, 4] 
+
+	10). Methods for Assigning:-
+		
+		a). concat: Appends all elements from given arrays.
+		
+			eg :- 
+				3.2.1 :072 > arr
+				 => [1, 2, 3, 4, 5] 
+				3.2.1 :073 > arr1 = [6,7,8,9]
+				 => [6, 7, 8, 9] 
+				3.2.1 :074 > arr.concat(arr1)
+				 => [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+				3.2.1 :075 > arr
+				 => [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+				
+		b). fill: Replaces specified elements with specified objects.  #file a value between some range
+		
+			eg :- 
+				3.2.1 :076 > arr.fill(1,4,8)
+				 => [1, 2, 3, 4, 1, 1, 1, 1, 1, 1, 1, 1] 
+
+		c). replace: Replaces the content of self with the content of a given array.
+		
+			eg :-
+				3.2.1 :077 > arr2 = [10,11,12,13,14]
+				 => [10, 11, 12, 13, 14] 
+				3.2.1 :078 > arr.replace(arr2)
+				 => [10, 11, 12, 13, 14] 
+
+		d). sort_by!: Replaces self with its elements sorted, as determined by a given block.
+		
+			eg :-
+				3.2.1 :083 > arr = ["apple", "banana", "cherry"]
+				 => ["apple", "banana", "cherry"] 
+				3.2.1 :084 > arr.sort_by! {|fruit| fruit.length }
+				 => ["apple", "banana", "cherry"] 
+
+ NOTE :- reverse!,rotate!,shuffle! similar to reverse,rotate and shuffle respectfully but with permanent change. 
+ 
+ 	11). Methods for Combining :-
+		 	
+		a). &: Returns an array containing elements found both in self and a given array.
+		
+			eg :- 
+				3.2.1 :086 > a
+				=> [1, 2, 3, 4]
+				3.2.1 :087 > b = [2,3,4,5,6]
+				 => [2, 3, 4, 5, 6] 
+				3.2.1 :088 > a & b
+				 => [2, 3, 4] 
+				
+		b). intersection: Returns an array containing elements found both in self and in each given array.
+		
+			eg :- 
+				3.2.1 :089 > c = [3,4,5,6,7,8,9]
+				 => [3, 4, 5, 6, 7, 8, 9] 
+				3.2.1 :090 > a.intersection(b,c)
+				 => [3, 4] 
+
+		c). +: Returns an array containing all elements of self followed by all elements of a given array.
+		
+			eg :-
+				3.2.1 :091 > a+b
+				 => [1, 2, 3, 4, 2, 3, 4, 5, 6] 
+
+		d). -: Returns an array containing all elements of self that are not found in a given array.
+		
+			eg :-
+				3.2.1 :092 > a-b
+				 => [1] 
+
+		e). |: Returns an array containing all elements of self and all elements of a given array, duplicates removed.
+		
+			eg :-
+				3.2.1 :093 > a | b
+				 => [1, 2, 3, 4, 5, 6] 
+				
+		f). union: Returns an array containing all elements of self and all elements of given arrays, duplicates removed.
+		
+			eg :-
+				3.2.1 :094 > a.union(b,c)
+				 => [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+
+		g). difference: Returns an array containing all elements of self that are not found in any of the given arrays..
+		
+			eg :-
+				3.2.1 :095 > a.difference(b,c)
+				 => [1] 
+
+		h). product: Returns or yields all combinations of elements from self and given arrays.
+		
+			eg :-
+				3.2.1 :109 > a.product(b,c)
+				 => 
+				[[1, 2, 3],                                    
+				 [1, 2, 4],                                    
+				 [1, 3, 3],                                    
+				 [1, 3, 4],                                    
+				 [2, 2, 3],                                    
+				 [2, 2, 4],                                    
+				 [2, 3, 3],                                    
+				 [2, 3, 4],                                    
+				 [3, 2, 3],                                    
+				 [3, 2, 4],                                    
+				 [3, 3, 3],                                    
+				 [3, 3, 4],                                    
+				 [4, 2, 3],                                    
+				 [4, 2, 4],                                    
+				 [4, 3, 3],
+				 [4, 3, 4]] 
+
+	12). Methods for Iterating :-
+	
+		a). each: Passes each element to a given block.
+		
+			eg :-
+				3.2.1 :113 > a
+				 => [1, 2, 3, 4] 
+				3.2.1 :114 > a.each{|i| print i ," "}
+				
+			 	output:- 1 2 3 4 
+				
+		b). reverse_each: Passes each element, in reverse order, to a given block.
+		
+			eg :-
+				3.2.1 :115 > a.reverse_each{|i| print i ," "}
+				
+				output:- 4 3 2 1  
+
+		c). each_index: Passes each element index to a given block.
+		
+			eg :-
+				3.2.1 :116 > a.each_index{|i| print i ," "}
+				
+				output:- 0 1 2 3  
+
+		d). cycle: Calls a given block with each element, then does so again, for a specified number of times, or forever.
+		
+			eg :-
+				3.2.1 :117 > a.cycle(2){|i| print i ," "}
+				
+				output:-  1 2 3 4 1 2 3 4 
+
+		e). combination: Calls a given block with combinations of elements of self.
+		    -> a combination does not use the same element more than once.
+		    
+		    	eg :- 
+		    		3.2.1 :120 > a.combination(2){|i| print i," " }
+		    		
+				output:- [1, 2] [1, 3] [1, 4] [2, 3] [2, 4] [3, 4] 
+		    		
+		f). permutation: Calls a given block with permutations of elements of self,
+		    -> a permutation does not use the same element more than once.
+		    
+		    	eg :-
+				3.2.1 :121 > a.permutation(2){|i| print i," " }
+				
+				output:- [1, 2] [1, 3] [1, 4] [2, 1] [2, 3] [2, 4] [3, 1] [3, 2] [3, 4] [4, 1] [4, 2] [4, 3]  
+
+		g). repeated_combination: Calls a given block with combinations of elements of self.
+		    -> a combination may use the same element more than once.
+		    
+		    	eg :-
+		    		3.2.1 :123 > a.repeated_combination(2){|i| print i," " }
+		    		
+				output:- [1, 1] [1, 2] [1, 3] [1, 4] [2, 2] [2, 3] [2, 4] [3, 3] [3, 4] [4, 4] 
+				
+		h). repeated_permutation: Calls a given block with permutations of elements of self.
+		    -> a permutation may use the same element more than once.
+		    
+		    	eg :-
+		    		3.2.1 :122 > a.repeated_permutation(2){|i| print i," " }
+		    		
+				output:- [1, 1] [1, 2] [1, 3] [1, 4] [2, 1] [2, 2] [2, 3] [2, 4] [3, 1] [3, 2] [3, 3] [3, 4] [4, 1] [4, 2] [4, 3] [4, 4]             
+				
+				
+	13). Methods for Converting :-
+
+		a). inspect, to_s: Returns a new String containing the elements.
+		
+			eg :-
+				3.2.1 :124 > a
+				 => [1, 2, 3, 4] 
+				3.2.1 :125 > a.inspect
+				 => "[1, 2, 3, 4]" 
+				
+		b). join: Returns a newsString containing the elements joined by the field separator.
+		
+			eg :-
+				3.2.1 :126 > a.join(',')
+				=> "1,2,3,4" 
+
+		c). to_a: Returns self or a new array containing all elements.
+		
+			eg :-
+				3.2.1 :128 > a1 = a.to_a
+				=> [1, 2, 3, 4] 
+
+		d). to_ary: Returns self.
+		
+			eg :-
+				3.2.1 :130 > arr3 = a.to_ary
+				 => [1, 2, 3, 4] 
+				3.2.1 :131 > puts arr3 == a
+				true
+
+		e). to_h: Returns a new hash formed from the elements.
+		
+			eg :-
+				3.2.1 :134 > arr = [[:name, "John"], [:age, 30], [:gender, "Male"]]
+				 => [[:name, "John"], [:age, 30], [:gender, "Male"]] 
+				3.2.1 :135 > hash = arr.to_h
+				 => {:name=>"John", :age=>30, :gender=>"Male"} 
+				3.2.1 :136 > puts hash
+				{:name=>"John", :age=>30, :gender=>"Male"}
+
+		f). transpose: Transposes self, which must be an array of arrays.
+		
+			eg :-
+				3.2.1 :137 > arr = [[1,2],[3,4],[5,6]]
+				 => [[1, 2], [3, 4], [5, 6]]                                                
+				3.2.1 :139 > print arr.transpose
+				[[1, 3, 5], [2, 4, 6]] => nil 
+
+		g). zip: Returns a new array of arrays containing self and given arrays; follow the link for details.
+		
+			eg :-
+				3.2.1 :140 > arr1 = [1,2,3]
+				 => [1, 2, 3] 
+				3.2.1 :141 > arr2 = ['a','b','c']
+				 => ["a", "b", "c"] 
+				3.2.1 :142 > print arr1.zip(arr2)
+				[[1, "a"], [2, "b"], [3, "c"]] => nil 
+				
+	14). Other Methods :-
+	
+		a). abbrev: Returns a hash of unambiguous abbreviations for elements.
+			
+			eg :-
+				3.2.1 :163 > require 'abbrev'
+				 => true 
+				3.2.1 :164 > 
+				3.2.1 :165 > words = ["car", "cone", "cart", "cape"]
+				 => ["car", "cone", "cart", "cape"] 
+				3.2.1 :166 > abbreviations = words.abbrev
+				 => {"cone"=>"cone", "con"=>"cone", "co"=>"cone", "cart"=>"cart", "cape"=>"cape", "cap"=>"cape", "car"=>"car"} 
+				3.2.1 :167 > 
+				3.2.1 :168 > puts abbreviations.inspect
+				{"cone"=>"cone", "con"=>"cone", "co"=>"cone", "cart"=>"cart", "cape"=>"cape", "cap"=>"cape", "car"=>"car"}
+				 => nil 
+
+
+		b). pack: Packs the elements into a binary sequence.
+			
+			eg :-
+				3.2.1 :155 > arr1
+				 => [1, 2, 3] 
+				3.2.1 :156 > arr1.pack('sss')
+				 => "\x01\x00\x02\x00\x03\x00" 
+
+		c). sum: Returns a sum of elements according to either + or a given block.
+		
+			eg :-
+				3.2.1 :159 > arr1.sum
+				=> 6 
+
+

@@ -1,0 +1,65 @@
+------------------------------------------------------------------------------------------------------------------------------------
+								ARRAYS
+								
+ -> Ruby arrays are ordered, integer-indexed collections of any object. 
+ -> Each element in an array is associated with and referred to by an index.
+ -> Array indexing starts at 0.
+ -> an index of -1 indicates the last element of the array and so on.
+ -> Ruby arrays can hold objects such as String, Integer, Fixnum, Hash, Symbol, even other Array objects. 
+ -> Ruby arrays grow automatically while adding elements to them.
+
+	1). Creating Arrays using new keyword:-
+		syntax :- names = Array.new
+
+	2). Setting size of array :-
+		syntax :- names = Array.new(20)
+
+	3). assign a value to the array as follows :-
+
+		eg :- names = Array.new(4, "mac")
+		      puts "#{names}"
+
+		output :- ["mac", "mac", "mac", "mac"]	
+		
+	4). use a block with new, populating each element with what the block evaluates to :-
+
+		eg :- nums = Array.new(10) { |e| e = e * 2 }
+		      puts "#{nums}"
+
+		output :- [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]	
+
+	5). Other ways of array creation :-
+	
+		eg :- nums = Array.[](1, 2, 3, 4,5)
+		      nums = Array[1, 2, 3, 4,5]
+		      
+		      -> try_convert: Returns a new array created from a given object.
+		      
+		      		eg :-
+		      			3.2.1 :012 > arr = [1, 2, 3]
+					3.2.1 :013 > p Array.try_convert(arr)
+					[1, 2, 3]
+					 => [1, 2, 3]                                    
+	      
+	6). Using range :-
+		
+		eg :- digits = Array(0..9)
+			puts "#{digits}"
+
+		output :- [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+	7). Built-in Methods :-
+	
+		a). digit.at(6)    #show digit at 6th index.
+		b). arr.size       #provide size of array (count,length are similar to size)
+		c). arr.pop        #remove last element from array
+		d). arr.push       #add last element in array
+		e). arr.shift      #add at begining
+		f). arr.unshift    #remove at begining
+		g). arr.sort       #sort in ascending order
+		h). arr.reverse
+		i). arr.include ? parameter  
+		j). arr.flatten    #convert inner array into elements
+		k). arr.compact    #remove null or nil values.
+		l). arr.product    #convert each element in array.
+		
