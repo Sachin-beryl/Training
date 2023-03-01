@@ -1,6 +1,23 @@
 ------------------------------------------------------------------------------------------------------------------------------------
 								MODULES
-								
+
+NOTE :- 
+	-> include :- it is used to insert all the methods from module in the current class.
+	
+	-> require :- it is used to include modules from another file to present file.
+		      loaded one time (if loaded again show error)
+		      
+	-> load    :- load calls module again and again .(similar to require)
+		      does'nt keep track of library loaded.
+		      use when module changes frequently.
+		      
+	-> Extend  :- (similar to include)
+		      - we are adding the modules methods as class method instead of as instance method.
+		      
+		      instance method :- require an object of its class to be created before it can be called. 
+	
+
+
  -> Modules are a way of grouping together methods, classes, and constants. Modules give you two major benefits.
 	1). Modules provide a namespace and prevent name clashes.
 	2). Modules implement the mixin facility.
