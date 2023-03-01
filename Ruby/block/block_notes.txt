@@ -1,0 +1,61 @@
+------------------------------------------------------------------------------------------------------------------------------------
+								BLOCKS
+								
+ -> A block consists of chunks of code.
+ -> You assign a name to a block.
+ -> The code in the block is always enclosed within braces ({}).
+ -> A block is always invoked from a function with the same name as that of the block. This means that if you have a block with the name test, then you use the function test to invoke this block.
+
+ -> You invoke a block by using the yield statement.
+ 
+ 	example :- def yield_check
+		    puts "outside block 1"
+		    yield
+		    puts "outside block 2"
+		    yield							      # calling block using yield keyword
+		   end
+
+		   yield_check {puts "block code check using yield statement"}     #block
+
+
+	output :-  outside block 1
+		   block code check using yield statement
+		   outside block 2
+		   block code check using yield statement
+		   
+		   
+ 	a). pass parameters with the yield statement.
+ 		
+ 		def yield_check
+		    puts "outside block 1"
+		    yield 10,9                                                  # calling block using yield keyword with parameter
+		    puts "outside block 2"
+		    yield 3,8                                               # calling block using yield keyword with parameter
+		end
+
+		yield_check {|a,b| puts "block code check using yield statement #{a} #{b}"} #block
+
+	output :- 
+		outside block 1
+		block code check using yield statement 10 9
+		outside block 2
+		block code check using yield statement 3 8
+
+	b). block as parameter using '&block'.
+	
+		def test(&block)
+		   block.call         #calling block 
+		end
+		test { puts "Hello World!"}   #block
+		
+	c). begin and end block.
+		
+		BEGIN { 			# BEGIN block code 
+		  puts "BEGIN code block"
+		} 
+
+		END { 				 # END block code 
+		  puts "END code block"
+		}
+		   
+		puts "MAIN code block"	         # MAIN block code 
