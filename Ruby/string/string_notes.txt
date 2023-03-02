@@ -1,0 +1,39 @@
+--------------------------------------------------------------------------------------------------------------------------------------
+							         STRINGS
+
+ -> A String object in Ruby holds and manipulates an arbitrary sequence of one or more bytes.
+ -> typically representing characters that represent human language.
+ 
+ 	eg :- 'This is a simple Ruby string literal'
+ 	
+ -> If you need to place an apostrophe within a single-quoted string literal, precede it with a backslash.
+ 
+        eg :- 'Won\'t you read O\'Reilly\'s book?'
+
+	1). Expression Substitution
+		-> it is a means of embedding the value of any Ruby expression into a string using #{ and } −
+		
+		eg:-
+			x, y, z = 12, 36, 72
+			puts "The value of x is #{ x }."
+			puts "The sum of x and y is #{ x + y }."
+			puts "The average was #{ (x + y + z)/3 }."
+			
+		output :- The value of x is 12.
+			  The sum of x and y is 48.
+			  The average was 40.
+			  
+	2). General Delimited Strings
+		-> you can create strings inside a pair of matching though arbitrary delimiter characters, e.g., !, (, {, <, etc., preceded by a percent character (%). 
+		-> Q, q, and x have special meanings. 
+		-> General delimited strings can be :-
+
+			%{Ruby is fun.}  equivalent to "Ruby is fun."
+			%Q{ Ruby is fun. } equivalent to " Ruby is fun. "
+			%q[Ruby is fun.]  equivalent to a single-quoted string
+			%x!ls! equivalent to back tick command output `ls`
+			
+	3). substitute(sub) and global substitute(gsub).
+	
+		-> s.sub(/[aeiou]/, '*')# => "h*llo"
+		-> s.gsub(/[aeiou]/, '*') # => "h*ll*"
