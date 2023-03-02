@@ -1,0 +1,851 @@
+------------------------------------------------------------String irb----------------------------------------------------------------
+
+	1). Hash replacement :- 
+	-> If argument replacement is a hash, and pattern matches one of its keys, the replacing string is the value for that key
+	
+		eg :-  3.2.1 :148 > h = {'app'=>'purp' , 'le' => 'ly'}
+			 => {"app"=>"purp", "le"=>"ly"} 
+			3.2.1 :149 > apple.sub('app',h)
+			
+		output :-
+			3.2.1 :150 > 'apple'.sub('app',h)
+			 => "purple" 
+			3.2.1 :151 > 'apple'.sub('le',h)
+			 => "apply" 
+			 
+	2). String Slices :-
+
+	-> A slice of a string is a substring that is selected by certain criteria.
+	-> Types of slicing
+		a). string[index].
+		
+			eg :-  3.2.1 :166 > str
+				 => "sachin" 
+				3.2.1 :167 > str[0]
+				 => "s" 
+				3.2.1 :168 > str[3]
+				 => "h" 
+				3.2.1 :169 > str[-2]
+ 				=> "i" 
+
+
+		b). string[start, length].    #between some range
+		
+			eg :- 	3.2.1 :170 > str[0,4]
+				 => "sach" 
+				3.2.1 :173 > str[2,5]
+				 => "chin" 
+
+		c). string[range].
+		
+			eg :-   3.2.1 :174 > str[1..4]
+				 => "achi" 
+				3.2.1 :175 > str[1...4]
+				 => "ach" 
+				3.2.1 :176 > str[2..200]
+				 => "chin" 
+
+		d). string[regexp, capture = 0].
+		
+		eg :-   s = 'saaaccchinn' 
+			3.2.1 :195 > s[/[aeiou]/]   # find first vowel letter
+			 => "a" 
+			3.2.1 :196 > s[/[aeiou](.)/]   # "." for add next element after first vowel
+			 => "aa" 
+			3.2.1 :197 > s[/[aeiou](.)\1/]  # "\1" for add all similer letter after the first vowel but must be consecutive
+			 => "aaa" 
+			3.2.1 :198 > s[/[aeiou](.)\1/,0]
+			 => "aaa" 
+			3.2.1 :199 > s[/[aeiou](.)\1/,1] # "1" consecutive similer letter limit to 1.
+			 => "a" 
+
+		e). string[substring].   #search for substring in the string.
+		
+			eg :-   3.2.1 :201 > s['aa']
+				 => "aa" 
+				3.2.1 :202 > s['zzz']
+				 => nil 
+				 
+	3). Methods for Creating a String :-
+	
+		a). ::new: Returns a new string.
+		
+			eg :- str = String.new("hello")
+
+		b). ::try_convert: Returns a new string created from a given object.
+			-> try to convert into string.
+
+		 	eg :-   arr = ["h", "e", "l", "l", "o"]
+				str = String.try_convert(arr)          #try to convert the array into the string and store into str.
+		
+	4). Methods for a Frozen/Unfrozen String :-
+	
+		a). Frozen -> A frozen string cannot be modified.
+			    -> Any attempt to modify a frozen string will result in a RuntimeError. 
+			    
+			   -> To make string freeze.
+			      syntax :- str = "something".frozen
+			    	
+			   -> To check frozen or not.
+			      syntax :- str.frozen?       #provide true or false value as output.
+			
+			eg :-   
+				3.2.1 :212 > str1 = 'something'.freeze    
+				 => "something" 				#frozen string
+				3.2.1 :213 > str2 = 'not_something'
+				 => "not_something" 				#unfrozen string
+				3.2.1 :214 > str1.frozen?
+				 => true 
+				3.2.1 :215 > str2.frozen?
+				 => false 
+		b). #dup  -> This method creates a copy of the string that is not frozen. 
+			   -> allowing it to be modified.
+			   -> dup make duplicate which is a shallow copy.
+
+			eg :-
+				str1 = "hello".freeze
+				str2 = str1.dup                     #replace of dup is clone which is a deep copy method of string.
+
+				begin
+				  str2[0] = "H"
+				rescue RuntimeError => e
+				  puts e.message #=> can't modify frozen String
+				end
+			
+			output :- through error because of shallow copy.
+			
+		c). #concat  -> This method appends a string to the end of the current string.
+			     -> returning a new string that is not frozen.
+
+			eg :-
+				str1 = "hello".freeze
+				str2 = "world"
+
+				str3 = str1.concat(str2)
+
+				puts str3 #=> "helloworld"
+				puts str3.frozen? #=> false	
+				
+			output :- concat string is not frozen .
+			
+	5). Methods for Querying
+	
+	  a) count :-
+		length, size: Returns the count of characters (not bytes).
+		
+			eg :-
+				3.2.1 :216 > str1.length
+				 => 9 
+				3.2.1 :217 > str1.size
+				 => 9 
+		
+		empty? : Returns true if self.length is zero; false otherwise.
+			
+			eg :- 
+				3.2.1 :218 > str1.empty?
+ 				=> false 
+
+		bytesize : Returns the count of bytes.
+		
+			eg :- 
+				3.2.1 :219 > str1.bytesize
+ 				=> 9 
+
+		count : Returns the count of substrings matching given strings.
+		
+			eg :- 
+				3.2.1 :225 > str1.count('e')
+ 				=> 1 
+			
+	  b) Substrings :-
+
+		=~ : Returns index of the first substring that matches a given object, nil if no match is found.
+		
+			eg :- 
+				3.2.1 :237 > string
+ 				=> "The quick brown fox jumps over the lazy dog" 
+ 				
+ 				3.2.1 :227 > if string =~ /brown/
+				3.2.1 :228 >   puts "Match found at index #{$~.begin(0)}"
+				3.2.1 :229 > else
+				3.2.1 :230 >   puts "No match found"
+				3.2.1 :231 > end
+				Match found at index 10
+
+
+		index : Returns the index of the first occurrence of a given substring; returns nil if none found.
+		
+			eg :- 
+				3.2.1 :238 > string.index('he')
+				 => 1 
+
+		rindex : Returns the index of the last occurrence of a given substring; returns nil if none found.
+		
+			eg :-
+				3.2.1 :239 > string.rindex('he')
+				 => 32 
+
+		include? : Returns true if the string contains a given substring; false otherwise.
+		
+			eg :-
+				3.2.1 :241 > string.include?('brown')
+				 => true 
+
+		match : Returns a MatchData object if the string matches a given Regexp; nil otherwise.
+		
+			eg :-
+				3.2.1 :243 > match_str = string.match(/fox/)
+				=> #<MatchData "fox"> 
+				
+				3.2.1 :249 > if match_str
+				3.2.1 :250 >   print "match found for the string"
+				3.2.1 :251 > else
+				3.2.1 :252 >   print "match not found"
+				3.2.1 :253 > end
+				match found for the string => nil 
+
+		match? : Returns true if the string matches a given Regexp; false otherwise.
+		
+			eg :- 
+				3.2.1 :255 > string.match?('fox')
+				=> true 
+
+		start_with?: Returns true if the string begins with any of the given substrings.
+		
+			eg :- 
+				3.2.1 :263 > string.start_with?('The')
+				 => true 
+				3.2.1 :264 > string.start_with?('he')
+				 => false 
+
+		end_with? : Returns true if the string ends with any of the given substrings.
+		
+			eg :- 
+				3.2.1 :259 > string.end_with?('dog')
+				 => true 
+				3.2.1 :260 > string.end_with?('do')
+				 => false 
+				 
+	  c). Encodings
+	  
+	        Retrieving the encoding of a string: You can use the encoding method to retrieve the encoding of a string.
+
+				eg :-
+				string = "hello"
+				puts string.encoding # prints "UTF-8"
+
+		Converting a string to a different encoding: You can use the encode method to convert a string to a different encoding.
+
+				eg :-
+				string = "héllo"
+				utf8_string = string.encode("UTF-8")
+				puts utf8_string # prints "héllo" (encoded in UTF-8)
+				
+		Checking if a string is valid in a specific encoding: You can use the valid_encoding?
+									method to check if a string is valid in a specific encoding.
+				eg :-
+				string = "héllo"
+				puts string.valid_encoding? # prints true
+				ascii_string = string.encode("ASCII")
+				puts ascii_string.valid_encoding? # prints false
+
+		Forcing a string to a specific encoding: You can use the force_encoding method to force a string to a specific encoding.
+
+				eg :-
+				string = "héllo".force_encoding("ASCII")
+				puts string.valid_encoding? # prints false
+				
+		unicode_normalized?: Returns true if the string is in Unicode normalized form; false otherwise.
+		
+				eg :-
+				3.2.1 :275 > string.unicode_normalized?
+ 				=> true 
+		
+		ascii_only?: Returns true if the string has only ASCII characters; false otherwise.
+				
+				eg :-
+				3.2.1 :274 > string.ascii_only?
+ 				=> true 
+
+	  d). checksum or hash code :-
+	  
+	  	sum: This method returns a basic checksum for the string by computing the sum of the ASCII or binary values of each byte in the string. 
+
+				eg :-
+				string = "hello"
+				checksum = string.sum
+				
+				puts checksum # prints 532
+
+	NOTE :-sum method computes the sum of the ASCII values of each byte in the string ("h" is 104, "e" is 101, etc.) and returns the integer result.
+
+		hash: This method returns an integer hash code for the string.
+		      which is a value that can be used to quickly identify the string and compare it with other strings. 
+		      The hash code is computed using a hash function that takes into account the values of each byte in the string.
+
+				eg :- 
+				string = "hello"
+				hash_code = string.hash
+				
+				puts hash_code # prints 8664480119899782111
+
+	6). Methods for Comparing :-
+	
+		a). ==, === : Returns true if a given other string has the same content as self.
+		b). eql?    : Returns true if the content is the same as the given other string. 
+		c). #<=>    : Returns -1, 0, or 1 as a given other string is smaller than, equal to, or larger than self.
+
+		d). casecmp : Ignoring case, returns -1, 0, or 1 as a given other string is smaller than, equal to, or larger than self.
+		
+			 0: The two strings are equal in a case-insensitive comparison.
+			-1: The first string is less than the second string in a case-insensitive comparison.
+			 1: The first string is greater than the second string in a case-insensitive comparison.
+
+			eg :-  
+				3.2.1 :276 > st1 = 'HELLO'
+				 => "HELLO" 
+				3.2.1 :277 > st2 = 'hElLO'
+				 => "hElLO" 
+				3.2.1 :278 > st1.casecmp(st2)
+				 => 0 
+
+		e). casecmp?: Returns true if the string is equal to a given string after Unicode case folding; false otherwise.
+
+			eg :- 
+				3.2.1 :280 > st1.casecmp?(st2)
+ 			        => true 
+
+	7). Methods for Modifying a String :-
+	 
+		a). Insertion :-
+
+			insert: Returns self with a given string inserted at a given offset.
+			
+				eg :-
+				3.2.1 :283 > st3 = 'ram'
+ 				=> "ram" 
+				3.2.1 :284 > st3.insert(2,'aa')
+				=> "raaam" 
+
+			<< : Returns self concatenated with a given string or integer.
+			
+				eg :-
+				3.2.1 :282 > st1 << ' WORLD'
+				=> "HELLO WORLD" 
+
+		b). Substitution :-
+
+			*). sub!: Replaces the first substring that matches a given pattern with a given replacement string.
+			    -> returns self if any changes, nil otherwise.     #destructive versions 
+			    
+			    eg :-
+			    	3.2.1 :288 > st1
+				 => "HELLO WORLD" 
+				3.2.1 :289 > st1.sub!('WORLD','RUBY')
+				 => "HELLO RUBY" 
+				3.2.1 :290 > st1
+				 => "HELLO RUBY" 
+
+
+			*). gsub!: Replaces each substring that matches a given pattern with a given replacement string. 
+			    -> returns self if any changes, nil otherwise.     #destructive versions 
+			    
+			    eg :-
+			    	3.2.1 :291 > string
+ 				=> "The quick brown fox jumps over the lazy dog" 
+ 				3.2.1 :293 > string.gsub!('The','the')
+ 				=> "the quick brown fox jumps over the lazy dog" 
+ 				
+			*). succ!, next!: Returns self modified to become its own successor.
+			    -> Both methods are destructive and modify the string in place.
+			    
+			    eg :-
+			    	3.2.1 :294 > st1.succ
+				 => "HELLO RUBZ" 
+				3.2.1 :295 > st1.succ
+				 => "HELLO RUBZ" 
+				3.2.1 :296 > st1.succ!
+				 => "HELLO RUBZ" 
+				3.2.1 :297 > st1.succ!
+				 => "HELLO RUCA" 
+				 
+				 
+				 3.2.1 :299 > st1.next!        #for next! similer to succ!
+				 => "HELLO RUCB" 
+				 3.2.1 :300 > st1.next!
+				 => "HELLO RUCC" 
+				 3.2.1 :301 > st1.next!
+
+			*). replace: Returns self with its entire content replaced by a given string.
+			
+				eg :-
+					3.2.1 :303 > st1
+					 => "HELLO RUCF" 
+					3.2.1 :304 > st2
+					 => "hElLO" 
+					3.2.1 :305 > st1.replace(st2)
+					 => "hElLO" 
+					3.2.1 :306 > st1
+					 => "hElLO" 
+
+
+			*). reverse!: Returns self with its characters in reverse order.
+			
+				eg :-
+					3.2.1 :307 > st1.reverse!
+					=> "OLlEh" 
+
+			*). setbyte: Sets the byte at a given integer offset to a given value; returns the argument.
+			
+				eg :-
+					3.2.1 :310 > st1.setbyte(0, 72)
+					 => 72 
+					3.2.1 :311 > st1
+					 => "HElLO" 
+
+			*). tr!: Replaces specified characters in self with specified replacement characters. 
+			    returns self if any changes, nil otherwise.
+			    
+			    	eg :-
+			    		3.2.1 :314 > st4 = 'hhellooo wworldd'
+					 => "hhellooo wworldd" 
+					3.2.1 :315 > st4.tr!("aeiou","&")
+					 => "hh&ll&&& ww&rldd" 
+					3.2.1 :316 > st4
+					 => "hh&ll&&& ww&rldd" 
+			    		
+			*). tr_s!: Replaces specified characters in self with specified replacement characters. 
+			    removing duplicates from the substrings that were modified; returns self if any changes, nil otherwise.
+			    
+			    	eg :-
+			    		3.2.1 :317 > st5 = 'hhelloo wworld'
+					 => "hhelloo wworld" 
+					3.2.1 :318 > st5.tr_s!("aeiou","*")
+					 => "hh*ll* ww*rld" 
+					 
+		c). Casing :-
+
+			*). capitalize!: Upcases the initial character and downcases all others.
+				-> returns self if any changes, nil otherwise.
+				
+				eg :-
+					3.2.1 :319 > st6 = 'beryl system'
+					 => "beryl system" 
+					3.2.1 :320 > st6.capitalize!
+					 => "Beryl system" 
+
+			*). downcase!: Downcases all characters; returns self if any changes, nil otherwise.
+			
+				eg :- 
+					 3.2.1 :322 > st6.downcase!
+					 => "beryl system" 
+
+			*). upcase!: Upcases all characters; returns self if any changes, nil otherwise.
+			
+				eg :-
+					3.2.1 :321 > st6.upcase!
+					 => "BERYL SYSTEM" 
+
+			*). swapcase!: Upcases each downcase character and downcases each upcase character.
+				-> returns self if any changes, nil otherwise.
+				
+				eg :-
+					3.2.1 :325 > st6.swapcase!
+					 => "bERYL SYSTEM" 
+					 
+		d). Encoding :-
+			
+		*). scrub!: This method is used to replace any invalid byte sequences in a string with a given replacement character. 
+		  -> It returns the modified string with the invalid byte sequences replaced. 
+		  -> The original string is modified in place. Here's an example:
+
+			eg :-
+				str = "hello\xE9world"
+				str.scrub!("*")
+				puts str # outputs: "hello*world"
+
+		e). Deletion :-
+		
+			*). clear: Removes all content, so that self is empty; returns self.
+			
+				eg :-
+					3.2.1 :327 > st6.clear
+					=> "" 
+
+			*). slice!, []=: Removes a substring determined by a given index, start/length, range, regexp, or substring.
+			
+				eg :-
+					3.2.1 :328 > st5
+					 => "hh*ll* ww*rld" 
+					3.2.1 :329 > st5.slice!(2,5)
+					 => "*ll* " 
+					3.2.1 :330 > st5
+					 => "hhww*rld" 
+
+			*). squeeze!: Removes contiguous duplicate characters; returns self.
+			
+				eg :-
+					3.2.1 :331 > st5.squeeze!
+ 					=> "hw*rld" 
+
+			*). delete!: Removes characters as determined by the intersection of substring arguments.
+			
+				eg :-
+					3.2.1 :332 > st3
+					 => "raaam" 
+					3.2.1 :333 > st3.delete!('aeiou')
+					 => "rm" 
+
+			*). lstrip!: Removes leading whitespace; returns self if any changes, nil otherwise.
+			
+				eg :-
+					3.2.1 :338 > st7 = '    there is an apple    '
+					 => "    there is an apple    " 
+					3.2.1 :339 > st7.lstrip!
+					 => "there is an apple    " 
+
+			*). rstrip!: Removes trailing whitespace; returns self if any changes, nil otherwise.
+			
+				eg :-
+					3.2.1 :340 > st7.rstrip!
+					=> "there is an apple" 
+
+			*). strip!: Removes leading and trailing whitespace; returns self if any changes, nil otherwise.
+			
+				eg :-
+					3.2.1 :344 > st8
+					 => "     there is a banana    " 
+					3.2.1 :345 > st8.strip!
+					 => "there is a banana" 
+
+			*). chomp!: Removes trailing record separator, if found; returns self if any changes, nil otherwise.
+				->  (i.e., "\n", "\r", or "\r\n") 
+				
+				eg :-
+					3.2.1 :347 > st9 = "hello \n world \n\r"
+					=> "hello \n world \n\r" 
+					
+					3.2.1 :349 > st9.chomp!
+					 => "hello \n world \n" 
+					3.2.1 :350 > st9.chomp!
+					 => "hello \n world " 
+
+
+			*). chop!: Removes trailing newline characters if found; otherwise removes the last character.
+				-> returns self if any changes, nil otherwise.
+				
+				eg :-
+					3.2.1 :354 > st9.chop!
+					 => "hello \n world" 
+					3.2.1 :355 > st9.chop!
+					 => "hello \n worl" 
+					3.2.1 :356 > st9.chop!
+					 => "hello \n wor" 
+
+	8). Methods for Converting to New String:-
+	
+		a). Extension :-
+		
+			*). *: Returns a new string that is the concatenation of the original string repeated a given number of times. 
+			
+				eg:-
+				3.2.1 :361 > st9 = "sachin "
+				 => "sachin " 
+				3.2.1 :362 > st9*3
+				 => "sachin sachin sachin " 
+
+			*). +: Returns a new string that is the concatenation of the original string and another given string. 
+			
+				eg:- 
+				3.2.1 :364 > st9 + 'kanojia'
+				=> "sachin kanojia" 
+
+			*). center: This method returns a new string that is padded with a given substring to a certain length.
+			    -> with the original string centered in between the padding. 
+			   
+			   	eg:-
+			   	3.2.1 :368 > st9.center(10,"-")     #10 specify the number of character in string.
+				=> "--sachin--" 
+ 
+
+			*). concat: appends the given strings to the end of the original string and returns the modified string. 
+			
+				eg:-
+				3.2.1 :369 > st9
+				 => "sachin" 
+				3.2.1 :370 > st9.concat('kanojia')
+				 => "sachinkanojia" 
+
+			*). prepend: prepends the given string to the beginning of the original string and returns the modified string. 
+			
+				eg:-
+				 3.2.1 :371 > st9.prepend('Hello ')
+				 => "Hello sachinkanojia" 
+
+			*). ljust: This method returns a new string that is padded with a given substring to a certain length.
+			    -> with the original string left-justified. 
+			    
+			    	eg:-
+			    	3.2.1 :374 > st9.ljust(25,'-')
+				 => "Hello sachinkanojia------" 
+				
+			*). rjust: This method returns a new string that is padded with a given substring to a certain length.
+			    -> with the original string right-justified. 
+			    
+			    	eg:-
+			    	3.2.1 :375 > st9.rjust(25,'-')
+				 => "------Hello sachinkanojia" 
+				 
+		b). Encoding
+
+			*). b: Returns a copy of self with ASCII-8BIT encoding.
+			
+				eg :-   3.2.1 :007 > st1.encoding
+					 => #<Encoding:UTF-8> 
+					3.2.1 :008 > st2 = st1.b
+					 => "sachin" 
+					3.2.1 :009 > st2.encoding
+					 => #<Encoding:ASCII-8BIT> 
+
+			*). scrub: Returns a copy of self with each invalid byte replaced with a given character.
+				
+				eg :-   3.2.1 :016 > str = "Hello, \xFFworld!"
+					 => "Hello, \xFFworld!" 
+					3.2.1 :017 > scrubbed_str = str.scrub('?')
+					3.2.1 :018 > puts scrubbed_str
+					Hello, ?world!
+					
+		c). Substitution
+
+			*). dump: Returns a copy of self with all non-printing characters replaced by xHH notation and all special characters escaped.
+				eg :-   3.2.1 :019 > str = "Hello, \tworld!\n"
+					 => "Hello, \tworld!\n" 
+					 
+					3.2.1 :020 > str3 = str.dump
+					 => "\"Hello, \\tworld!\\n\"" 
+					
+			*). undump: Returns a copy of self with all \xNN notation replace by \uNNNN notation and all escaped characters unescaped.
+				eg :-   3.2.1 :021 > str4 = str3.undump
+					 => "Hello, \tworld!\n" 
+
+		d). Deletion
+
+			*). delete: Returns a copy of self with characters removed
+			
+				eg :-   3.2.1 :030 > str
+					 => "Hello, \tworld!\n" 
+					3.2.1 :031 > str.delete('llo')
+					 => "He, \twrd!\n" 
+
+			*). delete_prefix: Returns a copy of self with a given prefix removed.
+			
+				eg :-   3.2.1 :032 > str.delete_prefix('Hello, ')
+					 => "\tworld!\n" 
+
+			*). delete_suffix: Returns a copy of self with a given suffix removed.
+			
+				eg :-   3.2.1 :037 > str = "Hello, world!"
+					3.2.1 :038 > new_str = str.delete_suffix(", world!")
+					 => "Hello" 
+
+			*). chr: Returns the first character.
+
+				eg :-   3.2.1 :040 > str
+					 => "Hello, world!" 
+					3.2.1 :041 > str.chr
+					 => "H" 
+
+		e). Duplication
+
+			*). to_s, $to_str: If self is a subclass of String, returns self copied into a String; otherwise, returns self.
+				
+				eg :-
+					3.2.1 :042 > a = 45
+					 => 45 
+					3.2.1 :043 > b = a.to_s
+					 => "45" 
+					3.2.1 :044 > b.class
+					 => String 
+
+	9). Methods for Converting to Non-String
+
+		a). Characters, Bytes, and Clusters
+
+			*). bytes: Returns an array of the bytes in self.
+			
+				eg :-   3.2.1 :054 > str.bytes
+ 					=> [104, 101, 108, 108, 111] 
+
+
+			*). chars: Returns an array of the characters in self.
+			
+				eg :-   3.2.1 :047 > str.chars
+					 => ["h", "e", "l", "l", "o"] 
+
+			*). codepoints: Returns an array of the integer ordinals in self, have values greater than 255.
+			
+				eg :-   3.2.1 :048 > str.codepoints
+					 => [104, 101, 108, 108, 111] 
+					
+			*). getbyte: Returns an integer byte as determined by a given index.
+			
+				eg :-   3.2.1 :049 > str.getbyte(1)
+					 => 101 
+					
+			*). grapheme_clusters: Returns an array of the grapheme clusters in self, also works on emojis.
+			
+				eg :-   3.2.1 :050 > str.grapheme_clusters
+					 => ["h", "e", "l", "l", "o"] 
+					3.2.1 :051 > str = "😇"
+					 => "😇" 
+					3.2.1 :052 > str.grapheme_clusters
+					 => ["😇"] 
+
+		b). Splitting
+
+			*). lines: Returns an array of the lines in self, as determined by a given record separator.
+			
+				eg :-   3.2.1 :055 > str = "Line 1\nLine 2\nLine 3"
+					 => "Line 1\nLine 2\nLine 3" 
+					3.2.1 :056 > str.lines
+					 => ["Line 1\n", "Line 2\n", "Line 3"] 
+
+			*). partition: Returns a 3-element array determined by the first substring that matches a given substring or regexp,
+				eg :-   3.2.1 :058 > str = 'hello , world'
+					 => "hello , world" 
+					3.2.1 :059 > str.partition(',')
+					 => ["hello ", ",", " world"] 
+				
+			*). rpartition: Returns a 3-element array determined by the last substring that matches a given substring or regexp,
+				eg :-   3.2.1 :060 > str = 'hello world , again'
+					 => "hello world , again" 
+					3.2.1 :061 > str.rpartition(',')
+					 => ["hello world ", ",", " again"] 
+
+			*). split: Returns an array of substrings determined by a given delimiter – regexp or string – or, if a block given, passes those substrings to the block.
+			
+				eg :-   3.2.1 :062 > str = 'hello , world , again'
+					 => "hello , world , again" 
+					3.2.1 :063 > str.split(',')
+					 => ["hello ", " world ", " again"] 
+					 
+		c). Matching
+
+			*). scan: Returns an array of substrings matching a given regexp or string, or, if a block given, passes each matching substring to the block.
+				eg :-   3.2.1 :065 > str.scan(/[aeiou]/)
+					 => ["e", "o", "o", "a", "a", "i"] 
+					3.2.1 :066 > str = "\x01\x02\x03"
+					 => "\u0001\u0002\u0003" 
+
+			*). unpack: Returns an array of substrings extracted from self according to a given format.
+			
+				eg :-   3.2.1 :068 > str.unpack('c*')
+					 => [1, 2, 3] 
+					
+			*). unpack1: Returns the first substring extracted from self according to a given format.
+			
+				eg :-   3.2.1 :069 > str.unpack1('c*')
+					 => 1 
+					 
+		d). Numerics
+
+			*). hex: Returns the integer value of the leading characters, interpreted as hexadecimal digits.
+			
+				eg :-   3.2.1 :080 > str
+					 => "2AB" 
+					3.2.1 :081 > str.hex
+					 => 683 
+
+			*). oct: Returns the integer value of the leading characters, interpreted as octal digits.
+			
+				eg :-   3.2.1 :082 > str.oct
+					 => 2 
+
+			*). ord: Returns the integer ordinal of the first character in self.
+			
+				eg :-   3.2.1 :083 > str.ord
+					 => 50 
+
+			*). to_i: Returns the integer value of leading characters, interpreted as an integer.
+			
+				eg :-   3.2.1 :078 > str.to_i
+					 => 2 
+
+			*). to_f: Returns the floating-point value of leading characters, interpreted as a floating-point number.
+			
+				eg :-   3.2.1 :079 > str.to_f
+					 => 2.0 
+					 
+		e). Strings and Symbols
+
+			*). inspect: Returns copy of self, enclosed in double-quotes, with special characters escaped.
+			
+				eg :-   3.2.1 :084 > str = 'hello\nworld'
+					 => "hello\\nworld" 
+					3.2.1 :085 > str.inspect
+					 => "\"hello\\\\nworld\"" 
+					
+			*). to_sym, intern: Returns the symbol corresponding to self.
+			
+				eg :-   3.2.1 :086 > str.to_sym
+					 => :"hello\\nworld" 
+					 
+	10). Methods for Iterating
+	
+			*). each_byte: Calls the given block with each successive byte in self.
+			
+				eg :-   3.2.1 :096 > str.each_byte{ |a| puts a}
+					104
+					101                                                             
+					108                                                             
+					108                                                             
+					111                                                             
+					 => "hello"                                                     
+					
+			*). each_char: Calls the given block with each successive character in self.
+			
+				eg :-   3.2.1 :097 > str.each_char{ |a| puts a}
+					h
+					e                                                               
+					l                                                               
+					l                                                               
+					o                                                               
+					 => "hello"                                                     
+					
+			*). each_codepoint: Calls the given block with each successive integer codepoint in self.
+			
+				eg :-   3.2.1 :098 > str.each_codepoint{ |a| puts a}
+					104
+					101                                   
+					108                                   
+					108                                   
+					111                                   
+					 => "hello" 
+
+			*). each_grapheme_cluster: Calls the given block with each successive grapheme cluster in self.
+			
+				eg :-   3.2.1 :099 > str.each_grapheme_cluster{ |a| puts a}
+					h
+					e                                     
+					l                                     
+					l                                     
+					o                                     
+					 => "hello" 
+
+			*). each_line: Calls the given block with each successive line in self, as determined by a given record separator.
+			
+				eg :-   3.2.1 :107 > str = "hello \n world"
+					 => "hello \n world" 
+					3.2.1 :108 > str.each_line{|a| puts a}
+					hello 
+					 world                                                         
+					 => "hello \n world"                                           
+
+			*). upto: Calls the given block with each string value returned by successive calls to succ.
+			
+				eg :-   3.2.1 :105 > "a".upto("d") { |str| puts str }
+					a
+					b                                                                               
+					c                                                                               
+					d                                                                               
+					 => "a"  
