@@ -138,4 +138,79 @@
 		h.delete(:foo)
 		h[:foo] = 5
 		h # => {:bar=>1, :baz=>3, :foo=>5}
+		
+ 5). Modifying an Active Hash Key
+ 
+ -> Modifying a Hash key while it is in use damages the hash’s index.
+
+	a). This Hash has keys that are Arrays:
+
+		a0 = [ :foo, :bar ]
+		a1 = [ :baz, :bat ]
+		h = {a0 => 0, a1 => 1}
+		h.include?(a0) # => true
+		h[a0] # => 0
+		a0.hash # => 110002110
+		
+	b). Modifying array element a0[0] changes its hash value:
+
+		a0[0] = :bam
+		a0.hash # => 1069447059
+		
+		And damages the Hash index:
+		h.include?(a0) # => false
+		h[a0] # => nil
+		
+	c). You can repair the hash index using method rehash:
+
+		h.rehash # => {[:bam, :bar]=>0, [:baz, :bat]=>1}
+		h.include?(a0) # => true
+		h[a0] # => 0
+		
+	d). A String key is always safe. 
+	    That’s because an unfrozen String passed as a key will be replaced by a duplicated and frozen String:
+
+		s = 'foo'
+		s.frozen? # => false
+		h = {s => 0}
+		first_key = h.keys.first
+		first_key.frozen? # => true
+		
+ 6). Default Values
+ -> The methods [], values_at and dig need to return the value associated to a certain key. 
+ -> When that key is not found, that value will be determined by its default proc (if any) or else its default (initially ‘nil`).
+
+	a). You can retrieve the default value with method default:
+
+		h = Hash.new
+		h.default # => nil
+		
+	b). You can set the default value by passing an argument to method Hash.new or with method default=
+
+		h = Hash.new(-1)
+		h.default # => -1
+		h.default = 0
+		h.default # => 0
+		
+	c). This default value is returned for [], values_at and dig when a key is not found:
+
+		counts = {foo: 42}
+		counts.default # => nil (default)
+		counts[:foo] = 42
+		counts[:bar] # => nil
+		counts.default = 0
+		counts[:bar] # => 0
+		counts.values_at(:foo, :bar, :baz) # => [42, 0, 0]
+		counts.dig(:bar) # => 0
+		
+	d). Note that the default value is used without being duplicated. It is not advised to set the default value to a mutable object:
+
+		synonyms = Hash.new([])
+		synonyms[:hello] # => []
+		synonyms[:hello] << :hi # => [:hi], but this mutates the default!
+		synonyms.default # => [:hi]
+		synonyms[:world] << :universe
+		synonyms[:world] # => [:hi, :universe], oops
+		synonyms.keys # => [], oops
+
 
