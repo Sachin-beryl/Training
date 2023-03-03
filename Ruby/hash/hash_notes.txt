@@ -1,0 +1,67 @@
+------------------------------------------------------------------------------------------------------------------------------------
+								HASHES
+								
+ Intro :-
+ -> A Hash maps each of its unique keys to a specific value.
+ -> A Hash has certain similarities to an Array, but:
+ -> An Array index is always an Integer.
+ -> A Hash key can be (almost) any object.
+ 
+ Hash Data Syntax :-
+
+ -> The older syntax for Hash data uses the “hash rocket,” =>:
+
+	h = {:foo => 0, :bar => 1, :baz => 2}
+	h # => {:foo=>0, :bar=>1, :baz=>2}
+
+ -> Alternatively, but only for a Hash key that’s a Symbol, you can use a newer JSON-style syntax, where each bareword becomes a Symbol:
+
+	h = {foo: 0, bar: 1, baz: 2}
+	h # => {:foo=>0, :bar=>1, :baz=>2}
+	
+ -> You can also use a String in place of a bareword:
+
+	h = {'foo': 0, 'bar': 1, 'baz': 2}
+	h # => {:foo=>0, :bar=>1, :baz=>2}
+	
+ -> Hash value can be omitted, meaning that value will be fetched from the context by the name of the key:
+
+	x = 0
+	y = 100
+	h = {x:, y:}
+	h # => {:x=>0, :y=>100}
+
+
+ 1). Common Uses :-
+ 
+	a). You can use a Hash to give names to objects:
+
+		eg:-	3.2.1 :010 > person = {name: 'sachin', surname: 'kanojia'}
+			 => {:name=>"sachin", :surname=>"kanojia"} 
+
+	b). You can use a Hash to give names to method arguments:
+
+		eg:-	3.2.1 :011 > def method(hash)
+			3.2.1 :012 >   p hash
+			3.2.1 :013 > end
+		some_method({foo: 0, bar: 1, baz: 2}) # => {:foo=>0, :bar=>1, :baz=>2}
+		
+		Note: when the last argument in a method call is a Hash, the curly braces may be omitted:
+			method(foo: 0, bar: 1, baz: 2) # => {:foo=>0, :bar=>1, :baz=>2}
+		
+	c). You can use a Hash to initialize an object:
+
+		class Dev
+		  attr_accessor :name, :language
+		  def initialize(hash)
+		    self.name = hash[:name]
+		    self.language = hash[:language]
+		  end
+		end
+		matz = Dev.new(name: 'Matz', language: 'Ruby')
+		matz # => #<Dev: @name="Matz", @language="Ruby">
+		
+	NOTE :- attr_accessor -> use to create getter and setter method for both name and language instance variable.
+			       -> can be modified and retrieve values outside of the class.
+
+
