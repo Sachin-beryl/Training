@@ -63,5 +63,52 @@
 		
 	NOTE :- attr_accessor -> use to create getter and setter method for both name and language instance variable.
 			       -> can be modified and retrieve values outside of the class.
+ 
+ 2). Creating a Hash
 
+	a). Create an empty Hash by calling method Hash.new
+
+		3.2.1 :007 > t = Hash.new
+		 => {} 
+		3.2.1 :008 > t.class
+		 => Hash 
+
+	b). You can create a Hash by calling method Hash.[].
+
+		h = Hash[]
+		h # => {}
+		
+	      ->Create a Hash with initial entries:
+		h = Hash[foo: 0, bar: 1, baz: 2]
+		h # => {:foo=>0, :bar=>1, :baz=>2}
+
+	c). You can create a Hash by using its literal form (curly braces).
+
+		h = {}
+		h # => {}
+		
+	      ->Create a Hash with initial entries:
+		h = {foo: 0, bar: 1, baz: 2}
+		h # => {:foo=>0, :bar=>1, :baz=>2} 
+		
+ 3). Hash Value Basics
+ 
+	a). The simplest way to retrieve a Hash value (instance method []):
+
+		h = {foo: 0, bar: 1, baz: 2}
+		h[:foo] # => 0
+		
+	b). The simplest way to create or update a Hash value (instance method []=):
+	
+		h = {foo: 0, bar: 1, baz: 2}
+		h[:bat] = 3 # => 3
+		h # => {:foo=>0, :bar=>1, :baz=>2, :bat=>3}
+		h[:foo] = 4 # => 4
+		h # => {:foo=>4, :bar=>1, :baz=>2, :bat=>3}
+		
+	c). The simplest way to delete a Hash entry (instance method delete):
+
+		h = {foo: 0, bar: 1, baz: 2}
+		h.delete(:bar) # => 1
+		h # => {:foo=>0, :baz=>2}
 
