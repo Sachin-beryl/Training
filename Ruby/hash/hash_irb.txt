@@ -1,0 +1,76 @@
+---------------------------------------------------------------Hash irb-------------------------------------------------------------------
+
+ 1). Methods for Creating a Hash:-
+ 
+	a). ::[]-> Returns a new hash populated with given objects.
+		
+		eg:-
+		3.2.1 :005 > my_hash = Hash["a",1,"b",2]
+		 => {"a"=>1, "b"=>2} 
+
+	b). ::new-> Returns a new empty hash.
+	
+		eg:-
+		3.2.1 :006 > my_hash = Hash.new
+		 => {} 
+		3.2.1 :007 > my_hash["a"] = 22
+		 => 22 
+		3.2.1 :008 > my_hash["b"] = 33
+		 => 33 
+		3.2.1 :009 > my_hash
+		 => {"a"=>22, "b"=>33} 
+
+	c). ::try_convert-> Returns a new hash created from a given object.
+	
+		eg:-
+		3.2.1 :010 > my_hash = Hash.try_convert({"y" => 99 , "z" => 100})
+		 => {"y"=>99, "z"=>100} 
+		3.2.1 :012 > my_hash2 = Hash.try_convert("not a hash")
+		 => nil
+		 
+ 2). Methods for Setting Hash State:-
+ 
+	a). compare_by_identity: Sets self to consider only identity in comparing keys.
+	
+		eg:-
+		3.2.1 :013 > my_hash
+		 => {"y"=>99, "z"=>100} 
+		3.2.1 :014 > my_hash.compare_by_identity
+		 => {"y"=>99, "z"=>100} 
+		3.2.1 :015 > my_hash["y".dup]
+		 => nil 
+		3.2.1 :016 > my_hash["y"]           #object id changed for y, so it will return nil if we access y in my_hash. 
+		 => nil 
+
+	b). default=: Sets the default to a given value.
+	
+		eg:-
+		3.2.1 :023 > my_hash = Hash.new
+		 => {} 
+		3.2.1 :024 > my_hash.default =0 
+		 => 0 
+		3.2.1 :025 > my_hash["a"]
+		 => 0 
+
+	c). default_proc=: Sets the default proc to a given proc.
+	
+		eg:-
+		3.2.1 :026 > my_hash
+		 => {} 
+		3.2.1 :027 > my_hash.default_proc = proc {|hash,key| hash[key] = key.length}     #setting key length as value for the key 
+		 => #<Proc:0x00007f1aa4c89900 (irb):27> 
+		3.2.1 :028 > my_hash["hello"]
+		 => 5 
+		
+	d). rehash: Rebuilds the hash table by recomputing the hash index for each key
+	
+		eg:-
+		3.2.1 :029 > my_hash3 = {"a" => 1, "b" => 2}
+		 => {"a"=>1, "b"=>2} 
+		3.2.1 :030 > my_hash3.rehash      		#making hash rehashable to change the values.
+		 => {"a"=>1, "b"=>2} 
+		3.2.1 :031 > my_hash3["a".dup] = 3
+		 => 3 
+		3.2.1 :032 > my_hash3["a"]
+		 => 3 
+
