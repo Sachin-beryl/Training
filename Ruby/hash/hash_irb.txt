@@ -260,5 +260,64 @@
 		3.2.1 :102 > other_hash.values_at("hello", "d")
 		 => [5, 1] 
 
+ 6). Methods for Assigning :-
+ 
+	a). []=, store: Associates a given key with a given value.
+	
+		eg:-
+		3.2.1 :103 > h = {foo: 0,bar: 1}
+		 => {:foo=>0, :bar=>1} 
+		3.2.1 :104 > h[:foo] = 2
+		 => 2 
+		3.2.1 :105 > h.store(:bar,3)           #another way to update the values using the key
+		 => 3 
+		3.2.1 :106 > h
+		 => {:foo=>2, :bar=>3} 
+		3.2.1 :107 > h[:baz] = 2               #if key is not present in the hash then make new entry at the end of the hash.
+		 => 2 
+		3.2.1 :108 > h
+		 => {:foo=>2, :bar=>3, :baz=>2} 
+
+	b). merge: Returns the hash formed by merging each given hash into a copy of self.
+	-> If the hashes being merged contain the same keys, 
+	-> the values in the last hash passed as an argument will overwrite the values in the previous hashes.
+	
+		eg:-
+		3.2.1 :109 > h1 = {a: 1,b: 2}
+		 => {:a=>1, :b=>2} 
+		3.2.1 :110 > h2 = {c: 3,d: 4}
+		 => {:c=>3, :d=>4} 
+		3.2.1 :111 > h1.merge(h2)
+		 => {:a=>1, :b=>2, :c=>3, :d=>4} 
+
+	c). merge!, update: Merges each given hash into self.
+	-> If the hashes being merged contain the same keys, 
+	-> the values in the last hash passed as an argument will overwrite the values in the previous hashes.
+	
+		eg:-
+		3.2.1 :112 > h3 = {b: 5, e: 6}
+		 => {:b=>5, :e=>6} 
+		3.2.1 :113 > h1
+		 => {:a=>1, :b=>2} 
+		3.2.1 :114 > h1.merge!(h2)
+		 => {:a=>1, :b=>2, :c=>3, :d=>4} 
+		3.2.1 :115 > h1
+		 => {:a=>1, :b=>2, :c=>3, :d=>4} 
+		3.2.1 :116 > h1.merge!(h3)
+		 => {:a=>1, :b=>5, :c=>3, :d=>4, :e=>6} 
+
+	d). replace: Replaces the entire contents of self with the contents of a given hash.
+	
+		eg:-
+		3.2.1 :117 > h1
+		 => {:a=>1, :b=>5, :c=>3, :d=>4, :e=>6} 
+		3.2.1 :118 > h2
+		 => {:c=>3, :d=>4} 
+		3.2.1 :119 > h1.replace(h2)
+		 => {:c=>3, :d=>4} 
+		3.2.1 :120 > h1
+		 => {:c=>3, :d=>4} 
+
+		
 
 
