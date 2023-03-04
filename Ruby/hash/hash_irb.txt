@@ -73,4 +73,73 @@
 		 => 3 
 		3.2.1 :032 > my_hash3["a"]
 		 => 3 
+		 
+ 3). Methods for Querying :-
+ 
+	a). any?: Returns whether any element satisfies a given criterion.
+	
+		eg:-		
+		3.2.1 :035 > my_hash
+		 => {"hello"=>5, "a"=>1, "b"=>10} 
+		3.2.1 :036 > has_even_number = my_hash.any? {|k,v| v.even?}
+		 => true 
+		3.2.1 :037 > puts "has even value ? #{has_even_number}"
+		has even value ? true
+		 => nil      
+		
+	b). compare_by_identity?: Returns whether the hash considers only identity when comparing keys.
+	
+		eg:-                                                     
+		3.2.1 :038 > my_hash.compare_by_identity
+		 => {"hello"=>5, "a"=>1, "b"=>10} 
+		3.2.1 :039 > puts "using identity comparison? #{my_hash.compare_by_identity?}"
+		using identity comparison? true
+		 => nil                                                                       
+
+	c). empty?: Returns whether there are no entries.
+	
+		eg:-
+		3.2.1 :040 > puts "is hash empty? #{my_hash.empty?}"
+		is hash empty? false
+		 => nil  
+
+	d). eql?: Returns whether a given object is equal to self.
+	
+		eg:-
+		3.2.1 :044 > puts "hashes equal? #{my_hash.eql?(other_hash)}"
+		hashes equal? false
+		 => nil                                                           
+		
+	e). hash: Returns the integer hash code.
+	
+		eg:-
+		3.2.1 :045 > puts "Hash code : #{my_hash.hash}"
+		Hash code : 364115739327489413
+		 => nil                                                           
+
+	f). has_value?: Returns whether a given object is a value in self.
+	
+		eg:-
+		3.2.1 :046 > hash_value = my_hash.has_value?(2)
+		 => false 
+		3.2.1 :047 > hash_value = my_hash.has_value?(10)
+		 => true 
+
+	g). include?, has_key?, member?, key?: Returns whether a given object is a key in self.
+	
+		eg:-
+		3.2.1 :054 > other_hash.has_key?("a")
+		 => true 
+
+	h). length, size: Returns the count of entries.
+	
+		eg:-
+		3.2.1 :056 > my_hash.length
+		 => 3 
+
+	i). value?: Returns whether a given object is a value in self.
+	
+		eg:-
+		3.2.1 :057 > my_hash.value?(1)
+		 => true 
 
