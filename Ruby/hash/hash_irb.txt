@@ -511,4 +511,55 @@
 		 => #<Proc:0x00007f4b2b0f2170 (lambda)> 
 		3.2.1 :015 > p.call(:a)
 		 => 1 
+		 
+ 10). Methods for Transforming Keys and Values:-
+ 
+	a). transform_keys: Returns a copy of self with modified keys.
+	
+		eg:-
+		3.2.1 :016 > h
+		 => {:a=>1, :b=>2, :c=>3} 
+		3.2.1 :017 > h.transform_keys{|key| key.to_s}
+		 => {"a"=>1, "b"=>2, "c"=>3} 
+
+	b). transform_keys!: Modifies keys in self
+	
+		eg:-
+		3.2.1 :018 > h.transform_keys!{|key| key.to_s}
+		 => {"a"=>1, "b"=>2, "c"=>3} 
+
+	c). transform_values: Returns a copy of self with modified values.
+	
+		eg:-
+		3.2.1 :019 > h
+		 => {"a"=>1, "b"=>2, "c"=>3} 
+		3.2.1 :020 > h.transform_values{|value| value*2}
+		 => {"a"=>2, "b"=>4, "c"=>6} 
+
+	d). transform_values!: Modifies values in self.
+	
+		eg:-
+		3.2.1 :021 > h
+		 => {"a"=>1, "b"=>2, "c"=>3} 
+		3.2.1 :022 > h.transform_values!{|value| value*2}
+		 => {"a"=>2, "b"=>4, "c"=>6} 
+
+ 11). Other Methods :-
+ 
+	a). flatten: Returns an array that is a 1-dimensional flattening of self.
+	
+		eg:-
+		3.2.1 :023 > h = {a: 1,b: {c: 2,d: 3}, e: 4}
+		 => {:a=>1, :b=>{:c=>2, :d=>3}, :e=>4} 
+		3.2.1 :024 > h.flatten
+		 => [:a, 1, :b, {:c=>2, :d=>3}, :e, 4] 
+		
+	b). invert: Returns a hash with the each key-value pair inverted.
+	
+		eg:-
+		3.2.1 :025 > h.invert
+		 => {1=>:a, {:c=>2, :d=>3}=>:b, 4=>:e} 
+
+
+
 
