@@ -319,5 +319,125 @@
 		 => {:c=>3, :d=>4} 
 
 		
+ 7). Methods for Deleting:-
+ 
+-> These methods remove entries from self:
 
+	a). clear: Removes all entries from self.
+	
+		eg:-
+		3.2.1 :125 > h
+		 => {:foo=>2, :bar=>3, :baz=>2} 
+		3.2.1 :126 > h.clear
+		 => {} 
+		3.2.1 :127 > h
+		 => {} 
+		
+	b). compact!: Removes all nil-valued entries from self.
+	
+		eg:-
+		3.2.1 :128 > h = {:foo=>2, :bar=>3, :baz=>2}
+		 => {:foo=>2, :bar=>3, :baz=>2} 
+		3.2.1 :129 > h["bar"] = nil
+		 => nil 
+		3.2.1 :130 > h
+		 => {:foo=>2, :bar=>3, :baz=>2, "bar"=>nil} 
+		3.2.1 :131 > h.compact!
+		 => {:foo=>2, :bar=>3, :baz=>2} 
+		
+	c). delete: Removes the entry for a given key.
+	
+		eg:-
+		3.2.1 :132 > h.delete(:foo)
+		 => 2 
+		3.2.1 :133 > h
+		 => {:bar=>3, :baz=>2} 
+
+	d). delete_if: Removes entries selected by a given block.
+	
+		eg:-
+		3.2.1 :138 > h = {a: 1, b: 2, c: 3}
+		3.2.1 :139 > h.delete_if { |key, value| value > 2 }
+		 => {:a=>1, :b=>2} 
+		
+	e). filter!, select!: Keep only those entries selected by a given block.
+	
+		eg:-
+		3.2.1 :140 > h = {a: 1, b: 2, c: 3}
+		3.2.1 :141 > h.select! { |key, value| value > 1 }
+		 => {:b=>2, :c=>3} 
+		3.2.1 :142 > h = {a: 1, b: 2, c: 3}
+		3.2.1 :143 > h.filter! { |key, value| key == :a || key == :c }
+		 => {:a=>1, :c=>3} 
+
+	f). keep_if: Keep only those entries selected by a given block.
+	
+		eg:-
+		3.2.1 :145 > h = {a: 1,b: 2,c: 3}
+		 => {:a=>1, :b=>2, :c=>3} 
+		3.2.1 :146 > h.keep_if{|key , value| value > 1}
+		 => {:b=>2, :c=>3} 
+		3.2.1 :147 > h
+		 => {:b=>2, :c=>3} 
+
+	g). reject!: Removes entries selected by a given block.
+	
+		eg:-
+		3.2.1 :148 > h = {a: 1,b: 2,c: 3}
+		 => {:a=>1, :b=>2, :c=>3} 
+		3.2.1 :149 > h.reject!{|key,value| value > 2}
+		 => {:a=>1, :b=>2} 
+
+	h). shift: Removes and returns the first entry.
+	
+		eg:-
+		3.2.1 :150 > h = {a: 1,b: 2,c: 3}
+		 => {:a=>1, :b=>2, :c=>3} 
+		3.2.1 :151 > h.shift
+		 => [:a, 1] 
+		3.2.1 :152 > h
+		 => {:b=>2, :c=>3} 
+
+-> These methods return a copy of self with some entries removed:
+
+	i). compact: Returns a copy of self with all nil-valued entries removed.
+	
+		eg:-
+		3.2.1 :153 > h = {a: 1, b: nil, c: 3, d: nil}
+		 => {:a=>1, :b=>nil, :c=>3, :d=>nil} 
+		3.2.1 :154 > h.compact
+		 => {:a=>1, :c=>3} 
+
+	j). except: Returns a copy of self with entries removed for specified keys.
+	
+		eg:-
+		3.2.1 :155 > h
+		 => {:a=>1, :b=>nil, :c=>3, :d=>nil} 
+		3.2.1 :156 > h.except(:a , :d)
+		 => {:b=>nil, :c=>3} 
+		3.2.1 :157 > h
+
+	k). filter, select: Returns a copy of self with only those entries selected by a given block.
+	
+		eg:-
+		3.2.1 :161 > h = {a: 1,b: 2,c: 3,d: 4}
+		 => {:a=>1, :b=>2, :c=>3, :d=>4} 
+		3.2.1 :162 > h.select {|key,value| value >2}
+		 => {:c=>3, :d=>4} 
+
+	l). reject: Returns a copy of self with entries removed as specified by a given block.
+	
+		eg:-
+		3.2.1 :163 > h
+		 => {:a=>1, :b=>2, :c=>3, :d=>4} 
+		3.2.1 :164 > h.reject {|key,value| key == :b || value == 4}
+		 => {:a=>1, :c=>3} 
+		
+	m). slice: Returns a hash containing the entries for given keys.
+	
+		eg:-
+		3.2.1 :165 > h
+		 => {:a=>1, :b=>2, :c=>3, :d=>4} 
+		3.2.1 :166 > h.slice(:a,:c)
+		 => {:a=>1, :c=>3} 
 
