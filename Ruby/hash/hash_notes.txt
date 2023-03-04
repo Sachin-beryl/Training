@@ -214,3 +214,20 @@
 		synonyms.keys # => [], oops
 
 
+ 7). Default Proc
+ 
+ -> A Proc is a block of code in Ruby that can be saved as a variable and executed later. 
+ -> The default Proc is a special type of Proc that has a default block of code which is executed when the Proc is called and no other block of code is provided. 
+ -> It allows you to define a default behavior for a Proc object.
+ 
+ 	eg:- 
+ 	
+ 	default_proc = Proc.new { puts "Default block executed" }   #creating default proc
+ 	
+	default_proc.call 					      #call default proc
+	Output: "Default block executed"
+	
+	default_proc.call { puts "Another block executed" } 	      #call default proc with block but return the default value.
+	Output: "Default block executed"
+ 
+ 
