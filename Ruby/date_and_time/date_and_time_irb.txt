@@ -1,0 +1,49 @@
+------------------------------------------------------------ date and time irb -----------------------------------------------------------
+
+ 1). Methods for Creating :-
+ 
+	a). ::new: Returns a new time from specified arguments (year, month, etc.), including an optional timezone value.
+	
+		eg:-
+		3.2.1 :038 > Time.new(2023,05,21,11,45,46, "+07:30")
+		 => 2023-05-21 11:45:46 +0730 
+		
+	b). ::local (aliased as ::mktime): Same as ::new, except the timezone is the local timezone.
+	
+		eg:-
+		3.2.1 :039 > Time.local(2023,05,21,11,45,46)
+		 => 2023-05-21 11:45:46 +0530 
+		
+	c). ::utc (aliased as ::gm): Same as ::new, except the timezone is UTC.
+	
+		eg:-
+		3.2.1 :040 > Time.utc(2023,05,21,11,45,46)
+		 => 2023-05-21 11:45:46 UTC 
+		
+	d). ::at: Returns a new time based on seconds since epoch.
+	
+		eg:-
+		3.2.1 :041 > Time.at(2347846313)
+		 => 2044-05-26 09:01:53 +0530 
+		
+	e). ::now: Returns a new time based on the current system time.
+	
+		eg:-
+		3.2.1 :042 > Time.now
+		 => 2023-03-06 14:55:42.951494274 +0530 
+		
+	f). + (plus): Returns a new time increased by the given number of seconds.
+	
+		eg:-
+		3.2.1 :043 > t = Time.now
+		 => 2023-03-06 14:56:00.018289599 +0530 
+		3.2.1 :044 > t+10
+		 => 2023-03-06 14:56:10.018289599 +0530 
+		
+	g). - (minus): Returns a new time decreased by the given number of seconds.
+	
+		eg:-
+		3.2.1 :045 > t-20
+		 => 2023-03-06 14:55:40.018289599 +0530 
+
+
