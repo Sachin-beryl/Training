@@ -206,7 +206,67 @@
 		3.2.1 :120 > Date.strptime('fri31dec99','%a%d%b%y')
 		 => #<Date: 1999-12-31 ((2451544j,0s,0n),+0s,2299161j)> 
 
-
+--------------------------------------------------------------------------------------------------------------------------------------
+							  Class DateTime
+								
+ -> A subclass of Date that easily handles date, hour, minute, second, and offset.
+ -> DateTime class is considered deprecated. Use Time class.
+ -> DateTime does not consider any leap seconds, does not track any summer time rules.
+ 
+ 1). Creating datetime:-
+ 
+ 	eg:-
+ 	3.2.1 :139 > DateTime.new(2001,2,3,4,5,6)
+	 => #<DateTime: 2001-02-03T04:05:06+00:00 ((2451944j,14706s,0n),+0s,2299161j)>     
+	                                              
+	3.2.1 :140 > DateTime.new(2001,2,3.5)
+	 => #<DateTime: 2001-02-03T12:00:00+00:00 ((2451944j,43200s,0n),+0s,2299161j)>   
+	                                                                    
+	3.2.1 :141 > DateTime.new(2001,2,3,4,5,6,'+03:00')
+	 => #<DateTime: 2001-02-03T04:05:06+03:00 ((2451944j,3906s,0n),+10800s,2299161j)>   
+	 
+ 2). A DateTime object has various methods:-
+ 
+ 	eg:-
+ 	3.2.1 :142 > d = DateTime.parse('3rd Feb 2001 04:05:06+03:30')
+	 => #<DateTime: 2001-02-03T04:05:06+03:30 ((2451944j,2106s,0n),+12600... 
+	3.2.1 :143 > d.hour
+	 => 4 
+	3.2.1 :144 > d.min
+	 => 5 
+	3.2.1 :145 > d.minute
+	 => 5 
+	3.2.1 :146 > d.sec
+	 => 6 
+	3.2.1 :147 > d.second
+	 => 6 
+	3.2.1 :148 > d.offset
+	 => (7/48) 
+	3.2.1 :149 > d.zone
+	 => "+03:30" 
+	 
+	 
+	useful methods:-
+	
+	*). 3.2.1 :150 > DateTime.now
+	  => #<DateTime: 2023-03-06T18:35:55+05:30 ((2460010j,47155s,440809393n),+19800s,2299161j)>        
+	                                 
+	*). 3.2.1 :151 > DateTime.ordinal
+	  => #<DateTime: -4712-01-01T00:00:00+00:00 ((0j,0s,0n),+0s,2299161j)> 
+	  
+	*). 3.2.1 :152 > DateTime.parse('20010203T040506+0700')
+	  => #<DateTime: 2001-02-03T04:05:06+07:00 ((2451943j,75906s,0n),+25200s,2299161j)>      
+	                                          
+	*). 3.2.1 :153 > DateTime.parse('3rd Feb 2001 04:05:06 PM')
+	  => #<DateTime: 2001-02-03T16:05:06+00:00 ((2451944j,57906s,0n),+0s,2299161j)>            
+	                                        
+	*). 3.2.1 :154 > DateTime.httpdate('Sat, 03 Feb 2001 04:05:06 GMT')
+	  => #<DateTime: 2001-02-03T04:05:06+00:00 ((2451944j,14706s,0n),+0s,2299161j)>   
+	  
+	*). 3.2.1 :155 > DateTime.now.strftime     #provide datetime in string form
+	  => "2023-03-06T18:56:04+05:30" 
+        
+       
 
 
 
