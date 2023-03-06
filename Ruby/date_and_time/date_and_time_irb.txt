@@ -260,3 +260,78 @@
 		3.2.1 :095 > t.deconstruct_keys([:year , :month , :day])
 		 => {:year=>2023, :month=>3, :day=>6} 
 
+
+--------------------------------------------------------------------------------------------------------------------------------------
+								date
+								
+ 1). Argument limit:-
+
+ -> Certain singleton methods in Date that parse string arguments also take optional keyword argument limit, 
+ -> which can limit the length of the string argument.
+ 
+ 2). gregorian_leap?(year):-
+ 
+ -> Returns true if the given year is a leap year in the proleptic Gregorian calendar, false otherwise
+ 	eg:-
+ 	3.2.1 :126 > Date.gregorian_leap?(2000)
+	 => true 
+	3.2.1 :127 > Date.gregorian_leap?(2002)
+	 => false 
+	3.2.1 :128 > Date.gregorian_leap?(2004)
+	 => true 
+	 
+	 or 
+	 
+	 we can use leap?
+		 eg:-
+		 Date.new(2000).leap?
+	 
+ 3). Date , month and year movement :-
+ 
+ 	a). next_day(n = 1) → new_date
+	    Equivalent to Date#+ with argument n.
+	    
+	    eg:-
+	    	3.2.1 :131 > date = Date.today
+		 => #<Date: 2023-03-06 ((2460010j,0s,0n),+0s,2299161j)> 
+		3.2.1 :132 > date.next_day(n=1)
+		 => #<Date: 2023-03-07 ((2460011j,0s,0n),+0s,2299161j)> 
+		
+	b). next_month(n = 1) → new_date
+	    Equivalent to >> with argument n.
+	    
+	    	eg:-
+	    	3.2.1 :133 > date.next_month(n=1)
+		 => #<Date: 2023-04-06 ((2460041j,0s,0n),+0s,2299161j)> 
+		3.2.1 :134 > date.next_month(n=4)
+		 => #<Date: 2023-07-06 ((2460132j,0s,0n),+0s,2299161j)> 
+		
+	c). next_year(n = 1) → new_date
+	    Equivalent to >> with argument n * 12.
+	    
+	    	eg:-
+	    	3.2.1 :135 > date.next_year(n=13)
+		 => #<Date: 2036-03-06 ((2464759j,0s,0n),+0s,2299161j)> 
+		
+	d). prev_day(n = 1) → new_date
+	    Equivalent to Date#- with argument n.
+	    
+	    	eg:-
+	    	3.2.1 :136 > date.prev_day(n=5)
+		 => #<Date: 2023-03-01 ((2460005j,0s,0n),+0s,2299161j)> 
+		
+	e). prev_month(n = 1) → new_date
+	    Equivalent to << with argument n.
+	    
+	    	eg:-
+	    	3.2.1 :137 > date.prev_month(n=5)
+		 => #<Date: 2022-10-06 ((2459859j,0s,0n),+0s,2299161j)> 
+		
+	f). prev_year(n = 1) → new_date
+	    Equivalent to << with argument n * 12.
+	    
+	    	eg:-
+	    	3.2.1 :138 > date.prev_year(n=5)
+		 => #<Date: 2018-03-06 ((2458184j,0s,0n),+0s,2299161j)> 
+
+
