@@ -128,7 +128,90 @@
 			3.2.1 :035 > Time.new(2010,10,31).between?(t1,t2)
 			 => true 
 
-			
+---------------------------------------------------------- class Date ---------------------------------------------------------------
+
+-> Class Date provides methods for storing and manipulating calendar dates.
+-> Consider using class Time instead of class Date if:
+	*). You need both dates and times; Date handles only dates.
+-> A Date object, once created, is immutable, and cannot be modified.
+
+ 1). Creating a Date:-
+ 
+	a). You can create a date for the current date, using Date.today:
+	
+		eg:-
+		3.2.1 :099 > Date.today
+		 => #<Date: 2023-03-06 ((2460010j,0s,0n),+0s,2299161j)> 
+		
+	b). Date.new takes integer year, month, and day-of-month:
+	
+		eg:-
+		3.2.1 :100 > Date.new(2012,10,27)
+		 => #<Date: 2012-10-27 ((2456228j,0s,0n),+0s,2299161j)> 
+
+	c). Date.ordinal takes integer year and day-of-year:
+	
+		eg:-
+		3.2.1 :101 > Date.ordinal(2012,365)
+		 => #<Date: 2012-12-30 ((2456292j,0s,0n),+0s,2299161j)> 
+		
+	d). Date.jd takes integer Julian day:
+	
+		eg:-
+		3.2.1 :105 > Date.jd(2451544)
+		 => #<Date: 1999-12-31 ((2451544j,0s,0n),+0s,2299161j)> 
+
+	e). Date.commercial takes integer commercial data (year, week, day-of-week):
+	
+		eg:-
+		3.2.1 :106 > Date.commercial(2002,48,3)
+		 => #<Date: 2002-11-27 ((2452606j,0s,0n),+0s,2299161j)> 
+
+	f). Date.parse takes a string, which it parses heuristically:
+	
+		eg:-
+		3.2.1 :107 > Date.parse("2002-11-3")
+		 => #<Date: 2002-11-03 ((2452582j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :108 > Date.parse("31-12-1992")
+		 => #<Date: 1992-12-31 ((2448988j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :109 > Date.parse("1992-365")
+		 => #<Date: 1992-12-30 ((2448987j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :110 > Date.parse("1992-W52-3")
+		 => #<Date: 1992-12-23 ((2448980j,0s,0n),+0s,2299161j)> 
+
+	g). Date.strptime takes a date string and a format string, then parses the date string according to the format string:
+	
+		eg:-
+		3.2.1 :113 > Date.strptime('2001-12-31','%Y-%m-%d')
+		 => #<Date: 2001-12-31 ((2452275j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :114 > Date.strptime('31-12-2001','%d-%m-%Y')
+		 => #<Date: 2001-12-31 ((2452275j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :116 > Date.strptime('2001-365','%Y-%j')
+		 => #<Date: 2001-12-31 ((2452275j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :117 > Date.strptime('2001-W52-5','%G-W%V-%u')
+		 => #<Date: 2001-12-28 ((2452272j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :118 > Date.strptime('2001 12 31','%Y %U %w')
+		 => #<Date: 2001-03-28 ((2451997j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :119 > Date.strptime('2001 12 31','%Y %W %u')
+		 => #<Date: 2001-03-21 ((2451990j,0s,0n),+0s,2299161j)> 
+		 
+		3.2.1 :120 > Date.strptime('fri31dec99','%a%d%b%y')
+		 => #<Date: 1999-12-31 ((2451544j,0s,0n),+0s,2299161j)> 
+
+
+
+
+
+
+
 
 
 
