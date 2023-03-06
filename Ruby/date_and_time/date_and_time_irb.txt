@@ -116,4 +116,76 @@
 		3.2.1 :057 > t.zone
 		 => "IST" 
 
+ 3). Methods for Querying:-
+ 
+	a). utc? (aliased as gmt?): Returns whether the time is UTC.
+	
+		eg:-
+		3.2.1 :065 > t.utc?
+		 => false 
 
+	b). dst? (aliased as isdst): Returns whether the time is DST (daylight saving time).
+	
+		eg:-
+		3.2.1 :066 > t.dst?
+		 => false 
+
+	c). sunday?: Returns whether the time is a Sunday.
+	
+		eg:-
+		3.2.1 :067 > t.sunday?
+		 => false 
+
+	NOTE :- monday?,tuesday?,wednesday?,thursday?,friday? ,saturday? are similar to sunday?
+	
+ 4). Methods for Comparing:-
+ 
+	a). <=>: Compares self to another time.
+	
+		eg:-
+		3.2.1 :068 > t1
+		 => 2010-01-01 00:00:00 +0530 
+		3.2.1 :069 > t2
+		 => 2011-01-01 00:00:00 +0530 
+		3.2.1 :070 > t1 <=> t2 
+		 => -1 
+		
+	b). eql?: Returns whether the time is equal to another time.
+	
+		eg:-
+		3.2.1 :071 > t1.eql?(t2)
+		 => false 
+
+ 5). Methods for Rounding:-
+ 
+	a). round:Returns a new time with subseconds rounded.
+	
+		eg:-
+		3.2.1 :072 > t = Time.now
+		 => 2023-03-06 15:55:16.655981428 +0530 
+		3.2.1 :073 > t.round(0)
+		 => 2023-03-06 15:55:17 +0530 
+		3.2.1 :074 > t.round(1)
+		 => 2023-03-06 15:55:16.7 +0530 
+
+	b). ceil: Returns a new time with subseconds raised to a ceiling.
+	
+		eg:-
+		3.2.1 :075 > t.floor(0)
+		 => 2023-03-06 15:55:16 +0530 
+		3.2.1 :076 > t.floor(1)
+		 => 2023-03-06 15:55:16.6 +0530 
+		
+	c). floor: Returns a new time with subseconds lowered to a floor.
+	
+		eg:-
+		3.2.1 :077 > t.ceil(0)
+		 => 2023-03-06 15:55:17 +0530 
+		3.2.1 :078 > t.ceil(1)
+		 => 2023-03-06 15:55:16.7 +0530 
+		 
+	NOTE :- 0 and 1 specify the number of digit after decimal.
+	
+		eg:-
+		3.2.1 :080 > t.ceil(5)
+ 		=> 2023-03-06 15:55:16.65599 +0530 
