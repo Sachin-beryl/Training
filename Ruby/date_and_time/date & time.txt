@@ -1,0 +1,65 @@
+--------------------------------------------------------------- class Time ---------------------------------------------------------------
+
+ -> The Time class represents dates and times in Ruby. 
+ -> It is a thin layer over the system date and time functionality provided by the operating system. 
+ -> This class may be unable on your system to represent dates before 1970 or after 2038.
+ 
+ -> A Time object represents a date and time :-
+ 	syntax :- Time.new(YYYY,MM,DD,HH,MM,SS)
+ 	
+ 	eg :-
+ 		3.2.1 :002 > Time.new(2000,1,1,0,0,0)
+ 		 => 2000-01-01 00:00:00 +0530              # +0530 is GMT.s
+ 		 
+ 1). Accessing each element in time :-
+ 	
+ 	eg:-
+ 		3.2.1 :003 > t = Time.new(2000,1,1,0,0,0)
+		 => 2000-01-01 00:00:00 +0530 
+		 
+		3.2.1 :004 > t.year
+		 => 2000 
+		3.2.1 :005 > t.month
+		 => 1 
+		3.2.1 :006 > t.mday
+		 => 1 
+		3.2.1 :007 > t.hour
+		 => 0 
+		3.2.1 :008 > t.min
+		 => 0 
+		3.2.1 :009 > t.sec
+		 => 0 
+		3.2.1 :010 > t.subsec
+ 		 => 0 
+ 		 
+ 2). Epoch Seconds :-
+ 
+	-> Epoch seconds is the exact number of seconds (including fractional subseconds) since the Unix Epoch, January 1, 1970.
+	-> You can retrieve that value exactly using method Time.to_r:
+
+	eg:-
+		3.2.1 :011 > Time.at(0).to_r
+		 => (0/1) 
+		3.2.1 :012 > Time.at(0.999999).to_r
+		 => (9007190247541737/9007199254740992) 
+		
+	-> Other retrieval methods such as Time#to_i and Time#to_f may return a value that rounds or truncates subseconds.
+	
+	eg:-
+		3.2.1 :013 > Time.at(0.999999).to_f
+		 => 0.999999 
+		3.2.1 :014 > Time.at(0.999999).to_i
+		 => 0 
+		 
+ 3). Time Resolution :-
+ 
+ -> A Time object derived from the system clock (for example, by method Time.now) has the resolution supported by the system.
+ 	eg:-
+ 		3.2.1 :015 > Time.now
+		 => 2023-03-06 13:19:47.633533513 +0530 
+		 
+		 
+
+
+
+
