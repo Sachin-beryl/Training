@@ -45,5 +45,75 @@
 		eg:-
 		3.2.1 :045 > t-20
 		 => 2023-03-06 14:55:40.018289599 +0530 
+		 
+ 2). Methods for Fetching :-
+
+	a). usec (aliased as tv_usec): Returns the number of microseconds in the subseconds value of the time.
+		
+		eg:-
+		3.2.1 :046 > t
+		 => 2023-03-06 14:56:00.018289599 +0530 
+		3.2.1 :047 > t.usec
+		 => 18289 
+		
+	b). nsec (aliased as tv_nsec): Returns the number of nanoseconds in the subsecond part of the time.
+	
+		eg:-
+		3.2.1 :048 > t.nsec
+		 => 18289599 
+
+	c). subsec: Returns the subseconds value for the time.
+	
+		eg:-
+		3.2.1 :049 > t.subsec
+		 => (18289599/1000000000) 
+		
+	d). wday: Returns the integer weekday value of the time (0 == Sunday).
+	
+		eg:-
+		3.2.1 :050 > t.wday
+		 => 1 
+		
+	e). yday: Returns the integer yearday value of the time (1 == January 1).
+	
+		eg:-
+		3.2.1 :051 > t.yday
+		 => 65 
+		
+	f). hash: Returns the integer hash value for the time.
+	
+		eg:-
+		3.2.1 :052 > t.hash
+		 => 1279555496784931508 
+		
+	g). utc_offset (aliased as gmt_offset and gmtoff): Returns the offset in seconds between time and UTC.
+	
+		eg:-
+		3.2.1 :053 > t.utc_offset
+		 => 19800 
+		
+	h). to_f: Returns the float number of seconds since epoch for the time.
+	
+		eg:-
+		3.2.1 :054 > t.to_f
+		 => 1678094760.0182896 
+		
+	i). to_i (aliased as tv_sec): Returns the integer number of seconds since epoch for the time.
+	
+		eg:-
+		3.2.1 :055 > t.to_i
+		 => 1678094760 
+
+	j). to_r: Returns the Rational number of seconds since epoch for the time.
+	
+		eg:-
+		3.2.1 :056 > t.to_r
+		 => (1678094760018289599/1000000000) 
+		
+	k). zone: Returns a string representation of the timezone of the time.
+	
+		eg:-
+		3.2.1 :057 > t.zone
+		 => "IST" 
 
 
