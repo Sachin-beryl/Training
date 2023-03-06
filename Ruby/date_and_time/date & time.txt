@@ -58,8 +58,77 @@
  		3.2.1 :015 > Time.now
 		 => 2023-03-06 13:19:47.633533513 +0530 
 		 
-		 
+	a). Creating a New Time Instance :-
+	
+	-> You can create a new instance of Time with Time.new. 
+	-> This will use the current system time. 
+	-> Time.now is an alias for this. 
+	-> You can also pass parts of the time to Time.new such as year, month, minute, etc. 
+	-> When you want to construct a time this way you must pass at least a year. 
+	-> If you pass the year with nothing else time will default to January 1 of that year at 00:00:00 with the current system timezone.
+	
+		eg:-
+		3.2.1 :016 > Time.new(2002)      	#only year is provided
+		 => 2002-01-01 00:00:00 +0530 	
+		3.2.1 :017 > Time.new(2002,10)	#year and month
+		 => 2002-10-01 00:00:00 +0530 
+		3.2.1 :018 > Time.new(2002,10,31)	#year,month and date
+		 => 2002-10-31 00:00:00 +0530 
 
+		3.2.1 :021 > Time.new(2002,10,31,2,2,2, "+02:00")     #You can pass a UTC offset
+		 => 2002-10-31 02:02:02 +0200 
+		 
+	b). Working with an Instance of Time :-
+	
+	-> Once you have an instance of Time there is a multitude of things you can do with it. 
+	
+		eg:-
+		3.2.1 :023 > t = Time.new(1995,05,25,15,5,5, "+05:00")
+		=> 1995-05-25 15:05:05 +0500 
+		
+		*). Was that a monday?
+		        eg:-
+			3.2.1 :024 > t.monday?
+			 => false 
+		
+		*). What year was that again?
+			eg:-
+			3.2.1 :025 > t.year
+			 => 1995 
+		
+		*). Was it daylight savings at the time?
+			eg:-
+			3.2.1 :026 > t.dst?
+			 => false 
+		
+		*). What’s the day a year later?
+			eg:-
+			3.2.1 :027 > t + (60*60*24*365)
+			 => 1996-05-24 15:05:05 +0500 
+		
+		*). How many seconds was that since the Unix Epoch?
+			eg:-
+			3.2.1 :028 > t.to_i
+			 => 801396305 
+		
+		*). You can also do standard functions like compare two times.
+			eg:-
+			3.2.1 :029 > t1 = Time.new(2010)
+			 => 2010-01-01 00:00:00 +0530 
+			3.2.1 :030 > t2 = Time.new(2011)
+			 => 2011-01-01 00:00:00 +0530 
+			3.2.1 :031 > t1 == t2
+			 => false 
+			3.2.1 :032 > t1 == t1
+			 => true 
+			3.2.1 :033 > t1 < t2
+			 => true 
+			3.2.1 :034 > t1 > t2
+			 => false 
+			3.2.1 :035 > Time.new(2010,10,31).between?(t1,t2)
+			 => true 
+
+			
 
 
 
