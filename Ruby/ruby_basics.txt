@@ -89,3 +89,82 @@ key :- gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A170311
 	c). Exit the ruby terminal type "quit".
 	
  3). VScode :- install vscode , install extensions in vscode related to ruby.
+ 
+ ----------------------------------------------------------- Ranges -------------------------------------------------------------------
+ 
+ -> Ranges occur everywhere: January to December, 0 to 9, lines 50 through 67, and so on. 
+
+ 1). Ranges as Sequences :-
+ 	-> The first and perhaps the most natural use of ranges is to express a sequence. 
+ 	-> Sequences have a start point, an end point, and a way to produce successive values in the sequence.
+	-> Ruby creates these sequences using the ''..'' and ''...'' range operators. 
+	-> The two-dot form creates an inclusive range, while the three-dot form creates a range that excludes the specified high value.
+	
+	eg:-
+	(1..5)        #==> 1, 2, 3, 4, 5
+	(1...5)       #==> 1, 2, 3, 4
+	('a'..'d')    #==> 'a', 'b', 'c', 'd'
+
+ 2). Ranges as Conditions :-
+	-> Ranges may also be used as conditional expressions.
+	
+	eg:-
+	score = 70
+
+	result = case score
+	   when 0..40 then "Fail"
+	   when 41..60 then "Pass"
+	   when 61..70 then "Pass with Merit"
+	   when 71..100 then "Pass with Distinction"
+	   else "Invalid Score"
+	end
+
+	puts result
+
+ 3). Ranges as Intervals :-
+	-> A final use of the versatile range is as an interval test,
+	seeing if some value falls within the interval represented by the range. This is done using ===, the case equality operator.
+
+	eg1:-
+		if ((1..10) === 5)
+		   puts "5 lies in (1..10)"
+		end
+
+	eg2:-
+		if (('a'..'j') === 'c')
+		   puts "c lies in ('a'..'j')"
+		end
+
+
+------------------------------------------------------------ Iterators ----------------------------------------------------------------
+
+ -> Iterators are nothing but methods supported by collections. 
+ -> Objects that store a group of data members are called collections. 
+ -> In Ruby, arrays and hashes can be termed collections.
+ -> Iterators return all the elements of a collection, one after the other.
+ 
+ 1). Ruby each Iterator :-
+	-> The each iterator returns all the elements of an array or a hash.
+
+	Syntax :-
+		collection.each do |variable|
+		   code
+		end
+	
+	eg:-
+		ary = [1,2,3,4,5]
+		ary.each do |i|
+		   puts i
+		end
+		
+ 2). Ruby collect Iterator :-
+	-> The collect iterator returns all the elements of a collection.
+
+	Syntax:-
+		collection = collection.collect
+		
+	eg:-
+		a = [1,2,3,4,5]
+		b = a.collect{|x| 10*x}
+		puts b
+		
