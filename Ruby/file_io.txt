@@ -1,0 +1,64 @@
+------------------------------------------------------------- file I/O -------------------------------------------------------------------
+
+ -> Ruby provides a whole set of I/O-related methods implemented in the Kernel module. 
+ -> All the I/O methods are derived from the class IO.
+ -> The class IO provides all the basic methods, such as read, write, gets, puts, readline, getc, and printf.
+ 
+ 1). The putc Statement :-
+ -> Unlike the puts statement, which outputs the entire string onto the screen, 
+ -> the putc statement can be used to output one character at a time.
+
+	eg:-
+	str = "Hello Ruby!"  
+	putc str		 #print first character of string (H)
+	
+ 2). Opening and Closing Files :-
+ -> Until now, you have been reading and writing to the standard input and output. Now, we will see how to play with actual data files.
+
+	a). The File.new Method:-
+	    -> You can create a File object using File.new method for reading, writing, or both, according to the mode string. 
+	    -> Finally, you can use File.close method to close that file.
+
+		Syntax:-
+		aFile = File.new("filename", "mode")
+		   # ... process the file
+		aFile.close
+		
+	b). The File.open Method:-
+	    -> You can use File.open method to create a new file object and assign that file object to a file. 
+	    -> However, there is one difference in between File.open and File.new methods. 
+	    -> The difference is that the File.open method can be associated with a block, 
+	    -> whereas you cannot do the same using the File.new method.
+
+		syntax:-
+		File.open("filename", "mode") do |aFile|
+		   # ... process the file
+		end
+
+	c). Here is a list of The Different Modes of opening a File −
+	
+		Sr.No.		Modes & Description
+		
+		1		r
+				Read-only mode. The file pointer is placed at the beginning of the file. This is the default mode.
+
+		2		r+
+				Read-write mode. The file pointer will be at the beginning of the file.
+
+		3		w
+				Write-only mode. Overwrites the file if the file exists. 
+				If the file does not exist, creates a new file for writing.
+
+		4		w+
+				Read-write mode. Overwrites the existing file if the file exists. 
+				If the file does not exist, creates a new file for reading and writing.
+
+		5		a
+				Write-only mode. The file pointer is at the end of the file if the file exists. 
+				That is, the file is in the append mode. If the file does not exist, it creates a new file for writing.
+
+		6		a+
+				Read and write mode. The file pointer is at the end of the file if the file exists. 
+				The file opens in the append mode. 
+				If the file does not exist, it creates a new file for reading and writing.
+
