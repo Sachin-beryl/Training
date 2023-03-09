@@ -106,3 +106,66 @@
 			   puts e.backtrace.inspect  
 			end  
 	
+			
+	3). Using ensure Statement :-
+	
+	 -> Sometimes, you need to guarantee that some processing is done at the end of a block of code, 
+	 -> regardless of whether an exception was raised.
+	 -> The ensure clause does just this. 
+	 -> ensure goes after the last rescue clause and contains a chunk of code that will always be executed as the block terminates. 
+	 -> It doesn't matter if the block exits normally, if it raises and rescues an exception, 
+	 -> or if it is terminated by an uncaught exception, the ensure block will get run.
+
+		Syntax:-
+			begin 
+			   #.. process 
+			   #..raise exception
+			rescue 
+			   #.. handle error 
+			ensure 
+			   #.. finally ensure execution
+			   #.. This will always execute.
+			end
+
+		eg:-
+			begin
+			   raise 'A test exception.'
+			rescue Exception => e
+			   puts e.message
+			   puts e.backtrace.inspect
+			ensure				#at last it will execute .
+			   puts "Ensuring execution"
+			end
+			
+	4). Using else Statement :-
+	
+		-> If the else clause is present, it goes after the rescue clauses and before any ensure.
+		-> The body of an else clause is executed only if no exceptions are raised by the main body of code.
+
+		Syntax :-
+			begin 
+			   #.. process 
+			   #..raise exception
+			rescue 
+			   # .. handle error
+			else
+			   #.. executes if there is no exception
+			ensure 
+			   #.. finally ensure execution
+			   #.. This will always execute.
+			end
+		
+		eg :-
+			begin
+			   # raise 'A test exception.'
+			   puts "I'm not raising exception"
+			rescue Exception => e
+			   puts e.message
+			   puts e.backtrace.inspect
+			else
+			   puts "Congratulations-- no errors!"
+			ensure
+			   puts "Ensuring execution"
+			end
+			
+	
