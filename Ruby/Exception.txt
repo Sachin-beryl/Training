@@ -168,4 +168,34 @@
 			   puts "Ensuring execution"
 			end
 			
+	5). Catch and Throw :-
 	
+		-> While the exception mechanism of raise and rescue is great for abandoning the execution when things go wrong, 
+		-> it's sometimes nice to be able to jump out of some deeply nested construct during normal processing. 
+		-> This is where catch and throw come in handy.
+		-> The catch defines a block that is labeled with the given name (which may be a Symbol or a String). 
+		-> The block is executed normally until a throw is encountered.
+
+		Syntax:-
+			throw :lablename
+			#.. this will not be executed
+			catch :lablename do
+			#.. matching catch will be executed after a throw is encountered.
+			end
+
+			OR
+
+			throw :lablename condition
+			#.. this will not be executed
+			catch :lablename do
+			#.. matching catch will be executed after a throw is encountered.
+			end
+			
+		eg:-
+			exception = catch(:divide) do
+			  number = rand(2)                  #random number 0 and 1
+			  throw :divide, 10 if number == 0  #if 0 then print 10
+			  number 
+			end
+
+			puts exception
