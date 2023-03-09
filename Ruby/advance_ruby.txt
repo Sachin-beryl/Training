@@ -1,0 +1,112 @@
+----------------------------------------------------------- Advance ruby ---------------------------------------------------------------
+
+ 1). Access Control :-
+	
+	a). Public Methods − Public methods can be called by anyone. 
+			     Methods are public by default except for initialize, which is always private.
+
+	b). Private Methods − Private methods cannot be accessed, or even viewed from outside the class. 
+			      Only the class methods can access private members.
+
+	c). Protected Methods − A protected method can be invoked only by objects of the defining class and its subclasses. 
+				 Access is kept within the family.
+
+		eg:-
+		class Box
+		   def initialize(w,h)		# constructor method
+		      @width, @height = w, h
+		   end
+
+		   def getArea			 # instance method by default it is public.
+		      getWidth() * getHeight
+		   end
+
+		   def getWidth		# define private accessor methods
+		      @width
+		   end
+		   
+		   def getHeight		# define private accessor methods
+		      @height
+		   end
+		   
+		   private :getWidth, :getHeight  # make them private
+
+		   def printArea			 # instance method to print area
+		      @area = getWidth() * getHeight
+		      puts "Big box area is : #@area"
+		   end
+
+		   protected :printArea	# make method protected
+		end
+
+
+		box = Box.new(10, 20)
+
+		a = box.getArea()			# call instance methods
+		puts "Area of the box is : #{a}"
+
+		# box.printArea()	# if we try to call protected methods it will throw error
+		
+ 2). Inheritance :-
+ 
+ 	-> Inheritance also provides an opportunity to reuse the code functionality and fast implementation time 
+ 	-> but unfortunately Ruby does not support multiple levels of inheritances but Ruby supports mixins. 
+ 	-> A mixin is like a specialized implementation of multiple inheritance in which only the interface portion is inherited.
+ 	-> The syntax for extending a class is simple. Just add a < character and the name of the superclass to your class statement.
+ 	
+ 		eg:-
+ 		class Box			#parent class
+		  def initialize(w,h)
+		    @width, @height = w, h
+		  end
+		  def getArea
+		    @width * @height
+		  end
+		end
+
+		class BigBox < Box		#child class extending parent class
+		  def printArea
+		    @area = @width * @height
+		    puts "Big box area is : #@area"
+		  end
+		end
+
+		box = BigBox.new(5, 7)	#object of child class.
+		box.printArea()
+ 	
+ 	a). Methods Overriding :-
+ 	
+	-> Though you can add new functionality in a derived class, 
+	-> but sometimes you would like to change the behavior of already defined method in a parent class. 
+	-> You can do so simply by keeping the method name same and overriding the functionality of the method.
+	
+		eg:-
+		class Box			#parent class
+		  def initialize(w,h)
+		    @width, @height = w, h
+		  end
+		  def getArea
+		    puts "parent class box area = #{@width * @height}"
+		  end
+		end
+
+		class BigBox < Box		#child class extending parent class
+		  def getArea         #overriding the method 
+		    @area = @width * @height
+		    puts "child class box area is = #@area"
+		  end
+		end
+
+		box = BigBox.new(5, 7)	#object of child class.
+		box.getArea() 
+		
+ 3). Class Information :-
+ 
+	-> If class definitions are executable code, this implies that they execute in the context of some object: 
+	-> self must reference something. Let's find out what it is.
+
+	eg:-
+		class Box
+		   puts "Type of self = #{self.type}"      #return class as type
+		   puts "Name of self = #{self.name}"      #return Box as name of class
+		end
