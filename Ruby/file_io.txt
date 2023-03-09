@@ -61,4 +61,221 @@
 				Read and write mode. The file pointer is at the end of the file if the file exists. 
 				The file opens in the append mode. 
 				If the file does not exist, it creates a new file for reading and writing.
+				
+	d). Reading and Writing Files :-
+	
+	-> The same methods that we've been using for 'simple' I/O are available for all file objects. 
+	-> So, gets reads a line from standard input, and aFile.gets reads a line from the file object aFile.
+
+	e). The sysread Method :-
+	
+	-> You can use the method sysread to read the contents of a file. 
+	-> You can open the file in any of the modes when using the method sysread.
+	
+		eg:-
+		aFile = File.new("test3.rb", "r")	#reading file.
+		if aFile
+		  content = aFile.sysread(50)		#read first 50 characters of the file.
+		  puts content
+		else
+		  puts "Unable to open file!"
+		end
+		
+	f). The syswrite Method :-
+	
+	-> You can use the method syswrite to write the contents into a file. 
+	-> You need to open the file in write mode when using the method syswrite.
+	
+		eg:-
+		afile = File.new("/home/beryl/Music/sample.txt","r+")
+		if afile
+		  afile.syswrite("making change in file using the syswrite in file I/O")
+		else
+		  puts "unable to open file!"
+		end
+		
+	g). The each_byte Method :-
+	
+	-> This method belongs to the class File. 
+	-> The method each_byte is always associated with a block.
+	
+		eg:-
+		afile = File.new("/home/beryl/Music/sample.txt","r+")
+		if afile
+		  afile.each_byte{|ch| putc ch; putc ?.}   # place "." after each character, place is also a character.
+		else
+		  puts "unable to open file!"
+		end
+		
+	h). The IO.readlines Method (convert into array form):-
+	
+	-> The class File is a subclass of the class IO. 
+	-> The class IO also has some methods, which can be used to manipulate files.
+	-> One of the IO class methods is IO.readlines. This method returns the contents of the file line by line.
+	
+		eg:-
+		arr = IO.readlines("/home/beryl/Music/sample.txt")
+		puts arr[0]		#arr[0] will contain the first line
+		puts arr[1]		#arr[1] will contain the second line of the file.
+		
+	i). The IO.foreach Method:-
+	
+	-> This method also returns output line by line. 
+	-> The difference between the method foreach and the method readlines is that the method foreach is associated with a block. 		-> However, unlike the method readlines, the method foreach does not return an array.
+	
+		eg:-
+		IO.foreach("input.txt"){|block| puts block}
+
+	j). Renaming and Deleting Files :-
+		
+		eg:-
+		rename -> File.rename( "test1.txt", "test2.txt" )
+		delete -> File.delete("test2.txt")
+		
+	k). File Modes and Ownership :-
+	
+	-> Use the chmod method with a mask to change the mode or permissions/access list of a file −
+
+		eg:-
+		file = File.new( "test.txt", "w" )
+		file.chmod( 0755 ) 
+		
+		Sr.No.	Mask & Description
+		1	0700 ,rwx mask for owner
+
+		2	0400 ,r for owner
+
+		3	0200 ,w for owner
+
+		4	0100 ,x for owner
+
+		5	0070 ,rwx mask for group
+
+		6	0040 ,r for group
+
+		7	0020 ,w for group
+
+		8	0010 ,x for group
+
+		9	0007 ,rwx mask for other
+
+		10	0004 ,r for other
+
+		11	0002 ,w for other
+
+		12	0001 ,x for other
+
+		13	4000 ,Set user ID on execution
+
+		14	2000 ,Set group ID on execution
+
+		15	1000 ,Save swapped text, even after use
+		
+	l). File Inquiries :-
+		
+		*). The following command tests whether a file exists before opening it −
+
+			eg:- File.open("file.rb") if File::exists?( "file.rb" )
+		
+		*). The following command inquire whether the file is really a file −
+
+			eg:- File.file?( "text.txt" ) 
+		
+		*). The following command finds out if the given file name is a directory −
+
+			eg:- File::directory?( "/usr/local/bin" ) 
+
+				# a file
+				File::directory?( "file.rb" ) # => false
+				
+		*). The following command finds whether the file is readable, writable or executable −
+
+			eg:- File.readable?( "test.txt" )   # => true
+			     File.writable?( "test.txt" )   # => true
+			     File.executable?( "test.txt" ) # => false
+		
+		*). The following command finds whether the file has zero size or not −
+
+			eg:- e.zero?( "test.txt" )      # => true
+			
+		*). The following command returns size of the file −
+
+			eg:- File.size?( "text.txt" )     # => 1002
+		
+		*). The following command can be used to find out a type of file −
+
+			eg:- File::ftype( "test.txt" )     # => file
+			
+			::--The ftype method identifies the type of the file by returning one of the following 
+			::--file, directory, characterSpecial, blockSpecial, fifo, link, socket, or unknown.
+
+		*). The following command can be used to find when a file was created, modified, or last accessed −
+
+			eg:- File::ctime( "test.txt" ) # => Fri May 09 10:06:37 -0700 2008	#create time
+			     File::mtime( "text.txt" ) # => Fri May 09 10:44:44 -0700 2008	#modified time
+			     File::atime( "text.txt" ) # => Fri May 09 10:45:01 -0700 2008	#accessed time
+			     
+	m). Navigating Through Directories :-
+	
+		*). To change directory within a Ruby program, use Dir.chdir as follows.
+		
+			eg:- Dir.chdir("/usr/bin")
+		
+			note :- puts Dir.pwd # This will return something like /usr/bin
+			
+		*). You can get a list of the files and directories within a specific directory using Dir.entries −
+
+			eg:- puts Dir.entries("/usr/bin").join(' ')
+			
+		*). Dir.entries returns an array with all the entries within the specified directory. 
+		    Dir.foreach provides the same feature −
+
+			eg:- Dir.foreach("/usr/bin") do |entry|
+			       puts entry
+			     end
+			     
+		*). An even more concise way of getting directory listings is by using Dir's class array method −
+
+			eg:- Dir["/usr/bin/*"]
+			
+		*). Creating a Directory
+		
+			eg:- Dir.mkdir("mynewdir")
+			-> You can also set permissions on a new directory (not one that already exists) with mkdir −
+			   eg:- Dir.mkdir( "mynewdir", 755 )
+			
+		*). Deleting a Directory
+		 -> he Dir.delete can be used to delete a directory. 
+		 -> The Dir.unlink and Dir.rmdir performs exactly the same function and are provided for convenience.
+
+			eg:- Dir.delete("testdir")
+			
+	n). Creating Files & Temporary Directories :-
+	
+	-> Temporary files are those that might be created briefly during a program's execution 
+	   but aren't a permanent store of information.
+
+	-> Dir.tmpdir provides the path to the temporary directory on the current system, 
+	   although the method is not available by default. 
+	   To make Dir.tmpdir available it's necessary to use require 'tmpdir'.
+
+		eg:-
+		You can use Dir.tmpdir with File.join to create a platform-independent temporary file −
+
+		require 'tmpdir'
+		   tempfilename = File.join(Dir.tmpdir, "tingtong")
+		   tempfile = File.new(tempfilename, "w")
+		   tempfile.puts "This is a temporary file"
+		   tempfile.close
+		   File.delete(tempfilename)
+
+	-> Ruby's standard library also includes a library called Tempfile that can create temporary files for you −
+
+		eg:-
+		require 'tempfile'
+		   f = Tempfile.new('tingtong')
+		   f.puts "Hello"
+		   puts f.path
+		   f.close
+
 
