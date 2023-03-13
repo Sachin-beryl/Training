@@ -273,3 +273,64 @@
 		# Close the database connection
 		conn.close
 
+-----------------------------------------------------------Ruby - Built-in Functions--------------------------------------------------
+
+ 1). Functions for Numbers :-
+ 
+	Here is a list of Built-in Functions related to number :-
+	
+	Sr.No.		Methods & Description
+	1		n + num
+			n - num
+			n * num
+			n / num
+
+	2		n % num
+
+	3		n ** num    # Exponentiation.
+
+	4		n.abs	    # Returns the absolute value of n.
+
+	5		n.ceil	    # Returns the smallest integer greater than or equal to n.
+
+	6		n.divmod( num)    # Returns an array containing the quotient and modulus from dividing n by num.
+
+	8		n.floor	   # Returns the largest integer less than or equal to n.
+
+	9		n.integer? 	   # Returns true if n is an integer.
+
+	10		n.modulo( num)	   # Returns the modulus obtained by dividing n by num and rounding the quotient with floor
+
+	11		n.nonzero?	   # Returns n if it isn't zero, otherwise nil.
+
+	12		n.remainder( num)  # Returns the remainder obtained by dividing n by num and removing decimals from the quotient. 
+
+	13		n.round	   # Returns n rounded to the nearest integer.
+
+	14		n.truncate	   # Returns n as an integer with decimals removed.
+
+	15		n.zero?	   # Returns zero if n is 0.
+
+	16		n & num
+			n | num
+			n ^ num	   # Bitwise operations: AND, OR, XOR, and inversion.
+
+	17		n << num
+			n >> num	   # Bitwise left shift and right shift.
+
+	18		n[num]		   # Returns the value of the numth bit from the least significant bit, which is n[0].
+
+	19		n.chr		   # Returns a string containing the character for the character code n.
+
+	20		n.next
+			n.succ		   # Returns the next integer following n. Equivalent to n + 1.
+
+	21		n.size		   # Returns the number of bytes in the machine representation of n.
+
+	22		n.step( upto, step) {|n| ...}	# Iterates the block from n to upto, incrementing by step each time.
+
+	23		n.times {|n| ...}		# Iterates the block n times.
+
+	24		n.to_f			   # Float conversion may lose precision information.
+
+	25		n.to_int		   # Returns n after converting into interger number.
