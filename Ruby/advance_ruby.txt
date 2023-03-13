@@ -110,3 +110,83 @@
 		   puts "Type of self = #{self.type}"      #return class as type
 		   puts "Name of self = #{self.name}"      #return Box as name of class
 		end
+		
+-------------------------------------------------------------Regular Expressions------------------------------------------------------
+
+ -> A regular expression is a special sequence of characters that helps you match or 
+ -> find other strings or sets of strings using a specialized syntax held in a pattern.
+ -> A regular expression literal is a pattern between slashes or between arbitrary delimiters followed by %r.
+ 
+ Syntax:-
+	/pattern/
+	/pattern/im    # option can be specified
+	%r!/usr/local! # general delimited regular expression
+	
+ eg:-
+ 	line1 = "Cats are smarter than dogs";
+	line2 = "Dogs also like meat";
+
+	if ( line1 =~ /Cats(.*)/ )
+	   puts "Line1 contains Cats"
+	end
+	if ( line2 =~ /Cats(.*)/ )
+	   puts "Line2 contains  Dogs"
+	end
+	
+	
+	1). global (g) :-
+	
+		eg:- /ran/g  #search for every ran word in string.
+		
+	2). + :- find 1 or more same character which are consecutive.
+	
+		eg:- /e+/g   #search for consecutive "e"
+		
+	3). ? :- character may be present or not.
+	
+		eg:- /ea?/g  #a may be present or not.
+		
+	4). * :- find character with 0 or more occurance.
+	
+		eg:- /re*/g  # find 0 or more 'e' with 'r'.
+		
+	5). w :- find any character word.
+	
+		eg:- /\w/g
+		
+	6). s :- find space character.
+	
+		eg:- /\s/g
+		
+	7). [] :- word start with this.
+	
+		eg:- /[fc]/g    #find word start with fc.
+		
+	8). word start and end with .
+	
+		eg :- /[fc]at/g   #word start with fc and end with at with any number of character between them.
+		
+	9). using range.
+	
+		eg :- /[a-zA-Z]at/g   #start character in range a-z , A-Z and end with at.
+		
+	10). ^ :- match first element .
+	
+		eg :- /^[Tt]he/g      #if first word is The or the then return true.
+		
+	11). $ :- match last element.
+	
+		eg :- /\.$/gm         # $ for last word and m for multiline.
+		
+	12). \d :- for integer value.
+	
+		eg :- /\d/g           #find integer value.
+		
+	13). integer with range.
+	
+		eg :- /\d{10}/g       # 10 integer values.
+		
+	14). | :- for "or" condition.
+	
+		eg :- /(t|e|r){2,3}/g # matches between 2 and 3 words.
+		 
