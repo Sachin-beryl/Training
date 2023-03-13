@@ -190,3 +190,86 @@
 	
 		eg :- /(t|e|r){2,3}/g # matches between 2 and 3 words.
 		 
+		 
+		 
+------------------------------------------------------- Ruby/DBI - Database Access --------------------------------------------------
+
+ -> DBI stands for Database Independent Interface for Ruby, 
+ -> which means DBI provides an abstraction layer between the Ruby code and the underlying database, 
+ -> allowing you to switch database implementations really easily. 
+ -> It defines a set of methods, variables, and conventions that provide a consistent database interface, independent of the actual database being used.
+ 
+ 1). The general architecture for Ruby DBI uses two layers −
+
+	a). The database interface (DBI) layer. 
+	 -> This layer is database independent and provides a set of common access methods that are used the same way regardless of the type of database server with which you're communicating.
+
+	b). The database driver (DBD) layer. 
+	 -> This layer is database dependent; different drivers provide access to different database engines. 
+	 -> There is one driver for MySQL, another for PostgreSQL, another for InterBase, another for Oracle, and so forth. 
+	 -> Each driver interprets requests from the DBI layer and maps them onto requests appropriate for a given type of database server.
+
+ 2). To access PostgreSQL databases on Ubuntu using Ruby, you need to install the pg gem, 
+  -> which provides a Ruby interface to PostgreSQL. Here are the basic steps to connect to a PostgreSQL database using Ruby on Ubuntu:
+
+	step1 :- Install the PostgreSQL client library by running the following command in the terminal:
+
+		sudo apt-get install libpq-dev
+		
+	step2 :- Install the pg gem by running the following command in the terminal:
+
+		gem install pg
+		
+	step3 :- Ruby code to access a PostgreSQL database
+
+	code:-	require 'pg'
+
+		# Set up the connection parameters
+		conn = PG.connect(
+		  dbname: 'beryl_systems',
+		  user: 'postgres',
+		  password: 'changeit',
+		  host: 'localhost',
+		  port: 5432 # This is the default port for PostgreSQL
+		)
+
+		# Execute a query and retrieve the results
+		result = conn.exec('SELECT * FROM employee')
+		result.each do |row|
+		  puts row.inspect
+		end
+
+		# Close the connection
+		conn.close
+
+	step4 :- #Inserting values in database table using ruby.
+
+	code :- require 'pg'
+
+		# Connect to the database
+		conn = PG.connect(
+		  dbname: 'beryl_systems', 
+		  user: 'postgres', 
+		  password: 'changeit',
+		  host: 'localhost',
+		  port: 5432
+		)
+
+		# Define the SQL statement to insert a row into the table , $1 and so on are used as place holder.
+		sql = "INSERT INTO employee (first_name, last_name, gender, date_of_birth) VALUES ($1, $2, $3, $4)"
+
+		# Define the values to be inserted
+		values = [
+		  ['Akash', 'sharma', 'male','2002-07-09'],
+		  ['vikash', 'singh', 'male','1998-05-23'],
+		  ['simran', 'tandan', 'female','2001-10-6']
+		]
+
+		# Execute the SQL statement with the values
+		values.each do |row_values|
+		  conn.exec_params(sql, row_values)
+		end
+
+		# Close the database connection
+		conn.close
+
