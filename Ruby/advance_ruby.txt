@@ -334,3 +334,57 @@
 	24		n.to_f			   # Float conversion may lose precision information.
 
 	25		n.to_int		   # Returns n after converting into interger number.
+	
+	
+------------------------------------------------------ Sending Email using Ruby - SMTP -----------------------------------------------
+
+ -> Simple Mail Transfer Protocol (SMTP) is a protocol, which handles sending e-mail and routing e-mail between mail servers.
+ 
+ 1). How To Set Up an SMTP Server on Ubuntu :-
+ 
+ 	Step 1: Update Your Server
+ 		-> sudo apt update
+ 		
+ 	step 2: Install Postfix
+ 		-> sudo apt install postfix
+ 		
+ 	note :- A Postfix configuration window will pop up in the process of installation.
+ 	-> The configuration comes with Internet Site as the default mail configuration type. 
+ 	-> That is the recommended type of configuration for this particular purpose. 
+ 	-> Thus, you should press TAB, select OK, and then press ENTER.
+ 		
+ 	step 3: Configure Postfix
+ 	 
+ 	 a). back up the file before you make any edits. You may need the original version.
+		-> sudo cp /etc/postfix/main.cf /etc/postfix/main.cf.backup
+
+	 b). You can then access the file using the following commands.
+	 	-> sudo nano /etc/postfix/main.cf
+
+		-> after opening the file in nano editor ,change the inet_interface "all" to "loopback-only"
+		
+	step 4: Apply Changes and Start the Postfix Server.
+		-> to save file follow the instruction given in nano editor.
+		-> to enable Postfix :-
+			:- sudo systemctl enable postfix
+			
+	step 5: Configure Firewall
+		-> sudo ufw allow "Postfix"
+		-> sudo ufw allow "Postfix SMTPS"
+		-> sudo ufw allow "Postfix Submission"
+		
+	step 6: Test the STMP server
+		-> sudo telnet 127.0.0.1 25
+		
+		if show Connected to localhost, means connection successful. 
+		
+	step 7: install the mail-sending packages of Postfix
+		-> sudo apt install bsd-mailx
+		-> sudo mailx -r test@linhint-s "SUBJECT"[Email_address]
+
+ 	
+ 		
+ 	
+
+		
+	
