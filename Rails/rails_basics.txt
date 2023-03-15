@@ -49,5 +49,45 @@
  	
  		-> rails server or rails s
 
+ 7). If you enter a new database , which is not present on local system then use,
+ 
+ 	-> For create database on local machine corresponding to project :
+		rake db:create		#It creates database as name in database.yml of project to local machine.
 
+	-> For drop or delete the database , 
+		rack db:drop 
+		
+ 8). Say "hello, rails"
+ 
+ 	-> To get Rails saying "Hello", you need to create at minimum a route, a controller with an action, and a view. 
+ 	-> A route maps a request to a controller action. A controller action performs the necessary work to handle the request, 
+ 	-> and prepares any data for the view. A view displays data in a desired format.
+ 	
+ 	*). adding a route to our routes file, config/routes.rb, at the top of the Rails.application.routes.draw
+ 	
+ 		eg :- Rails.application.routes.draw do
+		        get "articles/index"
 
+		        # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+		      end
+		      
+	*). The route above declares that GET /articles requests are mapped to the index action of ArticlesController.
+
+		-> To create ArticlesController and its index action, we'll run the controller generator 
+			(with the --skip-routes option because we already have an appropriate route).
+
+		:- rails generate controller Articles index --skip-routes
+		
+	NOTE :- to run the hello rails provide full path as "127.0.0.1:3000/articles/index"    
+	
+ 9). Setting the Application Home Page :-
+ 
+	-> At the moment, http://localhost:3000 still displays a page with the Ruby on Rails logo. 
+	-> Let's display our "Hello, Rails!" text at http://localhost:3000 as well. 
+	-> To do so, we will add a route that maps the root path of our application to the appropriate controller and action.
+
+	Let's open config/routes.rb, and add the following root route to the top of the Rails.application.routes.draw block:
+
+	eg:-	Rails.application.routes.draw do
+		  root "articles#index"		# here '#' symbol is used to point as root .
+		end
