@@ -1,0 +1,53 @@
+------------------------------------------------------------ Rails basics -----------------------------------------------------------------
+
+ 1). What is Rails?
+	-> An extremely productive web-application framework.
+	-> You could develop a web application at least ten times faster with Rails than you could with a typical Java framework.
+	-> An open source Ruby framework for developing database-backed web applications.
+	-> Configure your code with Database Schema.
+	-> No compilation phase required.
+	
+	latest version -> rails 7.0.4.3
+	
+ 2). Full Stack Framework :-
+	-> Includes everything needed to create a database-driven web application, using the Model-View-Controller pattern.
+	-> Being a full-stack framework means all the layers are built to work seamlessly together with less code.
+	-> Requires fewer lines of code than other frameworks.
+	
+ 3). Three environments :-
+	-> Rails gives you three default environments: development, testing, and production. 
+	-> Each behaves slightly differently, making your entire software development cycle easier.
+	
+ 4). Rails installation :-
+ 
+ 	a). To install Rails, use the gem install command provided by RubyGems:
+		-> gem install rails      # automatically install latest version.
+
+	b). To verify that you have everything installed correctly, you should be able to run the following in a new terminal:
+		-> rails --version
+		
+ 5). Creating new application :-
+ 
+ 	-> rails new application_name     #it will create application with sql database
+ 	
+ 	-> rails new application_name -d postgresql    #it will create application with specified database.
+ 	
+ 	-> Setup config for database.yml :-
+
+		in <project-name>/config/database.yml
+
+		uncomment and edit the information ,
+		database :
+		username :
+		password :
+		host :
+		port :
+	 	
+ 6). start the web server :-
+ 	-> you need to start a web server on your development machine. 
+ 	-> You can do this by running the following command in the blog directory:
+ 	
+ 		-> rails server or rails s
+
+
+
