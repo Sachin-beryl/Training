@@ -1,0 +1,180 @@
+------------------------------------------------------------ Rails basics -----------------------------------------------------------------
+
+ 1). What is Rails?
+	-> An extremely productive web-application framework.
+	-> You could develop a web application at least ten times faster with Rails than you could with a typical Java framework.
+	-> An open source Ruby framework for developing database-backed web applications.
+	-> Configure your code with Database Schema.
+	-> No compilation phase required.
+	
+	latest version -> rails 7.0.4.3
+	
+ 2). Full Stack Framework :-
+	-> Includes everything needed to create a database-driven web application, using the Model-View-Controller pattern.
+	-> Being a full-stack framework means all the layers are built to work seamlessly together with less code.
+	-> Requires fewer lines of code than other frameworks.
+	
+ 3). Three environments :-
+	-> Rails gives you three default environments: development, testing, and production. 
+	-> Each behaves slightly differently, making your entire software development cycle easier.
+	
+ 4). Rails installation :-
+ 
+ 	a). To install Rails, use the gem install command provided by RubyGems:
+		-> gem install rails      # automatically install latest version.
+
+	b). To verify that you have everything installed correctly, you should be able to run the following in a new terminal:
+		-> rails --version
+		
+ 5). Creating new application :-
+ 
+ 	-> rails new application_name     #it will create application with sql database
+ 	
+ 	-> rails new application_name -d postgresql    #it will create application with specified database.
+ 	
+ 	-> Setup config for database.yml :-
+
+		in <project-name>/config/database.yml
+
+		uncomment and edit the information ,
+		database :
+		username :
+		password :
+		host :
+		port :
+	 	
+ 6). start the web server :-
+ 	-> you need to start a web server on your development machine. 
+ 	-> You can do this by running the following command in the blog directory:
+ 	
+ 		-> rails server or rails s
+
+ 7). If you enter a new database , which is not present on local system then use,
+ 
+ 	-> For create database on local machine corresponding to project :
+		rake db:create		#It creates database as name in database.yml of project to local machine.
+
+	-> For drop or delete the database , 
+		rack db:drop 
+		
+ 8). Say "hello, rails"
+ 
+ 	-> To get Rails saying "Hello", you need to create at minimum a route, a controller with an action, and a view. 
+ 	-> A route maps a request to a controller action. A controller action performs the necessary work to handle the request, 
+ 	-> and prepares any data for the view. A view displays data in a desired format.
+ 	
+ 	*). adding a route to our routes file, config/routes.rb, at the top of the Rails.application.routes.draw
+ 	
+ 		eg :- Rails.application.routes.draw do
+		        get "articles/index"
+
+		        # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+		      end
+		      
+	*). The route above declares that GET /articles requests are mapped to the index action of ArticlesController.
+
+		-> To create ArticlesController and its index action, we'll run the controller generator 
+			(with the --skip-routes option because we already have an appropriate route).
+
+		:- rails generate controller Articles index --skip-routes
+		
+	NOTE :- to run the hello rails provide full path as "127.0.0.1:3000/articles/index"    
+	
+ 9). Setting the Application Home Page :-
+ 
+	-> At the moment, http://localhost:3000 still displays a page with the Ruby on Rails logo. 
+	-> Let's display our "Hello, Rails!" text at http://localhost:3000 as well. 
+	-> To do so, we will add a route that maps the root path of our application to the appropriate controller and action.
+
+	Let's open config/routes.rb, and add the following root route to the top of the Rails.application.routes.draw block:
+
+	eg:-	Rails.application.routes.draw do
+		  root "articles#index"		# here '#' symbol is used to point as root .
+		end
+		
+ 10). MVC (Model-view-Controller):-
+ 
+	-> So far, we've discussed routes, controllers, actions, and views. 
+	-> All of these are typical pieces of a web application that follows the MVC (Model-View-Controller) pattern. 
+	-> MVC is a design pattern that divides the responsibilities of an application to make it easier to reason about. 
+	-> Rails follows this design pattern by convention.
+
+	a). Generating a Model:-
+	
+		-> A model is a Ruby class that is used to represent data. 
+		-> Additionally, models can interact with the application's database through a feature of Rails called Active Record.
+		-> To define a model, we will use the model generator:
+		
+			:-rails generate model Article title:string body:text
+			
+			NOTE :- Model names are singular, because an instantiated model represents a single data record.
+			
+	b). Database Migrations:-
+	
+		-> Migrations are used to alter the structure of an application's database. 
+		-> In Rails applications, migrations are written in Ruby so that they can be database-agnostic.
+
+		    :-	class CreateArticles < ActiveRecord::Migration[7.0]	#this code is written at (db/migrate
+			  def change						#/<timestamp>_create_articles.rb)
+			    create_table :articles do |t|
+			      t.string :title
+			      t.text :body
+
+			      t.timestamps
+			    end
+			  end
+			end
+			
+		-> By default, the create_table method adds an id column as an auto-incrementing primary key. 
+		-> Inside the block for create_table, two columns are defined: title and body. 
+		   These were added by the generator because we included them in our generate command above.
+
+		-> On the last line of the block is a call to t.timestamps. 
+		   This method defines two additional columns named created_at and updated_at. As we will see, 
+		   Rails will manage these for us, setting the values when we create or update a model object.
+		   
+	  -> run our migration with the following command:
+		:- rails db:migrate
+		
+	c). Using a Model to Interact with the Database:-
+	
+		-> To play with our model a bit, we're going to use a feature of Rails called the console(irb).
+		-> it also automatically loads Rails and our application code.
+
+			-> Let's launch the console with this command:
+				:- rails console
+		
+			-> when prompt get opened, we can initialize a new Article object:
+				:- irb> article = Article.new(title: "Hello Rails", body: "I am on Rails!")
+	
+		-> It's important to note that we have only initialized this object. 
+		-> This object is not saved to the database at all. It's only available in the console at the moment. 
+		-> To save the object to the database, we must call save:
+
+			:- irb> article.save
+			
+			note :- automatic id,created_at and updated_at are generated by rails.
+			
+	d). Showing a List of Articles:-
+		-> Let's go back to our controller in app/controllers/articles_controller.rb, and change the index action to fetch all articles from the database:
+
+		   :-	class ArticlesController < ApplicationController
+			  def index
+			    @articles = Article.all
+			  end
+			end
+		
+		-> Controller instance variables can be accessed by the view. 
+		-> That means we can reference @articles in app/views/articles/index.html.erb.
+		-> Let's open that file, and replace its contents with:
+
+		   :-	<h1>Articles</h1>
+
+			<ul>
+			  <% @articles.each do |article| %>
+			    <li>
+			      <%= article.title %>
+			    </li>
+			  <% end %>
+			</ul>
+
