@@ -2,8 +2,8 @@
 
 def permu(str)
   arr = str.split('')
-  return arr.permutation.map{|element| element.join}
+  return arr.permutation.map{|element| element.join}.uniq    #uniq is used to remove duplicate
 end
 
-str = "abcd"
-p permu(str)
+p permu("aa")
+p permu("abcd")
