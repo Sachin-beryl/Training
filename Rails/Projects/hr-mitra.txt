@@ -1,0 +1,79 @@
+------------------------------------------------------------- hr-mitra ---------------------------------------------------------------
+
+ step1 :- Create Application:-
+ 	
+ 	-> Type in terminal
+ 	   a). application                  
+ 	   	:- rails new hr-mitra(application_name)
+ 	   	
+ 	   b). move to project folder         
+ 	   	:- bundle install
+ 	   	
+ 	   c). open project folder in vscode  
+ 	   	:- code .   
+ 	   	
+ 	   d). start rails server
+ 	   	:- rails server or rails s
+ 	   	
+ step2:- Creating custome controller in Rails.
+ 
+ 	-> work of controller
+ 		:- sense request from browser.
+ 		:- produce appropriate output.
+ 		
+ 	NOTE :- MVC works in App dir.
+ 	
+ 	a). app/controller
+ 		*). basics
+ 			:- Every controller must be inherited by ActionController::Base
+ 			:- controller file should be with proper naming
+ 				eg :- home_controller.rb
+ 				
+ 		*). Action methods
+ 			:- it is similer to plain ruby method but when we make it in controller then it is refer as "action".
+ 			:- when method present in controller and have routing then that method is called as action.
+ 			
+ 				:- In home_controller
+ 					class HomeController < ActionController::Base
+					  def index        #action
+					  end
+					end
+					
+ 			:- if you want to create method, which is not action then it must be private
+ 				
+ 				eg:-
+ 					private
+ 					def method
+ 					end
+ 					 
+ 	b). app/config/routes.rb
+ 		*). basics
+ 			i).   get -> when we want to retrive data.
+ 			ii).  post -> when to save resource on server first time.
+ 			iii). delete -> when to delete resource from server.
+ 			iv).  patch -> when to insert and update in existing resource. 
+ 			
+ 		use of get :-
+ 			1 way). get 'home/index'     #home is a controller name , index is a action method. (127.0.0.1/home/index)
+ 			2 way). get '/home' => 'home#index'       # (127.0.0.1/home)
+ 			
+ 		NOTE :- 406 error ,when no template(html)
+ 		     :- 200 when request successfully served.
+ 		     
+ 	c). app/views
+ 	
+ 		-> used to show content on browser. (means html,css etc content)
+ 		
+ 		a). Create dir with same name as controller name (home_controller)
+ 			:- dir id home
+ 			
+ 		b). move to app/views/home
+ 			-> now create html file with same name of action.
+ 				:- index.html.erb
+ 				
+ 			-> In index file.
+ 				:- <h1> Hello world </h1>
+ 				   <p> I am learning rails! </p> 
+ 			
+ 	
+ 	
