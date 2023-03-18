@@ -177,4 +177,67 @@
 			    </li>
 			  <% end %>
 			</ul>
+			
+ 11). CRUDit Where CRUDit Is Due :-
+ 
+	-> Almost all web applications involve CRUD (Create, Read, Update, and Delete) operations. 
+	-> You may even find that the majority of the work your application does is CRUD. 
+	-> Rails acknowledges this, and provides many features to help simplify code doing CRUD.
+	
+	a). Showing a Single Article
+		-> We currently have a view that lists all articles in our database. 
+		-> Let's add a new view that shows the title and body of a single article.
+
+		-> We start by adding a new route that maps to a new controller action (which we will add next). 
+		-> Open config/routes.rb, and insert the last route shown here:
+
+		    :-	Rails.application.routes.draw do
+			  root "articles#index"
+
+			  get "/articles", to: "articles#index"
+			  get "/articles/:id", to: "articles#show"
+			end
+			
+		-> The new route is another get route, but it has something extra in its path: :id. 
+		-> This designates a route parameter. A route parameter captures a segment of the request's path, and puts that value into the params Hash, which is accessible by the controller action. 
+		-> For example, when handling a request like GET http://localhost:3000/articles/1, 1 would be captured as the value for :id, which would then be accessible as params[:id] in the show action of ArticlesController.
+
+		-> Let's add that show action now, below the index action in app/controllers/articles_controller.rb:
+
+		    :-	class ArticlesController < ApplicationController
+			  def index
+			    @articles = Article.all
+			  end
+
+			  def show
+			    @article = Article.find(params[:id])
+			  end
+			end
+			
+		-> The show action calls Article.find (mentioned previously) with the ID captured by the route parameter. 
+		-> The returned article is stored in the @article instance variable, so it is accessible by the view. 
+		-> By default, the show action will render app/views/articles/show.html.erb.
+
+		   -> Let's create app/views/articles/show.html.erb, with the following contents:
+
+			<h1><%= @article.title %></h1>
+
+			<p><%= @article.body %></p>
+
+		    Now we can see the article when we visit http://localhost:3000/articles/1!
+
+		-> To finish up, let's add a convenient way to get to an article's page. 
+		-> We'll link each article's title in app/views/articles/index.html.erb to its page:
+
+		  :-	<h1>Articles</h1>
+
+			<ul>
+			  <% @articles.each do |article| %>
+			    <li>
+			      <a href="/articles/<%= article.id %>">
+				<%= article.title %>
+			      </a>
+			    </li>
+			  <% end %>
+			</ul>
 
