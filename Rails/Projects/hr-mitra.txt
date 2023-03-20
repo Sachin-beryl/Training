@@ -100,5 +100,52 @@
  		
  		NOTE :- <%= %> , rails tag to display on browser.
  	                <% %> , rails tag used not to display (like for loop).
+ 
+-----------------------------------------------------------------------------------------------------------------------------------	
  	
+ 1). Creating controller using Rails generator:-
+ 
+ 	-> rails generate controller <name_controller> action1 .. .. ..action(n)  or we can replace generate as g.
  	
+ 	:- beryl@beryl-HP-Pavilion-Notebook:~/Desktop/Training/Rails/Projects/hr-mitra$ rails g controller pages about_us contact_us privacy_policy terms_and_conditions
+ 	
+ 	-> here controller name = pages
+ 	        action names = about_us , contact_us, privacy_policy, terms_and_conditions
+ 	
+ 	-> After using generator this files are created:-
+ 	
+	      create  app/controllers/pages_controller.rb         # pages controller created
+	       route  get 'pages/about_us'			    # route created for all the actions with default http work "get".
+		      get 'pages/contact_us'
+		      get 'pages/privacy_policy'
+		      get 'pages/terms_and_conditions'
+	      invoke  erb
+	      create    app/views/pages			    # in view generator create pages dir and all html.erb files for actions.
+	      create    app/views/pages/about_us.html.erb
+	      create    app/views/pages/contact_us.html.erb
+	      create    app/views/pages/privacy_policy.html.erb
+	      create    app/views/pages/terms_and_conditions.html.erb
+	      invoke  test_unit
+	      create    test/controllers/pages_controller_test.rb
+	      invoke  helper
+	      create    app/helpers/pages_helper.rb
+	      invoke    test_unit
+ 
+ 	*). Customize routes to make url clean.
+ 	
+ 		Before :- Rails.application.routes.draw do
+			    get 'pages/about_us'
+			    get 'pages/contact_us'
+			    get 'pages/privacy_policy'
+			    get 'pages/terms_and_conditions'
+			    root "home#index"
+			  end
+			  
+		After :- Rails.application.routes.draw do
+			   root "home#index"
+			   get 'about' => 'pages#about_us'
+			   get 'contact' => 'pages#contact_us'
+			   get 'privacy-policy' => 'pages#privacy_policy'
+			   get 'terms-and-conditions' => 'pages#terms_and_conditions'
+			 end
+
