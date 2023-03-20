@@ -1,5 +1,7 @@
 <h1> New Article</h1>
 
+<%= render "form", article: @article %>  <%# use the partial via render%>
+
 <%= form_with model: @article do |form| %>  <%# form_with helper method instantiates a form builder%>
   <div>
     <%= form.label :title %><br>    <%# calling label and text_field method using form_with %>

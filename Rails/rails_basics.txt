@@ -341,5 +341,69 @@
 				  </div>
 				<% end %>
 				
-	NOTE :- http://localhost:3000/articles/new   to run the above content.
+			NOTE :- http://localhost:3000/articles/new   to run the above content.
+			
+		 -> "CR" is used from crud in (a) as read and (b) as create.
+		 
+ 	c). Updating an Article :-
+ 	
+ 	-> handled by a controller's edit and update actions. Let's add a typical implementation of these actions to app/controllers/articles_controller.rb
+ 	
+ 		:-       def edit
+			    @article = Article.find(params[:id])
+			  end
 
+			  def update
+			    @article = Article.find(params[:id])
+
+			    if @article.update(article_params)
+			      redirect_to @article
+			    else
+			      render :edit, status: :unprocessable_entity
+			    end
+			  end
+			  
+	-> Using Partials to Share View Code :-
+	
+	   :-     <%= form_with model: article do |form| %>   <%# partials are shared code that,s why article is a local variable not an instance variable %>
+		  <div>
+		    <%= form.label :title %><br>
+		    <%= form.text_field :title %>
+		    <% article.errors.full_messages_for(:title).each do |message| %>
+		      <div><%= message %></div>
+		    <%end%>
+		  </div>
+
+		  <div>
+		    <%= form.label :body %><br>
+		    <%= form.text_area :body %><br>
+		    <% article.errors.full_messages_for(:body).each do |message| %>
+		      <div><%= message %></div>
+		    <%end%>
+		  </div>
+
+		  <div>
+		    <%= form.submit %>
+		  </div>
+		<%end%>
+
+	-> Let's update app/views/articles/new.html.erb to use the partial via render:
+
+	  :-	<%= render "form", article: @article %>
+	  
+	-> create a very similar app/views/articles/edit.html.erb:
+
+	  :-	<h1>Edit Article</h1>
+		<%= render "form", article: @article %>
+	
+	-> let's link to the edit page from the bottom of app/views/articles/show.html.erb:
+
+	  :-	<h1><%= @article.title %></h1>
+		<p><%= @article.body %></p>
+
+		<ul>
+		  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+		</ul>
+
+
+	->>> To run above :-  http://localhost:3000/articles/1/edit
