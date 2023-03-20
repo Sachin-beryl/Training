@@ -75,5 +75,30 @@
  				:- <h1> Hello world </h1>
  				   <p> I am learning rails! </p> 
  			
+ step3 :- Custom root page:-
+ 
+ 	a). To change root-
+ 	
+ 		-> move to App/config/routes.rb
+ 		:- root "home#index"             #home isa controller and index is an action name.
+ 		
+ 		NOTE :- root always as a "get" type because other http work redirects to other pages.
+ 		
+ 	b). when we want to show on browser, we have to create instance variable in Controller->action -
+ 	
+ 		-> move to app/controllers/home_controller.rb
+ 		
+ 		:- def index
+		     @title_text = "Hello World"                                  #dynamic data into erb template.
+		     @subtitle_text = "I am using instance variable in Rails!"
+		   end
+		   
+	c). using instance variable in index.html.erb file using "rails tags".
+	
+		:- <h1><%= @title_text %> </h1>
+		   <p><%= @subtitle_text %></p>
+ 		
+ 		NOTE :- <%= %> , rails tag to display on browser.
+ 	                <% %> , rails tag used not to display (like for loop).
  	
  	
