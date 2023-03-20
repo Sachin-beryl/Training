@@ -240,4 +240,106 @@
 			    </li>
 			  <% end %>
 			</ul>
+			
+			
+	b). creating a new article :-
+		-> app/controller/article_controller.rb
+		
+		:-      class ArticlesController < ApplicationController
+			  def index
+			    @articles = Article.all
+			  end
+
+			  def show
+			    @article = Article.find(params[:id])
+			  end
+
+			  def def new
+			    @article = Article.new 
+			  end
+
+			  def create
+			    @article = Article.new(title: "...", body: "...")
+
+			    if @article.save
+			      redirect_to @article
+			    else
+			      render :new, status: :unprocessable_entity
+			    end
+			  end
+			end
+
+		->> using form builder :- used to build the form
+		
+		:-	<h1> New Article</h1>
+
+			<%= form_with model: @article do |form| %>  <%# form_with helper method instantiates a form builder%>
+			  <div>
+			    <%= form.label :title %><br>    <%# calling label and text_field method using form_with %>
+			    <%= form.text_field :title %>
+			  </div>
+
+			  <div>
+			    <%= form.label :body %><br>
+			    <%= form.text_area :body %>
+			  </div>
+
+			  <div>
+			    <%= form.submit%>
+			  </div>
+			<% end %>
+		
+		->> Using Strong Parameters :-
+			-> a private method in app/controllers/articles_controller.rb named article_params that filters params.
+			
+			:-        def create
+				    @article = Article.new(article_params)
+
+				    if @article.save
+				      redirect_to @article
+				    else
+				      render :new, status: :unprocessable_entity
+				    end
+				  end
+
+				  private
+				  def article_params
+				    params.require(:article).permit(:title, :body)
+				  end
+		
+		->> Validations and Displaying Error Messages :-
+			-> app/model/article.rb
+			
+			:-      class Article < ApplicationRecord
+				  validates :title, presence: true
+				  validates :body, presence: true, length: { minimum: 10 }
+				end
+				
+			-> modify app/views/articles/new.html.erb to display any error messages for title and body
+			
+			:-     <h1> New Article</h1>
+
+				<%= form_with model: @article do |form| %>  <%# form_with helper method instantiates a form builder%>
+				  <div>
+				    <%= form.label :title %><br>    <%# calling label and text_field method using form_with %>
+				    <%= form.text_field :title %>
+				    <% @article.errors.full_messages_for(:title).each do|message| %>   <%# full_message_for is used to return an array of user-friendly error message %>
+				      <div><%= message %></div>
+				    <%end%>
+				  </div>
+
+				  <div>
+				    <%= form.label :body %><br>
+				    <%= form.text_area :body %><br>
+				    <% @article.errors.full_messages_for(:body).each do |message| %>
+				      <div><%= message %></div>
+				    <%end%>
+				  </div>
+
+				  <div>
+				    <%= form.submit%>
+				  </div>
+				<% end %>
+				
+	NOTE :- http://localhost:3000/articles/new   to run the above content.
 

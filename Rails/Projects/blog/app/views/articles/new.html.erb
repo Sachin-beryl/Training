@@ -1,0 +1,23 @@
+<h1> New Article</h1>
+
+<%= form_with model: @article do |form| %>  <%# form_with helper method instantiates a form builder%>
+  <div>
+    <%= form.label :title %><br>    <%# calling label and text_field method using form_with %>
+    <%= form.text_field :title %>
+    <% @article.errors.full_messages_for(:title).each do|message| %>   <%# full_message_for is used to return an array of user-friendly error message %>
+      <div><%= message %></div>
+    <%end%>
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %><br>
+    <% @article.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <%end%>
+  </div>
+
+  <div>
+    <%= form.submit%>
+  </div>
+<% end %>
