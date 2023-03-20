@@ -148,4 +148,23 @@
 			   get 'privacy-policy' => 'pages#privacy_policy'
 			   get 'terms-and-conditions' => 'pages#terms_and_conditions'
 			 end
+			 
+--------------------------------------------------------------------------------------------------------------------------------------
+
+ 2). Working with link_to helper in Rails. (link pages)
+ 
+ -> app/views/home/index.html.erb
+ -> link_to helper are used to create an anchar tag.
+ 
+ 	1 way). <%= link_to 'About Us', about_path %>  # 'About Us' is the value to show as link on page and about_path is a path .
+ 	2 way). <%= link_to 'About Us', controller: :pages , action: :about_us %>
+ 	3 way). <%= link_to 'About us', '/about' %>
+ 	4 way). <%= link_to nil, about_path %>         # link show as /about
+ 	
+ 	*). more parameters in link_to:-
+ 	
+ 		-> <%= link_to 'About Us' , about_path , target: '_blank' , data: {name: 'about-page',resource: 'pages'} %> 
+ 		
+ 			:- target is used as to redirect to new tag, here target is blank page.
+ 			:- providing data for about page, must be in hash form.
 
