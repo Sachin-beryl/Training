@@ -407,3 +407,50 @@
 
 
 	->>> To run above :-  http://localhost:3000/articles/1/edit
+	
+	
+	d). Deleting an Article :-
+	
+	-> Deleting a resource is a simpler process than creating or updating. 
+	-> It only requires a route and a controller action. 
+	-> And our resourceful routing (resources :articles) already provides the route, which maps DELETE /articles/:id requests to the destroy action of ArticlesController.
+	
+	-> add a typical destroy action to app/controllers/articles_controller.rb, below the update action.
+	
+		:- def destroy
+		    @article = Article.find(params[:id])
+		    @article.destroy
+
+		    redirect_to root_path, status: :see_other
+		  end
+	
+	-> add a link at the bottom of app/views/articles/show.html.erb so that we can delete an article from its own page.
+	
+		:-      <ul>
+			  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+			  <li><%= link_to "Destroy", article_path(@article), data: {
+			    turbo_method: :delete,
+			    turbo_confirm: "Are you sure?"
+			    } %>
+			  </li>
+			</ul>
+				
+				
+	before deletion :-
+	
+	 id |        title        |                 body                 |         created_at         |         updated_at         
+	----+---------------------+--------------------------------------+----------------------------+----------------------------
+	  2 | abc                 | do something which you want          | 2023-03-20 10:40:32.395657 | 2023-03-20 10:40:32.395657
+	  3 | xyz                 | do something which i like           +| 2023-03-20 10:41:08.831019 | 2023-03-20 10:41:08.831019
+	    |                     |                                      |                            | 
+	  1 | Hello something one | I am editing something on Rails! one | 2023-03-15 12:51:18.658259 | 2023-03-20 12:13:05.629671
+	  
+	  
+	 After deletion :-
+	 
+	 id | title |           body            |         created_at         |         updated_at         
+	----+-------+---------------------------+----------------------------+----------------------------
+	  3 | xyz   | do something which i like+| 2023-03-20 10:41:08.831019 | 2023-03-20 10:41:08.831019
+	    |       |                           |                            | 
+
+
