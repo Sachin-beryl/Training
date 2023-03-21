@@ -592,12 +592,48 @@
 			<% end %>
 
 
+ -------------------------------------------------------------- Refactoring ---------------------------------------------------------
+ 
+ 1). Rendering partial collections:-
+ 
+ -> make a comment partial to extract showing all the comments for the article. Create the file app/views/comments/_comment.html.erb 
  	
- 	
+ 	:-      <p>
+		  <strong>Commenter:</strong>
+		  <%= comment.commenter %>
+		</p>
 
+		<p>
+		  <strong>Comment:</strong>
+		  <%= comment.body %>
+		</p>
 		
+ -> now replace comments content in show.html.erb with partial.
+ 
+ 	:-	<h2>Comments</h2>
+		<%= render @article.comments %>
+
+	
+ 2). Rendering a partial form:-     
     
+    -> Let us also move that new comment section out to its own partial. Again, you create a file app/views/comments/_form.html.erb
  
- 	
- 
+ 	:-      <%= form_with model: [ @article, @article.comments.build ] do |form| %>
+		  <p>
+		    <%= form.label :commenter %><br>
+		    <%= form.text_field :commenter %>
+		  </p>
+		  <p>
+		    <%= form.label :body %><br>
+		    <%= form.text_area :body %>
+		  </p>
+		  <p>
+		    <%= form.submit %>
+		  </p>
+		<% end %>
+
+    -> Now change content of "Add a comment" in show.html.erb
+    
+    	:-	<h2>Add a comment:</h2>
+		<%= render 'comments/form' %>
 
