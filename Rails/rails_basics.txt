@@ -665,6 +665,15 @@
 	      params.require(:comment).permit(:commenter, :body, :status)
 	    end
 
+--------------------------------------------------------------------------------------------------------------------------------------
+							Deleting Comments
+							
+ -> Another important feature of a blog is being able to delete spam comments. 
+ -> To do this, we need to implement a link of some sort in the view and a destroy action in the CommentsController.
+
+ -> add the delete link in the app/views/comments/_comment.html.erb partial.
+ 	
+ 	:- 
 
  
  
