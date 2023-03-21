@@ -636,4 +636,36 @@
     
     	:-	<h2>Add a comment:</h2>
 		<%= render 'comments/form' %>
+		
+		
+ 3). Using Concerns :-
+ 
+ -> concerns are modules that can be included in multiple classes to share common functionality. 
+ -> Concerns are a way to extract common methods and behavior into a reusable module. 
+ -> They allow you to encapsulate code in a way that makes it easy to reuse and maintain.
+ 
+ -> Comments may be hidden or visible. This could be represented using a status column in each model.
+ -> run the following migrations to add status to Articles and Comments:
+ 
+ 	:- rails generate migration AddStatusToArticles status:string
+	   rails generate migration AddStatusToComments status:string
+
+	:- update the database with the generated migrations:
+		-> rails db:migrate
+		
+ -> We also have to permit the :status key as part of the strong parameter, in app/controllers/articles_controller.rb
+ 
+ 	:-  private
+	    def article_params
+	      params.require(:article).permit(:title, :body, :status)
+	    end
+	    
+	:-  private
+	    def comment_params
+	      params.require(:comment).permit(:commenter, :body, :status)
+	    end
+
+
+ 
+ 
 
