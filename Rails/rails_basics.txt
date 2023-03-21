@@ -673,8 +673,26 @@
 
  -> add the delete link in the app/views/comments/_comment.html.erb partial.
  	
- 	:- 
+ 	:-        <p>
+		    <%= link_to "Destroy Comment", [comment.article, comment], data: {
+				  turbo_method: :delete,
+				  turbo_confirm: "Are you sure?"
+				} %>
+		  </p>
+		  
+ -> add a destroy action to our controller (app/controllers/comments_controller.rb):	
+ 
+ 	:-	  def destroy
+		    @article = Article.find(params[:article_id])
+		    @comment = @article.comments.find(params[:id])
+		    @comment.destroy
+		    redirect_to article_path(@article), status: :see_other
+		  end
 
+ -> Deleting Associated Objects
+   	--> If you delete an article, its associated comments will also need to be deleted.
+   	
+   	:- has_many :comments, dependent: :destroy
  
  
 
