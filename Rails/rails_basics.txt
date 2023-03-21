@@ -454,3 +454,150 @@
 	    |       |                           |                            | 
 
 
+----------------------------------------------------------- Adding a Second Model --------------------------------------------------
+
+ a). Generating a Model:-
+ 
+ 	:- rails generate model Comment commenter:string body:text article:references   #reference for foreign key
+ 	
+ 	-> After the above command 4 files are created.
+ 	
+ 	File							Purpose
+ 	
+	db/migrate/20140120201010_create_comments.rb		Migration to create the comments table in your database 
+								(your name will include a different timestamp)
+	
+	app/models/comment.rb					The Comment model
+	test/models/comment_test.rb				Testing harness for the comment model
+	test/fixtures/comments.yml				Sample comments for use in testing
+	
+	
+	-> db/schema.rb
+	
+		class CreateComments < ActiveRecord::Migration[7.0]
+		  def change
+		    create_table :comments do |t|
+		      t.string :commenter
+		      t.text :body
+		      t.references :article, null: false, foreign_key: true   #making foreign key of article model in Comment model.
+
+		      t.timestamps
+		    end
+		  end
+		end
+
+	-> rails db:migrate
+	
+	beryl@beryl-HP-Pavilion-Notebook:~/Desktop/Training/Rails/Projects/blog$ rails db:migrate
+	== 20230320131809 CreateComments: migrating ===================================
+	-- create_table(:comments)
+	   -> 0.0466s
+	== 20230320131809 CreateComments: migrated (0.0467s) ==========================
+
+ b). Associating Models:-
+ 
+ -> Active Record associations let you easily declare the relationship between two models.
+ 
+ -> for article and comments:-
+ 	Each comment belongs to one article.
+	One article can have many comments.
+	
+	1). associate comment with one article. (app/models/comment.rb)
+	
+		class Comment < ApplicationRecord     # already present  
+		  belongs_to :article
+		end
+
+	2). associate article with many comment. (app/models/article.rb)
+	
+		class Article < ApplicationRecord
+		  has_many :comments                  # article can have many comments.
+
+		  validates :title, presence: true
+		  validates :body, presence: true, length: { minimum: 10 }
+		end
+
+ c). Adding a route for comments:-
+ 	-> config/routes.rb
+ 	
+ 	:-      Rails.application.routes.draw do
+		  root "articles#index"
+
+		  resources :articles do      #adding a route so that Rails knows where we would like to navigate to see comments.
+		    resources :comments
+		  end
+		end
+		
+ d). Generating a Controller:-
+ 
+ 	:- rails g controller Comments
+ 	
+ 	-> After above command , some files are created.
+ 	
+ 	File/Directory						Purpose
+ 	
+	app/controllers/comments_controller.rb		The Comments controller
+	app/views/comments/					Views of the controller are stored here
+	test/controllers/comments_controller_test.rb		The test for the controller
+	app/helpers/comments_helper.rb			A view helper file
+ 	
+ 	
+ 	-> to let us make a new comment:
+ 		--App/views/articles/show.html.erb
+ 		
+ 		:-    <h2>Add a comment:</h2>
+			<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+			  <p>
+			    <%= form.label :commenter %><br>
+			    <%= form.text_field :commenter %>
+			  </p>
+			  <p>
+			    <%= form.label :body %><br>
+			    <%= form.text_area :body %>
+			  </p>
+			  <p>
+			    <%= form.submit %>
+			  </p>
+			<% end %>
+ 		
+ 	-> Let's wire up the create in app/controllers/comments_controller.rb:
+
+		:-     class CommentsController < ApplicationController
+			  def create
+			    @article = Article.find(params[:article_id])
+			    @comment = @article.comments.create(comment_params)
+			    redirect_to article_path(@article)
+			  end
+
+			  private
+			  def comment_params
+			    params.require(:comment).permit(:commenter, :body)
+			  end
+			end
+			
+	-> Once we have made the new comment, we send the user back to the original article using the article_path(@article) helper.
+	  As we have already seen, this calls the show action of the ArticlesController which in turn renders the show.html.erb template. 	 This is where we want the comment to show, so let's add that to the app/views/articles/show.html.erb.
+	  
+	  	:-	<h2>Comments</h2>
+			<% @article.comments.each do |comment| %>
+			  <p>
+			    <strong>Commenter:</strong>
+			    <%= comment.commenter %>
+			  </p>
+
+			  <p>
+			    <strong>comments:</strong>
+			    <%= comments.body %>
+			  <p>
+			<% end %>
+
+
+ 	
+ 	
+
+		
+    
+ 
+ 	
+ 
+
