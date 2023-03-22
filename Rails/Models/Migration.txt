@@ -1,0 +1,10 @@
+------------------------------------------------------------- Migration ----------------------------------------------------------------
+
+ 1). Creating a Migration:-
+ 
+ 	a). Creating a Standalone Migration
+ 	-> Migrations are stored as files in the db/migrate directory.
+ 	-> The name of the file is of the form YYYYMMDDHHMMSS_create_products.rb
+ 	
+ 	-> generate migration:-
+ 		:- generate migration AddPartNumberToProducts
