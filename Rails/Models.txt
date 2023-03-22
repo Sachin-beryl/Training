@@ -54,7 +54,108 @@
 			eg:- a comments_count column in an Article class that has many instances of Comment will cache the number of existent comments for each article.
 
 
-
+	c). Overriding the Naming Conventions:-
 	
+	-> suppose you have Product ApplicationRecord and products table in database with id, name attribute.
+	
+	-> ApplicationRecord inherits from ActiveRecord::Base, which defines a number of helpful methods. 
+	   You can use the ActiveRecord::Base.table_name= method to specify the table name that should be used:
+
+		:-      class Product < ApplicationRecord               #alter table name
+			  self.table_name = "my_products"
+			end
+	
+	   If you do so, you will have to define manually the class name that is hosting the fixtures (my_products.yml) 
+	   using the set_fixture_class method in your test definition:
+
+		:-	class ProductTest < ActiveSupport::TestCase     
+			  set_fixture_class my_products: Product
+			  fixtures :my_products
+			  # ...
+			end
+			
+	   It's also possible to override the column that should be used as the table's primary key using 
+	   the ActiveRecord::Base.primary_key= method:
+
+		:-	class Product < ApplicationRecord		  #alter primary key
+			  self.primary_key = "product_id"
+			end
+			
+	
+	d). CRUD: Reading and Writing Data:-
+	
+		1). Create
 		
+		-> The new method will return a new object while create will return the object and save it to the database.
+
+		eg: the create method call will create and save a new record into the database:
+			:- user = User.create(name: "David", occupation: "Code Artist")
+
+		  : Using the new method, an object can be instantiated without being saved:
+
+		    :-	user = User.new
+			user.name = "David"
+			user.occupation = "Code Artist"
+
+		    # A call to user.save will commit the record to the database.
+
+		-> Finally, if a block is provided, both create and new will yield the new object to that block for initialization:
+
+		    :-	user = User.new do |u|
+			  u.name = "David"
+			  u.occupation = "Code Artist"
+			end
+			
+		2). Read
 		
+		-> Active Record provides a rich API for accessing data within a database. 
+		   Below are a few examples of different data access methods provided by Active Record.
+
+			# return a collection with all users
+			:- users = User.all
+			
+			# return the first user
+			:- user = User.first
+			
+			# return the first user named David
+			:- david = User.find_by(name: 'David')
+			
+			# find all users named David who are Code Artists and sort by created_at in reverse chronological order
+			:- users = User.where(name: 'David', occupation: 'Code Artist').order(created_at: :desc)
+			
+		3). Update
+		
+		Once an Active Record object has been retrieved, its attributes can be modified and it can be saved to the database.
+
+		   *).	user = User.find_by(name: 'David')
+				user.name = 'Dave'
+				user.save
+			
+			:A shorthand for this is to use a hash mapping attribute names to the desired value, like so:
+
+				user = User.find_by(name: 'David')
+				user.update(name: 'Dave')
+	
+		   *).  If, on the other hand, you'd like to update several records in bulk, 
+		   	you may find the update_all class method useful:
+
+				User.update_all "max_login_attempts = 3, must_change_password = 'true'"
+
+			:This is the same as if you wrote:-
+				User.update(:all, max_login_attempts: 3, must_change_password: true)
+				
+		4). Delete
+		Likewise, once retrieved an Active Record object can be destroyed which removes it from the database.
+
+		   *).	user = User.find_by(name: 'David')
+			user.destroy
+		
+		   *). to delete several records in bulk, you may use destroy_by or destroy_all method:
+
+			# find and delete all users named David
+			User.destroy_by(name: 'David')
+
+			# delete all users
+			User.destroy_all
+						
+
