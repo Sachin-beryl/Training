@@ -158,4 +158,49 @@
 			# delete all users
 			User.destroy_all
 						
+	e). Validations :-
+
+	-> Validation is a very important issue to consider when persisting to the database, 
+	-> so the methods save and update take it into account when running: they return false when validation fails and 
+	-> they don't actually perform any operations on the database. All of these have a bang counterpart (that is, save! and update!)
+	-> which are stricter in that they raise the exception ActiveRecord::RecordInvalid if validation fails. 
+
+		class User < ApplicationRecord
+		  validates :name, presence: true
+		end
+
+		irb> user = User.new
+		irb> user.save
+		=> false
+		irb> user.save!
+		ActiveRecord::RecordInvalid: Validation failed: Name can't be blank
+		
+	f). Callbacks :-
+	-> Active Record callbacks allow you to attach code to certain events in the life-cycle of your models. 
+	-> This enables you to add behavior to your models by transparently executing code when those events occur, 
+	-> like when you create a new record, update it, destroy it, and so on.
+	
+	-> To define a callback in a Rails model, you can use the before_save, after_save, before_create, after_create, before_update, after_update, before_destroy, and after_destroy methods, which are provided by Rails.
+	
+	g). Migrations :-
+	-> Rails provides a domain-specific language for managing a database schema called migrations. 
+	-> Migrations are stored in files which are executed against any database that Active Record supports using rake.
+
+		class CreatePublications < ActiveRecord::Migration[7.0]
+		  def change
+		    create_table :publications do |t|
+		      t.string :title
+		      t.text :description
+		      t.references :publication_type
+		      t.references :publisher, polymorphic: true
+		      t.boolean :single_issue
+
+		      t.timestamps
+		    end
+		  end
+		end
+
+NOTE :-
+Rails keeps track of which files have been committed to the database and provides rollback features. To actually create the table, you'd run rails db:migrate, and to roll it back, rails db:rollback.
+
 
