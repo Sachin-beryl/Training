@@ -29,5 +29,43 @@
 		
 	-> Apply join on user and product model:
 		:- rails generate migration CreateJoinTableCustomerProduct user product
+		
+ 2). Writing a Migration:-
+ 
+ 	a). Creating a Table
 
+		class CreateUsers < ActiveRecord::Migration[6.1]
+		  def change
+		    create_table :users do |t|
+		      t.string :name, null: false 		 # the name column cannot be null
+		      t.string :email, index: { unique: true } # add an index to the email column with unique constraint
+		      t.integer :age, default: 18 		 # the age column has a default value of 18
+		      t.boolean :active, default: true 	 # the active column has a default value of true
+		      t.text :description, limit: 1000 	 # the description column has a maximum length of 1000 characters
+		      t.references :account, foreign_key: true, null: false # add a foreign key to the account table and make it required
+		      t.timestamps 				 # add timestamps for created_at and updated_at columns
+		    end
+		  end
+		end
+		
+	b). Creating a Join Table
+	
+	-> The migration method create_join_table creates an HABTM (has and belongs to many) join table.
+		:- create_join_table :products, :categories
 
+	-> which creates a categories_products table with two columns called category_id and product_id. 
+	   These columns have the option :null set to false by default. This can be overridden by specifying the :column_options option:
+
+		:- create_join_table :products, :categories, column_options: { null: true }
+
+	-> By default, the name of the join table comes from the union of the first two arguments provided to create_join_table, 
+	   in alphabetical order. To customize the name of the table, provide a :table_name option:
+
+		:- create_join_table :products, :categories, table_name: :categorization
+		
+	-> create_join_table also accepts a block, which you can use to add indices (which are not created by default) 
+
+		:- create_join_table :products, :categories do |t|
+		     t.index :product_id
+		     t.index :category_id
+		   end
