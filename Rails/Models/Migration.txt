@@ -20,3 +20,14 @@
 
 	-> migration to add details in products
 		:- rails g migration AddDetailsToProducts price:decimal
+		
+	-> create new model user for reference migration work:
+		:- rails g model user name:string gender:string
+		
+	-> Add user reference to product:
+		:- rails generate migration AddUserRefToProducts user:references
+		
+	-> Apply join on user and product model:
+		:- rails generate migration CreateJoinTableCustomerProduct user product
+
+
