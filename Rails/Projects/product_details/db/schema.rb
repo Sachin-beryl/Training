@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_23_161503) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_164657) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
@@ -22,25 +23,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_161503) do
   create_table "categorization", id: false, force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "category_id", null: false
-    t.index ["category_id"], name: "index_categorization_on_category_id"
     t.index ["product_id"], name: "index_categorization_on_product_id"
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "manager", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "price"
-    t.string "p_name"
-    t.string "part_number", limit: 100, null: false
-    t.string "grade", comment: "grade for product"
-    t.index ["part_number"], name: "index_products_on_part_number"
   end
 
-  create_table "products_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "product_id", null: false
-    t.index ["product_id", "user_id"], name: "index_products_users_on_product_id_and_user_id"
-    t.index ["user_id", "product_id"], name: "index_products_users_on_user_id_and_product_id"
+  create_table "products", force: :cascade do |t|
+    t.integer "price", default: 9
+    t.string "part_number", limit: 100, null: false
+    t.string "grade", comment: "providing grade for product"
+    t.index ["part_number"], name: "index_products_on_part_number"
   end
 
   create_table "roles", force: :cascade do |t|
