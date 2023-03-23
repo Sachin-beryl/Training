@@ -122,3 +122,41 @@
 			    change_column :products, :part_number, :string, limit: 100, null: false
 			  end
 			end
+			
+	f). References
+	-> The add_reference method allows the creation of an appropriately named column.
+	
+	:-	class AddReferences < ActiveRecord::Migration[7.0]
+		  def change
+		    add_reference :users, :role, foreign_key: true           #add_reference also can be used as add_belongs_to
+		    add_belongs_to :taggings, :taggable, polymorphic: true
+		    remove_reference :products, :user, foreign_key           #remove the reference from the model
+		  end
+		end
+		
+		
+	g). Foreign Keys
+	
+	:-	 class ForeignKey < ActiveRecord::Migration[7.0]
+		  def change
+		    add_foreign_key :products, :categories, column: :id      #adding foreign key
+		    remove_foreign_key :products, column: :id		       #removing foreign key
+		  end
+		end
+		
+		# let Active Record figure out the column name
+		remove_foreign_key :accounts, :branches
+
+		# remove foreign key for a specific column
+		remove_foreign_key :accounts, column: :owner_id
+		
+	h). When Helpers aren't Enough
+	-> Sometimes the helpers provided by Active Record might not be enough to perform certain database operations, 
+	-> such as complex joins, subqueries, or custom SQL queries. 
+	-> In such cases, we can use the execute method to execute arbitrary SQL statements directly on the database.
+	
+		:-      class Helper < ActiveRecord::Migration[7.0]
+			  def change
+			    Product.connection.execute("UPDATE products SET price = 1 WHERE 1=1")    #making connection with product model
+			  end										#and execute inner query directly.
+			end
