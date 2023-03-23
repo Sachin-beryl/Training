@@ -69,3 +69,56 @@
 		     t.index :product_id
 		     t.index :category_id
 		   end
+		   
+	c). Changing Tables
+	
+	-> A close cousin of create_table is change_table, used for changing existing tables. 
+	   It is used in a similar fashion to create_table but the object yielded to the block knows more tricks.
+	   
+	   	:-     class UseChangeTable < ActiveRecord::Migration[7.0]
+			  def change
+			    change_table :products do |t|
+			      t.remove :description, :name
+			      t.string :p_name
+			      t.string :part_number
+			      t.index :part_number
+			    end
+			  end
+			end
+			
+	d). Changing Columns
+	
+	NOTE :- Note that change_column command is irreversible.
+	
+	-> Like the remove_column and add_column Rails provides the change_column migration method.
+	-> Besides change_column, the change_column_null and change_column_default methods are used specifically to change a not null constraint and default values of a column.
+	
+	eg for default :- change_column_default :products, :approved, from: true, to: false    #(reversible)
+	
+		:-      class ChangingColumnInUsers < ActiveRecord::Migration[7.0]
+			  def change
+			    change_column :users, :name, :text
+			    change_column_null :users, :created_at, true
+			  end
+			end
+			
+	e). Column Modifiers
+	
+	-> Column modifiers can be applied when creating or changing a column:
+
+	*). comment   :- Adds a comment for the column.
+	*). collation :- Specifies the collation for a string or text column.
+	*). default   :- Allows to set a default value on the column. Note that if you are using a dynamic value (such as a date), the default will only be calculated the first time (i.e. on the date the migration is applied). Use nil for NULL.
+	
+	*). limit     :- Sets the maximum number of characters for a string column and the maximum number of bytes for text/binary/integer columns.
+	*). null      :- Allows or disallows NULL values in the column.
+	*). precision :- Specifies the precision for decimal/numeric/datetime/time columns.
+	*). scale     :- Specifies the scale for the decimal and numeric columns, representing the number of digits after the decimal point.
+	
+		:-      class ApplyColumnModifier < ActiveRecord::Migration[7.0]
+			  def change
+			    add_column :products, :grade, :string, comment: "grade for product"
+			    change_column :products, :price, :integer, default: "zero", precision: 10, scale: 2
+			    change_column :products, :part_number, :string, limit: 100, null: false
+			  end
+			end
