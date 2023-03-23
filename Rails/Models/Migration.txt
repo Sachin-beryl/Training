@@ -8,3 +8,15 @@
  	
  	-> generate migration:-
  		:- generate migration AddPartNumberToProducts
+ 		
+ 	-> Add and remove column:-
+ 		:- rails generate migration AddPartNumberToProducts part_number:string --force
+ 
+ 	-> Add index :-
+ 		:- rails generate migration AddPartNumberToProducts part_number:string:index
+ 		
+ 	-> A migration to remove a column from the command line:
+		:- rails generate migration RemovePartNumberFromProducts part_number:string
+
+	-> migration to add details in products
+		:- rails g migration AddDetailsToProducts price:decimal
