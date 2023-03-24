@@ -10,10 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_24_045406) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_064804) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "apples", force: :cascade do |t|
+    t.string "variety"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -26,16 +30,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_045406) do
     t.index ["product_id"], name: "index_categorization_on_product_id"
   end
 
-  create_table "distributors", force: :cascade do |t|
-    t.string "zipcode"
-    t.check_constraint "length(zipcode::text) = 5", name: "zipchk"
-  end
-
   create_table "manager", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "productdetails", force: :cascade do |t|
+    t.string "name"
+    t.text "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_productdetails_on_name"
   end
 
   create_table "products", force: :cascade do |t|
@@ -52,12 +59,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_045406) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.text "u_name"
+    t.text "name"
     t.string "gender"
     t.datetime "created_at"
     t.datetime "updated_at", null: false
     t.bigint "role_id"
-    t.string "home_page_url"
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
