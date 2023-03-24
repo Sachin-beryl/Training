@@ -185,3 +185,89 @@
 	NOTE :-   rename_index :users, :index_users_on_email, :index_users_on_email_address
 		  rename_table :old_table_name, :new_table_name
 end
+
+	j). Using reversible
+	-> Complex migrations may require processing that Active Record doesn't know how to reverse.
+	-> use reversible to specify what to do when running a migration and what else to do when reverting it.
+	-> Using reversible will ensure that the instructions are executed in the right order too.
+	
+		:-     class UsingReversible < ActiveRecord::Migration[7.0]
+			  def change
+			    create_table :distributors do |t|
+			      t.string :zipcode
+			    end
+
+			    reversible do |dir|
+			      dir.up do
+				#adding zipchk constraint
+				execute <<-PSQL                   #execute is used to implement raw sql query directly to database
+				  ALTER TABLE distributors        
+				  ADD CONSTRAINT zipchk           
+				  CHECK (length(zipcode) = 5);
+				PSQL
+			      end
+
+			      dir.down do
+				#removing zipchk constraint
+				execute <<-PSQL                 #PSQL is used to take multiline string.
+				ALTER TABLE distributors
+				DROP CONSTRAINT zipchk
+				PSQL
+			      end
+			    end
+
+			    add_column :users, :home_page_url, :string
+			    rename_column :users, :name, :u_name
+			  end
+			end
+			
+	NOTE :- Sometimes your migration will do something which is just plain irreversible; 
+		for example, it might destroy some data. 
+		In such cases, you can raise ActiveRecord::IrreversibleMigration in your down block. 
+		If someone tries to revert your migration, an error message will be displayed saying that it can't be done.
+		
+	k). Using the up/down Methods
+	
+	-> You can also use the old style of migration using up and down methods instead of the change method. 
+	-> The up method should describe the transformation you'd like to make to your schema, and 
+	-> the down method of your migration should revert the transformations done by the up method. 
+	-> In other words, the database schema should be unchanged if you do an up followed by a down.  
+	   For example, if you create a table in the up method, you should drop it in the down method. 
+	   It is wise to perform the transformations in precisely the reverse order they were made in the up method.
+	   
+		   eg:- class UsingReversible < ActiveRecord::Migration[7.0]
+			  def up
+			    create_table :distributors do |t|
+			      t.string :zipcode
+			    end
+
+			    #adding zipchk constraint
+			    execute <<-PSQL                   #execute is used to implement raw sql query directly to database
+			      ALTER TABLE distributors        
+			      ADD CONSTRAINT zipchk           
+			      CHECK (length(zipcode) = 5);
+			    PSQL
+			  
+			    add_column :users, :home_page_url, :string
+			    rename_column :users, :name, :u_name
+			  end
+		    
+		    	#if we rollback the db:migration then down method will work.
+			  def down
+			    rename_column :users, :u_name, :name
+			    remove_column :users, :home_page_url, :string
+			    
+			    #removing zipchk constraint
+			    execute <<-PSQL                 #PSQL is used to take multiline string.
+			    ALTER TABLE distributors
+			    DROP CONSTRAINT zipchk
+			    PSQL
+			    
+			    drop_table :distributors
+			  end
+			end
+			    
+
+			    
+			  end
+			end

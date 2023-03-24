@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_23_164657) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_045406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -24,6 +24,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_164657) do
     t.bigint "product_id", null: false
     t.bigint "category_id", null: false
     t.index ["product_id"], name: "index_categorization_on_product_id"
+  end
+
+  create_table "distributors", force: :cascade do |t|
+    t.string "zipcode"
+    t.check_constraint "length(zipcode::text) = 5", name: "zipchk"
   end
 
   create_table "manager", force: :cascade do |t|
@@ -47,11 +52,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_164657) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.text "name"
+    t.text "u_name"
     t.string "gender"
     t.datetime "created_at"
     t.datetime "updated_at", null: false
     t.bigint "role_id"
+    t.string "home_page_url"
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
