@@ -425,3 +425,28 @@ end
 		    add_column :seller, :s_id, :primary_key
 		  end
 		end
+		
+-------------------------------------------------------------------------------------------------------------------------------------
+								seed.rb use
+								
+-> can be use to provide initial data into the table.
+
+a). without seed using:-
+
+	:-     class UsingSeed < ActiveRecord::Migration[7.0]
+		  def up
+		    5.times do |i|
+		      Role.create(name: "Product ##{i}")
+		    end
+		  end
+
+		  def down
+		    Role.delete_all
+		  end
+		end
+		
+b). using seed.rb:-
+
+	:-     10.times do |i|
+		  Role.create(name: "Product ##{i}")
+		end
