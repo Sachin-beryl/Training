@@ -358,4 +358,70 @@ end
 			end
 			
 		NOTE :- If you want Active Record to not output anything, 
-			:- rails db:migrate VERBOSE=false     # suppress all output.
+			:- rails db:migrate VERBOSE=false 	#suppress all output.
+
+-----------------------------------------------------------------------------------------------------------------------------------			
+ 4). Schema Dumps
+ -> Schema files are also useful if you want a quick look at what attributes an Active Record object has.
+ 
+ 	:-      class SchemaDump < ActiveRecord::Migration[7.0]
+		  create_table "manager", force: true do |t|
+		      t.string   "name"
+		      t.datetime "created_at"
+		      t.datetime "updated_at"
+		  end
+		end
+		
+	NOTE :- force: true , means if table already exist in database then drop the table and recreate the table with above attribute.
+	
+------------------------------------------------------------------------------------------------------------------------------------	
+ 5). Change primary key name:-
+
+	a). using execute command:- 
+	
+	    *)	class ChangePrimaryKeyNameInTable < ActiveRecord::Migration[7.0]
+		  def change
+		    rename_column :table_name, :old_primary_key_name, :new_primary_key_name
+		    execute "ALTER TABLE table_name ADD PRIMARY KEY (new_primary_key_name);"
+		  end
+		end
+		
+	    *)  
+	    	You could execute arbitrary SQL in your migration:
+		:- execute "ALTER TABLE `products` DROP PRIMARY KEY"
+		
+		and then add the new column:
+		:- add_column :products, :id, :primary_key
+		
+	b). While creating table :-
+	
+		class CreateCountries < ActiveRecord::Migration[7.0]
+		  def change
+		    create_table :countries, id: false, primary_key: :code do |t|
+		      t.string :code, null: false
+		      t.text :description
+
+		      # ...
+
+		      t.timestamps
+
+		     # You probably would want `code` to be unique. In that case...
+		      t.index :code, unique: true
+		    end
+		  end
+		end
+		
+		-> In addition, we need to specify the Primary Key in the model.
+
+			class Country < ApplicationRecord
+			  self.primary_key = :code
+			end
+			
+	c). using add and remove command:-
+	
+		class ChangePrimaryKey < ActiveRecord::Migration[7.0]
+		  def change
+		    remove_column :seller, :seller_id
+		    add_column :seller, :s_id, :primary_key
+		  end
+		end
