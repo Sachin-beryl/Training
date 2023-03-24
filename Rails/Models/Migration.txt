@@ -267,7 +267,31 @@ end
 			  end
 			end
 			    
+	l). Reverting Previous Migrations
+	-> use Active Record's ability to rollback migrations using the revert method.
+	-> reverting can be used to reverse any migration. (means it work not only for last migration, even work for all previous migration".
+	
+		:-     require_relative "20230324045406_using_reversible"    #require migration which you want to revert.
 
-			    
+			class RevertMigration < ActiveRecord::Migration[7.0]
+			  def change
+			    revert UsingReversible      #reverting the previous migration.
+
+			    create_table(:apples) do |t|    #and apple table will created.
+			      t.string :variety
+			    end
 			  end
-			end
+			end 
+			
+ 3). Running Migrations
+ -> running the db:migrate command also invokes the db:schema:dump command, 
+ -> which will update your db/schema.rb file to match the structure of your database.
+ 
+ -> If you specify a target version, Active Record will run the required migrations (change, up, down) until 
+    it has reached the specified version. The version is the numerical prefix on the migration's filename.
+    
+    	:- rails db:migrate VERSION=20230324045406
+    	
+ NOTE :- If version is greater than the current version (i.e., it is migrating upwards), this will run the change (or up) method on all migrations up to and including the version, and will not execute any later migrations. 
+ 
+ -> If migrating downwards, this will run the down method on all the migrations down to, but not including the version we specified.
