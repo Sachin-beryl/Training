@@ -137,3 +137,29 @@
   -> This helper validates that the attribute's value is unique right before the object gets saved. 
   
   	eg:- validates :email, confirmation: true, presence: true, uniqueness: true
+  	
+  11). validates_with
+  -> The validates_with helper takes a class, or a list of classes to use for validation. 
+  -> There is no default error message for validates_with. 
+  -> You must manually add errors to the record's errors collection in the validator class.
+  -> we can add the user define validation in model file or can make separate folder for this validation. 
+  
+  	eg:-      class NameValidator < ActiveModel::Validator     #create validation
+		    def validate(record)
+		      if record.name == "neeraj"
+			record.errors.add :name, "can't be neeraj"
+		      end
+		    end
+		  end
+
+		  validates_with NameValidator     #calling created validation 
+		  
+  12). validates_each
+  -> This helper validates attributes against a block. 
+  -> It doesn't have a predefined validation function. 
+  -> You should create one using a block, and every attribute passed to validates_each will be tested against it.
+  -> The block receives the record, the attribute's name, and the attribute's value.
+  
+  	eg:-    validates_each :name do |record, attr, value|   #check for name start with capital letter.
+    		  record.errors.add(attr, 'must start with upper case') if value =~ /\A[[:lower:]]/
+  		end
