@@ -11,3 +11,56 @@
 		  validates :age, presence: true
 		  validates :address, presence: true
 		end
+		
+-----------------------------------------------------------------------------------------------------------------------------
+
+ :- methods trigger validations, and will save the object to the database only if the object is valid:
+	-> create,create!,save,save!,update,update!
+	
+	NOTE :- The bang versions (e.g. save!) raise an exception if the record is invalid. 
+		The non-bang versions don't: save and update return false, and create returns the object.
+
+ :- Skipping Validations :
+	-> The following methods skip validations, and will save the object to the database regardless of its validity. 
+	
+	decrement! , decrement_counter
+	increment! , increment_counter
+	insert , insert!
+	insert_all , insert_all!
+	toggle!
+	touch , touch_all
+	update_all , update_attribute
+	update_column , update_columns
+	update_counters
+	upsert , upsert_all
+	
+	Note :- save also has the ability to skip validations if passed validate:false as an argument. 
+		-> save(validate: false)
+		
+ -> To full error message 
+ 	:- p.errors.objects.first.full_message
+ 	
+ ------------------------------------------------------------------------------------------------------------------------------------
+ 								    errors[]
+ 									
+ -> To verify whether or not a particular attribute of an object is valid, you can use errors[:attribute]. 
+ -> It returns an array of all the error messages for :attribute. 
+ -> If there are no errors on the specified attribute, an empty array is returned.
+ 	syntax :- .errors[:attribute_name].any?    
+ 	
+ ------------------------------------------------------------------------------------------------------------------------------------
+ 								Validation Helpers 
+ 								
+ -> Accept the :on and :message options, 
+ -> which define when the validation should be run and what message should be added to the errors collection if it fails, respectively. 
+ -> The :on option takes one of the values :create or :update. There is a default error message for each one of the validation helpers.
+ -> These messages are used when the :message option isn't specified.
+ 
+  1). acceptance
+  -> This method validates that a checkbox on the user interface was checked when a form was submitted.
+  
+  	1st way :- validates :terms_and_conditions, acceptance: true
+  	2nd way :- validates :terms_and_conditions, acceptance: { message: 'must be accepted' }
+  	3rd way :- validates :eula, acceptance: { accept: ['TRUE', 'accepted'] }  #used when we want to specify the word should be entered.
+ 	
+ 	

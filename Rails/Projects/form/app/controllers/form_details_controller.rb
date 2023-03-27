@@ -16,6 +16,6 @@ class FormDetailsController < ApplicationController
 
   private
   def form_params
-    params.require(:form_detail).permit(:name, :age, :gender, :address, :terms_and_conditions)
+    params.require(:form_detail).permit(:name, :age, :gender, :address, :terms_and_conditions, :relocate)
   end
 end

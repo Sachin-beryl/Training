@@ -27,6 +27,14 @@
   </div>
 
   <div class="form-field">
+    <%= f.label :relocate %><br>
+    <%= f.label :relocate , " Willing to Relocate faridabad" %><br>
+    <%= f.radio_button :relocate, 'yes' %> yes<br />
+    <%= f.radio_button :relocate, 'no' %> no<br />
+    <%= error_message_for @form_detail, :relocate %>
+  </div>
+
+  <div class="form-field">
     <%= f.label :terms_and_conditions %>
     <%= f.check_box :terms_and_conditions %>
     <%= f.label :terms_and_conditions, "I accept the terms and conditions" %>
