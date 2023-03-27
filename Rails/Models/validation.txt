@@ -63,4 +63,13 @@
   	2nd way :- validates :terms_and_conditions, acceptance: { message: 'must be accepted' }
   	3rd way :- validates :eula, acceptance: { accept: ['TRUE', 'accepted'] }  #used when we want to specify the word should be entered.
  	
+  2). confirmation
+  -> You should use this helper when you have two text fields that should receive exactly the same content.
+  
+  	1st way :- validates :email, confirmation: true, presence: true
+  		   validates :email_confirmation, presence: true                #email_confirmation must be present.
+  		   
+  	2nd way :- There is also a :case_sensitive option that you can use to define whether the confirmation constraint will be case sensitive or not. This option defaults to true.
+
+		 --->>> validates :email, confirmation: { case_sensitive: false }
  	

@@ -16,7 +16,7 @@
   <div class="form-field">
     <%= f.label :gender%><br />
     <%= f.radio_button :gender, 'male' %> male<br />
-    <%= f.radio_button :gender, 'female' %> female<br />
+    <%= f.radio_button :gender, 'female' %> female
     <%= error_message_for @form_detail, :gender %>
   </div>
 
@@ -27,8 +27,17 @@
   </div>
 
   <div class="form-field">
-    <%= f.label :relocate %><br>
-    <%= f.label :relocate , " Willing to Relocate faridabad" %><br>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+    <%= error_message_for @form_detail, :email %><br>
+    <%= f.label :email_confirmation%><br>
+    <%= f.text_field :email_confirmation%>
+    <%= error_message_for @form_detail, :email_confirmation %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :relocate %>
+    <%= f.label :relocate , ":- Willing to Relocate faridabad" %><br>
     <%= f.radio_button :relocate, 'yes' %> yes<br />
     <%= f.radio_button :relocate, 'no' %> no<br />
     <%= error_message_for @form_detail, :relocate %>

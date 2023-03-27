@@ -5,4 +5,6 @@ class FormDetail < ApplicationRecord
   validates :address, presence: true
   validates :terms_and_conditions, acceptance: { message: 'must be accepted' }
   validates :relocate, acceptance: { accept: ['yes','no'] }, presence: true
+  validates :email, confirmation: true, presence: true
+  validates :email_confirmation, presence: true
 end
