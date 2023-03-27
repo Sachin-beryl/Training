@@ -1,0 +1,13 @@
+------------------------------------------------------------- Validation ------------------------------------------------------------
+
+-> Validations are used to ensure that only valid data is saved into your database.
+-> Model-level validations are the best way to ensure that only valid data is saved into your database. 
+
+ 1). first and simple validation :- checking for presence of attribute field.
+ 
+ 	:-      class FormDetail < ApplicationRecord
+		  validates :name, presence: true
+		  validates :gender, presence: true
+		  validates :age, presence: true
+		  validates :address, presence: true
+		end

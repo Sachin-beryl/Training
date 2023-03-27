@@ -11,6 +11,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <% if content_for?(:error_messages) %>
+        <div class="alert alert-danger">
+          <% flash[:error] = nil %>
+          <%= yield(:error_messages) %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
