@@ -73,3 +73,34 @@
 
 		 --->>> validates :email, confirmation: { case_sensitive: false }
  	
+  3). comparison
+  -> This check will validate a comparison between any two comparable values. The validator requires a compare option be supplied.
+  
+  	syntax :- validates :start_date, comparison: { greater_than: :end_date }
+  	
+  -> These options are all supported:
+	:greater_than ,:greater_than_or_equal_to ,:equal_to ,:less_than ,:less_than_or_equal_to ,:other_than.
+	
+  4). exclusion
+  -> This helper validates that the attributes' values are not included in a given set.
+  
+  	eg:- validates :address, presence: true, exclusion: { in: %w(delhi up mp),message: "%{value} is invalid ." }
+  	
+	explanation :- The exclusion helper has an option :in that receives the set of values 
+		       that will not be accepted for the validated attributes. 
+		       The :in option has an alias called :within that you can use for the same purpose, if you'd like to. 
+		       This example uses the :message option to show how you can include the attribute's value.
+		       
+  5). format
+  -> This helper validates the attributes' values by testing whether they match a given regular expression, 
+     which is specified using the :with option.
+     
+     eg:- validates :name, presence: true, format: { with: /\A[a-zA-Z]+\z/,message: "only allows letters" }
+     
+     NOTE :- Alternatively, you can use attribute does not match the regular expression by using the :without option.
+     
+  6). inclusion
+  -> This helper validates that the attributes' values are included in a given set.
+  	
+  	eg:- validates :identity, inclusion: { in: %w(aadhar_card pan_card driving_license),message: "%{value} is invalid"}
+  	

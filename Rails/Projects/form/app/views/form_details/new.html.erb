@@ -1,6 +1,13 @@
 <h1>details </h1>
 
 <%= form_with model: @form_detail do |f| %>
+
+  <div class="form-field">
+    <%= f.label :form_id%><br>
+    <%= f.text_field :form_id%>
+    <%= error_message_for @form_detail, :form_id%>
+  </div>
+
   <div class="form-field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -24,6 +31,12 @@
     <%= f.label :address %><br>
     <%= f.text_area :address %>
     <%= error_message_for @form_detail, :address %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :identity %><br>
+    <%= f.text_field :identity %>
+    <%= error_message_for @form_detail, :identity %>
   </div>
 
   <div class="form-field">
