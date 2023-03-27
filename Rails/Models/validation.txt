@@ -104,3 +104,36 @@
   	
   	eg:- validates :identity, inclusion: { in: %w(aadhar_card pan_card driving_license),message: "%{value} is invalid"}
   	
+  7). length
+  -> This helper validates the length of the attributes' values.
+  
+  	eg:- validates :form_id, comparison: { greater_than_or_equal_to: 1000 }, presence:true , length: { minimum: 4, maximum:5 }
+  	
+  	:- possible length constraint options are:
+		-> minimum ,:maximum 
+		-> :in (or :within) - The value for this option must be a range.  (length: { in: 6..20 })
+		-> :is - The attribute length must be equal to the given value.   (length: { is: 6 })
+		
+  8). numericality
+  -> This helper validates that your attributes have only numeric values. 
+  -> By default, it will match an optional sign followed by an integer or floating point number.
+  
+  	eg:- validates :form_id, presence: true, numericality: { only_integer: true }
+  	  :- validates :age, presence: true, numericality: {greater_than_or_equal_to: 30, even: true }
+  	
+  	-> other options
+  		:greater_than ,:greater_than_or_equal_to ,:equal_to ,:less_than ,:less_than_or_equal_to ,:other_than ,:in ,:odd ,:even 
+  		
+  NOTE :- By default, numericality doesn't allow nil values. You can use allow_nil: true option to permit it.
+  
+  9). absence
+  -> This helper validates that the specified attributes are absent. 
+  -> It uses the present? method to check if the value is not either nil or a blank string, 
+  -> that is, a string that is either empty or consists of whitespace.
+  
+  	eg:- validates :mobile, absence: true
+  	
+  10). uniqueness
+  -> This helper validates that the attribute's value is unique right before the object gets saved. 
+  
+  	eg:- validates :email, confirmation: true, presence: true, uniqueness: true

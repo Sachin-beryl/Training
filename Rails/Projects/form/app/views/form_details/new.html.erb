@@ -40,6 +40,12 @@
   </div>
 
   <div class="form-field">
+    <%= f.label :mobile %><br>
+    <%= f.text_field :mobile %>
+    <%= error_message_for @form_detail, :mobile %>
+  </div>
+
+  <div class="form-field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
     <%= error_message_for @form_detail, :email %><br>
