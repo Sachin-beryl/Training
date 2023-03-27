@@ -163,3 +163,38 @@
   	eg:-    validates_each :name do |record, attr, value|   #check for name start with capital letter.
     		  record.errors.add(attr, 'must start with upper case') if value =~ /\A[[:lower:]]/
   		end
+  		
+ ------------------------------------------------------------------------------------------------------------------------------------
+ 							   Common Validation Options
+ 							   
+ 1). allow_nil
+ -> The :allow_nil option skips the validation when the value being validated is nil.
+ 
+ 	eg:- validates :salary, numericality: { only_integer: true }, allow_nil: true
+ 	
+ 2). allow_blank
+ -> The :allow_blank option is similar to the :allow_nil option. 
+ -> This option will let validation pass if the attribute's value is blank?, like nil or an empty string.
+ 
+ eg:- validates :identity, inclusion: { in: %w(aadhar_card pan_card driving_license),message: "%{value} is invalid"},  allow_blank: true
+ 
+ 3). message
+ -> As you've already seen, the :message option lets you specify the message that will be added to the errors collection 
+ -> when validation fails. When this option is not used, 
+ -> Active Record will use the respective default error message for each validation helper. The :message option accepts a String.
+ 
+ 	eg:- validates :name, presence: { message: "must be given please" } 
+ 	
+ 4). on
+ -> The :on option lets you specify when the validation should happen. 
+ -> The default behavior for all the built-in validation helpers is to be run on save (both when you're creating a new record 
+ -> and when you're updating it).
+ -> on: :create to run the validation only when a new record is created 
+ -> on: :update to run the validation only when a record is updated.
+ 
+ 	eg:- validates :email, confirmation: true, presence: true, uniqueness: true, on: :create
+ 	
+ 5). Strict Validations
+ -> You can also specify validations to be strict and raise ActiveModel::StrictValidationFailed when the object is invalid.
+ 	
+ 	eg:- validates :email_confirmation, presence: { strict: true }  #must be present

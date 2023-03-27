@@ -46,6 +46,12 @@
   </div>
 
   <div class="form-field">
+    <%= f.label :salary %><br>
+    <%= f.text_field :salary %>
+    <%= error_message_for @form_detail, :salary %>
+  </div>
+
+  <div class="form-field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
     <%= error_message_for @form_detail, :email %><br>
