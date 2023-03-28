@@ -21,7 +21,7 @@ class FormDetail < ApplicationRecord
   validates_with NameValidator     #calling created validation
   validates :name, presence: { message: "must be given please" }, format: { with: /\A[a-zA-Z]+\z/,message: "only allows letters" }
   validates :gender, presence: { message: "must be given please" }
-  validates :age, presence: true, numericality: {greater_than_or_equal_to: 30, even: true }
+  validates :age, presence: true, numericality: {greater_than_or_equal_to: 20}
   validates :address, presence: true, exclusion: { in: %w(delhi up mp),message: "%{value} is invalid ." }
   validates :terms_and_conditions, acceptance: { message: 'must be accepted' } 
   validates :relocate, acceptance: { accept: ['yes','no'] }, presence: true
@@ -88,5 +88,44 @@ class FormDetail < ApplicationRecord
 
   around_save :around_save_check
 
+  # before create
+  def before_create_check
+    self.before_save = "before_create"
+    puts "==========================before create is created============================= "
+  end
+
+  before_create :before_create_check
+
+  #after create
+  def after_create_check
+    puts "========================after create is created================================="
+  end
+
+  after_create :after_create_check
+
+  #around create
+  def around_create_check
+    self.before_save = "around_create"
+    puts "========================use around create before create happen====================="
+    yield
+    puts "========================use around create after create happen====================="
+    self.after_save = "around_create"
+  end
+
+  around_create :around_create_check
+
+  #after save
+  def after_save_check
+    puts "================================after save check================================"
+  end
+
+  after_save :after_save_check
+
+  #after commit 
+  def after_commit_check
+    puts "================================after commit check================================"
+  end
+
+  after_commit :after_commit_check
 
 end

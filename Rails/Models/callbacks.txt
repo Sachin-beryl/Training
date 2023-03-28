@@ -60,4 +60,47 @@
 
 		around_save :around_save_check
 	
+	*). before_create :-
 	
+		  def before_create_check
+		    self.before_save = "before_create"
+		    puts "==========================before create is created============================= "
+		  end
+
+		  before_create :before_create_check
+
+	*). around_create :-
+	
+		  def around_create_check
+		    self.before_save = "around_create"
+		    puts "========================use around create before create happen====================="
+		    yield
+		    puts "========================use around create after create happen====================="
+		    self.after_save = "around_create"
+		  end
+
+		  around_create :around_create_check
+		  
+	*). after_create :-
+	
+		  def after_create_check
+		    puts "========================after create is created================================="
+		  end
+
+		  after_create :after_create_check
+		  
+	*). after_save :-
+	
+		  def after_save_check
+		    puts "================================after save check================================"
+		  end
+
+		  after_save :after_save_check
+
+	*). after_commit :-
+
+		  def after_commit_check
+		    puts "================================after commit check================================"
+		  end
+
+  		  after_commit :after_commit_check
