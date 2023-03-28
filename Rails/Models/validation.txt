@@ -252,3 +252,21 @@
 		  end
 		  
 		  calling :-   validate :salary_can_not_be_less_than_10000
+		  
+---------------------------------------------------------------------------------------------------------------------------------
+							Working with Validation Errors
+							
+ 1). person.errors.full_messages  :- showing all possible error for person variable.
+ 2). person.errors[:name] :- checking name for error. if error present in collection, then error will throw else through empty array for error.
+ 
+ 3). person.errors.where(:name)  :- showing all error for the name attribute.
+ 4). errors.clear
+	-> The clear method is used when you intentionally want to clear the errors collection.
+   note -> when the next time you call valid? or any method that tries to save this object to the database, the validations will run again. If any of the validations fail, the errors collection will be filled again. 
+   
+   	:- person.errors.clear
+   	
+  5). errors.size
+	-> The size method returns the total number of errors for the object. 
+	
+	:- person.errors.size
