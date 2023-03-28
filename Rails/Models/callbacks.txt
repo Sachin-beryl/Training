@@ -1,0 +1,63 @@
+------------------------------------------------------------- callbacks --------------------------------------------------------------
+
+-> Callbacks are methods that get called at certain moments of an object's life cycle. 
+-> With callbacks it is possible to write code that will run whenever an Active Record object is created, saved, updated, deleted, validated, or loaded from the database.
+
+ 1). Callback Registration :-
+	-> In order to use the available callbacks, you need to register them. You can implement the callbacks as ordinary methods and 
+	-> use a macro-style class method to register them as callbacks
+	
+	:-        def normalize_name     #use for callback
+		    self.name = name.downcase.titleize
+		  end
+		  
+		  before_validation :normalize_name  #calling normalize_name method for name for validating the name.
+		  
+	:- The macro-style class methods can also receive a block. Consider using this style 
+	   if the code inside your block is so short that it fits in a single line.
+	   
+		   before_validation do
+		     self.name = name.downcase.titleize
+		   end
+
+ 2). Available Callbacks :-
+-> Here is a list with all the available Active Record callbacks, 
+-> listed in the same order in which they will get called during the respective operations.
+
+   a). Creating an Object
+   
+	*). before_validation :-
+		def normalize_name     #use for callback
+		  self.name = name.downcase.titleize
+		end
+
+		before_validation :normalize_name
+
+	*). after_validation :-
+		def print_message
+		  puts "validation checked"
+		end
+
+		after_validation :print_message
+		
+	*). before_save :-  it work on both create and update
+	
+		def length_check
+		  if self.mobile.split('').length != 10
+		    self.mobile = "1234567890"
+		  end
+		end
+
+		before_save :length_check
+
+	*). around_save :-
+		
+		def around_save_check
+		  puts "# perform actions before save"
+		  yield # save the object
+		  puts "# perform actions after save"
+		end
+
+		around_save :around_save_check
+	
+	

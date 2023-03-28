@@ -30,7 +30,7 @@ class FormDetail < ApplicationRecord
   validates :form_id, comparison: { greater_than_or_equal_to: 1000 }, presence:true , length: { minimum: 4, maximum:5 }, numericality: { only_integer: true }
   validates :identity, inclusion: { in: %w(aadhar_card pan_card driving_license),message: "%{value} is invalid"},  allow_blank: true
   validates :mobile, presence: true
-  # validates :salary, presence: true
+  validates :salary, presence: true
   validates :payment_type, presence: true, inclusion: { in: %w(card upi net_banking),message: "%{value} is invalid"}
   validates :password, confirmation: true, unless: Proc.new { |a| a.password.blank? }
   validates :confirm_password, presence: true
@@ -53,5 +53,40 @@ class FormDetail < ApplicationRecord
       errors.add(:salary, "can't be less than 10000")
     end
   end
+
+  #callbacks
+
+  #before validation
+  def normalize_name     
+    self.name = name.downcase.titleize
+  end
+
+  before_validation :normalize_name
+
+  #after validation
+  def print_message
+    puts "validation checked"
+  end
+
+  after_validation :print_message
+
+  #before save
+  def length_check
+    if self.mobile.split('').length != 10
+      self.mobile = "1234567890"
+    end
+  end
+
+  before_save :length_check
+
+  #around save
+  def around_save_check
+    puts "# perform actions before save"
+    yield # save the object
+    puts "# perform actions after save"
+  end
+
+  around_save :around_save_check
+
 
 end
