@@ -19,9 +19,26 @@ class FormDetail < ApplicationRecord
   validates :terms_and_conditions, acceptance: { message: 'must be accepted' } 
   validates :relocate, acceptance: { accept: ['yes','no'] }, presence: true
   validates :email, confirmation: true, presence: true, uniqueness: true, on: :create
-  validates :email_confirmation, presence: { strict: true }  #must be present
+  validates :email_confirmation, presence: true
   validates :form_id, comparison: { greater_than_or_equal_to: 1000 }, presence:true , length: { minimum: 4, maximum:5 }, numericality: { only_integer: true }
   validates :identity, inclusion: { in: %w(aadhar_card pan_card driving_license),message: "%{value} is invalid"},  allow_blank: true
   validates :mobile, presence: true
-  validates :salary, numericality: { only_integer: true }, allow_nil: true
+  # validates :salary, presence: true
+  validates :payment_type, presence: true, inclusion: { in: %w(card upi net_banking),message: "%{value} is invalid"}
+  validates :password, confirmation: true, unless: Proc.new { |a| a.password.blank? }
+  validates :confirm_password, presence: true
+
+  #if payment type is card then card number required
+  validates :card_number, presence: true, if: :paid_with_card?  
+
+  def paid_with_card?
+    payment_type == "card"
+  end
+
+  #if card is present then this validation must be satisfied.
+  with_options if: :paid_with_card? do |a|
+    a.validates :card_number, length: { minimum: 10 }
+    a.validates :salary, presence: true
+  end
+
 end

@@ -52,12 +52,33 @@
   </div>
 
   <div class="form-field">
+    <%= f.label :payment_type %><br>
+    <%= f.text_field :payment_type %>
+    <%= error_message_for @form_detail, :payment_type%>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :card_number %><br>
+    <%= f.text_field :card_number %>
+    <%= error_message_for @form_detail, :card_number%>
+  </div>
+
+  <div class="form-field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
     <%= error_message_for @form_detail, :email %><br>
     <%= f.label :email_confirmation%><br>
     <%= f.text_field :email_confirmation%>
     <%= error_message_for @form_detail, :email_confirmation %>
+  </div>
+    
+  <div class = "form-field" >
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+    <%= error_message_for @form_detail, :password %><br>
+    <%= f.label :confirm_password %><br>
+    <%= f.text_field :confirm_password%>
+    <%= error_message_for @form_detail, :confirm_password %>
   </div>
 
   <div class="form-field">
