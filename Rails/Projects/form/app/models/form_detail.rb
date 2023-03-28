@@ -7,10 +7,17 @@ class FormDetail < ApplicationRecord
     end
   end
 
+  validates_each :email do |record, attribute, value|          # validating email
+    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      record.errors.add(attribute, "is not correct or valid")
+    end
+  end
+
   validates_each :name do |record, attr, value|   #check for name start with capital letter.
     record.errors.add(attr, 'must start with upper case') if value =~ /\A[[:lower:]]/
   end
 
+  validate :salary_can_not_be_less_than_10000
   validates_with NameValidator     #calling created validation
   validates :name, presence: { message: "must be given please" }, format: { with: /\A[a-zA-Z]+\z/,message: "only allows letters" }
   validates :gender, presence: { message: "must be given please" }
@@ -39,6 +46,12 @@ class FormDetail < ApplicationRecord
   with_options if: :paid_with_card? do |a|
     a.validates :card_number, length: { minimum: 10 }
     a.validates :salary, presence: true
+  end
+
+  def salary_can_not_be_less_than_10000     #Custom Methods for salary validation
+    if salary < 10000
+      errors.add(:salary, "can't be less than 10000")
+    end
   end
 
 end

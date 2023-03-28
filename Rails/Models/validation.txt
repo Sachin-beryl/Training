@@ -231,3 +231,24 @@
 		  end
 		  
 	-> All validations inside of the with_options block will have automatically passed the condition if: :paid_with_card?
+	
+-------------------------------------------------------------------------------------------------------------------------------------
+							Performing Custom Validations
+
+-> Email validation using validates_each with regular expression.
+
+	:-        validates_each :email do |record, attribute, value|          # validating email
+		    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+		      record.errors.add(attribute, "is not correct or valid")
+		    end
+		  end
+		  
+ -> Custom Methods for salary validation:-
+ 
+ 	:-	  def salary_can_not_be_less_than_10000     #Custom Methods for salary validation
+		    if salary < 10000
+		      errors.add(:salary, "can't be less than 10000")
+		    end
+		  end
+		  
+		  calling :-   validate :salary_can_not_be_less_than_10000
