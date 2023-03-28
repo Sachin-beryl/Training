@@ -128,4 +128,46 @@ class FormDetail < ApplicationRecord
 
   after_commit :after_commit_check
 
+  #before update
+  def before_update_check
+    self.before_save = "before update"
+    puts "=================print before update================================"
+  end
+
+  before_update :before_update_check
+
+  #after update
+  def after_update_check
+    self.after_save = "after update"
+    puts "=====================print after update================================"
+  end
+
+  after_update :after_update_check
+
+  #before destroy
+  before_destroy :can_destroy?
+
+  def can_destroy?
+    if self.form_id > 1007 
+      self.errors.add(:base, "Can't be destroy because form id greater than 1003")
+      throw :abort
+    end
+  end
+
+  #after destroy
+  after_destroy :comment
+
+  def comment
+    puts "after destroy successful"
+  end
+
+  #around destroy
+  around_destroy :comment_around
+
+  def comment_around
+    puts "comment for around destroy before"
+    yield
+    puts "comment for around destroy after"
+  end
+
 end
