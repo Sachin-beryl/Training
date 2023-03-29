@@ -310,4 +310,45 @@
 			 CURRENT_TIMESTAMP) RETURNING 			"id"                                                                                                                                    
 			=> #<ActiveRecord::Result:0x00007f65aa005bb0 @column_types={}, @columns=["id"], @hash_rows=nil, @rows=[[35], [36]]>  
 			
-	*). insert_all!	:- This method is similar to insert_all, but it raises an exception if the record is invalid.
+	*). insert_all! -> This method is similar to insert_all, but it raises an exception if the record is invalid.
+		
+	*). touch_all -> This method updates the updated_at timestamp for multiple records and skips all callbacks.
+	
+			eg :- 3.2.1 :088 > FormDetail.where(salary: 15000).touch_all
+			
+  			FormDetail Update All (3.6ms)  UPDATE "form_details" SET "updated_at" = $1 WHERE "form_details"."salary" = $2 
+  			[["updated_at", "2023-03-29 08:43:39.396978"], ["salary", 15000]]
+  			=> 1 
+
+	*). update_column -> This method updates a single attribute for a record and skips the `before_save and after_save callbacks.
+	
+			eg :- 3.2.1 :100 > f4.update_column(:age, 25)
+			
+  			    FormDetail Update (1.9ms)  UPDATE "form_details" SET "age" = $1 WHERE "form_details"."id" = $2  [["age", 25]
+  			    , ["id", 22]]
+  			    => true 
+       
+	*). update_columns -> This method updates multiple attribute for a record and skips the `before_save and after_save callbacks.
+	*). update_all	   -> This method updates multiple records and skips all callbacks.
+	
+			eg :- 3.2.1 :101 > FormDetail.where(terms_and_conditions: nil).update_all(terms_and_conditions: "1")
+			
+  			    FormDetail Update All (2.0ms)  UPDATE "form_details" SET "terms_and_conditions" = $1 WHERE
+  			    "form_details"."terms_and_conditions" IS NULL [["terms_and_conditions" , "1"]]
+  			    => 3 rm_pass
+  			      
+	*). update_counters -> This method updates a counter cache column for multiple records and skips all callbacks. 
+	*). upsert	    -> This method inserts a new record or updates an existing record and skips all callbacks.
+	
+			eg :- 3.2.1 :111 > FormDetail.upsert({name: "vishal", email: "vishal@gmail.com"})
+			
+  			   FormDetail Upsert (1.9ms)  INSERT INTO "form_details" ("name","email","created_at","updated_at") 
+  			   VALUES ('vishal', 'vishal@gmail.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) ON CONFLICT ("id") DO UPDATE 
+  			   SET updated_at=(CASE WHEN ("form_details"."name" IS NOT DISTINCT FROM excluded."name" 
+  			   AND "form_details"."email" IS NOT DISTINCT FROM excluded."email") THEN "form_details".
+  			   updated_at ELSE CURRENT_TIMESTAMP END),"name"=excluded."name","email"=excluded."email" RETURNING "id" 
+  			                            
+ 			=> #<ActiveRecord::Result:0x00007f65a9b787a0 @column_types={}, @columns=["id"], @hash_rows=nil, @rows=[[37]]> 
+
+
+	*). upsert_all	    -> This method inserts multiple records or updates existing records and skips all callbacks.
