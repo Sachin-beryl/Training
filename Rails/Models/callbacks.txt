@@ -352,3 +352,37 @@
 
 
 	*). upsert_all	    -> This method inserts multiple records or updates existing records and skips all callbacks.
+	
+-------------------------------------------------------------------------------------------------------------------------------------
+							  Conditional Callbacks
+								
+ -> :if option when you want to specify under which conditions the callback should be called. 
+ -> If you want to specify the conditions under which the callback should not be called, then you may use the :unless option.
+ 
+ 1). Using :if and :unless with a Symbol and a proc:-
+ 
+ 	     :-   before_save :normalize_card_length, if: :paid_with_card?
+
+		  def normalize_card_length
+		    if self.card_number.split('').length != 10
+		      self.card_number = "0000000000"
+		    end
+		  end
+		  
+ 	     :- using proc -> before_save :normalize_card_length, if: Proc.new { |f| f.paid_with_card? }
+ 	     
+    -> Multiple Callback Conditions
+    
+    	     :- before_save :normalize_card_length, if: [:paid_with_card?, :salary_present?]
+    	     
+    	     	  def normalize_card_length
+		    if self.card_number.split('').length != 10
+		      self.card_number = "0000000000"
+		    end
+		  end
+
+		  def salary_present?
+		    if self.salary
+		      return true
+		    end
+		  end

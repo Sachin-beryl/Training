@@ -185,4 +185,20 @@ class FormDetail < ApplicationRecord
     puts "================You have touched an object======================"
   end
 
+  #Conditional Callbacks
+  before_save :normalize_card_length, if: [:paid_with_card?, :salary_present?]
+  # before_save :normalize_card_length, if: Proc.new { |f| f.paid_with_card? }
+
+  def normalize_card_length
+    if self.card_number.split('').length != 10
+      self.card_number = "0000000000"
+    end
+  end
+
+  def salary_present?
+    if self.salary
+      return true
+    end
+  end
+
 end
