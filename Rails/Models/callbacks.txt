@@ -243,4 +243,71 @@
 	
  NOTE :- The after_initialize callback is triggered every time a new object of the class is initialized.
  
+-----------------------------------------------------------------------------------------------------------------------------------
+							Skipping Callbacks
+							
+-> Just as with validations, it is also possible to skip callbacks by using the following methods:
+
+	*). decrement! -> This method decrements a numeric attribute and skips all callbacks.
+		
+			eg :- 3.2.1 :041 > f1.decrement!(:form_id)
+			
+	  		      FormDetail Update All (2.0ms)  UPDATE "form_details" SET "form_id" = COALESCE("form_id", 0) - $1 
+	  		      WHERE "form_details"."id" = $2  [["form_id", 1], ["id", 32]]        
 	
+	*). decrement_counter  -> This method decrements a counter cache column and skips all callbacks.
+	
+	*). delete -> This method deletes a record and skips the before_destroy and after_destroy callbacks.
+	
+			eg :- 3.2.1 :045 > f1.delete
+			
+	  		      FormDetail Destroy (2.0ms)  DELETE FROM "form_details" WHERE "form_details"."id" = $1  [["id", 1]]
+
+	*). delete_all	-> This method deletes all records that match the given conditions and skips the before_destroy 
+			   and after_destroy callbacks. 
+				   
+			eg :- 3.2.1 :046 > FormDetail.where(relocate: nil).delete_all
+			
+	  		      FormDetail Delete All (1.7ms)  DELETE FROM "form_details" WHERE "form_details"."relocate" IS NULL
+	 		      => 9       	   
+				   
+	*). delete_by -> This method deletes the first record that matches the given conditions and
+			  skips the before_destroy and after_destroy callbacks
+				   
+			eg :- 3.2.1 :048 > FormDetail.where(relocate: "yes").delete_by(payment_type: "net_banking")
+			
+	  		      FormDetail Delete All (2.3ms)  DELETE FROM "form_details" WHERE "form_details"."relocate" = $1 AND 			      "form_details"."payment_type" = $2  [["relocate", "yes"], ["payment_type", "net_banking"]]
+			      => 4 
+				   
+	*). increment! -> This method increments a numeric attribute and skips all callbacks.
+	
+			eg :- 3.2.1 :050 > f1.increment!(:form_id)
+			
+ 			      FormDetail Update All (1.6ms)  UPDATE "form_details" SET "form_id" = COALESCE("form_id", 0) + $1 WHERE 				      "form_details"."id" = $2  [["form_id", 1], ["id", 31]]    
+			
+	*). increment_counter -> This method increments a counter cache column and skips all callbacks.
+	
+	*). insert -> This method inserts a new record and skips all callbacks.
+	
+			eg :- 3.2.1 :065 > FormDetail.insert({name: "vipul", salary: 23456, address: "punjab"}) 
+			
+ 			      FormDetail Insert (2.3ms)  INSERT INTO
+ 			      "form_details" ("name","salary","address","created_at","updated_at")VALUES ('vipul', 23456, 'punjab',
+ 			      CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) ON CONFLICT  DO NOTHING RETURNING "id"
+ 			      => #<ActiveRecord::Result:0x00007f65a98e5ab0 @column_types={}, @columns=["id"], @hash_rows=nil,
+ 			       @rows=[[34]]> 
+
+	*). insert! -> This method is similar to insert, but it raises an exception if the record is invalid.
+	
+	*). insert_all	-> This method inserts multiple record and skips all callbacks.
+	
+			eg :- 3.2.1 :067 > FormDetail.insert_all!([{name: "prabha", salary: 123456, address: "gujrat", gender: "female"}
+			      ,{name: "dev", salary: 108515, address: "delhi", gender: "male"}]) 
+			
+			FormDetail Bulk Insert (1.7ms)  INSERT INTO
+			"form_details" ("name","salary","address","gender","created_at","updated_at") VALUES ('prabha', 123456, 'gujrat'
+			, 'female', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), ('dev', 108515, 'delhi', 'male', CURRENT_TIMESTAMP,
+			 CURRENT_TIMESTAMP) RETURNING 			"id"                                                                                                                                    
+			=> #<ActiveRecord::Result:0x00007f65aa005bb0 @column_types={}, @columns=["id"], @hash_rows=nil, @rows=[[35], [36]]>  
+			
+	*). insert_all!	:- This method is similar to insert_all, but it raises an exception if the record is invalid.
