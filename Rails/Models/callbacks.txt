@@ -212,6 +212,35 @@
 	================================after commit check================================
 	 => true                                                  
 	
+-----------------------------------------------------------------------------------------------------------------------------------
+							Running Callbacks
+							
+-> The following methods trigger callbacks:
 
-
+	*). create   :- This would trigger the after_create and after_save callbacks.
+	*). create!  :- This method is similar to create, but it raises an exception if the record is invalid.
+	*). destroy  :- This method triggers the before_destroy and after_destroy callbacks when a record is deleted.
+	*). destroy! :- This method is similar to destroy, but it raises an exception if the record cannot be deleted.
+	
+	*). destroy_all :- This method deletes all records that match the given conditions. 
+			    It triggers the same callbacks as destroy for each record that is deleted.
+			    
+	*). destroy_by  :- This method deletes the first record that matches the given conditions. 
+			   It triggers the same callbacks as destroy for the record that is deleted.
+			   
+	*). save	:- This method triggers the before_save and after_save callbacks when a record is saved.
+	*). save!	:- This method is similar to save, but it raises an exception if the record is invalid.
+	*). save(validate: false) :- This method skips the validation step when saving a record.
+	*). toggle!	:- This method updates a boolean attribute and triggers the before_save and after_save callbacks.
+	*). touch	:- This method updates the updated_at timestamp for a record and triggers the before_save and after_save callbacks.
+	*). update_attribute :- This method updates a single attribute for a record and triggers the before_save and after_save callbacks.
+	*). update	:- This method updates a record and triggers the before_save and after_save callbacks. 
+	*). update!	:- This method is similar to update, but it raises an exception if the record is invalid.
+	*). valid?	:- This method is used to check ,if object is valid or not.
+	
+  :--- Additionally, the after_find callback is triggered by the following finder methods:
+	all,first,find,find_by,find_by_*,find_by_*!,find_by_sql,last
+	
+ NOTE :- The after_initialize callback is triggered every time a new object of the class is initialized.
+ 
 	
