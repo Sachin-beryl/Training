@@ -54,7 +54,7 @@ class FormDetail < ApplicationRecord
     end
   end
 
-  #callbacks
+  #---------------------------------------callbacks------------------------------------------
 
   #before validation
   def normalize_name     
@@ -130,7 +130,7 @@ class FormDetail < ApplicationRecord
 
   #before update
   def before_update_check
-    self.before_save = "before update"
+    # self.before_save = "before update"
     puts "=================print before update================================"
   end
 
@@ -138,7 +138,7 @@ class FormDetail < ApplicationRecord
 
   #after update
   def after_update_check
-    self.after_save = "after update"
+    # self.after_save = "after update"
     puts "=====================print after update================================"
   end
 
@@ -168,6 +168,21 @@ class FormDetail < ApplicationRecord
     puts "comment for around destroy before"
     yield
     puts "comment for around destroy after"
+  end
+
+  #after initialize
+  after_initialize do |form_detail|
+    puts "==================You have initialized an object!======================"
+  end
+
+  #after find
+  after_find do |form_detail|
+    puts "==================You have found an object!============================"
+  end
+
+  #after touch
+  after_touch do |user|
+    puts "================You have touched an object======================"
   end
 
 end

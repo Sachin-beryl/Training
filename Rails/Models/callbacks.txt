@@ -105,7 +105,7 @@
 
   		  after_commit :after_commit_check
   		  
-  b). Updating an Object
+   b). Updating an Object
   
 	*). before_validation
 	*). after_validation
@@ -134,11 +134,11 @@
 	*). after_save
 	*). after_commit 
 	
- c). Destroying an Object
+  c). Destroying an Object
  
 	*). before_destroy
 	
-		  before_destroy :can_destroy?, prepend: true
+		  before_destroy :can_destroy?
 
 		  def can_destroy?
 		    if self.form_id > 1003 
@@ -177,3 +177,41 @@
 		  def comment
 		    puts "after destroy successful"
 		  end
+		  
+  d). after_initialize and after_find :-
+	-> The after_initialize callback will be called whenever an Active Record object is instantiated, 
+	   either by directly using new or when a record is loaded from the database.
+	   
+	   	:- 	  after_initialize do |form_detail|
+			    puts "==================You have initialized an object!======================"
+			  end
+			  
+			  calling :- FormDetail.new
+
+	-> The after_find callback will be called whenever Active Record loads a record from the database. 
+	   after_find is called before after_initialize if both are defined.
+	   
+	   	:-       after_find do |form_detail|
+			    puts "==================You have found an object!============================"
+			  end
+	   
+			  calling :- FormDetail.first
+			  
+  e). after_touch :-
+	-> The after_touch callback will be called whenever an Active Record object is touched.
+	
+	:- f3 = FormDetail.find(15)
+	
+	calling:-
+	
+	3.2.1 :032 > f3.touch
+	  TRANSACTION (0.3ms)  BEGIN
+	  FormDetail Update (0.4ms)  UPDATE "form_details" SET "updated_at" = $1 WHERE "form_details"."id" = $2  [["updated_at", "2023-03-29 05:22:38.571222"], ["id", 15]]                                     
+	================You have touched an object======================
+	  TRANSACTION (1.7ms)  COMMIT                             
+	================================after commit check================================
+	 => true                                                  
+	
+
+
+	
