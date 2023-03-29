@@ -386,3 +386,17 @@
 		      return true
 		    end
 		  end
+		  
+------------------------------------------------------------------------------------------------------------------------------------
+    							Callback Classes
+    							
+-> Sometimes the callback methods that you'll write will be useful enough to be reused by other models. 
+-> Active Record makes it possible to create classes that encapsulate the callback methods, so they can be reused.
+    
+    	     :- class FormNameCallbacks
+		  def before_validation(f)
+		    f.name = "Untitled Form"
+		  end
+		end
+		
+		calling :- before_validation FormNameCallbacks.new

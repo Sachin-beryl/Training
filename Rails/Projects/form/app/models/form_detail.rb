@@ -1,4 +1,12 @@
+class FormNameCallbacks
+  def before_validation(f)
+    f.name = "Untitled Form"
+  end
+end
+
 class FormDetail < ApplicationRecord
+  before_validation FormNameCallbacks.new
+
   class NameValidator < ActiveModel::Validator     #create validation
     def validate(record)
       if record.name == "neeraj"
@@ -19,7 +27,7 @@ class FormDetail < ApplicationRecord
 
   validate :salary_can_not_be_less_than_10000
   validates_with NameValidator     #calling created validation
-  validates :name, presence: { message: "must be given please" }, format: { with: /\A[a-zA-Z]+\z/,message: "only allows letters" }
+  # validates :name, presence: { message: "must be given please" }, format: { with: /\A[a-zA-Z]+\z/,message: "only allows letters" }
   validates :gender, presence: { message: "must be given please" }
   validates :age, presence: true, numericality: {greater_than_or_equal_to: 20}
   validates :address, presence: true, exclusion: { in: %w(delhi up mp),message: "%{value} is invalid ." }
