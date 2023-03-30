@@ -108,6 +108,68 @@
 			 created_at: Thu, 30 Mar 2023 10:22:22.746515000 UTC +00:00,     
 			 updated_at: Thu, 30 Mar 2023 10:22:22.746515000 UTC +00:00>     
 
+-----------------------------------------------------------------------------------------------------------------------------------
+							has_many :through Association
+							
+ -> A has_many :through association is often used to set up a many-to-many connection with another model. 
+ -> This association indicates that the declaring model can be matched with zero or more instances of 
+    another model by proceeding through a third model.
 			
-			
+ 	*). for has_many :through we make two model, first = category and second = book_category (this is used for through as common)
+ 	
+ 		-> category model
+ 		 	:- rails g model category name
+ 		 	
+ 	        -> book_category model reference with book and category model.
+ 			:- rails g model book_category book:references category:references
+ 			
+	 		after migration:-	class CreateBookCategories < ActiveRecord::Migration[7.0]
+						  def change
+						    create_table :book_categories do |t|
+						      t.references :book, null: false, foreign_key: true
+						      t.references :category, null: false, foreign_key: true
+						      t.timestamps
+						    end
+						  end
+						end
 						
+practise on console :-
+  
+  a) call many category related to one book.
+  
+  	3.2.1 :024 > b2.categories
+ 
+	output:-
+	
+	  id: 2,
+	  name: "Contemporary",
+	  created_at: Thu, 30 Mar 2023 11:39:51.851053000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 11:39:51.851053000 UTC +00:00>,
+	 #<Category:0x00007fa8242eb548
+	  id: 6,
+	  name: "Mystery",
+	  created_at: Thu, 30 Mar 2023 11:39:51.864012000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 11:39:51.864012000 UTC +00:00>] 
+	  
+	  
+   b) call many book related to one category.
+   
+	3.2.1 :025 > cate = Category.find(5)
+	3.2.1 :026 > cate.books
+	  
+	output:- 
+                                          
+	  id: 4,                                                               
+	  name: "The Little Prince",                                           
+	  book_type: "Adventure",                                              
+	  created_at: Thu, 30 Mar 2023 08:54:11.350053000 UTC +00:00,          
+	  updated_at: Thu, 30 Mar 2023 08:54:11.350053000 UTC +00:00>,         
+	 #<Book:0x00007fa824336a48                                             
+	  id: 5,                                                          
+	  name: "A Tale Of Two Cities",                                   
+	  book_type: "fiction",                                           
+	  created_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00,     
+	  updated_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00>]    
+
+	
+
