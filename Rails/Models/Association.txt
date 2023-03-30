@@ -1,0 +1,64 @@
+------------------------------------------------------ Active Record Associations -----------------------------------------------------
+
+ -> In Rails, an association is a connection between two Active Record models.
+ 
+ ****************************** NOTE :- using below two association, to make one to many relation. ************************************
+ 
+ (**) before adding association :-
+ 
+ 	1). first make model and enter data for that table.
+ 	
+ 	    :- rails g model book name book_type   #if we not specify the type opf column it will take string.
+ 	    
+ 	    -> data enter in book table
+ 	    	:- Book.create([{name: "The Hobbit ", book_type: "Fantasy"},{name: "And Then There Were None", book_type: "Mystery"}
+ 	    	,{name: "The Little Prince", book_type: "Adventure"},{name: "A Tale Of Two Cities", book_type: "fiction"}])
+
+ (**) After adding association
+ 
+	2). Now add association :-
+ 	    
+	    :- rails g model author name book:references    # it will automatically generate belongs_to association in author.
+	    
+	    -> check in app/model/author.rb
+	    	:-     class Author < ApplicationRecord
+			  belongs_to :book                  # belongs_to always use singular model name.
+			end
+		
+	    -> create manual has_many association in book.rb
+	   	:-	class Book < ApplicationRecord
+			  has_many :authors		     # has_many always use plural model name.
+			end
+			
+	     a). now enter the data for author table.
+	     
+	     	:- Author.create([{name: "JRR Tolkien", book_id: 2},{name: "Agatha Christie", book_id: 3},{name: "Antoine de Saint
+	     	-Exupéry", book_id: 4},{name: "Charles Dickens", book_id: 5},{name: "Charles Dickens", book_id: 3}])
+
+
+  practise on console :-
+  
+  	*). save book one row into variable.
+  		:- b1 = Book.find(3)
+  		
+  	*). for check author detail related to 3rd id book. 
+  		:- b1.authors
+  		
+  output:- showing one book have two author  (one-2-many)
+  
+        Author Load (0.5ms)  SELECT "authors".* FROM "authors" WHERE "authors"."book_id" = $1  [["book_id", 3]]
+	=>                                                              
+	[#<Author:0x00007f2c814e91c0                              
+	  id: 3,                                                  
+	  name: "Agatha Christie",                                
+	  book_id: 3,                                             
+	  created_at: Thu, 30 Mar 2023 09:03:00.249358000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 09:03:00.249358000 UTC +00:00>,
+	 #<Author:0x00007f2c814e8fe0                              
+	  id: 6,                                                  
+	  name: "Charles Dickens",                                
+	  book_id: 3,                                             
+	  created_at: Thu, 30 Mar 2023 09:03:00.262260000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 09:03:00.262260000 UTC +00:00>] 
+ 
+
