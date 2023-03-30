@@ -61,4 +61,53 @@
 	  created_at: Thu, 30 Mar 2023 09:03:00.262260000 UTC +00:00,
 	  updated_at: Thu, 30 Mar 2023 09:03:00.262260000 UTC +00:00>] 
  
+----------------------------------------------------------------------------------------------------------------------------------
+ 								has_one Association
+ 								 
+ -> A has_one association indicates that one other model has a reference to this model. 
+ -> That model can be fetched through this association.
+ 
+ 	*). Making publisher migration for has_one.
+ 	
+ 		:-     class CreatePublishers < ActiveRecord::Migration[7.0]
+			  def change
+			    create_table :publishers do |t|
+			      t.string :name
+			      t.references :book, null: false, foreign_key: true      #when we migarte,then automatic reference is created. 
+			      t.timestamps
+			    end
+			  end
+			end
+			
+	*). now manual add has_one in book to make book have one publisher.
+	
+		:-     class Book < ApplicationRecord
+			  has_many :authors
+			  has_one :publisher
+			end
+			
+		:-     class Publisher < ApplicationRecord
+			  belongs_to :book
+			end
+			
+ practise on console :-
+ 
+ 	3.2.1 :006 > b1 = Book.first
+                   
+        output :-
+                                        
+	   3.2.1 :007 > b1.publisher
+	   
+			  Publisher Load (0.3ms)  SELECT "publishers".* FROM "publishers" WHERE "publishers"."book_id" = $1 LIMIT $2  
+			  [["book_id", 1], ["LIMIT", 1]]
+			 =>                                                              
+			#<Publisher:0x00007fa824e17818                                   
+			 id: 1,                                                          
+			 name: "Arihant Books",                                          
+			 book_id: 1,                                                     
+			 created_at: Thu, 30 Mar 2023 10:22:22.746515000 UTC +00:00,     
+			 updated_at: Thu, 30 Mar 2023 10:22:22.746515000 UTC +00:00>     
 
+			
+			
+						
