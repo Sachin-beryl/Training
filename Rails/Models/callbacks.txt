@@ -400,3 +400,32 @@
 		end
 		
 		calling :- before_validation FormNameCallbacks.new
+		
+-------------------------------------------------------------------------------------------------------------------------------------
+							Transaction Callbacks
+							
+-> There are two additional callbacks that are triggered by the completion of a database transaction: after_commit and after_rollback.
+-> already applied above.
+
+	     eg:- def after_commit_check
+		    puts "================================after commit check================================"
+		  end
+
+		  after_commit :after_commit_check
+		  
+	-> some modification:-
+	   :- use can specify to run this call back.   eg:- on: :create, on: :destroy, on: :update.
+	   
+	-> if not want to specify, when to run call back. we can use alias of commit.
+	
+	   :-   after_create_commit
+		after_update_commit
+		after_destroy_commit
+		
+	-> an alias for using the after_commit callback for both create and update together:
+	   :-   after_save_commit
+	   
+	   
+   NOTE :- When a transaction completes, the after_commit or after_rollback callbacks are called for all models created, updated, 
+   	   or destroyed within that transaction.
+

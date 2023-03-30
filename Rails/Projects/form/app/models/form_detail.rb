@@ -1,6 +1,8 @@
-class FormNameCallbacks
+class FormNameCallbacks          #class callback
   def before_validation(f)
-    f.name = "Untitled Form"
+    if f.name.nil?
+      f.name = "Untitled Form"
+    end
   end
 end
 
@@ -62,7 +64,7 @@ class FormDetail < ApplicationRecord
     end
   end
 
-  #---------------------------------------callbacks------------------------------------------
+  # ---------------------------------------callbacks------------------------------------------
 
   #before validation
   def normalize_name     
