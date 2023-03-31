@@ -390,4 +390,108 @@ practise on console:-
 		 created_at: Fri, 31 Mar 2023 10:52:50.000949000 UTC +00:00,   
 		 updated_at: Fri, 31 Mar 2023 10:52:50.000949000 UTC +00:00>   
 
+----------------------------------------------------------------------------------------------------------------------------------
+							Tips, Tricks, and Warnings
+							
+ 1). Controlling Caching:-
+ 
+  -> if you want to avoid caching or change the caching behavior, 
+     you can use the :touch option to force the cache to be updated whenever the associated object is updated.
+     
+	eg:- if you have a Post model with a belongs_to :user association, 
+	     you can add :touch => true to the association to ensure that the User model's cache is updated whenever a Post is updated.
+	     
+	     :- class Post < ApplicationRecord
+		  belongs_to :user, :touch => true
+		end
+		
+ 2). Avoiding name collisions:-
+ 
+ -> When defining associations, make sure to choose unique names for the association methods to avoid name collisions 
+    with other methods or attributes in your models.
+    
+	eg:- if you have a User model with a has_many :posts association, you can use a different name for the association method:
 
+	     :- class User < ApplicationRecord
+		  has_many :published_posts, class_name: "Post"
+		end
+		
+ 3). Updating the Schema:-
+ 
+ 	a). Creating Foreign Keys for belongs_to Associations:-
+ 	
+	-> When you declare a belongs_to association, you need to create foreign keys as appropriate.
+	eg:-
+		class Book < ApplicationRecord
+		  belongs_to :author
+		end
+
+		class CreateBooks < ActiveRecord::Migration[7.0]
+		  def change
+		    create_table :books do |t|
+		      t.datetime   :published_at
+		      t.string     :book_number
+		      t.references :author
+		    end
+		  end
+		end
+		
+	b). Creating Join Tables for has_and_belongs_to_many Associations:-
+	
+	-> If you create a has_and_belongs_to_many association, you need to explicitly create the joining table.
+	eg:-
+		class Assembly < ApplicationRecord
+		  has_and_belongs_to_many :parts
+		end
+
+		class Part < ApplicationRecord
+		  has_and_belongs_to_many :assemblies
+		end
+		
+	       :- need to be backed up by a migration to create the assemblies_parts table. 
+	  note :- This table should be created without a primary key:    (also we can use id: false to create table without id)
+	  
+	  	class CreateAssembliesPartsJoinTable < ActiveRecord::Migration[7.0]
+		  def change
+		    create_join_table :assemblies, :parts do |t|
+		      t.index :assembly_id
+		      t.index :part_id
+		    end
+		  end
+		end
+		
+ 4). Controlling Association Scope :-
+ 
+ -> By default, associations look for objects only within the current module's scope. 
+    This can be important when you declare Active Record models within a module.
+    
+    note :- it is important that both the Supplier and the Account class are defined within the same scope.
+    	eg:- 
+	    	module MyApplication
+		  module Business
+		    class Supplier < ApplicationRecord
+		      has_one :account
+		    end
+
+		    class Account < ApplicationRecord
+		      belongs_to :supplier
+		    end
+		  end
+		end
+		
+ 5). Bi-directional Associations :-
+ 
+ -> It's normal for associations to work in two directions, requiring declaration on two different models:
+ 
+ 	eg:- 
+		class Author < ApplicationRecord
+		  has_many :books
+		end
+
+		class Book < ApplicationRecord
+		  belongs_to :author
+		end
+
+ -> Active Record will attempt to automatically identify that these two models share a bi-directional association based on 
+    the association name. In this way, Active Record will only load one copy of the Author object, 
+    making your application more efficient and preventing inconsistent data.
