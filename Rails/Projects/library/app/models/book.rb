@@ -15,4 +15,5 @@ class Book < ApplicationRecord
 
   #polymorphic
   has_many :feedbacks, as: :feedbackable
+  
 end

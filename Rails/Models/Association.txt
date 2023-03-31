@@ -321,5 +321,73 @@ practise on console:-
 		 feedbackable_type: "Author",                                                                       
 		 feedbackable_id: 1,                                                                                
 		 created_at: Fri, 31 Mar 2023 09:21:13.518616000 UTC +00:00,                                        
-		 updated_at: Fri, 31 Mar 2023 09:21:13.518616000 UTC +00:00>           
+		 updated_at: Fri, 31 Mar 2023 09:21:13.518616000 UTC +00:00>     
+		 
+-----------------------------------------------------------------------------------------------------------------------------------
+							        Self Joins
+							        
+-> In designing a data model, you will sometimes find a model that should have a relation to itself.   
+-> For self join we use section model to separate different book.
+
+	select * from sections;
+	 id |    name     | parent_id |         created_at         |         updated_at         
+	----+-------------+-----------+----------------------------+----------------------------
+	  1 | Library     |           | 2023-03-31 10:52:49.937362 | 2023-03-31 10:52:49.937362
+	  2 | Fiction     |         1 | 2023-03-31 10:52:50.000949 | 2023-03-31 10:52:50.000949
+	  3 | Non-fiction |         1 | 2023-03-31 10:52:50.065104 | 2023-03-31 10:52:50.065104
+	  4 | Mystery     |         2 | 2023-03-31 10:52:50.098923 | 2023-03-31 10:52:50.098923
+	  5 | Romance     |         2 | 2023-03-31 10:52:50.160441 | 2023-03-31 10:52:50.160441
+	  6 | Biography   |         3 | 2023-03-31 10:52:50.230188 | 2023-03-31 10:52:50.230188
+	  7 | History     |         3 | 2023-03-31 10:52:50.235257 | 2023-03-31 10:52:50.235257
+
+
+	:- create section model
+	
+		class CreateSections < ActiveRecord::Migration[7.0]
+		  def change
+		    create_table :sections do |t|
+		      t.string :name
+		      t.integer :parent_id
+		      t.timestamps
+		    end
+		  end
+		  
+	:- Add association in section model
+	
+		class Section < ApplicationRecord
+		  belongs_to :parent, class_name: 'Section', optional: true
+		  has_many :children, class_name: 'Section', foreign_key: 'parent_id'
+		end
+		end   
 	 
+practise on console:-
+
+	a).  3.2.1 :111 > section.children
+  
+  		output:-
+  		
+		  id: 4,
+		  name: "Mystery",
+		  parent_id: 2,
+		  created_at: Fri, 31 Mar 2023 10:52:50.098923000 UTC +00:00,
+		  updated_at: Fri, 31 Mar 2023 10:52:50.098923000 UTC +00:00>,
+		
+		  id: 5,
+		  name: "Romance",
+		  parent_id: 2,
+		  created_at: Fri, 31 Mar 2023 10:52:50.160441000 UTC +00:00,
+		  updated_at: Fri, 31 Mar 2023 10:52:50.160441000 UTC +00:00>] 
+		  
+	b).  
+		3.2.1 :112 > section = Section.find_by(name: 'Mystery')
+		3.2.1 :113 > section.parent
+		
+	        output:-
+	                            
+		 id: 2,                                                        
+		 name: "Fiction",                                              
+		 parent_id: 1,                                                 
+		 created_at: Fri, 31 Mar 2023 10:52:50.000949000 UTC +00:00,   
+		 updated_at: Fri, 31 Mar 2023 10:52:50.000949000 UTC +00:00>   
+
+
