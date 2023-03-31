@@ -495,3 +495,69 @@ practise on console:-
  -> Active Record will attempt to automatically identify that these two models share a bi-directional association based on 
     the association name. In this way, Active Record will only load one copy of the Author object, 
     making your application more efficient and preventing inconsistent data.
+    
+-----------------------------------------------------------------------------------------------------------------------------------
+						   Detailed Association Reference
+						   
+ -> The following sections give the details of each type of association, including the methods that they add and 
+    the options that you can use when declaring an association.
+    
+   1). belongs_to Association Reference
+   
+     -> In database terms, the belongs_to association says that this model's table contains a column which represents 
+        a reference to another table. This can be used to set up one-to-one or one-to-many relations, depending on the setup.
+        
+        a). Methods Added by belongs_to :-
+		
+	    *). association
+	    
+	    	eg:- book = Book.first
+		     book.category #=> returns the associated Category object
+		
+	    *). association=(associate)
+	    
+	        eg:-   book = Book.first
+			category = Category.find_by(name: "Science Fiction")
+			book.category = category
+	        
+	    *). build_association(attributes = {})
+	    
+	    	eg:-    book = Book.first
+			category = book.build_category(name: "Fantasy")
+	    	
+	    *). create_association(attributes = {})
+	    
+	    	eg:-	book = Book.first
+			category = book.create_category(name: "Mystery")
+			
+	    *). create_association!(attributes = {})    #raise error when record is invalid.
+	    
+	    	eg:-	book = Book.first
+			category = book.create_category!(name: "Thriller")
+			
+	    *). reload_association        # This method reloads the associated Category object from the database
+	    
+	    	eg:-	book = Book.first
+			book.category #=> returns the associated Category object
+			
+			# Suppose the category name is changed in another process:
+			
+			Category.first.update(name: "New Name")
+			book.reload_category #=> returns the updated Category object
+			
+	    *). association_changed?     #return true if association get modified
+	    
+	    	eg:-	book = Book.first
+			book.category #=> returns the associated Category object
+			book.category.name #=> "Science Fiction"
+			book.category.name = "New Name"
+			book.category_changed? #=> true
+			
+	    *). association_previously_changed?    #returns true if the association change after the last time object get saved.
+		   
+		eg:-	book = Book.first
+			book.category #=> returns the associated Category object
+			book.update(title: "New Title")
+			book.category_previously_changed? #=> true
+			
+	
