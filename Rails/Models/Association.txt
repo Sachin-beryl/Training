@@ -210,3 +210,45 @@ practise on console :-
 	 created_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00,      
 	 updated_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00>      
 
+-----------------------------------------------------------------------------------------------------------------------------------
+						  has_and_belongs_to_many Association
+						  
+-> A has_and_belongs_to_many association creates a direct many-to-many connection with another model, with no intervening model. 
+-> This association indicates that each instance of the declaring model refers to zero or more instances of another model.
+
+	:- Borrower model
+	
+		class Borrower < ApplicationRecord
+		  has_and_belongs_to_many :books
+		end
+		
+	:- Book model
+	
+		class Book < ApplicationRecord
+		  has_and_belongs_to_many :borrowers
+		end
+		
+	:- create join table of borrower and book
+	
+		class CreateJoinTableBooksBorrowers < ActiveRecord::Migration[7.0]
+		  def change
+		    create_join_table :books, :borrowers
+		  end
+		end
+		
+practise on console :-
+
+NOTE :- we have to enter data like below because we haven,t create a model to store data, we only made a table(books_borrowers).
+	which don,t have its own id, it only store ids of book and borrower model. when we create data ike below.
+	
+	-> books_borrowers is not a model so we can,t enter data as we do with models.(main reason)
+	
+	3.2.1 :041 > b1.books << Book.where(id:2)      #enter book detail in borrower
+	3.2.1 :042 > b1.books
+	
+	output:-                                            
+	  id: 2,                                                                
+	  name: "The Hobbit ",                                                  
+	  book_type: "Fantasy",                                                 
+	  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,           
+	  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>]   
