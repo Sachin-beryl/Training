@@ -252,3 +252,74 @@ NOTE :- we have to enter data like below because we haven,t create a model to st
 	  book_type: "Fantasy",                                                 
 	  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,           
 	  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>]   
+	  
+----------------------------------------------------------------------------------------------------------------------------------
+
+ a). Choosing Between belongs_to and has_one:- (combination of both make one 2 one relation)
+ 
+	 -> Use "belongs_to" when the child model is dependent on the parent model and cannot exist without it, 
+	 -> Use "has_one" when the parent model has a single associated model that is not dependent on it and can exist independently.
+ 
+ b). Choosing Between has_many :through and has_and_belongs_to_many :-
+ -> Rails offers two different ways to declare a many-to-many relationship between models. 
+ 
+ 	-> Use has_many :through when the many-to-many relationship requires an intermediate model with its own attributes.s
+ 		eg:- if date required to borrow a book in library.
+ 	
+ 	-> Use has_and_belongs_to_many when the many-to-many relationship is simpler and does not require an intermediate model 
+ 		but needs an intermediate table.
+ 		
+       NOTE :- Use has_many :through if you need validations, callbacks, or extra attributes on the join model.
+       
+------------------------------------------------------------------------------------------------------------------------------------
+						      Polymorphic Associations
+						
+ -> A slightly more advanced twist on associations is the polymorphic association. With polymorphic associations, 
+ -> a model can belong to more than one other model, on a single association.
+ 
+ -> By using polymorphic association we will make feedbacks on books and authors.
+ 
+ 	a). feedback model creation.
+ 	
+	 	class CreateFeedbacks < ActiveRecord::Migration[7.0]
+		  def change
+		    create_table :feedbacks do |t|
+		      t.text :content
+		      t.references :feedbackable, polymorphic: true
+		      t.timestamps
+		    end
+		  end
+		end
+		
+	b). Add this in both book.rb and author.rb
+	
+		has_many :feedbacks, as: :feedbackable
+		
+practise on console:-
+ 
+ 	:- create feedback for book
+ 	
+ 		3.2.1 :049 >  book = Book.first           
+		3.2.1 :050 > book.feedbacks.create(content: 'This book is great!')
+		
+		output:-                                
+		  id: 2,                                                          
+		  content: "interesting book",                                    
+		  feedbackable_type: "Book",                                      
+		  feedbackable_id: 3,                                             
+		  created_at: Fri, 31 Mar 2023 09:19:20.775789000 UTC +00:00,   
+		  updated_at: Fri, 31 Mar 2023 09:19:20.775789000 UTC +00:00>]  
+ 
+ 	:- create feedback for author
+ 	
+ 		3.2.1 :061 > auth = Author.first
+		3.2.1 :063 > auth.feedbacks.create(content: 'i like your book harry potter')
+                        
+               output:-                                              
+		 id: 3,                                                                                             
+		 content: "i like your book harry potter",                                                          
+		 feedbackable_type: "Author",                                                                       
+		 feedbackable_id: 1,                                                                                
+		 created_at: Fri, 31 Mar 2023 09:21:13.518616000 UTC +00:00,                                        
+		 updated_at: Fri, 31 Mar 2023 09:21:13.518616000 UTC +00:00>           
+	 
