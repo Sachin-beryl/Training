@@ -822,3 +822,102 @@ practise on console:-
 	       (in order to update its foreign key). In addition, any object being replaced is also automatically saved, 
 	       because its foreign key will change too.
   	
+    3). has_many Association Reference :-
+    -> The has_many association creates a one-to-many relationship with another model. In database terms, this association says 
+       that the other class will have a foreign key that refers to instances of this class.
+       
+       a). Methods Added by has_many
+       
+    	   *). collection - Returns an array of associated objects. If the association hasn't been loaded, 
+    	       	    it'll query the database to get the associated objects.
+    	       	    
+    	        eg :- # Returns an array of associated posts
+			user.posts
+    	       	    
+    	   *). collection<<(object, ...) 
+    	   
+    	   	eg :- # Adds one or more posts to the association
+			user.posts << post1
+			user.posts << [post2, post3]
+
+    	   *). collection.delete(object, ...) 
+    	   
+    	   	eg :- # Removes one or more posts from the association
+			user.posts.delete(post1)
+			user.posts.delete([post2, post3])
+    	   
+    	   *). collection.destroy(object, ...) - Destroys one or more objects from the association. 
+    	   					  This method will also remove the association between the objects, 
+    	   					  but it won't delete the objects themselves.
+    	   					  
+    	   	eg :- # Destroys one or more posts from the association
+			user.posts.destroy(post1)
+			user.posts.destroy([post2, post3])
+			    	   					  
+    	   *). collection= 
+    	   
+    	   	eg :- # Replaces the current associated posts with a new set of posts
+			user.posts = [post4, post5]
+    	   
+    	   *). collection_singular_ids 
+    	   
+    	   	eg :- # Returns an array of the ids of the associated posts
+			user.post_ids
+    	   
+    	   *). collection_singular_ids=(ids) 
+    	   
+    	   	eg :- # Replaces the current associated posts with posts specified by their ids
+			user.post_ids = [post6.id, post7.id]
+    	   
+    	   *). collection.clear 
+    	   
+    	   	eg :- # Removes all posts from the association
+			user.posts.clear
+    	   
+    	   *). collection.empty? 
+    	       	   
+    	   	eg :- # Returns true if the association doesn't have any associated posts
+			user.posts.empty?
+    	   
+    	   *). collection.size 
+    	       	   
+    	   	eg :- # Returns the number of associated posts
+			user.posts.size
+    	   
+    	   *). collection.find(...) 
+    	       	   
+    	   	eg :- # Finds associated posts by their ids
+			user.posts.find(post6.id)
+    	   
+    	   *). collection.where(...) 
+    	       	   
+    	   	eg :- # Finds associated posts that match the specified conditions
+			user.posts.where("title LIKE ?", "%example%")
+    	   
+    	   *). collection.exists?(...) 
+    	       	   
+    	   	eg :- # Checks if associated posts exist that match the specified conditions
+			user.posts.exists?(published: true)
+    	   
+    	   *). collection.build(attributes = {}) 
+    	       	   
+    	   	eg :- # Builds a new post associated with this user
+			user.posts.build(title: "Example Post")
+    	   
+    	   *). collection.create(attributes = {}) 
+    	       	   
+    	   	eg :- # Builds a new post, saves it to the database and adds it to the association
+			user.posts.create(title: "Another Post")
+    	   
+    	   *). collection.create!(attributes = {}) 
+    	   					           	   
+    	   	eg :- # Builds a new post, saves it to the database and adds it to the association. Raises an exception if the post is
+    	   	        invalid.
+			user.posts.create!(title: "Invalid Post")
+
+    	   					       
+    	   *). collection.reload 
+    	       	   
+    	   	eg :- # Reloads the association from the database
+			user.posts.reload
+    	   
