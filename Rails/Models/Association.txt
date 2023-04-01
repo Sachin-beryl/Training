@@ -688,3 +688,54 @@ practise on console:-
 			book = Book.new(title: "The Lord of the Rings")
 			book.save 		#=> Returns true, because the associated category is optional
 			book.category 		#=> Returns nil, because no category was associated
+			
+	c). Scopes for belongs_to :-
+       
+	-> There may be times when you wish to customize the query used by belongs_to. 
+	-> Such customizations can be achieved via a scope block.
+	
+    	   *). where - The where method lets you specify the conditions that the associated object must meet.
+    	   
+    	   	eg:-    class Book < ApplicationRecord
+			  belongs_to :author, -> { where active: true }
+			end
+			
+    	   *). includes - method to specify second-order associations that should be eager-loaded when this association is used.
+    	   
+    	   	eg:-	
+    	   	If you frequently retrieve authors directly from chapters (@chapter.book.author), then you can make your 
+    	   	code somewhat more efficient by including authors in the association from chapters to books.
+
+			class Chapter < ApplicationRecord
+			  belongs_to :book, -> { includes :author }   #helps in the faster retrival.
+			end
+
+			class Book < ApplicationRecord
+			  belongs_to :author
+			  has_many :chapters
+			end
+
+			class Author < ApplicationRecord
+			  has_many :books
+			end
+			
+    	   *). readonly - If you use readonly, then the associated object will be read-only when retrieved via the association.
+    	  		- prevent updates.
+    	  		
+    	  	eg:- Post.includes(:author).readonly
+
+    	   *). select - Method lets you override the SQL SELECT clause that is used to retrieve data about the associated object. 
+    	   	      - by default rails retrive all column.
+    	   	      
+    	   	eg:- Post.joins(:author).select("posts.*, authors.name as author_name")  #select all post only related to author(only post
+    	   												column)
+    	   												
+	d). Do Any Associated Objects Exist?
+	
+	    -> You can see if any associated objects exist by using the association.nil? method:
+
+		eg:-	if @book.author.nil?
+			  @msg = "No author found for this book"
+			end
+    	   
+    	   	
