@@ -1062,5 +1062,51 @@ practise on console:-
 		    end
 		  end
 
+   7). Association Extensions
+   -> To define an association extension, you need to define a module with the extension methods and then use the :extend option to 
+      add the module to the association.
+      
+      eg :- 
+        
+	module MyExtension     # Define a module with the extension methods
+	  def custom_method
+	    puts "created custom extension"
+	  end
+	end
+
+	class Author < ApplicationRecord   # Define the association with the :extend option
+	  has_many :books, extend: MyExtension
+	end
+
+	author = Author.first		# Now you can use the custom_method on the association object
+	author.books.custom_method
 	
+   8). Single Table Inheritance (STI)
+   
+   -> Sometimes, you may want to share fields and behavior between different models. 
+      Let's say we have Car, Motorcycle, and Bicycle models. We will want to share the color and price fields and some methods for 
+      all of them, but having some specific behavior for each, and separated controllers too.
+      
+      step 1:- First, let's generate the base Vehicle model:
+		-> rails generate model vehicle type:string color:string price:decimal{10.2}
+		
+      step 2:- generate the Car model that inherits from Vehicle
+      		-> rails generate model car --parent=Vehicle
+      		
+      step 3:- generated model will look like this:
+
+	   :-	class Car < Vehicle
+		end
+		
+      step 4:- Creating a car will save it in the vehicles table with "Car" as the type field:
+
+	   :-	Car.create(color: 'Red', price: 10000)
+	   
+	   generate this query :- INSERT INTO "vehicles" ("type", "color", "price") VALUES ('Car', 'Red', 10000)
+	   
+      step 5:- Querying car records will search only for vehicles that are cars:
+
+	   :-	Car.all
+
+
 		
