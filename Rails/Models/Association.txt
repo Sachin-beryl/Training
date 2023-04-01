@@ -738,4 +738,87 @@ practise on console:-
 			  @msg = "No author found for this book"
 			end
     	   
+    2). has_one Association Reference :-
+    
+      -> The has_one association creates a one-to-one match with another model. In database terms, this association says that the other 
+         class contains the foreign key. If this class contains the foreign key, then you should use belongs_to instead.
+         
+        a). Methods Added by has_one
+	   -> When you declare a has_one association, the declaring class automatically gains 6 methods related to the association
+
+    	   *). association - Returns the associated object or nil if it doesn't exist.
+    	   
+    	   	eg:-  user = User.new(name: "John")
+		      user.profile        		# Returns the associated Profile object or nil if it doesn't exist
+		      
+    	   *). association=(associate) - Assigns the given object to the association. The object is not saved to the database.
+    	   
+    	   	eg:-  profile = Profile.new(bio: "Hello, I'm John!")
+		      user.profile = profile   	# Assigns the given Profile object to the association
+		      
+    	   *). build_association(attributes = {}) - Builds a new associated object with the given attributes, and returns it. 
+    	   					     The object is not saved to the database.
+    	   					     
+    	   	eg:-  new_profile = user.build_profile(bio: "I'm a new profile!")
+    	   					     
+    	   *). create_association(attributes = {}) - Builds a new associated object with the given attributes, saves it to the database,
+    	   			                      and returns it. This method is equivalent to calling build_association followed by
+    	   			                      save.
+    	   			 
+    	   	eg:-  created_profile = user.create_profile(bio: "I'm a created profile!")
+    	   			 
+    	   *). reload_association: Reloads the association from the database. This method is useful if you want to ensure that 
+    	   			    you're working with the most up-to-date version of the association.
+    	   
+    	   	eg:-  reloaded_profile = user.profile.reload
+    	   
+        b). Options for has_one
+        -> some options are similar to belongs_to.
+           :- autosave, :class_name, :dependent, :foreign_key, :inverse_of, :primary_key, :touch, :validate
+        
+	-> has_one association supports these options:
+
+    	   *). as - Specifies a polymorphic interface for the association.
+    	   
+    	   	eg:- we used in polymorphic association above
     	   	
+    	   *). source - Specifies the name of the associated model when the association is using a has_one or belongs_to association.
+    	   
+    	   	eg:-    class Profile < ApplicationRecord
+			  belongs_to :user
+			  has_one :address, source: :owner    #here address is taken form the owner model
+			end
+			
+    	   *). source_type: Specifies the type of the associated model when the association is using a has_one or belongs_to 
+    	   	            polymorphic association.
+    	   	            
+    	   	note :- polymorphic association is must in source_type.
+    	   	 
+    	   	eg:-	class User < ApplicationRecord
+			  has_one :profile
+			end
+
+			class Profile < ApplicationRecord
+			  belongs_to :user
+			  has_one :address, source: :owner, source_type: 'User'
+			end
+
+			class Address < ApplicationRecord
+			  belongs_to :owner, polymorphic: true
+			end
+
+    	   *). through: Specifies a has_many or has_one association that is used as a source for this association.
+
+ 		eg:-	example of "has_one :through Association"
+ 		
+  	c). Scopes for has_one  -> similar to belong_to
+  		:- where,includes,readonly,select
+  		
+  	d). Do Any Associated Objects Exist? 
+  	    -> check associated objects exist by using the association.nil? method.
+  	    
+  	e). When are Objects Saved?
+	    -> When you assign an object to a has_one association, that object is automatically saved 
+	       (in order to update its foreign key). In addition, any object being replaced is also automatically saved, 
+	       because its foreign key will change too.
+  	
