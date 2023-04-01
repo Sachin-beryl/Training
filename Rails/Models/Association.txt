@@ -921,3 +921,61 @@ practise on console:-
     	   	eg :- # Reloads the association from the database
 			user.posts.reload
     	   
+    	b). Options for has_many
+    	-> same as belongs_to and has_one
+    	
+    	   :- as, :autosave, :class_name, :counter_cache, :dependent, :foreign_key, :inverse_of, :primary_key, :source, :source_type
+    	      :through, :validate
+    	      
+    	c). Scopes for has_many
+    	-> same as has_one :- where,includes,readonly,select
+    		   
+    	   *). extending :- This option allows you to extend the association with a module. 
+    	                    This can be useful for adding additional methods to the association.
+
+		eg:-	class User < ApplicationRecord
+			  has_many :posts, extending: PostExtensions
+			end
+
+			module PostExtensions
+			  def published
+			    where(published: true)
+			  end
+			end
+			
+    	   *). group :- This option allows you to group the associated records based on a specific attribute. 
+    	   		 It can be useful for performing aggregate functions like counting or summing.
+
+		eg:-	class Order < ApplicationRecord
+			  has_many :line_items
+			  has_many :products, through: :line_items, group: "products.id"
+			end
+			
+    	   *). limit :- This option allows you to limit the number of associated records returned.
+
+		eg:-	class User < ApplicationRecord
+			  has_many :posts, limit: 5
+			end
+			
+    	   *). offset :- This option allows you to offset the starting point of the associated records returned.
+
+		eg:-	class User < ApplicationRecord
+			  has_many :posts, offset: 10
+			end
+			
+    	   *). order :- This option allows you to order the associated records based on a specific attribute.
+
+		eg:-	class User < ApplicationRecord
+			  has_many :posts, order: "created_at DESC"
+			end
+			
+    	   *). distinct :- This option allows you to return only distinct associated records.
+
+		eg:-	class User < ApplicationRecord
+			  has_many :posts, distinct: true
+			end 
+			
+	d). When are Objects Saved?
+	
+	   -> When you assign an object to a has_many association, that object is automatically saved (in order to update its foreign
+	      key). If you assign multiple objects in one statement, then they are all saved.
