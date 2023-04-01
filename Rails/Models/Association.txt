@@ -560,4 +560,131 @@ practise on console:-
 			book.update(title: "New Title")
 			book.category_previously_changed? #=> true
 			
-	
+	b). Options for belongs_to :-
+	   
+    	   *). autosave - If set to true, Rails will automatically save the associated record when saving the parent record. 
+    	   
+		eg:-	class Book < ApplicationRecord
+			  belongs_to :category, autosave: true
+			end
+
+			book = Book.new(title: "The Lord of the Rings")
+			book.category = Category.new(name: "Fantasy")
+			book.save			 # Both book and category are saved to the database
+			
+	   *). class_name - The name of the associated class. By default, Rails assumes the name of the association 
+	                    (:category in belongs_to :category) corresponds to the name of the associated model (Category). 
+
+		eg:-	class Book < ApplicationRecord
+			  belongs_to :category
+			  belongs_to :sub_category, class_name: "Category"
+			end
+
+			book = Book.new(title: "The Lord of the Rings")
+			book.category = Category.new(name: "Fantasy")
+			book.sub_category = Category.new(name: "Epic Fantasy")
+			book.save 			# Both category and sub_category are saved to the database as Category records
+			
+	   *). counter_cache - If set to true, Rails will maintain a count of the number of objects belonging to the associated class. 
+	   
+		eg:-	class Book < ApplicationRecord
+			  belongs_to :category, counter_cache: true
+			end
+
+			category = Category.create(name: "Fantasy", books_count: 0)
+			book = Book.create(title: "The Lord of the Rings", category: category)
+			category.reload
+			category.books_count 		#=> 1
+			
+	   *). dependent - Specifies what should happen when the parent object is destroyed.
+
+		eg:-	class Book < ApplicationRecord
+			  belongs_to :category, dependent: :destroy
+			end
+
+			category = Category.create(name: "Fantasy")
+			book = Book.create(title: "The Lord of the Rings", category: category)
+			book.destroy
+			Category.all 			#=> Returns an empty array, because the associated category was also destroyed
+			
+	   *). foreign_key - Specifies the name of the foreign key column used for the association. Example:
+
+		eg:-	class Book < ApplicationRecord
+			  belongs_to :category, foreign_key: "genre_id"
+			end
+
+			book = Book.new(title: "The Lord of the Rings", genre_id: 1)
+			book.category 			#=> Returns the associated category object with id 1
+			
+	   *). primary_key - Specifies the name of the primary key column used for the association. 
+
+		eg:-	class Category < ApplicationRecord
+			  self.primary_key = "code"
+			  has_many :books, foreign_key: "genre_code"
+			end
+
+			class Book < ApplicationRecord
+			  belongs_to :category, primary_key: "code", foreign_key: "genre_code"
+			end
+
+			category = Category.create(code: "FAN", name: "Fantasy")
+			book = Book.create(title: "The Lord of the Rings", genre_code: "FAN")
+			book.category 			#=> Returns the associated category object with code "FAN"
+			
+	   *). inverse_of - Specifies the name of the association on the associated model. 
+	       	    This can be used to avoid SQL queries when accessing the associated object.
+	       	    
+	       	   - If we hadn't specified inverse_of, Rails would need to query the database to retrieve the associated 
+	       	     books when we call author.books
+	       	     
+	     Note:- "inverse_of" option only works if the associated model has also specified the inverse association. 
+	             It also only works for associations that are defined as has_one, has_many, or belongs_to.
+	       
+		eg:-	class Category < ApplicationRecord
+			  has_many :books, inverse_of: :category
+			end
+
+			class Book < ApplicationRecord
+			  belongs_to :category, inverse_of: :books
+			end
+
+			category = Category.create(name: "Fantasy")
+			book = Book.create(title: "The Lord of the Rings", category: category)
+			category.books 		#=> Returns an array with the associated book
+			
+	   *). touch - Updates the timestamp of the parent object when the associated object is saved or destroyed.
+	   
+		eg:-	class Book < ApplicationRecord
+			  belongs_to :category, touch: true
+			end
+
+			category = Category.create(name: "Fantasy", updated_at: Time.now - 1.day)
+			book = Book.create(title: "The Lord of the Rings", category: category)
+			book.save
+			category.reload
+			category.updated_at   #=> Returns the current time, because the associated book was saved and touched the category
+			
+	   *). validate - Specifies whether validations should be run on the associated object. Default is true. Example:
+
+		eg:-	class Book < ApplicationRecord
+			  belongs_to :category, validate: false
+			  validates :title, presence: true
+			end
+
+			book = Book.new(title: "")
+			book.category = Category.new(name: "Fantasy")
+			book.save 		 #=> Returns true, because the category was not validated
+			book.valid? 		 #=> Returns false, because the book's title is blank
+			
+	   *). optional - Specifies whether the association should be optional. By default, belongs_to associations are required. 
+	   
+	 note  - we have a Book model that belongs to a category. By setting optional: true, we are telling Rails that a book can 
+	   	  exist without an associated category record. This means that we can create a book without specifying a category.
+	   
+		eg:-	class Book < ApplicationRecord
+			  belongs_to :category, optional: true
+			end
+
+			book = Book.new(title: "The Lord of the Rings")
+			book.save 		#=> Returns true, because the associated category is optional
+			book.category 		#=> Returns nil, because no category was associated
