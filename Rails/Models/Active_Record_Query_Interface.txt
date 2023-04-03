@@ -283,5 +283,120 @@
 		  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
 		  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>] 
 
+    c). Hash Conditions
+	-> Active Record also allows you to pass in hash conditions which can increase the readability of your conditions syntax.
+	NOTE :- Only equality, range, and subset checking are possible with Hash conditions.
+	
+	i). Equality Conditions :-
+	
+		eg:- first way
+		
+		3.2.1 :089 > Record.where(borrowed: true)
+ 
+ 		output :-
+		  id: 1,
+		  borrowed: true,
+		  book_record_id: 2,
+		  created_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00>,
+
+		  id: 3,
+		  borrowed: true,
+		  book_record_id: 3,
+		  created_at: Thu, 30 Mar 2023 13:33:09.863343000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 13:33:09.863343000 UTC +00:00>] 
+		  
+		eg:- second way
+		
+		3.2.1 :090 > Record.where("borrowed" => true)     #using string
+		  
+		output :-
+		  id: 1,
+		  borrowed: true,
+		  book_record_id: 2,
+		  created_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00>,
+		 
+		  id: 3,
+		  borrowed: true,
+		  book_record_id: 3,
+		  created_at: Thu, 30 Mar 2023 13:33:09.863343000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 13:33:09.863343000 UTC +00:00>] 
+
+	ii). Range Conditions     #can use as between in postgres
+		eg :-
+		
+		3.2.1 :093 > Book.where(created_at: (Time.now.midnight - 3.day)..Time.now.midnight)
+  		
+  		output :-
+		  id: 6,
+		  name: "Harry Potter and the Sorcerer’s Stone",
+		  book_type: "fiction",
+		  created_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00,
+		  updated_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00>] 
+
+	iii). Subset Conditions
+	   -> If you want to find records using the IN expression you can pass an array to the conditions hash:
+	   
+	   	eg :-
+	   	3.2.1 :094 > Record.where(book_record_id: [1,3])
+
+		output :-
+		  id: 3,
+		  borrowed: true,
+		  book_record_id: 3,
+		  created_at: Thu, 30 Mar 2023 13:33:09.863343000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 13:33:09.863343000 UTC +00:00>,
+
+		  id: 4,
+		  borrowed: false,
+		  book_record_id: 1,
+		  created_at: Thu, 30 Mar 2023 13:33:09.869023000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 13:33:09.869023000 UTC +00:00>] 
+
+	iv). NOT Conditions
+	  -> NOT SQL queries can be built by where.not
+	  
+	  	eg :-
+	  	3.2.1 :095 > Record.where.not(book_record_id: [1,3,4])
+ 
+ 		output :-
+		  id: 1,
+		  borrowed: true,
+		  book_record_id: 2,
+		  created_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00>] 
+
+	v). OR Conditions
+	  -> OR conditions built by calling or on the first relation, and passing the second one as an argument.
+	  
+	  	eg :-
+	  	3.2.1 :098 > Book.where(book_type: 'Fantasy').or(Book.where(book_type: 'Mystery'))
+                  
+               output :-                                         
+		  id: 2,                                                                                  
+		  name: "The Hobbit ",                                                                    
+		  book_type: "Fantasy",                                                                   
+		  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,                             
+		  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>,                            
+				                                               
+		  id: 3,                                                                                  
+		  name: "And Then There Were None",
+		  book_type: "Mystery",
+		  created_at: Thu, 30 Mar 2023 08:54:11.346950000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:54:11.346950000 UTC +00:00>] 
+		  
+	vi). AND Conditions
+	   -> AND conditions can be built by chaining where conditions.
+	   
+	   	eg :-
+	   	3.2.1 :103 > Book.where(id: [1, 2]).and(Book.where(id: [2, 3]))
+  		
+  		output :-
+		  id: 2,                 
+		  name: "The Hobbit ",   
+		  book_type: "Fantasy",  
+		  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>] 
 
 
