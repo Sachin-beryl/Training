@@ -201,3 +201,87 @@
 			And Then There Were None                                     
 			The Little Prince                                            
 			 => nil 
+			 
+------------------------------------------------------------------------------------------------------------------------------------
+
+ 2). Conditions.
+ -> The where method allows you to specify conditions to limit the records returned, representing the WHERE-part of the SQL statement.
+    Conditions can either be specified as a string, array, or hash.
+    
+    a). Pure String Conditions
+    
+    	eg :- 3.2.1 :058 > Book.where("book_type = 'fiction'")
+	      output :-
+	                                         
+		  id: 1,                                                     
+		  name: "Harry potter",                                      
+		  book_type: "fiction",
+		  created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00>,
+		
+		  id: 5,
+		  name: "A Tale Of Two Cities",
+		  book_type: "fiction",
+		  created_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00>,
+		
+		  id: 6,
+		  name: "Harry Potter and the Sorcerer’s Stone",
+		  book_type: "fiction",
+		  created_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00,
+		  updated_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00>] 
+
+    b). Array Conditions
+    
+    	eg 1 :- 
+    	  3.2.1 :083 > Book.where(["name = ?","The Hobbit "])
+              
+        output :-     
+	  id: 2,
+	  name: "The Hobbit ",
+	  book_type: "Fantasy",
+	  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>] 
+	  
+	eg 2 :-
+	3.2.1 :084 > params = {name: "The Hobbit "}
+	 => {:name=>"The Hobbit "} 
+	3.2.1 :085 > book = Book.where("name = ?", params[:name])
+	3.2.1 :086 > book
+
+	output :-
+	  id: 2,                 
+	  name: "The Hobbit ",   
+	  book_type: "Fantasy",  
+	  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>] 
+	  
+	i). Conditions That Use LIKE
+	-> Although condition arguments are automatically escaped to prevent SQL injection, SQL LIKE wildcards (i.e., % and _) are not
+	   escaped. This may cause unexpected behavior if an unsanitized value is used in an argument.
+	   
+	   eg :-
+	   3.2.1 :087 > Book.where("name LIKE ?", params[:name] + "%")      #Book Load (0.6ms)
+
+	     output:-
+		  id: 2,
+		  name: "The Hobbit ",
+		  book_type: "Fantasy",
+		  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>] 
+		  
+	  NOTE :- this may also prevent the database from using an intended index, leading to a much slower query.
+	  
+	  -> To avoid these problems, use sanitize_sql_like to escape wildcard characters in the relevant portion of the argument:
+	  eg :-
+	  	3.2.1 :088 > Book.where("name LIKE ?",Book.sanitize_sql_like(params[:name]) + "%")    #Book Load (0.5ms)
+		   
+	     output:-
+		  id: 2,
+		  name: "The Hobbit ",
+		  book_type: "Fantasy",
+		  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>] 
+
+
+
