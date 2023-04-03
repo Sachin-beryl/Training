@@ -110,3 +110,94 @@
 			 created_at: Thu, 30 Mar 2023 10:22:22.766797000 UTC +00:00,     
 			 updated_at: Thu, 30 Mar 2023 10:22:22.766797000 UTC +00:00>  
 		
+     ---------------------------------------------------------------------------------------------------------------------
+     		
+     b). Retrieving Multiple Objects in Batches:-
+     	
+     	*). find_each :- Method fetches a batch of records and yields each of them to the provided block, instead of loading all 
+     	                 the records into memory at once. This method is best used when you need to process the records one by one.
+     	                 
+		eg:-    3.2.1 :016 > Book.find_each do |book|
+			3.2.1 :017 >   puts book.name
+			3.2.1 :018 > end
+		output:-	  
+			Harry potter
+			The Hobbit 
+			And Then There Were None
+			The Little Prince
+			A Tale Of Two Cities
+			Harry Potter and the Sorcerer’s Stone
+			 => nil 
+			 
+	 options:-
+	 	
+ 	i). batch_size :- it allows you to specify the number of records to be retrieved in each batch.
+ 	
+	eg:-   3.2.1 :019 > Book.find_each(batch_size: 3) do |book|     #every batch size is 3 here.
+		3.2.1 :020 >   puts book.name
+		3.2.1 :021 > end
+		
+	  output:-
+	  
+	    batch 1:-
+	    	Harry potter
+		The Hobbit 
+		And Then There Were None
+		  
+            batch 2:-
+		The Little Prince
+		A Tale Of Two Cities
+		Harry Potter and the Sorcerer’s Stone
+		 
+	ii). start and finish :- 
+		-> The :start option allows you to configure the first ID of the sequence.
+		-> :finish allows you to configure the last ID of the sequence.
+	NOTE :- we can use this start and finish separately.
+	
+		eg :-
+			3.2.1 :022 > Author.find_each(start: 2, finish: 5) do |auth|
+			3.2.1 :023 >   puts auth.name
+			3.2.1 :024 > end
+			
+		  output :-
+			JRR Tolkien
+			Agatha Christie
+			Antoine de Saint-Exupéry
+			Charles Dickens
+			 => nil 
+
+     	*). find_in_batches :- method fetches a batch of records and returns them as an array, instead of yielding them one by one. 
+     	    This method is best used when you need to perform an operation on a batch of records, such as updating or deleting them.
+     	    
+     	    	eg :-
+     	    	3.2.1 :043 > Book.find_in_batches(batch_size: 3) do |batch|      #first convert into batches in array form
+		3.2.1 :044 >   batch.each do |book|				    # iterate each book of batch one by one.
+		3.2.1 :045 >     puts book.name
+		3.2.1 :046 >   end
+		3.2.1 :047 > end
+		  
+		  output :-
+		     batch 1:-
+		     
+			Harry potter
+			The Hobbit 
+			And Then There Were None
+			
+		     batch 2:- 
+			The Little Prince
+			A Tale Of Two Cities
+			Harry Potter and the Sorcerer’s Stone
+			
+	 i). start and finish options :-
+	 
+	 	eg :-
+	 	3.2.1 :053 > Book.find_in_batches(start: 3,finish: 4) do |batch|
+		3.2.1 :054 >   batch.each do |book|
+		3.2.1 :055 >     puts book.name
+		3.2.1 :056 >   end
+		3.2.1 :057 > end
+		 
+		    output :-                         
+			And Then There Were None                                     
+			The Little Prince                                            
+			 => nil 
