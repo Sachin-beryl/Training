@@ -399,4 +399,113 @@
 		  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
 		  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>] 
 
+------------------------------------------------------------------------------------------------------------------------------------
+
+ 3). Ordering
+   -> To retrieve records from the database in a specific order, you can use the order method.
+   
+   	:- Order by single field
+   		-> Book.order(:created_at)
+   		-> Book.order("created_at")   #we can also use string as parameter.
+   		-> Book.order(created_at::desc)
+   		-> Book.order(created_at::asc)
+   		
+   	:- Ordering by multiple field
+   		-> Book.order(name::asc , created_at::desc)
+   		
+   	:- Order multiple times
+   		-> Book.order("name ASC").order("created_at DESC")
+   
+   eg :-
+	   3.2.1 :107 > Record.order(book_record_id: :desc)
+	   
+	output:-       
+	  id: 2,                                   
+	  borrowed: false,                         
+	  book_record_id: 4,                       
+	  created_at: Thu, 30 Mar 2023 13:33:09.858600000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 13:33:09.858600000 UTC +00:00>,
+		     
+	  id: 3,                                   
+	  borrowed: true,                          
+	  book_record_id: 3,                       
+	  created_at: Thu, 30 Mar 2023 13:33:09.863343000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 13:33:09.863343000 UTC +00:00>,
+		     
+	  id: 1,
+	  borrowed: true,
+	  book_record_id: 2,
+	  created_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 13:31:35.263745000 UTC +00:00>,
+
+	  id: 4,
+	  borrowed: false,
+	  book_record_id: 1,
+	  created_at: Thu, 30 Mar 2023 13:33:09.869023000 UTC +00:00,
+	  updated_at: Thu, 30 Mar 2023 13:33:09.869023000 UTC +00:00>]
+	  
+----------------------------------------------------------------------------------------------------------------------------------
+
+ 4). Selecting Specific Fields
+   -> By default, Model.find selects all the fields from the result set using select *.
+   
+   a). select particular column from the database using the query in rails.
+   	
+   	eg 1:- 3.2.1 :109 > Book.select(:name)
+	
+	output :-                                                                
+		[#<Book:0x00007fc7bb1f0290 id: nil, name: "Harry potter">,              
+		 #<Book:0x00007fc7bb1f01f0 id: nil, name: "The Hobbit ">,               
+		 #<Book:0x00007fc7bb1f0150 id: nil, name: "And Then There Were None">,  
+		 #<Book:0x00007fc7bb1f00b0 id: nil, name: "The Little Prince">,         
+		 #<Book:0x00007fc7bb1f0010 id: nil, name: "A Tale Of Two Cities">,      
+		 #<Book:0x00007fc7bd32f960 id: nil, name: "Harry Potter and the Sorcerer’s Stone">] 
+
+	eg 2:- 3.2.1 :110 > Feedback.select(:content, :feedbackable_type)
+              
+        output :-                                                      
+		[#<Feedback:0x00007fc7bae361e0 id: nil, content: "This book is great!", feedbackable_type: "Book">,
+		 #<Feedback:0x00007fc7bd40a6f0 id: nil, content: "interesting book", feedbackable_type: "Book">,
+		 #<Feedback:0x00007fc7bd40a650 id: nil, content: "i like your book harry potter", feedbackable_type: "Author">] 
+
+   b). for uniq element only.
+   
+   	eg :- 3.2.1 :111 > Book.select(:book_type).distinct
+            
+            output :-                                                           
+		[#<Book:0x00007fc7bd42f658 id: nil, book_type: "fiction">,                 
+		 #<Book:0x00007fc7bd42f5b8 id: nil, book_type: "Adventure">,               
+		 #<Book:0x00007fc7bd42f518 id: nil, book_type: "Fantasy">,                 
+		 #<Book:0x00007fc7bd42f478 id: nil, book_type: "Mystery">]  
+		 
+----------------------------------------------------------------------------------------------------------------------------------- 
+
+ 5). Limit and Offset
+ -> To apply LIMIT to the "PSQL" fired by the Model.find, you can specify the LIMIT using limit and offset methods on the relation.
+ -> You can use limit to specify the number of records to be retrieved.
+ -> use offset to specify the number of records to skip before starting to return the records.
+ 
+ 	eg for limit :-
+	 	3.2.1 :117 > Author.order("id DESC").limit(2)
+
+		  id: 6,
+		  name: "Charles Dickens",
+		  book_id: 3,
+		  created_at: Thu, 30 Mar 2023 09:03:00.262260000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 09:03:00.262260000 UTC +00:00>,
+		
+		  id: 5,
+		  name: "Charles Dickens",
+		  book_id: 5,
+		  created_at: Thu, 30 Mar 2023 09:03:00.257843000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 09:03:00.257843000 UTC +00:00>] 
+
+	eg for offset :-
+		3.2.1 :126 > Author.offset(2).limit(1)
+ 
+		  id: 3,
+		  name: "Agatha Christie",
+		  book_id: 3,
+		  created_at: Thu, 30 Mar 2023 09:03:00.249358000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 09:03:00.249358000 UTC +00:00>] 
 
