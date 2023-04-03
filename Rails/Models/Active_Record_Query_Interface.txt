@@ -508,4 +508,38 @@
 		  book_id: 3,
 		  created_at: Thu, 30 Mar 2023 09:03:00.249358000 UTC +00:00,
 		  updated_at: Thu, 30 Mar 2023 09:03:00.249358000 UTC +00:00>] 
+	
+---------------------------------------------------------------------------------------------------------------------------------	  
+ 6). Group
+ -> To apply a GROUP BY clause to the PSQL fired by the finder, you can use the group method.
+
+	eg :- 3.2.1 :127 > Book.select("book_type").group("book_type")
+	
+             output:-                                                    
+		[#<Book:0x00007fc7bab572a8 id: nil, book_type: "fiction">,           
+		 #<Book:0x00007fc7bd42da38 id: nil, book_type: "Adventure">,         
+		 #<Book:0x00007fc7bd42d998 id: nil, book_type: "Fantasy">,           
+		 #<Book:0x00007fc7bd42d8f8 id: nil, book_type: "Mystery">] 
+		 
+	a). Total of grouped items
+	  -> To get the total of grouped items on a single query, call count after the group.
+	  
+	  	eg :- 3.2.1 :128 > Book.group("book_type").count
+ 		
+ 		   output :-
+ 			{"fiction"=>3, "Adventure"=>1, "Fantasy"=>1, "Mystery"=>1}       
+ 			
+----------------------------------------------------------------------------------------------------------------------------------
+7). Having
+ -> PSQL uses the HAVING clause to specify conditions on the GROUP BY fields. You can add the HAVING clause to the SQL fired by 
+    the Model.find by adding the having method to the find.
+    
+    eg :-
+    3.2.1 :157 > Book.select("book_type , sum(id)").group("book_type").having("sum(id) < ?",200)
+  
+     output :-
+	[#<Book:0x00007fc7bd46dd40 id: nil, book_type: "fiction">,
+	 #<Book:0x00007fc7bd46dca0 id: nil, book_type: "Adventure">,
+	 #<Book:0x00007fc7bd46dc00 id: nil, book_type: "Fantasy">,
+	 #<Book:0x00007fc7bd46db60 id: nil, book_type: "Mystery">] 
 
