@@ -848,4 +848,51 @@
 		 #<Book:0x00007fd3980217c8 id: nil, name: "A Tale Of Two Cities">,                                             
 		 #<Book:0x00007fd398021728 id: nil, name: "Harry Potter and the Sorcerer’s Stone">]
 
-		 
+--------------------------------------------------------------------------------------------------------------------------------
+13). Eager Loading Associations
+  -> Eager loading is a technique for loading associated records in a single query, rather than fetching them one-by-one.
+     This can help avoid the N+1 query problem, where a query is executed for each record in a collection.
+
+  -> Active Record provides several methods for eager loading associations using the query interface:
+
+	a). includes -> This method allows you to specify the associations to be eager-loaded in a single query.
+
+	     imp -> generates a single SQL query that includes a JOIN on the associated table(s), fetching all the required records 
+	            in a single query.
+	
+	    eg :- 3.2.1 :054 > Book.includes(:authors).where("book_id > ?", 3).pluck(:name)   #pluck is used to print specific columns
+		   
+		output :-
+ 		   => ["The Little Prince", "A Tale Of Two Cities"] 
+ 		   
+ 	b). preload -> This method is similar to includes, but it does not perform a join. Instead, it loads the associations using 
+ 	               a separate query.
+ 	               
+ 	     imp ->  it doesn't require any additional joins in the initial query, so it can be more performant in certain cases.
+ 	               
+ 	    eg :- 3.2.1 :061 > Book.preload(:authors).pluck(:name)
+                   
+                   output :-                                                                   
+			["The Hobbit ",                                                                          
+			 "And Then There Were None",                                                             
+			 "The Little Prince",                                                                    
+			 "A Tale Of Two Cities",                                                                 
+			 "Harry Potter and the Sorcerer’s Stone",                                                
+			 "Harry potter"]               
+			 
+	c). eager_load -> This method also allows you to specify the associations to be eagerly-loaded, but it differs from includes 
+	                  in how the query is constructed. 
+	                  
+	       imp :- includes an OUTER JOIN to ensure that all main records are included in the result set, even if they have no
+	              associated records.     
+	                  
+	    eg :- 3.2.1 :062 > Book.eager_load(:authors).pluck(:name)
+                   
+                   output :-                                                     
+			["Harry potter",                                                                 
+			 "The Hobbit ",                                                                  
+			 "And Then There Were None",                                                     
+			 "The Little Prince",                                                            
+			 "A Tale Of Two Cities",                                    
+			 "And Then There Were None",                                
+			 "Harry Potter and the Sorcerer’s Stone"]          
