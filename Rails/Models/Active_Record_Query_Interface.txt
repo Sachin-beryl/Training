@@ -542,4 +542,123 @@
 	 #<Book:0x00007fc7bd46dca0 id: nil, book_type: "Adventure">,
 	 #<Book:0x00007fc7bd46dc00 id: nil, book_type: "Fantasy">,
 	 #<Book:0x00007fc7bd46db60 id: nil, book_type: "Mystery">] 
+	 
+-----------------------------------------------------------------------------------------------------------------------------------
+8). Overriding Conditions
+
+    a). unscope :- You can specify certain conditions to be removed using the unscope method.
+ 
+ 	eg with using unscope :-
+		 3.2.1 :002 > Book.where('id > 4').limit(1).order('id desc').unscope(:order)  
+			
+		output :-	                                                                   
+		  id: 5,                                                                                                      
+		  name: "A Tale Of Two Cities",                                                                               
+		  book_type: "fiction",                                                                                       
+		  created_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00,                                                 
+		  updated_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00>]   
+		  
+	eg without using unscope :-	                                               
+		3.2.1 :003 > Book.where('id > 4').limit(1).order('id desc')
+		
+		output :-			                                                                     
+		  id: 6,                                                                                                      
+		  name: "Harry Potter and the Sorcerer’s Stone",                                                              
+		  book_type: "fiction",                                                                                       
+		  created_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00,                                                 
+		  updated_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00>]    
+		  
+	NOTE :- You can also unscope specific where clauses.
+	
+		3.2.1 :009 > Book.where(id: 3, name: 'A Tale Of Two Cities').unscope(where: :id)
+                                                                                            
+		  id: 5,                                                                                                                
+		  name: "A Tale Of Two Cities",                                                                                         
+		  book_type: "fiction",                                                                                                 
+		  created_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00,                                                           
+		  updated_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00>]    
+
+    b). only :- You can also override conditions using the only method.
+    
+    	eg :- 3.2.1 :010 > Book.where('id > 4').limit(1).order('id desc').only(:order, :where)#only order and where condition get executed
+		  
+	output :-                                                                              
+	  id: 6,                                                                                                            
+	  name: "Harry Potter and the Sorcerer’s Stone",                                                                    
+	  book_type: "fiction",                                                                                             
+	  created_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00,                                                       
+	  updated_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00>,                                                      
+	                                                                                       
+	  id: 5,                                                                                                            
+	  name: "A Tale Of Two Cities",                                                                                     
+	  book_type: "fiction",                                                                                             
+	  created_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00,                                                       
+	  updated_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00>]   
+	  
+    c). reselect :- The reselect method overrides an existing select statement.
+    
+    	eg :- 3.2.1 :012 > Book.select(:id, :name).reselect(:created_at)   #reselect will suppress the select condition.
+		
+	    output :-		                                                                        
+		[#<Book:0x00007ff51e45a6f8 id: nil, created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00>,
+		 #<Book:0x00007ff51e45a658 id: nil, created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00>,
+		 #<Book:0x00007ff51e45a5b8 id: nil, created_at: Thu, 30 Mar 2023 08:54:11.346950000 UTC +00:00>,
+		 #<Book:0x00007ff51e45a518 id: nil, created_at: Thu, 30 Mar 2023 08:54:11.350053000 UTC +00:00>,
+		 #<Book:0x00007ff51e45a478 id: nil, created_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00>,
+		 #<Book:0x00007ff51e45a3d8 id: nil, created_at: Fri, 31 Mar 2023 10:17:29.648225000 UTC +00:00>] 
+		 
+    d). reorder :- The reorder method overrides the default scope order. we can change the previous or defaut order type with new order.
+    
+    	eg :- 3.2.1 :014 > authors = Author.order('name asc')
+  	  query become :- Author Load (0.8ms)  SELECT "authors".* FROM "authors" ORDER BY name asc
+  	  
+  	  -> using reorder
+  	     3.2.1 :016 > authors.reorder('name desc')
+  	  query become :- Author Load (0.5ms)  SELECT "authors".* FROM "authors" ORDER BY name desc
+                    
+               output :-    
+		  id: 2,                                                
+		  name: "JRR Tolkien",                                  
+		  book_id: 2,                                           
+		  created_at: Thu, 30 Mar 2023 09:03:00.244777000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 09:03:00.244777000 UTC +00:00>,
+				        
+		  id: 1,                                                
+		  name: "JK Rowling",                                   
+		  book_id: 1,                                           
+		  created_at: Thu, 30 Mar 2023 08:57:18.310960000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:57:18.310960000 UTC +00:00>,
+				        
+		  id: 5,
+		  name: "Charles Dickens",
+		  book_id: 5,
+		  created_at: Thu, 30 Mar 2023 09:03:00.257843000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 09:03:00.257843000 UTC +00:00>,
+
+    e). reverse_order :- The reverse_order method reverses the ordering clause if specified.
+    
+    	eg :- 3.2.1 :021 > Record.select('borrowed').order('borrowed desc')    #before reverse_order
+                                                         
+		[#<Record:0x00007ff51e3fbf40 id: nil, borrowed: true>,        
+		 #<Record:0x00007ff51e3fbea0 id: nil, borrowed: true>,        
+		 #<Record:0x00007ff51e3fbe00 id: nil, borrowed: false>,       
+		 #<Record:0x00007ff51e3fbd60 id: nil, borrowed: false>]   
+		     
+	      3.2.1 :022 > Record.select('borrowed').order('borrowed desc').reverse_order    #after reverse_order
+				                                            
+		[#<Record:0x00007ff51c3073c0 id: nil, borrowed: false>,       
+		 #<Record:0x00007ff51c307320 id: nil, borrowed: false>,       
+		 #<Record:0x00007ff51c307280 id: nil, borrowed: true>,
+		 #<Record:0x00007ff51c3071e0 id: nil, borrowed: true>] 
+
+    f). rewhere :- The rewhere method overrides an existing, named where condition.
+    
+    	eg :- 3.2.1 :024 > Book.select(:name).where(id: 3).rewhere(id: 5)  #where clause is suppressed by rewhere clause.
+	  Book Load (0.4ms)  SELECT "books"."name" FROM "books" WHERE "books"."id" = $1  [["id", 5]]   
+	  
+	  output :-
+	 	=> [#<Book:0x00007ff51ca0b900 id: nil, name: "A Tale Of Two Cities">] 
+	 	
+	NOTE :- if we write where with another where that will make and condition.
+		syntax :- Book.where(condition).where(condition)
 
