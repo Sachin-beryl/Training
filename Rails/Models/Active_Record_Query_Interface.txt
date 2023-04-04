@@ -754,4 +754,98 @@
 		3.2.1 :057 > book.name = "Harry potter"
 		 => "Harry potter" 
 		3.2.1 :058 > book.save!     #lock released after save
+		
+----------------------------------------------------------------------------------------------------------------------------------
+12). Joining Tables
+ -> Active Record provides two finder methods for specifying JOIN clauses on the resulting SQL: joins and left_outer_joins. 
+    While joins should be used for INNER JOIN or custom queries, left_outer_joins is used for queries using LEFT OUTER JOIN.
+    
+    a). joins  (Inner join)
+    -> There are multiple ways to use the joins method.
+
+	*). Using a String SQL Fragment:-
+	
+	 -> You can just supply the raw SQL specifying the JOIN clause to joins.
+	 eg :-
+	    3.2.1 :063 > Book.joins("INNER JOIN authors on authors.book_id = books.id and books.book_type = 'fiction'")
+                                                                
+		  id: 1,                                                                                  
+		  name: "Harry potter",                                                                   
+		  book_type: "fiction",                                                                   
+		  created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,                             
+		  updated_at: Tue, 04 Apr 2023 07:56:57.096612000 UTC +00:00,                             
+		  lock_version: 3>,                                                                       
+		                                                             
+		  id: 5,
+		  name: "A Tale Of Two Cities",
+		  book_type: "fiction",
+		  created_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:54:11.352993000 UTC +00:00,
+		  lock_version: 0>] 
+		  
+	*). Using Array/Hash of Named Associations :-
+	
+	-> Active Record lets you use the names of the associations defined on the model as a shortcut for specifying JOIN clauses 
+	   for those associations when using the joins method.
+	   
+	   eg :-
+	   	3.2.1 :065 > Book.joins(:authors)
+  		Book Load (0.8ms)  SELECT "books".* FROM "books" INNER JOIN "authors" ON "authors"."book_id" = "books"."id"
+  		
+  	*). Joining Multiple Associations :-
+  	
+  	   eg :- Book.joins(:author, :reviews)     #example from ruby guide.
+
+		i). Joining Nested Associations (Single Level)
+		
+			eg :- Book.joins(reviews: :customer)
+			
+		ii). Joining Nested Associations (Multiple Level)
+			eg :- Author.joins(books: [{ reviews: { customer: :orders } }, :supplier] )
+			
+			explanation -> 
+				SELECT * FROM authors
+				  INNER JOIN books ON books.author_id = authors.id
+				  INNER JOIN reviews ON reviews.book_id = books.id
+				  INNER JOIN customers ON customers.id = reviews.customer_id
+				  INNER JOIN orders ON orders.customer_id = customers.id
+				INNER JOIN suppliers ON suppliers.id = books.supplier_id
+				
+	*). Specifying Conditions on the Joined Tables
+	 -> You can specify conditions on the joined tables using the regular Array and String conditions. 
+	    Hash conditions provide a special syntax for specifying conditions for the joined tables.
+	    
+	    eg :-
+	        3.2.1 :028 > time_range = (Time.now.midnight - 5.day)..Time.now.midnight
+		3.2.1 :029 > Book.joins(:authors).where(authors: { created_at: time_range }).limit(2)
+		 
+	      output :-
+		  id: 1,
+		  name: "Harry potter",
+		  book_type: "fiction",
+		  created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,
+		  updated_at: Tue, 04 Apr 2023 07:56:57.096612000 UTC +00:00,
+		  lock_version: 3>,
+		 
+		  id: 2,
+		  name: "The Hobbit ",
+		  book_type: "Fantasy",
+		  created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
+		  updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,
+		  lock_version: 0>] 
+
+    b). left_outer_joins
+      -> If you want to select a set of records whether or not they have associated records you can use the left_outer_joins method.
+      
+      	 eg :- 3.2.1 :046 > Book.left_outer_joins(:record).select(:name)
+		  Book Load (0.6ms)  SELECT "books"."name" FROM "books" LEFT OUTER JOIN "book_records" ON "book_records"."book_id"
+		   = "books"."id" LEFT OUTER JOIN "records" ON "records"."book_record_id" = "book_records"."id"
+		                                                                                                                                                                                                             
+		[#<Book:0x00007fd398021b88 id: nil, name: "The Hobbit ">,                                                      
+		 #<Book:0x00007fd3980219a8 id: nil, name: "The Little Prince">,                                                
+		 #<Book:0x00007fd398021908 id: nil, name: "And Then There Were None">,                                         
+		 #<Book:0x00007fd398021868 id: nil, name: "Harry potter">,                                                     
+		 #<Book:0x00007fd3980217c8 id: nil, name: "A Tale Of Two Cities">,                                             
+		 #<Book:0x00007fd398021728 id: nil, name: "Harry Potter and the Sorcerer’s Stone">]
+
 		 
