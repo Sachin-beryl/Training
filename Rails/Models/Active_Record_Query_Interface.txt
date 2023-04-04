@@ -662,3 +662,96 @@
 	NOTE :- if we write where with another where that will make and condition.
 		syntax :- Book.where(condition).where(condition)
 
+----------------------------------------------------------------------------------------------------------------------------------
+9). Null Relation
+-> The none method returns a chainable relation with no records.
+
+	eg :-   3.2.1 :028 > Book.none
+		 => [] 
+		 
+		3.2.1 :029 > Book.none?    
+		  Book Exists? (0.9ms)  SELECT 1 AS one FROM "books" LIMIT $1  [["LIMIT", 1]]
+		 => false   
+		 
+-----------------------------------------------------------------------------------------------------------------------------------
+10). Readonly Objects
+ -> Active Record provides the readonly method on a relation to explicitly disallow modification of any of the returned objects.
+    Any attempt to alter a readonly record will not succeed, raising an ActiveRecord::ReadOnlyRecord exception.
+    
+    eg :- 3.2.1 :030 > book = Book.readonly.first
+          3.2.1 :031 > book
+                                         
+		 id: 1,                                                            
+		 name: "Harry potter",                                             
+		 book_type: "fiction",                                             
+		 created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,       
+		 updated_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00> 
+		 
+	  3.2.1 :033 > book.id += 1
+	      => 2 
+	  3.2.1 :034 > book.save   #this will throw error for readonly.
+	  
+	        /home/beryl/.rvm/gems/ruby-3.2.1/gems/activerecord-7.0.4.3/lib/active_record/persistence.rb:1123:in
+	         `_raise_readonly_record_error': Book is marked as readonly (ActiveRecord::ReadOnlyRecord)  
+
+---------------------------------------------------------------------------------------------------------------------------------        
+11). Locking Records for Update
+ -> Locking is helpful for preventing race conditions when updating records in the database and ensuring atomic updates.
+ 
+ -> Active Record provides two locking mechanisms:
+
+	a). Optimistic Locking :- 
+	-> Optimistic Locking is a technique for ensuring that multiple updates to a record don't conflict with each other. 
+	-> It uses a special column named lock_version to store the version number of the record. 
+	-> When a record is fetched from the database, its lock_version is also fetched. 
+	-> When the record is updated, Active Record checks if the lock_version in the database matches the lock_version of the fetched
+	   record. If they match, the record is updated and the lock_version is incremented by 1. 
+	-> If they don't match, it means that some other process has updated the record, and Active Record raises an
+	   ActiveRecord::StaleObjectError error.
+	   
+	   :- First Add lock_version column in Books table.
+	   	: rails g migration AddLockVersionToBook lock_version:integer
+	   	
+	  eg :-3.2.1 :040 > book
+                                        
+		 id: 1,                                                            
+		 name: "Harry potter",                                             
+		 book_type: "fiction",                                             
+		 created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,       
+		 updated_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,       
+		 lock_version: 0>                                       #lock version is 0 
+		                                              
+		3.2.1 :041 > book.name = "Harry potter lock_version"    #change book name
+		 => "Harry potter lock_version" 
+		 
+		3.2.1 :042 > book.save     				  #save the change
+				                         
+		3.2.1 :043 > book          				  #check for book name
+		                                       
+		 id: 1,                                                           
+		 name: "Harry potter lock_version",                               
+		 book_type: "fiction",                                            
+		 created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,      
+		 updated_at: Tue, 04 Apr 2023 07:36:30.067490000 UTC +00:00,
+		 lock_version: 1>                 			  # lock version is incremented by 1 after update.
+			
+	b). Pessimistic Locking :-
+	-> It is a technique for preventing other processes from updating a record while it's being updated by another process. 
+	-> It uses a database-level lock to ensure that only one process can update a record at a time. 
+	-> This technique is also known as "pessimistic concurrency control" because it's based on the assumption that conflicts 
+	   will occur, and that it's better to prevent them from happening than to deal with them after they occur.
+	   
+	   eg :- 3.2.1 :055 > book = Book.lock.first   #lock! = other processes can't update it until the lock is released.
+                                                           
+		3.2.1 :056 > book
+				                       
+			 id: 1,                                                            
+			 name: "12345",                                                    
+			 book_type: "fiction",                                             
+			 created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,       
+			 updated_at: Tue, 04 Apr 2023 07:55:07.352146000 UTC +00:00,       
+			 lock_version: 2>                                                  
+		3.2.1 :057 > book.name = "Harry potter"
+		 => "Harry potter" 
+		3.2.1 :058 > book.save!     #lock released after save
+		 
