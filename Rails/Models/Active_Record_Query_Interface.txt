@@ -945,7 +945,7 @@
 	
 	eg :-
 		step 1 :- Add scope in book.rb model.
-			   #if time present then other condition get checked.
+			#if time present then other condition get checked.
 			  :- scope :created_before, ->(time) { where("created_at < ?", time) if time.present? } 
 			  											
 		step 2 :- 3.2.1 :088 > Book.created_before(Time.now.midnight - 4.days).limit(2)
@@ -1031,4 +1031,49 @@
 		  created_at: Thu, 30 Mar 2023 13:33:09.858600000 UTC +00:00,
 		  updated_at: Thu, 30 Mar 2023 13:33:09.858600000 UTC +00:00>] 
 
-
+-------------------------------------------------------------------------------------------------------------------------------
+15). Dynamic Finders
+  -> For every field (also known as an attribute) you define in your table, Active Record provides a finder method.
+  
+  	eg :- 3.2.1 :103 > Book.find_by_name("Harry potter")
+               
+              output :-                              
+		 id: 1,                                                               
+		 name: "Harry potter",                                                
+		 book_type: "fiction",                                                
+		 created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,          
+		 updated_at: Tue, 04 Apr 2023 07:56:57.096612000 UTC +00:00,          
+		 lock_version: 3>      
+                                                
+	eg :- 3.2.1 :104 > Book.find_by_book_type("Fantasy")
+                    
+              output :-                            
+		 id: 2,                                                                    
+		 name: "The Hobbit ",                                                      
+		 book_type: "Fantasy",                                                     
+		 created_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,               
+		 updated_at: Thu, 30 Mar 2023 08:54:11.342365000 UTC +00:00,               
+		 lock_version: 0>       
+		 
+	eg :- 3.2.1 :106 > Book.find_by_book_type_and_name("Fantasy","Harry potter")  #combine two finders together using "and" 
+	
+	  Book Load (0.3ms)  SELECT "books".* FROM "books" WHERE "books"."book_type" = $1 AND "books"."name" = $2 LIMIT $3
+	  [["book_type", "Fantasy"], ["name", "Harry potter"], ["LIMIT", 1]]         
+	      
+	      output :-                                            
+		 => nil 
+		 
+---------------------------------------------------------------------------------------------------------------------------------
+16). Enums
+ -> An enum lets you define an Array of values for an attribute and refer to them by name. The actual value stored in the database
+    is an integer that has been mapped to one of the values.
+    
+    :- create enum in books.
+    -> enum :book_type, [:fiction, :Mystery, :Adventure, :Fantasy]
+    
+    		eg 1:- Book.fiction   #return all book whose book_type is fiction.
+    		
+    		eg 2:- book = Book.fiction? #if book is fiction type, then return true.
+    		
+    		   
+    		

@@ -19,4 +19,7 @@ class Book < ApplicationRecord
   scope :book_type, -> {where(book_type: "Mystery")}
   scope :greater_than_id, ->(var) { where("id > ?", var) }   #parameter scope
   scope :created_before, ->(time) { where("created_at < ?", time) if time.present? }
+
+  # Enum
+  enum :book_type, [:fiction, :Mystery, :Adventure, :Fantasy]
 end
