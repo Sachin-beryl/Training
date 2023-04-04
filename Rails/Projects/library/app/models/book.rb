@@ -15,5 +15,8 @@ class Book < ApplicationRecord
 
   #polymorphic
   has_many :feedbacks, as: :feedbackable
-  
+ 
+  scope :book_type, -> {where(book_type: "Mystery")}
+  scope :greater_than_id, ->(var) { where("id > ?", var) }   #parameter scope
+  scope :created_before, ->(time) { where("created_at < ?", time) if time.present? }
 end
