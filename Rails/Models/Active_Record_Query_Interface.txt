@@ -1223,3 +1223,83 @@
   		
   	     output :-                              
 		 => true            
+		 
+---------------------------------------------------------------------------------------------------------------------------------
+21). Calculations
+ -> This section uses count as an example method in this preamble, but the options described apply to all sub-sections.
+ 
+    a). Count
+      -> If you want to see how many records are in your model's table you could call Customer.count and that will return the number.
+      
+      eg :- 3.2.1 :052 > Author.count
+ 
+ 	    output :-
+ 		=> 6  
+ 		                                                       
+      eg :- 3.2.1 :053 > Book.where(book_type: 'fiction').count
+  		
+  	    output :-
+ 		=> 2    
+ 		
+    b). Average
+    
+      eg :- 3.2.1 :055 > Book.average('id')
+  	    
+  	    output :-
+ 		=> 0.45e1   
+ 		
+    c). Maximum
+    
+      eg :- 3.2.1 :057 > Book.maximum('id')
+  	    
+  	    output :-
+ 		=> 8  
+ 		                                                             
+    d). Minimum
+    
+      eg :- 3.2.1 :058 > Book.minimum('id')
+  	    
+  	    output :-
+ 		=> 1    
+ 		                                                       
+    e). Sum
+    
+      eg :- 3.2.1 :059 > Book.sum('id')
+  
+  	    output :-
+		=> 36    
+		
+---------------------------------------------------------------------------------------------------------------------------------
+22). Running EXPLAIN
+ -> You can run explain on a relation. EXPLAIN output varies for each database.
+ 
+      eg :- 3.2.1 :070 > Book.where(id: 1).joins(:authors).explain
+  	           Book Load (0.4ms)  SELECT "books".* FROM "books" INNER JOIN "authors" ON "authors"."book_id" = "books"."id" WHERE
+  	           "books"."id" = $1  [["id", 1]]          
+  
+  OUTPUT :-
+                                                                                       
+	EXPLAIN for: SELECT "books".* FROM "books" INNER JOIN "authors" ON "authors"."book_id" = "books"."id" WHERE "books"."id" = $1
+	[["id", 1]]
+
+							         QUERY PLAN                                       
+			---------------------------------------------------------------------------------------------
+			 Nested Loop  (cost=4.33..20.85 rows=4 width=92)                                          
+			   ->  Index Scan using books_pkey on books  (cost=0.15..8.17 rows=1 width=92)            
+				 Index Cond: (id = '1'::bigint)                                                   
+			   ->  Bitmap Heap Scan on authors  (cost=4.18..12.64 rows=4 width=8)                     
+				 Recheck Cond: (book_id = '1'::bigint)                                            
+				 ->  Bitmap Index Scan on index_authors_on_book_id  (cost=0.00..4.18 rows=4 width=0)
+				       Index Cond: (book_id = '1'::bigint)                                        
+				  
+				  
+      eg :- 3.2.1 :072 > Book.where(book_type: 'fiction').explain
+  		   Book Load (0.4ms)  SELECT "books".* FROM "books" WHERE "books"."book_type" = $1  [["book_type", "fiction"]]
+
+   OUTPUT :-                                    
+		EXPLAIN for: SELECT "books".* FROM "books" WHERE "books"."book_type" = $1 [["book_type", "fiction"]]
+				      QUERY PLAN        
+		-------------------------------------------------------
+		 Seq Scan on books  (cost=0.00..18.50 rows=3 width=92)
+		   Filter: ((book_type)::text = 'fiction'::text)
+		     
