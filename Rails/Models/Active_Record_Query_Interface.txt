@@ -1302,4 +1302,48 @@
 		-------------------------------------------------------
 		 Seq Scan on books  (cost=0.00..18.50 rows=3 width=92)
 		   Filter: ((book_type)::text = 'fiction'::text)
-		     
+		
+--------------------------------------------------------------------------------------------------------------------------------
+						  	    Remaining queries  
+						  		
+ 1). Annotate :-
+ -> Adds an SQL comment to queries generated from this relation.
+ 
+ 	eg :- 3.2.1 :073 > Book.annotate("selecting user names").select(:name)
+	  Book Load (0.4ms)  SELECT "books"."name" FROM "books" /* selecting user names */
+	
+     	     output :- 
+		[#<Book:0x00007fe04b6d2800 id: nil, name: "The Hobbit ">,
+		 #<Book:0x00007fe04b6d2760 id: nil, name: "And Then There Were None">,
+		 #<Book:0x00007fe04b6d26c0 id: nil, name: "The Little Prince">,
+		 #<Book:0x00007fe04b6d2620 id: nil, name: "A Tale Of Two Cities">,
+		 #<Book:0x00007fe04b6d2580 id: nil, name: "Harry Potter and the Sorcerer’s Stone">,
+		 #<Book:0x00007fe04b6d24e0 id: nil, name: "Harry potter">,
+		 #<Book:0x00007fe04b6d2440 id: nil, name: "A Revenue Stamp">,
+		 #<Book:0x00007fe04b6d2300 id: nil, name: "War and Peace">] 
+		 
+ 2). create_with :-
+ -> Sets attributes to be used when creating new records from a relation object.
+ 
+ 	eg :- 3.2.1 :077 > author = Author.create_with(name: 'sachin')
+	      Author Load (0.5ms)  SELECT "authors".* FROM "authors"
+		                                                 
+	      3.2.1 :078 > author.new.name
+	      	output => "sachin" 
+	      	
+ 3). optimizer_hints :- 
+  -> the optimizer_hints method is used to add database-specific hints to a database query to help the database optimizer 
+     choose a more efficient query plan. 
+     
+     	eg :- 3.2.1 :079 > Book.where(name: 'Harry potter').optimizer_hints('USE INDEX (index_name)')
+		  Book Load (0.4ms)  SELECT /*+ USE INDEX (index_name) */ "books".* FROM "books" WHERE "books"."name" = $1  [["name",
+		  "Harry potter"]]
+	
+	      output :-                           
+		  id: 1,                                              
+		  name: "Harry potter",                               
+		  book_type: "0",                                     
+		  created_at: Thu, 30 Mar 2023 08:49:06.338483000 UTC +00:00,
+		  updated_at: Tue, 04 Apr 2023 13:09:19.805056000 UTC +00:00,
+		  lock_version: 4>] 
+		  		   
