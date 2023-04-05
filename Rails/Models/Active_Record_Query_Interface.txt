@@ -1075,5 +1075,69 @@
     		
     		eg 2:- book = Book.fiction? #if book is fiction type, then return true.
     		
-    		   
+--------------------------------------------------------------------------------------------------------------------------------
+17). Understanding Method Chaining
+ -> The Active Record pattern implements Method Chaining, which allow us to use multiple Active Record methods together 
+    in a simple and straightforward way.
+    
+    a). Retrieving filtered data from multiple tables.
+    
+    	eg :- 3.2.1 :011 > Book.select('books.id,authors.name').joins(:authors).where('authors.created_at > ?',1.week.ago)
+
+	    output :-
+		[#<Book:0x00007fe0500dc4f0 id: 1, name: "JK Rowling">,
+		 #<Book:0x00007fe0500dc450 id: 2, name: "JRR Tolkien">,
+		 #<Book:0x00007fe0500dc3b0 id: 3, name: "Agatha Christie">,
+		 #<Book:0x00007fe0500dc310 id: 4, name: "Antoine de Saint-Exupéry">,
+		 #<Book:0x00007fe0500dc270 id: 5, name: "Charles Dickens">,
+		 #<Book:0x00007fe0500dc1d0 id: 3, name: "Charles Dickens">] 
+
+    b). Retrieving specific data from multiple tables.
+    
+    	eg :- 3.2.1 :014 > Book.select('books.id,authors.name').joins(:authors).find_by(name: 'The Little Prince')
+                  
+            output :-                                   
+		 #<Book:0x00007fe04b8eb920 id: 4, name: "Antoine de Saint-Exupéry">   
     		
+---------------------------------------------------------------------------------------------------------------------------------
+18). Find or Build a New Object
+ -> It's common that you need to find a record or create it if it doesn't exist. You can do that with the find_or_create_by and
+    find_or_create_by! methods.
+    
+    a). find_or_create_by
+      -> The find_or_create_by method checks whether a record with the specified attributes exists. If it doesn't, then create is called.
+      
+      eg :- 3.2.1 :015 > Book.find_or_create_by(name: 'A Revenue Stamp')
+      
+  Book Load (0.3ms)  SELECT "books".* FROM "books" WHERE "books"."name" = $1 LIMIT $2  [["name", "A Revenue Stamp"], ["LIMIT", 1]]
+  TRANSACTION (0.3ms)  BEGIN                                                                                           
+  Book Create (2.8ms)  INSERT INTO "books" ("name", "book_type", "created_at", "updated_at", "lock_version") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "A Revenue Stamp"], ["book_type", nil], ["created_at", "2023-04-05 05:28:07.313610"], ["updated_at", "2023-04-05 05:28:07.313610"], ["lock_version", 0]]                                                                                   
+  TRANSACTION (1.1ms)  COMMIT                                                                                     
+ =>                                                                                                               
+             
+	     output:-                 
+		 id: 7,                                                     
+		 name: "A Revenue Stamp",                                   
+		 book_type: nil,                                            
+		 created_at: Wed, 05 Apr 2023 05:28:07.313610000 UTC +00:00,
+		 updated_at: Wed, 05 Apr 2023 05:28:07.313610000 UTC +00:00,
+		 lock_version: 0>        
+		 
+    b). find_or_create_by!
+      -> Similer to find_or_create_by but find_or_create_by! to raise an exception if the new record is invalid.
+      -> works when there is validation on attributes.
+      
+    c). find_or_initialize_by
+      -> The find_or_initialize_by method will work just like find_or_create_by but it will call new instead of create. 
+      -> This means that a new model instance will be created in memory but won't be saved to the database.
+      
+      	eg :-   3.2.1 :019 > book = Book.find_or_initialize_by(name: 'War and Peace')
+		3.2.1 :020 > book.new_record?
+		 => true 
+		3.2.1 :022 > book.save
+		
+  TRANSACTION (0.2ms)  BEGIN
+  Book Create (0.3ms)  INSERT INTO "books" ("name", "book_type", "created_at", "updated_at", "lock_version") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "War and Peace"], ["book_type", nil], ["created_at", "2023-04-05 05:39:50.971660"], ["updated_at", "2023-04-05 05:39:50.971660"], ["lock_version", 0]]                                     
+  TRANSACTION (1.9ms)  COMMIT                                     
+ => true   
+
