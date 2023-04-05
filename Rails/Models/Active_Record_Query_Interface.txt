@@ -1141,3 +1141,85 @@
   TRANSACTION (1.9ms)  COMMIT                                     
  => true   
 
+--------------------------------------------------------------------------------------------------------------------------------
+19). Finding by SQL
+ -> If you'd like to use your own SQL to find records in a table you can use find_by_sql. The find_by_sql method will return 
+    an array of objects even if the underlying query returns just a single record.
+    
+    eg :- 3.2.1 :028 > Author.find_by_sql('select name from authors where id between 2 and 5')
+    
+      output :-
+	  Author Load (0.6ms)  select name from authors where id between 2 and 5
+	 =>                                                                                           
+	[#<Author:0x00007fe050574440 id: nil, name: "JRR Tolkien">,                                   
+	 #<Author:0x00007fe0505743a0 id: nil, name: "Agatha Christie">,                               
+	 #<Author:0x00007fe050573f40 id: nil, name: "Antoine de Saint-Exupéry">,                      
+	 #<Author:0x00007fe050573ea0 id: nil, name: "Charles Dickens">]  
+	 
+    a). select_all
+      -> find_by_sql has a close relative called connection.select_all. select_all will retrieve objects from the database using 
+         custom SQL just like find_by_sql but will not instantiate them.
+         
+         eg :- 3.2.1 :031 > Book.connection.select_all('select name from books where id between 3 and 4').to_a
+	   (0.5ms)  select name from books where id between 3 and 4
+	   
+	   output :-
+	 	=> [{"name"=>"And Then There Were None"}, {"name"=>"The Little Prince"}]   
+	 	
+    b). pluck
+      -> pluck can be used to query single or multiple columns from the underlying table of a model. It accepts a list of column 
+         names as an argument and returns an array of values of the specified columns with the corresponding data type.
+         
+         eg :- 3.2.1 :035 > Record.where(borrowed: true).pluck(:id)
+ 	    
+ 	    output :-
+ 		=> [1, 3]    
+ 		                                                                              
+	 eg :- 3.2.1 :036 > Book.distinct.pluck(:id,:book_type)
+  
+  	    output :-
+ 		=> [[8, nil], [5, "fiction"], [6, "fiction"], [4, "Adventure"], [3, "Mystery"], [7, nil], [2, "Fantasy"], [1, "0"]] 
+ 		
+    c). ids
+      -> ids can be used to pluck all the IDs for the relation using the table's primary key.
+      
+      	 eg :-  3.2.1 :037 > Book.ids
+		  Book Pluck (0.4ms)  SELECT "books"."id" FROM "books"
+		 => [2, 3, 4, 5, 6, 1, 7, 8]       
+		                                                          
+	 eg :-	3.2.1 :038 > Author.ids
+		  Author Pluck (0.5ms)  SELECT "authors"."id" FROM "authors"
+		 => [1, 2, 3, 4, 5, 6]     
+
+---------------------------------------------------------------------------------------------------------------------------------
+20). Existence of Objects
+ -> If you simply want to check for the existence of the object there's a method called exists?. 
+ -> This method will query the database using the same query as find, but instead of returning an object or collection of objects 
+ -> it will return either true or false.
+ 
+ 	 eg :- 3.2.1 :048 > Book.exists?(1)
+		  Book Exists? (0.6ms)  SELECT 1 AS one FROM "books" WHERE "books"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+		  
+	     output :-
+		 => true 
+		 
+	 eg :- 3.2.1 :049 > Book.exists?(id: [1,2,3])
+		  Book Exists? (0.5ms)  SELECT 1 AS one FROM "books" WHERE "books"."id" IN ($1, $2, $3) LIMIT $4  [["id", 1], ["id", 2],
+		  ["id", 3], ["LIMIT", 1]]       
+		  
+	     output :-                                                  
+		 => true        
+		 
+	 eg :- 3.2.1 :050 > Record.where(borrowed: true).any?
+  		Record Exists? (0.4ms)  SELECT 1 AS one FROM "records" WHERE "records"."borrowed" = $1 LIMIT $2  [["borrowed", true],
+  		["LIMIT", 1]]
+  		
+  	     output :-
+ 		 => true      
+ 		                                                 
+	 eg :- 3.2.1 :051 > Record.where(borrowed: true).many?
+  		Record Count (0.6ms)  SELECT COUNT(*) FROM (SELECT 1 AS one FROM "records" WHERE "records"."borrowed" = $1 LIMIT $2)
+  		subquery_for_count  [["borrowed", true], ["LIMIT", 2]] 
+  		
+  	     output :-                              
+		 => true            
