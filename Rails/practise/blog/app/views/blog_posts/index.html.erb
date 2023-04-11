@@ -2,7 +2,7 @@
 
 <% @blog_posts.each do |blog|%>
   <div>
-    <h2><%= blog.title%></h2>
+    <h2><%= link_to blog.title , blog %></h2>
     <%= blog.body%>
   </div>
 <% end%>
